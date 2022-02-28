@@ -1,0 +1,239 @@
+body {
+    background-color: #eaedf7;
+    font-family: 'Montserrat', sans-serif;
+    color: #071c4d;
+    scrollbar-width: none;
+    overflow-x: hidden;
+}
+
+.section-login{
+    .card{
+        margin-top: 100px;
+        margin-bottom: -120px;
+    }
+}
+
+.section-register{
+    .card{
+        margin-top: 100px;
+        margin-bottom: -130px;
+    }
+}
+.section-lupa-password{
+    .card{
+        margin-top: 100px;
+        margin-bottom: -130px;
+    }
+}
+.section-confirm{
+    .card{
+        margin-top: 100px;
+        margin-bottom: -130px;
+    }
+}
+
+//Navbar
+.navbar-brand {
+    img {
+        max-width: 80px;
+        margin-left: 10px;
+    }
+}
+.navbar-dark {
+    .navbar-nav {
+        .nav-link {
+            color: #ffffff;
+            font-weight: 300;
+            &.active {
+                font-weight: bold;
+                color: #ffffff !important;
+            }
+        }
+    }
+}
+.btn-login {
+    background-color: #ffffff;
+    color: #071c4d;
+    &:hover{
+        background-color: #c72828;
+        color: #ffffff;  
+    }
+}
+.btn-navbar-right {
+    margin-top: -10px !important;
+    margin-right: 10px !important;
+    height: 50px;
+}
+//End Navbar
+
+
+//Slider
+.carousel-inner {
+    background-size:cover;
+    margin-top: 88px;
+    margin-bottom: -8px;
+}
+//End Slider
+
+.section-company-overview{
+    min-height: 610px;
+    margin-top: -80px;
+    
+    background:url('../images/company-overview/BgCompanyOverview2.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+
+    .section-company-overview-heading{
+        margin-top: 80px;
+        padding-top: 70px;
+        padding-bottom: 20px;
+        h2,p {
+            color:#071C4D;
+        }
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 50px;
+        }
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 30px;
+            font-weight: 500;
+            font-style: italic;
+            text-align: center;
+            font-size: 18px;
+            text-shadow: 0.5px 0.5px 5px rgba(0,0,0,0.5);
+        }
+        p{
+            padding-top: 30px;
+            text-align: justify;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .blockquote-footer{
+            color: #071C4D;
+        }
+    }
+}
+
+.section-visi-misi {
+   
+    margin-top: -80px;
+    .heading{
+        font-family: 'Montserrat', sans-serif;
+        text-align: justify;
+        h2{
+            font-family: 'Roboto', sans-serif;
+            font-style: italic;
+            font-weight: 700;
+        }
+        p{
+            font-size: 18px;
+        }
+    }
+    
+    
+}
+
+.section-core-value {
+    
+    margin-top: -250px;
+    margin-bottom: -140px;
+
+    .section-core-value-heading{
+        margin-top: 100px;
+        padding-top: 120px;
+        padding-bottom: -20px;
+        h2,p {
+            color:#071C4D;
+        }
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 50px;
+            margin-bottom: 160px;
+            margin-left: 90px;
+        }
+        .desktop{
+            margin-top: -120px;
+        }
+        h5{
+            color: #c72828;
+        }
+        p{
+            text-align: justify;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .images-core-value{
+            margin-top: 30px;
+            margin-right: 30px;
+        }
+        ul{
+            margin-top: 120px;
+            margin-bottom: 70px;
+            
+        }
+    }
+}
+
+//Footer
+.section-footer {
+    margin-top: 140px;
+    background-color: #EFF4FC;
+
+    
+    h5 {
+        color:#071C4D;
+        font-family: 'Roboto',serif;
+        font-weight: bold;
+    }
+    img {
+        max-width: 80%;
+        transition: 0.5s;
+        &:hover{
+            transform: translateY(-10px);
+        }
+    } 
+    a {
+        color: #071c4d;
+        text-decoration: none;
+    }
+    ul {
+        img {
+            max-width: 50%;
+        }
+    }
+    li {
+        font-size: 12px;
+        .certification{
+            transition: 0.5s;
+            &:hover{
+                transform: translateY(-10px);
+            }
+        }
+    }
+    
+}
+.container-fluid {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+//End Footer
+
+// Scroll On Top
+#topBtn{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    font-size: 22px;
+    width: 50px;
+    height: 50px;
+    background: #ff0000;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+// End Scroll On Top
