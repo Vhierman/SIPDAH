@@ -140,8 +140,7 @@
                                             <div class="form-group mt-2">
                                                 <label for="title" class="form-label">Tanggal Akhir Kerja</label>
                                                 <input type="date" class="form-control" name="tanggal_akhir_kerja"
-                                                    placeholder="dd/mm/yyyy" value="{{ $item->tanggal_akhir_kerja }}"
-                                                    readonly>
+                                                    placeholder="dd/mm/yyyy" value="{{ $item->tanggal_akhir_kerja }}">
                                             </div>
                                             <div class="form-group mt-2">
                                                 <label for="title" class="form-label">Status Kerja</label>
