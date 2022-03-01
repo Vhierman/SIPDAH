@@ -64,14 +64,14 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
         $rt                     = "'".$employees->rt;
         $rw                     = "'".$employees->rw;
         $nomor_npwp             = "'".$employees->nomor_npwp;
-        $nomor_rekening             = "'".$employees->nomor_rekening;
+        $nomor_rekening         = "'".$employees->nomor_rekening;
         
         $tanggal_akhir_kerja = $employees->tanggal_akhir_kerja;
 
         if ($employees->status_kerja == "PKWTT") {
             $tanggalakhirkerja = "PKWTT";
         } else {
-            $tanggalakhirkerja = \Carbon\Carbon::parse($tanggal_akhir_kerja)->isoformat('D MMMM Y');
+            $tanggalakhirkerja = \Carbon\Carbon::parse($tanggal_akhir_kerja)->isoformat('DD-MM-Y');
         }
         
 
@@ -94,13 +94,13 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
                 $employees->nomor_absen,
                 $nomor_npwp,
                 $employees->tempat_lahir,
-                \Carbon\Carbon::parse($employees->tanggal_lahir)->isoformat('D MMMM Y'),
+                \Carbon\Carbon::parse($employees->tanggal_lahir)->isoformat('DD-MM-Y'),
                 $employees->agama,
                 $employees->jenis_kelamin,
                 $employees->pendidikan_terakhir,
                 $employees->golongan_darah,
                 $employees->status_kerja,
-                \Carbon\Carbon::parse($employees->tanggal_mulai_kerja)->isoformat('Y-MM-D'),
+                \Carbon\Carbon::parse($employees->tanggal_mulai_kerja)->isoformat('DD-MM-Y'),
                 $tanggalakhirkerja,
                 $nomor_rekening,
                 $nomor_kartu_keluarga,
