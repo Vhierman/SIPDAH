@@ -207,7 +207,7 @@ class CetaksController extends Controller
 
     public function pkwt($id)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD'&& auth()->user()->roles != 'KARYAWAN') {
             abort(403);
         }
         $item               = HistoryContracts::findOrFail($id);

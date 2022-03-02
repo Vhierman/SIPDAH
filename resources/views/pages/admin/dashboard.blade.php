@@ -330,7 +330,7 @@
                                                                                                     </div>
                                                                                                     <div
                                                                                                         class="timeline-body">
-                                                                                                        <p>{{ \Carbon\Carbon::parse($datahistorykontrak->tanggal_awal_kontrak)->isoformat('D MMMM Y') }}
+                                                                                                        <p>{{ \Carbon\Carbon::parse($datahistorykontrak->tanggal_akhir_kontrak)->isoformat('D MMMM Y') }}
                                                                                                         </p>
                                                                                                     </div>
                                                                                                     <div
@@ -339,6 +339,12 @@
                                                                                                             class="mdi mdi-heart-outline text-muted mr-1"></i>
                                                                                                         <span>{{ $datahistorykontrak->masa_kontrak }}</span>
                                                                                                     </div>
+                                                                                                    <a href="{{ route('cetak.pkwt', $datahistorykontrak->id) }}"
+                                                                                                        class="btn btn-primary btn-sm"
+                                                                                                        target="_blank">
+                                                                                                        <i
+                                                                                                            class="fa fa-print"></i>
+                                                                                                    </a>
                                                                                                 </div>
                                                                                             </div>
                                                                                         @else
@@ -367,6 +373,12 @@
                                                                                                             class="mdi mdi-heart-outline text-muted mr-1"></i>
                                                                                                         <span>{{ $datahistorykontrak->masa_kontrak }}</span>
                                                                                                     </div>
+                                                                                                    <a href="{{ route('cetak.pkwt', $datahistorykontrak->id) }}"
+                                                                                                        class="btn btn-primary btn-sm"
+                                                                                                        target="_blank">
+                                                                                                        <i
+                                                                                                            class="fa fa-print"></i>
+                                                                                                    </a>
                                                                                                 </div>
                                                                                             </div>
                                                                                         @endif
