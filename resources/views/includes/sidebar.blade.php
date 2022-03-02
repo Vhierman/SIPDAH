@@ -68,6 +68,9 @@
                             <a class="nav-link" href="{{ route('positions.index') }}">Jabatan</a>
                             <a class="nav-link" href="{{ route('working-hours.index') }}">Jam Kerja</a>
                             <a class="nav-link" href="{{ route('schools.index') }}">Sekolah</a>
+                            {{-- Temporary Update --}}
+                            <a class="nav-link" href="{{ route('temporarys.index') }}">Sekolah</a>
+                            {{-- Temporary Update --}}
                         </nav>
                     </div>
                 @endif

@@ -66,6 +66,7 @@ Route::prefix('admin')
         Route::resource('areas', 'AreasController');
         Route::resource('positions', 'PositionsController');
         Route::resource('working-hours', 'WorkingHoursController');
+        Route::resource('temporarys', 'TemporarysController');
 
         // Employees
         Route::get('employees/export_excel', 'EmployeesController@export_excel')->name('employees.export_excel');
