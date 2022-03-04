@@ -175,7 +175,7 @@ class CetaksController extends Controller
 
         $this->fpdf->Ln(38);
         $this->fpdf->Cell(5);
-        $this->fpdf->Image('backend/qr/qrcodeRudiyanto.png' , 17,195,30);
+        $this->fpdf->Image('backend/assets/qrcode/qrcodesigns.png' , 17,195,30);
         $this->fpdf->Ln(5);
         
         $this->fpdf->SetFont('Arial', 'BU', '12');

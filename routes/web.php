@@ -14,6 +14,8 @@ use App\Http\Controllers\PdfController;
 */
 
 Route::get('/','HomeController@index');
+Route::get('/signs','SignsController@index')
+        ->name('signs');
 
 //Artisan Cpanel
 // Route::get('/config-clear', function() {
