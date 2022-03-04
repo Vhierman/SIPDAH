@@ -2,3 +2,4 @@
 .env.example
 storage/app/public/
 public/storage/
+.htaccess
