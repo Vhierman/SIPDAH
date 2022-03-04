@@ -662,9 +662,9 @@
                 name: "Penempatan",
                 colorByPoint: true,
                 data: [{
-                        name: "Greenville",
+                        name: "Accounting",
                         y: jumlahgreenville,
-                        drilldown: "Greenville"
+                        drilldown: "Accounting"
                     },
                     {
                         name: "HRD-GA",
@@ -710,8 +710,8 @@
             }],
             drilldown: {
                 series: [{
-                        name: "Greenville",
-                        id: "Greenville",
+                        name: "Accounting",
+                        id: "Accounting",
                         data: [
                             [
                                 "Accounting",
