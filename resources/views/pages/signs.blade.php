@@ -19,10 +19,10 @@
 <body>
     <div class="content">
         <div class="card">
-            <div class="firstinfo"><img src="{{ url('backend/assets/signs/Taron.jpg') }}" />
+            <div class="firstinfo"><img src="{{ url('backend/assets/signs/Rudiyanto.jpeg') }}" />
                 <div class="profileinfo">
-                    <h1>Achmad Firmansyah</h1>
-                    <h3>Staff HRD-GA</h3>
+                    <h1>Rudiyanto</h1>
+                    <h3>Manager HRD-GA</h3>
                     <p class="bio">PT PRIMA KOMPONEN INDONESIA.</p>
                 </div>
             </div>
