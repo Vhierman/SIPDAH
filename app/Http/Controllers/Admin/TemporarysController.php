@@ -22,7 +22,7 @@ class TemporarysController extends Controller
             abort(403);
         }
 
-        $items = Employees::all();
+        $items  = Employees::where('kode_pos','=',11111)->get();
         return view('pages.admin.temporary.index',[
             'items' => $items
         ]);
