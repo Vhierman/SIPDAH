@@ -302,7 +302,8 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Copyright:</div>
-            <i class="fas fa-laptop-code"></i> OLAY <i class="fas fa-award"></i>
+            <i class="fas fa-code"></i></i> OLAY
+            <i class="fas fa-code"></i>
         </div>
     </nav>
 </div>

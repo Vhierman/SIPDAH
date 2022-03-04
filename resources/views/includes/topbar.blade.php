@@ -15,8 +15,10 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false"><i class="fas fa-cog"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">{{ Auth::user()->name }}</a></li>
-                <li><a class="dropdown-item" href="{{ route('privacypolicy') }}">Privacy Policy</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-street-view"></i> {{ Auth::user()->name }}</a>
+                </li>
+                <li><a class="dropdown-item" href="{{ route('privacypolicy') }}"><i class="fas fa-tasks"></i>
+                        Privacy Policy</a></li>
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
@@ -24,7 +26,7 @@
                     @csrf
                     <li class="text-center">
                         <button class="btn btn-light btn-block" type="submit">
-                            Keluar
+                            <i class="fas fa-power-off"></i> Keluar
                         </button>
                     </li>
                 </form>
