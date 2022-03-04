@@ -16,13 +16,13 @@
                 aria-expanded="false"><i class="fas fa-cog"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#">{{ Auth::user()->name }}</a></li>
-                {{-- <li><a class="dropdown-item" href="#!">Activity Log</a></li> --}}
+                <li><a class="dropdown-item" href="{{ route('privacypolicy') }}">Privacy Policy</a></li>
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
                 <form class="form-inline ml-3" action="{{ url('logout') }}" method="post">
                     @csrf
-                    <li class="ml-3">
+                    <li class="text-center">
                         <button class="btn btn-light btn-block" type="submit">
                             Keluar
                         </button>

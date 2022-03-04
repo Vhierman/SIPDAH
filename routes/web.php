@@ -60,6 +60,8 @@ Route::prefix('admin')
     {
         Route::get('/','DashboardController@index')
         ->name('dashboard');
+        Route::get('privacypolicy','PrivacypolicyController@index')
+        ->name('privacypolicy');
 
         Route::resource('users', 'UsersController');
         Route::resource('comingsoon', 'ComingsoonController');
