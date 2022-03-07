@@ -49,24 +49,9 @@
                                             placeholder="Masukan NIK Karyawan" value="{{ $item->nik_karyawan }}">
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Kelurahan</label>
-                                        <input type="text" class="form-control" readonly name="kelurahan"
-                                            placeholder="Masukan Nama Kelurahan" value="{{ $item->kelurahan }}">
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Kecamatan</label>
-                                        <input type="text" class="form-control" readonly name="kecamatan"
-                                            placeholder="Masukan Nama Kecamatan" value="{{ $item->kecamatan }}">
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Kota</label>
-                                        <input type="text" class="form-control" readonly name="kota"
-                                            placeholder="Masukan Nama Kota" value="{{ $item->kota }}">
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Kode POS</label>
-                                        <input type="text" class="form-control" onkeyup="angka(this);" maxlength="5"
-                                            name="kode_pos" placeholder="Masukan Kode POS" value="{{ $item->kode_pos }}">
+                                        <label for="title" class="form-label">Nomor Handphone</label>
+                                        <input type="text" class="form-control" onkeyup="angka(this);"
+                                            name="nomor_handphone" placeholder="Masukan Nomor Handphone" value="{{ $item->nomor_handphone }}">
                                     </div>
 
                                     <div class="d-grid gap-2 mt-3">

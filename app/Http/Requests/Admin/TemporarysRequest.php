@@ -25,7 +25,7 @@ class TemporarysRequest extends FormRequest
     {
         return [
             //
-            'kode_pos' => 'required'
+            'nomor_handphone' => 'required'
         ];
     }
 }

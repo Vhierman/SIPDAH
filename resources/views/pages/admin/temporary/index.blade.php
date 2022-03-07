@@ -25,10 +25,7 @@
                                         <th>No</th>
                                         <th>Nama Karyawan</th>
                                         <th>NIK Karyawan</th>
-                                        <th>Kelurahan</th>
-                                        <th>Kecamatan</th>
-                                        <th>Kota</th>
-                                        <th>Kode POS</th>
+                                        <th>Nomor Handphone</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -41,10 +38,7 @@
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $item->nama_karyawan }}</td>
                                             <td>{{ $item->nik_karyawan }}</td>
-                                            <td>{{ $item->kelurahan }}</td>
-                                            <td>{{ $item->kecamatan }}</td>
-                                            <td>{{ $item->kota }}</td>
-                                            <td>{{ $item->kode_pos }}</td>
+                                            <td>{{ $item->nomor_handphone }}</td>
                                             <td>
                                                 <a href="{{ route('temporarys.edit', $item->id) }}"
                                                     class="btn btn-success">

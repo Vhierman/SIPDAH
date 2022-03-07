@@ -22,7 +22,7 @@ class TemporarysController extends Controller
             abort(403);
         }
 
-        $items  = Employees::where('kode_pos','=',11111)->get();
+        $items  = Employees::all();
         return view('pages.admin.temporary.index',[
             'items' => $items
         ]);
@@ -106,10 +106,10 @@ class TemporarysController extends Controller
         $karyawan       = Employees::where('nik_karyawan', $nikkaryawan)->first();
 
         $karyawan->update([
-            'kode_pos'  => $request->input('kode_pos'),
-            'edit_oleh' => $request->input('edit_oleh')
+            'nomor_handphone'   => $request->input('nomor_handphone'),
+            'edit_oleh'         => $request->input('edit_oleh')
         ]);
-        Alert::info('Success Edit Data Alamat','Oleh '.auth()->user()->name);
+        Alert::info('Success Edit Data Nomor Handphone','Oleh '.auth()->user()->name);
         return redirect()->route('temporarys.index');
     }
 
