@@ -69,7 +69,7 @@
                             <a class="nav-link" href="{{ route('working-hours.index') }}">Jam Kerja</a>
                             <a class="nav-link" href="{{ route('schools.index') }}">Sekolah</a>
                             {{-- Temporary Update --}}
-                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Nomor Handphone</a>
+                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Nomor Absen</a>
                             {{-- Temporary Update --}}
                         </nav>
                     </div>

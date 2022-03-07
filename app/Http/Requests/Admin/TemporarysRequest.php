@@ -25,7 +25,7 @@ class TemporarysRequest extends FormRequest
     {
         return [
             //
-            'nomor_handphone' => 'required'
+            'nomor_absen' => 'required'
         ];
     }
 }

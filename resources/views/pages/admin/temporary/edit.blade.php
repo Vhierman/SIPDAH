@@ -49,9 +49,10 @@
                                             placeholder="Masukan NIK Karyawan" value="{{ $item->nik_karyawan }}">
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Nomor Handphone</label>
-                                        <input type="text" class="form-control" onkeyup="angka(this);"
-                                            name="nomor_handphone" placeholder="Masukan Nomor Handphone" value="{{ $item->nomor_handphone }}">
+                                        <label for="title" class="form-label">Nomor Absen</label>
+                                        <input type="text" class="form-control" onkeyup="angka(this);" maxlength="4"
+                                            name="nomor_absen" placeholder="Masukan Nomor Absen"
+                                            value="{{ $item->nomor_absen }}">
                                     </div>
 
                                     <div class="d-grid gap-2 mt-3">

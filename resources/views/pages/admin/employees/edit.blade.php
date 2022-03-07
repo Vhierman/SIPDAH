@@ -317,7 +317,7 @@
                                         </div>
                                         <div class="form-group mt-2">
                                             <label for="title" class="form-label">Alamat</label>
-                                            <input type="text" class="form-control" maxlength="40" name="alamat"
+                                            <input type="text" class="form-control" maxlength="80" name="alamat"
                                                 placeholder="Masukan Alamat" value="{{ $item->alamat }}">
                                         </div>
                                         <div class="form-group mt-2">

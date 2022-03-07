@@ -106,10 +106,10 @@ class TemporarysController extends Controller
         $karyawan       = Employees::where('nik_karyawan', $nikkaryawan)->first();
 
         $karyawan->update([
-            'nomor_handphone'   => $request->input('nomor_handphone'),
+            'nomor_absen'       => $request->input('nomor_absen'),
             'edit_oleh'         => $request->input('edit_oleh')
         ]);
-        Alert::info('Success Edit Data Nomor Handphone','Oleh '.auth()->user()->name);
+        Alert::info('Success Edit Data Nomor Absen','Oleh '.auth()->user()->name);
         return redirect()->route('temporarys.index');
     }
 
