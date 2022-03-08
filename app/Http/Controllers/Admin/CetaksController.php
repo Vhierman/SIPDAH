@@ -2026,8 +2026,8 @@ class CetaksController extends Controller
         $pkwtharians = HistoryContracts::with([
             'employees'
             ])->where('status_kontrak_kerja', 'Harian')
-            ->whereBetween('tanggal_akhir_kontrak', [$awal, $akhir])
-            ->orderBy('tanggal_akhir_kontrak', 'ASC')->get();
+            ->whereBetween('tanggal_awal_kontrak', [$awal, $akhir])
+            ->orderBy('tanggal_awal_kontrak', 'ASC')->get();
             
             
 
