@@ -13,7 +13,7 @@ class OvertimesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,13 @@ class OvertimesRequest extends FormRequest
     {
         return [
             //
+            'employees_id'      => 'required|integer',
+            'tanggal_lembur'    => 'required|date',
+            'keterangan_lembur' => 'required',
+            'jam_masuk'         => 'required|integer',
+            'jam_istirahat'     => 'required|integer',
+            'jam_pulang'        => 'required|integer',
+            'jenis_lembur'      => 'required|string|in:Biasa,Libur'
         ];
     }
 }

@@ -105,4 +105,7 @@ class Employees extends Model
     public function inventory_cars() {
         return $this->hasMany(InventoryCars::class,'employees_id','id');
     }
+    public function overtimes() {
+        return $this->hasMany(Overtimes::class,'employees_id','id');
+    }
 }

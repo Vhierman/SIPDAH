@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Employees;
+use App\Models\Admin\Companies;
+use App\Models\Admin\Areas;
 use App\Models\Admin\Divisions;
+use App\Models\Admin\Positions;
 use Illuminate\Http\Request;
 
 class OvertimesController extends Controller
@@ -27,18 +30,6 @@ class OvertimesController extends Controller
     public function create()
     {
         //
-        $items = Employees::with([
-            'areas',
-            'divisions',
-            'positions'
-            ])->get();
-        // $items = Employees::with(['divisions'])->get();
-        // $items = Employees::with(['positions'])->get();
-        // $items = Employees::all();
-    
-        return view('pages.admin.overtimes.create',[
-            'items' => $items
-        ]);
     }
 
     /**
@@ -50,17 +41,6 @@ class OvertimesController extends Controller
     public function store(Request $request)
     {
         //
-        $employeess       = $request->input('employees_id');
-        
-        foreach ($employeess as $employee ) {
-            
-            Divisions::create([
-                'penempatan'                  => $employee
-            ]);
-        }
-
-
-        return redirect()->route('overtimes.create');
     }
 
     /**
