@@ -69,7 +69,8 @@
                             <a class="nav-link" href="{{ route('working-hours.index') }}">Jam Kerja</a>
                             <a class="nav-link" href="{{ route('schools.index') }}">Sekolah</a>
                             {{-- Temporary Update --}}
-                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Nomor Absen</a>
+                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Nomor
+                                Absen</a>
                             {{-- Temporary Update --}}
                         </nav>
                     </div>
@@ -214,7 +215,7 @@
                     <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{ route('comingsoon.index') }}">Overtimes</a>
+                            <a class="nav-link" href="{{ route('overtimes.index') }}">Overtimes</a>
                         </nav>
                     </div>
                 @endif

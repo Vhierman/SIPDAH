@@ -50,6 +50,13 @@ class EmployeesController extends Controller
             'divisions',
             'positions'
             ])->get();
+
+        // $items = Employees::with([
+        //     'areas',
+        //     'divisions',
+        //     'positions'
+        //     ])->whereIn('divisions_id', [1, 2, 3])->get();
+
         // $items = Employees::with(['divisions'])->get();
         // $items = Employees::with(['positions'])->get();
         // $items = Employees::all();
