@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\TemporarysRequest;
 use App\Models\Admin\Employees;
+use App\Models\Admin\Divisions;
+use App\Models\Admin\Positions;
 use Alert;
 
 class TemporarysController extends Controller
@@ -22,7 +24,13 @@ class TemporarysController extends Controller
             abort(403);
         }
 
-        $items  = Employees::all();
+        $items = Employees::with([
+            'areas',
+            'divisions',
+            'positions'
+            ])->get();
+
+        // $items  = Employees::all();
         return view('pages.admin.temporary.index',[
             'items' => $items
         ]);

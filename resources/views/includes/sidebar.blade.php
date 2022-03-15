@@ -70,7 +70,7 @@
                             <a class="nav-link" href="{{ route('schools.index') }}">Sekolah</a>
                             {{-- Temporary Update --}}
                             <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Nomor
-                                Absen</a>
+                                BPJSKS</a>
                             {{-- Temporary Update --}}
                         </nav>
                     </div>
