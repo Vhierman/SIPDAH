@@ -78,7 +78,7 @@
                 {{-- End Master --}}
 
                 {{-- Employee --}}
-                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'MANAGER')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEmployee"
                         aria-expanded="false" aria-controls="collapseEmployee">
                         <div class="sb-nav-link-icon"><i class="fas fa-snowboarding"></i></div>
@@ -102,7 +102,7 @@
                 {{-- End Employee --}}
 
                 {{-- Siswa Prakerin --}}
-                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'MANAGER')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseStudents"
                         aria-expanded="false" aria-controls="collapseStudents">
                         <div class="sb-nav-link-icon"><i class="fas fa-user-graduate"></i></div>

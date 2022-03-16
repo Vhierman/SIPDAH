@@ -489,6 +489,10 @@
                         </div>
                     </div>
         </main>
+    @elseif(Auth::user()->roles != 'ADMIN' && Auth::user()->roles != 'HRD' && Auth::user()->roles != 'ACCOUNTING')
+        <div class="container">
+
+        </div>
     @else
         <main>
             <div class="container-fluid px-4">

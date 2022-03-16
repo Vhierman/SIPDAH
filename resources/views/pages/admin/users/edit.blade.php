@@ -58,12 +58,18 @@
                                         <label for="roles">Roles</label>
                                         <select name="roles" class="form-select">
                                             <option value="">Pilih Roles</option>
+                                            <option value="USER"
+                                                @if ($item->roles == 'USER') {{ 'selected="selected"' }} @endif>
+                                                USER</option>
                                             <option value="ADMIN"
                                                 @if ($item->roles == 'ADMIN') {{ 'selected="selected"' }} @endif>
                                                 ADMIN</option>
                                             <option value="HRD"
                                                 @if ($item->roles == 'HRD') {{ 'selected="selected"' }} @endif>
                                                 HRD</option>
+                                            <option value="ACCOUNTING"
+                                                @if ($item->roles == 'ACCOUNTING') {{ 'selected="selected"' }} @endif>
+                                                ACCOUNTING</option>
                                             <option value="LEADER"
                                                 @if ($item->roles == 'LEADER') {{ 'selected="selected"' }} @endif>
                                                 LEADER</option>

@@ -19,8 +19,11 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         toast('Hello '.auth()->user()->name,'success');
+
+
         //Halaman Karyawan
         $nik_karyawan = auth()->user()->nik;
+
         $datakaryawan = Employees::with([
             'companies',
             'areas',
@@ -42,8 +45,12 @@ class DashboardController extends Controller
             ])->where('employees_id', $nik_karyawan)->first();
         //Halaman Karyawan
 
+        //Halaman Leader
+        $caridivisi     = Employees::all()->where('nik_karyawan', $nik_karyawan)->first();
+        $divisi         = $caridivisi->divisions_id;
+        //Halaman Leader
 
-
+        //Halaman Admin HRD Accounting
         $itembsd = Employees::with([
             'areas'
             ])->where('areas_id', 2)->count();

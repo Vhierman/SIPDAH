@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\StudentsRequest;
 use App\Models\Admin\Students;
+use App\Models\Admin\Employees;
 use App\Models\Admin\Schools;
 use App\Models\Admin\Divisions;
 use Alert;
@@ -20,13 +21,71 @@ class StudentsController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
-        $items = Students::with([
-            'schools',
-            'divisions'
-            ])->get();
+
+        $nik            = auth()->user()->nik;
+        $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
+        $divisi         = $caridivisi->divisions_id;
+
+        if ($divisi == 11) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->whereIn('divisions_id', [11, 19, 20,21])->get();
+        }
+        elseif ($divisi == 19) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->whereIn('divisions_id', [19, 20,21])->get();
+        } 
+        elseif ($divisi == 2) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->whereIn('divisions_id', [2])->get();
+        } 
+        elseif ($divisi == 7) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->whereIn('divisions_id', [7])->get();
+        } 
+        elseif ($divisi == 8) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->whereIn('divisions_id', [8])->get();
+        } 
+        elseif ($divisi == 9) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->whereIn('divisions_id', [9])->get();
+        } 
+        elseif ($divisi == 10) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->whereIn('divisions_id', [12,13,14,15,18])->get();
+        } 
+        elseif ($divisi == 4) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->get();
+        } 
+        elseif ($divisi == 1) {
+            $items = Students::with([
+                'schools',
+                'divisions'
+                ])->get();
+        } 
+        else {
+            abort(403);
+        }
 
         return view('pages.admin.students.index',[
             'items' => $items
@@ -80,7 +139,7 @@ class StudentsController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
     }

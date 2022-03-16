@@ -32,6 +32,9 @@ class IsAdmin
         elseif (Auth::user() && Auth::user()->roles == 'KARYAWAN') {
             return $next($request);
         }
+        elseif (Auth::user() && Auth::user()->roles == 'ACCOUNTING') {
+            return $next($request);
+        }
         return redirect('/');
     }
 }

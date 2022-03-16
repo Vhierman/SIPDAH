@@ -43,16 +43,90 @@ class EmployeesOutsController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
-        $items = EmployeesOuts::with([
-            'companies',
-            'areas',
-            'divisions',
-            'positions'
-            ])->get();
-    
+
+        $nik            = auth()->user()->nik;
+        $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
+        $divisi         = $caridivisi->divisions_id;
+
+        if ($divisi == 11) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [11, 19, 20,21])->get();
+        }
+        elseif ($divisi == 19) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [19, 20,21])->get();
+        } 
+        elseif ($divisi == 2) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [2])->get();
+        } 
+        elseif ($divisi == 7) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [7])->get();
+        } 
+        elseif ($divisi == 8) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [8])->get();
+        } 
+        elseif ($divisi == 9) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [9])->get();
+        } 
+        elseif ($divisi == 10) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [12,13,14,15,18])->get();
+        } 
+        elseif ($divisi == 4) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->get();
+        } 
+        elseif ($divisi == 1) {
+            $items = EmployeesOuts::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->get();
+        } 
+        else {
+            abort(403);
+        }
+
         return view('pages.admin.employees-outs.index',[
             'items' => $items
         ]);
@@ -228,7 +302,7 @@ class EmployeesOutsController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $item           = EmployeesOuts::findOrFail($id);

@@ -39,7 +39,7 @@
                                             class="img-fluid rounded-circle">
                                     </div>
 
-                                    @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                                    @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'ACCOUNTING')
                                         <div class="text-center mt-4">
                                             <a href="{{ Storage::url($item->foto_ktp) }}" target="_blank"
                                                 class="btn btn-primary btn-block">
