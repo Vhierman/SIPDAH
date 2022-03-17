@@ -54,7 +54,7 @@ class DashboardController extends Controller
             'areas',
             'divisions',
             'positions'
-            ])->where('divisions_id', $divisi)->orderBy('positions_id')->get();
+            ])->where('divisions_id', $divisi)->orderBy('positions_id')->orderBy('nama_karyawan')->get();
 
         //Halaman Leader
 
