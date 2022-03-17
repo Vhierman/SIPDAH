@@ -491,7 +491,34 @@
         </main>
     @elseif(Auth::user()->roles != 'ADMIN' && Auth::user()->roles != 'HRD' && Auth::user()->roles != 'ACCOUNTING')
         <div class="container">
+            <div class="timeline-struktur">
+                <div class="container mt-100 mt-60">
+                    <div class="row">
+                        @foreach ($itemleaders as $itemleader)
+                            <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+                                <div class="mt-4 pt-2">
+                                    <div class="team position-relative d-block text-center">
+                                        <div class="image position-relative d-block overflow-hidden">
+                                            <img src="{{ Storage::url($itemleader->foto_karyawan) }}"
+                                                class="img-fluid rounded" alt="">
+                                            <div class="overlay rounded bg-dark"></div>
+                                        </div>
+                                        <div
+                                            class="content py-2 member-position bg-white border-bottom overflow-hidden rounded d-inline-block">
+                                            <h4 class="title mb-0">{{ $itemleader->nama_karyawan }}</h4>
+                                            <small class="text-muted">{{ $itemleader->positions->jabatan }}</small>
+                                        </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end col-->
+
+                            <!--end row-->
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     @else
         <main>

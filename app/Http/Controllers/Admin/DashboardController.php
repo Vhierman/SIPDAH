@@ -46,8 +46,16 @@ class DashboardController extends Controller
         //Halaman Karyawan
 
         //Halaman Leader
+
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik_karyawan)->first();
         $divisi         = $caridivisi->divisions_id;
+        
+        $itemleaders     = Employees::with([
+            'areas',
+            'divisions',
+            'positions'
+            ])->where('divisions_id', $divisi)->orderBy('positions_id')->get();
+
         //Halaman Leader
 
         //Halaman Admin HRD Accounting
@@ -505,6 +513,10 @@ class DashboardController extends Controller
             'historykontrak'                => $historykontrak,
             'historykeluarga'               => $historykeluarga,
             //Halaman Karyawan
+
+            //Halaman Leader
+            'itemleaders'                   => $itemleaders,
+            //Halaman Leader
             
             'itempdc'                       => $itempdc,
             'itemall'                       => $itemall,
