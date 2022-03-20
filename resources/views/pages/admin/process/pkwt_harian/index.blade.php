@@ -11,7 +11,7 @@
             <div class="container-fluid mt-4">
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item">Dashboard</li>
-                    <li class="breadcrumb-item">Surat</li>
+                    <li class="breadcrumb-item">Prosess</li>
                     <li class="breadcrumb-item active">PKWT Harian</li>
                 </ol>
 

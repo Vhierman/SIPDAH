@@ -4,9 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\HistoryTrainingEksternalsRequest;
+use App\Http\Requests\Admin\HistoryTrainingEksternalsMultipleRequest;
+use App\Http\Requests\Admin\HistoryTrainingEksternalsMultipleViewRequest;
 use App\Models\Admin\Employees;
+use App\Models\Admin\Companies;
+use App\Models\Admin\Areas;
+use App\Models\Admin\Divisions;
+use App\Models\Admin\Positions;
 use App\Models\Admin\HistoryTrainingEksternals;
 use Illuminate\Http\Request;
+use DB;
 use Alert;
 
 class HistoryTrainingEksternalsController extends Controller
@@ -41,6 +48,97 @@ class HistoryTrainingEksternalsController extends Controller
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
+
+        $nik            = auth()->user()->nik;
+        $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
+        $divisi         = $caridivisi->divisions_id;
+
+        if ($divisi == 11) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_awal_training_eksternal) as jumlah'),'tanggal_awal_training_eksternal', 'institusi_penyelenggara_training_eksternal','perihal_training_eksternal','lokasi_training_eksternal')
+            ->groupByRaw('tanggal_awal_training_eksternal, institusi_penyelenggara_training_eksternal,perihal_training_eksternal,lokasi_training_eksternal')
+            ->whereIn('divisions_id', [11])
+            ->where('history_training_eksternals.deleted_at',NULL)
+            ->get();
+        } 
+        elseif($divisi == 2){
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_awal_training_eksternal) as jumlah'),'tanggal_awal_training_eksternal', 'institusi_penyelenggara_training_eksternal','perihal_training_eksternal','lokasi_training_eksternal')
+            ->groupByRaw('tanggal_awal_training_eksternal, institusi_penyelenggara_training_eksternal,perihal_training_eksternal,lokasi_training_eksternal')
+            ->whereIn('divisions_id', [2])
+            ->where('history_training_eksternals.deleted_at',NULL)
+            ->get();
+        }
+        elseif($divisi == 7){
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_awal_training_eksternal) as jumlah'),'tanggal_awal_training_eksternal', 'institusi_penyelenggara_training_eksternal','perihal_training_eksternal','lokasi_training_eksternal')
+            ->groupByRaw('tanggal_awal_training_eksternal, institusi_penyelenggara_training_eksternal,perihal_training_eksternal,lokasi_training_eksternal')
+            ->whereIn('divisions_id', [7])
+            ->where('history_training_eksternals.deleted_at',NULL)
+            ->get();
+        }
+        elseif($divisi == 8){
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_awal_training_eksternal) as jumlah'),'tanggal_awal_training_eksternal', 'institusi_penyelenggara_training_eksternal','perihal_training_eksternal','lokasi_training_eksternal')
+            ->groupByRaw('tanggal_awal_training_eksternal, institusi_penyelenggara_training_eksternal,perihal_training_eksternal,lokasi_training_eksternal')
+            ->whereIn('divisions_id', [8])
+            ->where('history_training_eksternals.deleted_at',NULL)
+            ->get();
+        }
+        elseif($divisi == 9){
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_awal_training_eksternal) as jumlah'),'tanggal_awal_training_eksternal', 'institusi_penyelenggara_training_eksternal','perihal_training_eksternal','lokasi_training_eksternal')
+            ->groupByRaw('tanggal_awal_training_eksternal, institusi_penyelenggara_training_eksternal,perihal_training_eksternal,lokasi_training_eksternal')
+            ->whereIn('divisions_id', [9])
+            ->where('history_training_eksternals.deleted_at',NULL)
+            ->get();
+        }
+        elseif($divisi == 10){
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_awal_training_eksternal) as jumlah'),'tanggal_awal_training_eksternal', 'institusi_penyelenggara_training_eksternal','perihal_training_eksternal','lokasi_training_eksternal')
+            ->groupByRaw('tanggal_awal_training_eksternal, institusi_penyelenggara_training_eksternal,perihal_training_eksternal,lokasi_training_eksternal')
+            ->whereIn('divisions_id', [12,13,14,15,18])
+            ->where('history_training_eksternals.deleted_at',NULL)
+            ->get();
+        }
+        elseif($divisi == 19){
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_awal_training_eksternal) as jumlah'),'tanggal_awal_training_eksternal', 'institusi_penyelenggara_training_eksternal','perihal_training_eksternal','lokasi_training_eksternal')
+            ->groupByRaw('tanggal_awal_training_eksternal, institusi_penyelenggara_training_eksternal,perihal_training_eksternal,lokasi_training_eksternal')
+            ->whereIn('divisions_id', [19,20,21,22])
+            ->where('history_training_eksternals.deleted_at',NULL)
+            ->get();
+        }
+        elseif($divisi == 4){
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_awal_training_eksternal) as jumlah'),'tanggal_awal_training_eksternal', 'institusi_penyelenggara_training_eksternal','perihal_training_eksternal','lokasi_training_eksternal')
+            ->groupByRaw('tanggal_awal_training_eksternal, institusi_penyelenggara_training_eksternal,perihal_training_eksternal,lokasi_training_eksternal')
+            ->where('history_training_eksternals.deleted_at',NULL)
+            ->get();
+        }
+        else {
+            abort(403);
+        }
+        
+        return view('pages.admin.history-training-eksternals.index',[
+            'items' => $items
+        ]);
     }
 
     /**
@@ -54,6 +152,17 @@ class HistoryTrainingEksternalsController extends Controller
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
+
+        $items = Employees::with([
+            'companies',
+            'areas',
+            'divisions',
+            'positions'
+            ])->get();
+
+        return view ('pages.admin.history-training-eksternals.createmultiple',[
+            'items' => $items
+        ]);
     }
 
     /**
@@ -62,6 +171,40 @@ class HistoryTrainingEksternalsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function storemultipletrainingeksternal(HistoryTrainingEksternalsMultipleRequest $request)
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+            abort(403);
+        }
+
+        $tanggalawal    = $request->input('tanggal_awal_training_eksternal');
+        $hariawal       = \Carbon\Carbon::parse($tanggalawal)->isoformat('dddd');
+        $tanggalakhir   = $request->input('tanggal_akhir_training_eksternal');
+        $hariakhir      = \Carbon\Carbon::parse($tanggalakhir)->isoformat('dddd');
+
+        foreach ($request->input('employees_id') as $key=>$name) {
+            $insert =[
+                'employees_id'                                  => $request->input('employees_id')[$key],
+                'institusi_penyelenggara_training_eksternal'    => $request->input('institusi_penyelenggara_training_eksternal'),
+                'perihal_training_eksternal'                    => $request->input('perihal_training_eksternal'),
+                'hari_awal_training_eksternal'                  => $hariawal,
+                'hari_akhir_training_eksternal'                 => $hariakhir,
+                'tanggal_awal_training_eksternal'               => $tanggalawal,
+                'tanggal_akhir_training_eksternal'              => $tanggalakhir,
+                'jam_training_eksternal'                        => $request->input('jam_training_eksternal'),
+                'lokasi_training_eksternal'                     => $request->input('lokasi_training_eksternal'),
+                'alamat_training_eksternal'                     => $request->input('alamat_training_eksternal'),
+                'input_oleh'                                    => $request->input('input_oleh')
+            ];
+            HistoryTrainingEksternals::create($insert);
+        }
+
+        Alert::success('Success Input Data Training Eksternals','Oleh '.auth()->user()->name);
+        //Redirect
+        return redirect()->route('history_training_eksternal.index');
+    }
+
     public function store(HistoryTrainingEksternalsRequest $request)
     {
         //
@@ -128,6 +271,148 @@ class HistoryTrainingEksternalsController extends Controller
         return view ('pages.admin.history-training-eksternals.edit',[
             'item'                      => $item,
             'historytrainingeksternals' => $historytrainingeksternals
+        ]);
+    }
+
+    public function tampilmultipletrainingeksternal(HistoryTrainingEksternalsMultipleViewRequest $request)
+    {
+
+        $institusi_penyelenggara_training_eksternal = $request->input('institusi_penyelenggara_training_eksternal');
+        $perihal_training_eksternal                 = $request->input('perihal_training_eksternal');
+        $tanggal_awal_training_eksternal            = $request->input('tanggal_awal_training_eksternal');
+        $lokasi_training_eksternal                  = $request->input('lokasi_training_eksternal');
+
+        $nik            = auth()->user()->nik;
+        $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
+        $divisi         = $caridivisi->divisions_id;
+
+        if ($divisi == 11) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where([
+                ['institusi_penyelenggara_training_eksternal','=',$institusi_penyelenggara_training_eksternal],
+                ['perihal_training_eksternal','=',$perihal_training_eksternal],
+                ['tanggal_awal_training_eksternal','=',$tanggal_awal_training_eksternal],
+                ['lokasi_training_eksternal','=',$lokasi_training_eksternal],
+                ['divisions_id','=',11],
+                ['history_training_eksternals.deleted_at','=',NULL]
+            ])
+            ->get();
+        }
+        elseif ($divisi == 2) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where([
+                ['institusi_penyelenggara_training_eksternal','=',$institusi_penyelenggara_training_eksternal],
+                ['perihal_training_eksternal','=',$perihal_training_eksternal],
+                ['tanggal_awal_training_eksternal','=',$tanggal_awal_training_eksternal],
+                ['lokasi_training_eksternal','=',$lokasi_training_eksternal],
+                ['divisions_id','=',2],
+                ['history_training_eksternals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        elseif ($divisi == 7) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where([
+                ['institusi_penyelenggara_training_eksternal','=',$institusi_penyelenggara_training_eksternal],
+                ['perihal_training_eksternal','=',$perihal_training_eksternal],
+                ['tanggal_awal_training_eksternal','=',$tanggal_awal_training_eksternal],
+                ['lokasi_training_eksternal','=',$lokasi_training_eksternal],
+                ['divisions_id','=',7],
+                ['history_training_eksternals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        elseif ($divisi == 8) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where([
+                ['institusi_penyelenggara_training_eksternal','=',$institusi_penyelenggara_training_eksternal],
+                ['perihal_training_eksternal','=',$perihal_training_eksternal],
+                ['tanggal_awal_training_eksternal','=',$tanggal_awal_training_eksternal],
+                ['lokasi_training_eksternal','=',$lokasi_training_eksternal],
+                ['divisions_id','=',8],
+                ['history_training_eksternals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        elseif ($divisi == 9) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where([
+                ['institusi_penyelenggara_training_eksternal','=',$institusi_penyelenggara_training_eksternal],
+                ['perihal_training_eksternal','=',$perihal_training_eksternal],
+                ['tanggal_awal_training_eksternal','=',$tanggal_awal_training_eksternal],
+                ['lokasi_training_eksternal','=',$lokasi_training_eksternal],
+                ['divisions_id','=',9],
+                ['history_training_eksternals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        elseif ($divisi == 10) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where([
+                ['institusi_penyelenggara_training_eksternal','=',$institusi_penyelenggara_training_eksternal],
+                ['perihal_training_eksternal','=',$perihal_training_eksternal],
+                ['tanggal_awal_training_eksternal','=',$tanggal_awal_training_eksternal],
+                ['lokasi_training_eksternal','=',$lokasi_training_eksternal],
+                ['history_training_eksternals.deleted_at','=',NULL]
+            ])
+            ->whereIn('divisions_id', [12,13,14,15,18])
+            ->get();
+        } 
+        elseif ($divisi == 19) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where([
+                ['institusi_penyelenggara_training_eksternal','=',$institusi_penyelenggara_training_eksternal],
+                ['perihal_training_eksternal','=',$perihal_training_eksternal],
+                ['tanggal_awal_training_eksternal','=',$tanggal_awal_training_eksternal],
+                ['lokasi_training_eksternal','=',$lokasi_training_eksternal],
+                ['history_training_eksternals.deleted_at','=',NULL]
+            ])
+            ->whereIn('divisions_id', [19,20,21,22])
+            ->get();
+        } 
+        elseif ($divisi == 4) {
+            $items = DB::table('history_training_eksternals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where([
+                ['institusi_penyelenggara_training_eksternal','=',$institusi_penyelenggara_training_eksternal],
+                ['perihal_training_eksternal','=',$perihal_training_eksternal],
+                ['tanggal_awal_training_eksternal','=',$tanggal_awal_training_eksternal],
+                ['lokasi_training_eksternal','=',$lokasi_training_eksternal],
+                ['history_training_eksternals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        else {
+            abort(403);
+        }
+
+        
+
+        return view('pages.admin.history-training-eksternals.viewmultiple',[
+            'items' => $items
         ]);
     }
 

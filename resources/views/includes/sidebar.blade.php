@@ -141,6 +141,28 @@
                 @endif
                 {{-- End Inventory --}}
 
+                {{-- Training Untuk Halaman ADMIN dan HRD --}}
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER')
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTraining"
+                        aria-expanded="false" aria-controls="collapseTraining">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
+                        Training
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseTraining" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link"
+                                href="{{ route('history_training_internal.index') }}">Internal</a>
+                        </nav>
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link"
+                                href="{{ route('history_training_eksternal.index') }}">Eksternal</a>
+                        </nav>
+                    </div>
+                @endif
+                {{-- Training Untuk Halaman ADMIN dan HRD --}}
+
                 {{-- Surat --}}
                 @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSurat"

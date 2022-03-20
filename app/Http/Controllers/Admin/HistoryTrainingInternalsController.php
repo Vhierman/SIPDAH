@@ -4,7 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\HistoryTrainingInternalsRequest;
+use App\Http\Requests\Admin\HistoryTrainingInternalsMultipleRequest;
+use App\Http\Requests\Admin\HistoryTrainingInternalsMultipleViewRequest;
 use App\Models\Admin\Employees;
+use App\Models\Admin\Companies;
+use App\Models\Admin\Areas;
+use App\Models\Admin\Divisions;
+use App\Models\Admin\Positions;
 use App\Models\Admin\HistoryTrainingInternals;
 use Illuminate\Http\Request;
 use DB;
@@ -39,9 +45,109 @@ class HistoryTrainingInternalsController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
             abort(403);
         }
+
+        $nik            = auth()->user()->nik;
+        $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
+        $divisi         = $caridivisi->divisions_id;
+
+        if ($divisi == 11) {
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+            ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+            ->whereIn('divisions_id', [11])
+            ->where('history_training_internals.deleted_at',NULL)
+            ->get();
+        }
+        elseif($divisi == 2){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+            ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+            ->whereIn('divisions_id', [2])
+            ->where('history_training_internals.deleted_at',NULL)
+            ->get();
+        } 
+        elseif($divisi == 7){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+            ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+            ->whereIn('divisions_id', [7])
+            ->where('history_training_internals.deleted_at',NULL)
+            ->get();
+        } 
+        elseif($divisi == 8){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+            ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+            ->whereIn('divisions_id', [8])
+            ->where('history_training_internals.deleted_at',NULL)
+            ->get();
+        } 
+        elseif($divisi == 9){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+            ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+            ->whereIn('divisions_id', [9])
+            ->where('history_training_internals.deleted_at',NULL)
+            ->get();
+        } 
+        elseif($divisi == 10){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+            ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+            ->whereIn('divisions_id', [12,13,14,15,18])
+            ->where('history_training_internals.deleted_at',NULL)
+            ->get();
+        } 
+        elseif($divisi == 19){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+            ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+            ->whereIn('divisions_id', [19,20,21,22])
+            ->where('history_training_internals.deleted_at',NULL)
+            ->get();
+        } 
+        elseif($divisi == 4){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+            ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+            ->where('history_training_internals.deleted_at',NULL)
+            ->get();
+        } 
+        else {
+            abort(403);
+        }
+        
+        // $items = DB::table('history_training_internals')
+        // ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+        // ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+        // ->select(DB::raw('count(tanggal_training_internal) as jumlah'),'tanggal_training_internal', 'materi_training_internal','jam_training_internal','trainer_training_internal')
+        // ->groupByRaw('tanggal_training_internal, materi_training_internal,jam_training_internal,trainer_training_internal')
+        // // ->where('divisions_id',19)
+        // ->where('history_training_internals.deleted_at',NULL)
+        // ->get();
+
+        return view('pages.admin.history-training-internals.index',[
+            'items' => $items
+        ]);
     }
 
     /**
@@ -55,6 +161,17 @@ class HistoryTrainingInternalsController extends Controller
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
+
+        $items = Employees::with([
+            'companies',
+            'areas',
+            'divisions',
+            'positions'
+            ])->get();
+
+        return view ('pages.admin.history-training-internals.createmultiple',[
+            'items' => $items
+        ]);
     }
 
     /**
@@ -63,6 +180,34 @@ class HistoryTrainingInternalsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function storemultipletraininginternal(HistoryTrainingInternalsMultipleRequest $request)
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+            abort(403);
+        }
+        $tanggal    = $request->input('tanggal_training_internal');
+        $hari       = \Carbon\Carbon::parse($tanggal)->isoformat('dddd');
+
+        foreach ($request->input('employees_id') as $key=>$name) {
+            $insert =[
+                'employees_id'                  => $request->input('employees_id')[$key],
+                'hari_training_internal'        => $hari,
+                'tanggal_training_internal'     => $request->input('tanggal_training_internal'),
+                'jam_training_internal'         => $request->input('jam_training_internal'),
+                'lokasi_training_internal'      => $request->input('lokasi_training_internal'),
+                'materi_training_internal'      => $request->input('materi_training_internal'),
+                'trainer_training_internal'     => $request->input('trainer_training_internal'),
+                'input_oleh'                    => $request->input('input_oleh')
+            ];
+            HistoryTrainingInternals::create($insert);
+        }
+
+        Alert::success('Success Input Data Training Internal','Oleh '.auth()->user()->name);
+        //Redirect
+        return redirect()->route('history_training_internal.index');
+    }
+
     public function store(HistoryTrainingInternalsRequest $request)
     {
         //
@@ -124,6 +269,156 @@ class HistoryTrainingInternalsController extends Controller
         return view ('pages.admin.history-training-internals.edit',[
             'item'                          => $item,
             'historytraininginternals'      => $historytraininginternals
+        ]);
+    }
+
+    public function tampilmultipletraininginternal(HistoryTrainingInternalsMultipleViewRequest $request)
+    {
+        $materi_training_internal   = $request->input('materi_training_internal');
+        $tanggal_training_internal  = $request->input('tanggal_training_internal');
+        $jam_training_internal      = $request->input('jam_training_internal');
+        $trainer_training_internal  = $request->input('trainer_training_internal');
+
+        $nik            = auth()->user()->nik;
+        $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
+        $divisi         = $caridivisi->divisions_id;
+
+        if ($divisi == 11) {
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+
+            ->where([
+                ['materi_training_internal','=',$materi_training_internal],
+                ['tanggal_training_internal','=',$tanggal_training_internal],
+                ['jam_training_internal','=',$jam_training_internal],
+                ['trainer_training_internal','=',$trainer_training_internal],
+                ['divisions_id','=',11],
+                ['history_training_internals.deleted_at','=',NULL]
+            ])
+            ->get();
+        }
+        elseif($divisi == 2){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+
+            ->where([
+                ['materi_training_internal','=',$materi_training_internal],
+                ['tanggal_training_internal','=',$tanggal_training_internal],
+                ['jam_training_internal','=',$jam_training_internal],
+                ['trainer_training_internal','=',$trainer_training_internal],
+                ['divisions_id','=',2],
+                ['history_training_internals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        elseif($divisi == 7){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+
+            ->where([
+                ['materi_training_internal','=',$materi_training_internal],
+                ['tanggal_training_internal','=',$tanggal_training_internal],
+                ['jam_training_internal','=',$jam_training_internal],
+                ['trainer_training_internal','=',$trainer_training_internal],
+                ['divisions_id','=',7],
+                ['history_training_internals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        elseif($divisi == 8){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+
+            ->where([
+                ['materi_training_internal','=',$materi_training_internal],
+                ['tanggal_training_internal','=',$tanggal_training_internal],
+                ['jam_training_internal','=',$jam_training_internal],
+                ['trainer_training_internal','=',$trainer_training_internal],
+                ['divisions_id','=',8],
+                ['history_training_internals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        elseif($divisi == 9){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+
+            ->where([
+                ['materi_training_internal','=',$materi_training_internal],
+                ['tanggal_training_internal','=',$tanggal_training_internal],
+                ['jam_training_internal','=',$jam_training_internal],
+                ['trainer_training_internal','=',$trainer_training_internal],
+                ['divisions_id','=',9],
+                ['history_training_internals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        elseif($divisi == 10){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+
+            ->where([
+                ['materi_training_internal','=',$materi_training_internal],
+                ['tanggal_training_internal','=',$tanggal_training_internal],
+                ['jam_training_internal','=',$jam_training_internal],
+                ['trainer_training_internal','=',$trainer_training_internal],
+                ['history_training_internals.deleted_at','=',NULL]
+            ])
+            ->whereIn('divisions_id', [12,13,14,15,18])
+            ->get();
+        } 
+        elseif($divisi == 19){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+
+            ->where([
+                ['materi_training_internal','=',$materi_training_internal],
+                ['tanggal_training_internal','=',$tanggal_training_internal],
+                ['jam_training_internal','=',$jam_training_internal],
+                ['trainer_training_internal','=',$trainer_training_internal],
+                ['history_training_internals.deleted_at','=',NULL]
+            ])
+            ->whereIn('divisions_id', [19,20,21,22])
+            ->get();
+        } 
+        elseif($divisi == 4){
+            $items = DB::table('history_training_internals')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_training_internals.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+
+            ->where([
+                ['materi_training_internal','=',$materi_training_internal],
+                ['tanggal_training_internal','=',$tanggal_training_internal],
+                ['jam_training_internal','=',$jam_training_internal],
+                ['trainer_training_internal','=',$trainer_training_internal],
+                ['history_training_internals.deleted_at','=',NULL]
+            ])
+            ->get();
+        } 
+        else {
+            abort(403);
+        }
+        
+
+        
+
+        return view('pages.admin.history-training-internals.viewmultiple',[
+            'items' => $items
         ]);
     }
 

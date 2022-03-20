@@ -84,9 +84,13 @@ Route::prefix('admin')
         Route::resource('history_positions', 'HistoryPositionsController');
         //History Training Internal
         Route::get('history_training_internal/tambahhistorytraininginternal/{nik_karyawan}', 'HistoryTrainingInternalsController@tambahhistorytraininginternal')->name('history_training_internal.tambahhistorytraininginternal');
+        Route::post('history_training_internal/storemultipletraininginternal', 'HistoryTrainingInternalsController@storemultipletraininginternal')->name('history_training_internal.storemultipletraininginternal');
+        Route::post('history_training_internal/tampilmultipletraininginternal', 'HistoryTrainingInternalsController@tampilmultipletraininginternal')->name('history_training_internal.tampilmultipletraininginternal');
         Route::resource('history_training_internal', 'HistoryTrainingInternalsController');
         //History Training Eksternal
         Route::get('history_training_eksternal/tambahhistorytrainingeksternal/{nik_karyawan}', 'HistoryTrainingEksternalsController@tambahhistorytrainingeksternal')->name('history_training_eksternal.tambahhistorytrainingeksternal');
+        Route::post('history_training_eksternal/storemultipletrainingeksternal', 'HistoryTrainingEksternalsController@storemultipletrainingeksternal')->name('history_training_eksternal.storemultipletrainingeksternal');
+        Route::post('history_training_eksternal/tampilmultipletrainingeksternal', 'HistoryTrainingEksternalsController@tampilmultipletrainingeksternal')->name('history_training_eksternal.tampilmultipletrainingeksternal');
         Route::resource('history_training_eksternal', 'HistoryTrainingEksternalsController');
         //History Keluarga
         Route::get('history_families/tambahhistoryfamily/{nik_karyawan}', 'HistoryFamiliesController@tambahhistoryfamily')->name('history_families.tambahhistoryfamily');
