@@ -276,7 +276,10 @@ class HistoryTrainingEksternalsController extends Controller
 
     public function tampilmultipletrainingeksternal(HistoryTrainingEksternalsMultipleViewRequest $request)
     {
-
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
+            abort(403);
+        }
+        
         $institusi_penyelenggara_training_eksternal = $request->input('institusi_penyelenggara_training_eksternal');
         $perihal_training_eksternal                 = $request->input('perihal_training_eksternal');
         $tanggal_awal_training_eksternal            = $request->input('tanggal_awal_training_eksternal');

@@ -274,6 +274,10 @@ class HistoryTrainingInternalsController extends Controller
 
     public function tampilmultipletraininginternal(HistoryTrainingInternalsMultipleViewRequest $request)
     {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
+            abort(403);
+        }
+        
         $materi_training_internal   = $request->input('materi_training_internal');
         $tanggal_training_internal  = $request->input('tanggal_training_internal');
         $jam_training_internal      = $request->input('jam_training_internal');
