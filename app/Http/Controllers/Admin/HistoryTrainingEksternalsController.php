@@ -412,8 +412,6 @@ class HistoryTrainingEksternalsController extends Controller
             abort(403);
         }
 
-        
-
         return view('pages.admin.history-training-eksternals.viewmultiple',[
             'items' => $items
         ]);

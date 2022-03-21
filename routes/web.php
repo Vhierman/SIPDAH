@@ -143,6 +143,18 @@ Route::prefix('admin')
         Route::post('process/perpanjang_pkwt_kontrak', 'ProcessController@perpanjang_pkwt_kontrak')->name('process.perpanjang_pkwt_kontrak');
         Route::resource('process', 'ProcessController');
         // Overtimes
+        Route::get('overtimes/lihat_overtime', 'OvertimesController@lihat_overtime')->name('overtimes.lihat_overtime');
+        Route::post('overtimes/tampil_overtime', 'OvertimesController@tampil_overtime')->name('overtimes.tampil_overtime');
+        Route::get('overtimes/edit_overtime', 'OvertimesController@edit_overtime')->name('overtimes.edit_overtime');
+        Route::post('overtimes/tampiledit_overtime', 'OvertimesController@tampiledit_overtime')->name('overtimes.tampiledit_overtime');
+        Route::get('overtimes/form_hapus_overtime', 'OvertimesController@form_hapus_overtime')->name('overtimes.form_hapus_overtime');
+        Route::post('overtimes/tampilhapus_overtime', 'OvertimesController@tampilhapus_overtime')->name('overtimes.tampilhapus_overtime');
+        Route::get('overtimes/form_approve_overtime', 'OvertimesController@form_approve_overtime')->name('overtimes.form_approve_overtime');
+        Route::post('overtimes/tampil_approve_overtime', 'OvertimesController@tampil_approve_overtime')->name('overtimes.tampil_approve_overtime');
+        Route::post('overtimes/proses_approve_overtime', 'OvertimesController@proses_approve_overtime')->name('overtimes.proses_approve_overtime');
+        Route::get('overtimes/form_cancel_approve_overtime', 'OvertimesController@form_cancel_approve_overtime')->name('overtimes.form_cancel_approve_overtime');
+        Route::post('overtimes/tampil_cancel_approve_overtime', 'OvertimesController@tampil_cancel_approve_overtime')->name('overtimes.tampil_cancel_approve_overtime');
+        Route::post('overtimes/proses_cancel_approve_overtime', 'OvertimesController@proses_cancel_approve_overtime')->name('overtimes.proses_cancel_approve_overtime');
         Route::resource('overtimes', 'OvertimesController');
         
         

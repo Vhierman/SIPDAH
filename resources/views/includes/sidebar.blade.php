@@ -240,6 +240,19 @@
                             <a class="nav-link" href="{{ route('overtimes.index') }}">Overtimes</a>
                         </nav>
                     </div>
+                @elseif (Auth::user()->roles == 'LEADER')
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseProses"
+                        aria-expanded="false" aria-controls="collapseProses">
+                        <div class="sb-nav-link-icon"><i class="fas fa-paperclip"></i></div>
+                        Proses
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('overtimes.index') }}">Overtimes</a>
+                        </nav>
+                    </div>
                 @endif
                 {{-- End Proses --}}
 

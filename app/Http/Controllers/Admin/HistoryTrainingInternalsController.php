@@ -418,9 +418,6 @@ class HistoryTrainingInternalsController extends Controller
             abort(403);
         }
         
-
-        
-
         return view('pages.admin.history-training-internals.viewmultiple',[
             'items' => $items
         ]);

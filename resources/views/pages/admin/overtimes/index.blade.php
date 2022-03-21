@@ -15,30 +15,117 @@
 
                     <div class="card shadow">
 
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-2 d-grid gap-2 mt-2">
-                                    <a href="#" class="btn btn-primary btn-lg">
-                                        Lihat Data
-                                    </a>
-                                </div>
-                                <div class="col-md-2 d-grid gap-2 mt-2">
-                                    <a href="#" class="btn btn-primary btn-lg">Large button</a>
-                                </div>
-                                <div class="col-md-2 d-grid gap-2 mt-2">
-                                    <a href="#" class="btn btn-primary btn-lg">Large button</a>
-                                </div>
-                                <div class="col-md-2 d-grid gap-2 mt-2">
-                                    <a href="#" class="btn btn-primary btn-lg">Large button</a>
-                                </div>
-                                <div class="col-md-2 d-grid gap-2 mt-2">
-                                    <a href="#" class="btn btn-primary btn-lg">Large button</a>
-                                </div>
-                                <div class="col-md-2 d-grid gap-2 mt-2">
-                                    <a href="#" class="btn btn-primary btn-lg">Large button</a>
+                        @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.lihat_overtime') }}" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-search"></i>
+                                            Lihat Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.create') }}" class="btn btn-success btn-lg">
+                                            <i class="fas fa-plus"></i>
+                                            Tambah Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.edit_overtime') }}" class="btn btn-warning btn-lg">
+                                            <i class="fas fa-sync-alt"></i>
+                                            Edit Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.form_hapus_overtime') }}"
+                                            class="btn btn-danger btn-lg">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Hapus Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.form_approve_overtime') }}"
+                                            class="btn btn-primary btn-lg">
+                                            <i class="fas fa-check"></i>
+                                            Approve Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.index') }}" class="btn btn-success btn-lg">
+                                            <i class="fas fa-print"></i>
+                                            Cetak Slip
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.index') }}" class="btn btn-warning btn-lg">
+                                            <i class="fas fa-print"></i>
+                                            Cetak Rekap
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.form_cancel_approve_overtime') }}"
+                                            class="btn btn-danger btn-lg">
+                                            <i class="fas fa-undo"></i>
+                                            Cancel Approve
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @elseif(Auth::user()->roles == 'ACCOUNTING')
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.lihat_overtime') }}" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-search"></i>
+                                            Lihat Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.index') }}" class="btn btn-success btn-lg">
+                                            <i class="fas fa-print"></i>
+                                            Cetak Slip
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.index') }}" class="btn btn-warning btn-lg">
+                                            <i class="fas fa-print"></i>
+                                            Cetak Rekap
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @elseif(Auth::user()->roles == 'LEADER')
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.lihat_overtime') }}" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-search"></i>
+                                            Lihat Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.create') }}" class="btn btn-success btn-lg">
+                                            <i class="fas fa-plus"></i>
+                                            Tambah Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.edit_overtime') }}" class="btn btn-warning btn-lg">
+                                            <i class="fas fa-sync-alt"></i>
+                                            Edit Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('overtimes.form_hapus_overtime') }}"
+                                            class="btn btn-danger btn-lg">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Hapus Data
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                        @endif
 
                     </div>
                 </div>
