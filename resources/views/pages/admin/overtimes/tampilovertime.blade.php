@@ -47,9 +47,9 @@
                                             <td>{{ $item->jam_pulang }}</td>
                                             <td>{{ $item->keterangan_lembur }}</td>
                                             @if ($item->acc_hrd == null)
-                                                <td><span class="badge bg-danger">Belum Disetujui</span></td>
+                                                <td><span class="badge bg-danger">Belum Direkap</span></td>
                                             @else
-                                                <td><span class="badge bg-primary">Disetujui</span></td>
+                                                <td><span class="badge bg-primary">Sudah Direkap</span></td>
                                             @endif
 
                                         </tr>

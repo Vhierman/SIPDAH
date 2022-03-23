@@ -47,7 +47,7 @@
                                         <a href="{{ route('overtimes.form_approve_overtime') }}"
                                             class="btn btn-primary btn-lg">
                                             <i class="fas fa-check"></i>
-                                            Approve Data
+                                            Rekap Data
                                         </a>
                                     </div>
                                     <div class="col-md-3 d-grid gap-2 mt-2">
@@ -67,7 +67,7 @@
                                         <a href="{{ route('overtimes.form_cancel_approve_overtime') }}"
                                             class="btn btn-danger btn-lg">
                                             <i class="fas fa-undo"></i>
-                                            Cancel Approve
+                                            Cancel Rekap
                                         </a>
                                     </div>
                                 </div>
