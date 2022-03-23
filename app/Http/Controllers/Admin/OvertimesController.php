@@ -140,9 +140,7 @@ class OvertimesController extends Controller
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
         else {
-            Alert::error('Data Tidak Ditemukan');
-            //Redirect
-            return redirect()->route('overtimes.lihat_overtime');
+            abort(403);
         }
         
         if (!$items->isEmpty()) {
