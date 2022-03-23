@@ -66,6 +66,18 @@
                                                 Libur</option>
                                         </select>
                                     </div>
+                                    <div class="form-group  mt-2">
+                                        <label for="uang_makan_lembur">Uang Makan Lembur</label>
+                                        <select name="uang_makan_lembur" class="form-select">
+                                            <option value="">Dapat Uang Makan Lembur ?</option>
+                                            <option value="12500"
+                                                @if (old('uang_makan_lembur') == '12500') {{ 'selected' }} @endif>Dapat
+                                            </option>
+                                            <option value="0" @if (old('uang_makan_lembur') == '0') {{ 'selected' }} @endif>
+                                                Tidak
+                                            </option>
+                                        </select>
+                                    </div>
                                     <div class="form-group mt-2">
                                         <label for="title" class="form-label">Keterangan Lembur</label>
                                         <input type="text" class="form-control" name="keterangan_lembur"
@@ -75,7 +87,8 @@
                                     <div class="form-group mt-2">
                                         <label for="title" class="form-label">Jam Masuk</label>
                                         <input type="number" class="form-control" name="jam_masuk"
-                                            placeholder="Masukan Jam Masuk" maxlength="2" value="{{ $items->jam_masuk }}">
+                                            placeholder="Masukan Jam Masuk" maxlength="2"
+                                            value="{{ $items->jam_masuk }}">
                                     </div>
                                     <div class="form-group  mt-2">
                                         <label for="jam_istirahat">Jam Istirahat</label>

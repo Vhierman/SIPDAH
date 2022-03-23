@@ -155,6 +155,11 @@ Route::prefix('admin')
         Route::get('overtimes/form_cancel_approve_overtime', 'OvertimesController@form_cancel_approve_overtime')->name('overtimes.form_cancel_approve_overtime');
         Route::post('overtimes/tampil_cancel_approve_overtime', 'OvertimesController@tampil_cancel_approve_overtime')->name('overtimes.tampil_cancel_approve_overtime');
         Route::post('overtimes/proses_cancel_approve_overtime', 'OvertimesController@proses_cancel_approve_overtime')->name('overtimes.proses_cancel_approve_overtime');
+        Route::get('overtimes/form_cetak_slip_overtime', 'OvertimesController@form_cetak_slip_overtime')->name('overtimes.form_cetak_slip_overtime');
+        Route::get('overtimes/form_cetak_slip_karyawan_overtime', 'OvertimesController@form_cetak_slip_karyawan_overtime')->name('overtimes.form_cetak_slip_karyawan_overtime');
+        Route::post('overtimes/hasil_slipkaryawan_overtime', 'OvertimesController@hasil_slipkaryawan_overtime')->name('overtimes.hasil_slipkaryawan_overtime');
+        Route::get('overtimes/form_cetak_slip_department_overtime', 'OvertimesController@form_cetak_slip_department_overtime')->name('overtimes.form_cetak_slip_department_overtime');
+        Route::post('overtimes/hasil_slipdepartment_overtime', 'OvertimesController@hasil_slipdepartment_overtime')->name('overtimes.hasil_slipdepartment_overtime');
         Route::resource('overtimes', 'OvertimesController');
         
         
