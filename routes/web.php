@@ -160,8 +160,11 @@ Route::prefix('admin')
         Route::post('overtimes/hasil_slipkaryawan_overtime', 'OvertimesController@hasil_slipkaryawan_overtime')->name('overtimes.hasil_slipkaryawan_overtime');
         Route::get('overtimes/form_cetak_slip_department_overtime', 'OvertimesController@form_cetak_slip_department_overtime')->name('overtimes.form_cetak_slip_department_overtime');
         Route::post('overtimes/hasil_slipdepartment_overtime', 'OvertimesController@hasil_slipdepartment_overtime')->name('overtimes.hasil_slipdepartment_overtime');
+        Route::get('overtimes/form_cetak_rekap_overtime', 'OvertimesController@form_cetak_rekap_overtime')->name('overtimes.form_cetak_rekap_overtime');
+        Route::post('overtimes/form_lihat_rekap_overtime', 'OvertimesController@form_lihat_rekap_overtime')->name('overtimes.form_lihat_rekap_overtime');
+        Route::get('overtimes/export_excel_rekap_overtime', 'OvertimesController@export_excel_rekap_overtime')->name('overtimes.export_excel_rekap_overtime');
+        Route::post('overtimes/export_pdf_rekap_overtime', 'OvertimesController@export_pdf_rekap_overtime')->name('overtimes.export_pdf_rekap_overtime');
         Route::resource('overtimes', 'OvertimesController');
-        
         
         
 });

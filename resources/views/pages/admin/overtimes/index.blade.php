@@ -58,7 +58,8 @@
                                         </a>
                                     </div>
                                     <div class="col-md-3 d-grid gap-2 mt-2">
-                                        <a href="{{ route('overtimes.index') }}" class="btn btn-warning btn-lg">
+                                        <a href="{{ route('overtimes.form_cetak_rekap_overtime') }}"
+                                            class="btn btn-warning btn-lg">
                                             <i class="fas fa-print"></i>
                                             Cetak Rekap
                                         </a>
@@ -89,7 +90,8 @@
                                         </a>
                                     </div>
                                     <div class="col-md-3 d-grid gap-2 mt-2">
-                                        <a href="{{ route('overtimes.index') }}" class="btn btn-warning btn-lg">
+                                        <a href="{{ route('overtimes.form_cetak_rekap_overtime') }}"
+                                            class="btn btn-warning btn-lg">
                                             <i class="fas fa-print"></i>
                                             Cetak Rekap
                                         </a>

@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Exports\OvertimeExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\Admin\OvertimesRequest;
 use App\Http\Requests\Admin\CariOvertimesRequest;
 use App\Http\Requests\Admin\EditOvertimesRequest;
 use App\Http\Requests\Admin\SlipKaryawanOvertimesRequest;
 use App\Http\Requests\Admin\SlipDepartmentOvertimesRequest;
+use App\Http\Requests\Admin\RekapOvertimesRequest;
 use App\Models\Admin\Overtimes;
 use App\Models\Admin\Employees;
+use App\Models\Admin\HistorySalaries;
 use App\Models\Admin\Companies;
 use App\Models\Admin\Areas;
 use App\Models\Admin\Divisions;
 use App\Models\Admin\Positions;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use File;
 use Storage;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use DB;
@@ -985,9 +990,317 @@ class OvertimesController extends Controller
 
         $this->fpdf->Output();
         exit;
+    }
+
+    public function form_cetak_rekap_overtime()
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
+            abort(403);
+        }
+
+        return view ('pages.admin.overtimes.formrekapovertime');
+    }
+
+    public function form_lihat_rekap_overtime(RekapOvertimesRequest $request)
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
+            abort(403);
+        }
+        
+        $divisions_id   = $request->input('divisions_id');
+        $status_kerja   = $request->input('status_kerja');
+        $awal           = $request->input('awal');
+        $akhir          = $request->input('akhir');
+
+        $divisi = '';
+
+        if ($divisions_id == 'Produksi') {
+            $divisi = array('11');
+        }
+        elseif ($divisions_id == 'Office') {
+            $divisi = array('1','2','3','4','5','6','7','9','10','17');
+        } 
+        elseif ($divisions_id == 'Warehouse') {
+            $divisi = array('12','13','14','15','18');
+        } 
+        elseif ($divisions_id == 'Quality') {
+            $divisi = array('8');
+        } 
+        elseif ($divisions_id == 'PDC') {
+            $divisi = array('19','20','21','22');
+        } 
+        else {
+            abort(403);
+        }
+
+        $items = DB::table('overtimes')
+        ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
+        ->groupBy('employees_id')
+        ->select('employees_id', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
+        ->whereIn('divisions_id',$divisi)
+        ->where('overtimes.acc_hrd','<>',NULL)
+        ->where('overtimes.deleted_at',NULL)
+        ->whereBetween('tanggal_lembur', [$awal, $akhir])
+        ->orderBy('nama_karyawan')
+        ->get();
+
+        return view('pages.admin.overtimes.tampilrekapovertimes',[
+            'divisions_id'          => $divisions_id,
+            'status_kerja'          => $status_kerja,
+            'items'                 => $items,
+            'awal'                  => $awal,
+            'akhir'                 => $akhir
+        ]);
+    }
+
+    public function export_excel_rekap_overtime()
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
+            abort(403);
+        }
+		return Excel::download(new OvertimeExport, 'rekapovertime.xlsx');
+    }
+
+    public function export_pdf_rekap_overtime(Request $request)
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
+            abort(403);
+        }
+
+        $divisions_id   = $request->input('divisions_id');
+        $status_kerja   = $request->input('status_kerja');
+        $awal           = $request->input('awal');
+        $akhir          = $request->input('akhir');
+
+        $divisi = '';
+
+        if ($divisions_id == 'Produksi') {
+            $divisi = array('11');
+        }
+        elseif ($divisions_id == 'Office') {
+            $divisi = array('1','2','3','4','5','6','7','9','10','17');
+        } 
+        elseif ($divisions_id == 'Warehouse') {
+            $divisi = array('12','13','14','15','18');
+        } 
+        elseif ($divisions_id == 'Quality') {
+            $divisi = array('8');
+        } 
+        elseif ($divisions_id == 'PDC') {
+            $divisi = array('19','20','21','22');
+        } 
+        else {
+            abort(403);
+        }
+
+        $items = DB::table('overtimes')
+        ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
+        ->groupBy('employees_id')
+        ->select('employees_id', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
+        ->whereIn('divisions_id',$divisi)
+        ->where('overtimes.acc_hrd','<>',NULL)
+        ->where('overtimes.deleted_at',NULL)
+        ->whereBetween('tanggal_lembur', [$awal, $akhir])
+        ->orderBy('nama_karyawan')
+        ->get();
+
+        foreach ($items as $item) {
+
+            $this->fpdf = new FPDF('P', 'cm', array(21, 28));
+            $this->fpdf->setTopMargin(0.2);
+            $this->fpdf->setLeftMargin(0.2);
+            $this->fpdf->SetAutoPageBreak(true);
+
+            $this->fpdf->AddPage();
+            $this->fpdf->Cell(20.5, 27.5, '', 1, 0, 'C');
+            $this->fpdf->Ln(0.1);
+            
+            $this->fpdf->SetFont('Arial', 'B', '8');
+            $this->fpdf->Cell(0.1);
+            $this->fpdf->Cell(10, 1, "PT PRIMA KOMPONEN INDONESIA", 0, 0, 'L');
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->SetFont('Arial', '', '9');
+            $this->fpdf->Cell(0.1);
+            // $this->fpdf->Cell(10, 1, $area." - " . $penempatan . "", 0, 0, 'L');
+
+            $this->fpdf->SetFont('Arial', 'B', '10');
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(20, 1, "Daftar Rekap Lembur Karyawan", 0, 0, 'C');
+
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(20, 1, "Periode " . \Carbon\Carbon::parse($awal)->isoformat('D MMMM Y') . " s/d " . \Carbon\Carbon::parse($akhir)->isoformat('D MMMM Y') . "", 0, 0, 'C');
+
+            $this->fpdf->Ln(0.6);
+
+            $this->fpdf->SetFont('Arial', 'B', '8');
+            $this->fpdf->Cell(0.1);
+            $this->fpdf->Cell(7, 0.5, $divisions_id, 0, 0, 'L');
+
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(0.1);
+            $this->fpdf->SetFont('Arial', '', '8');
+            $this->fpdf->SetFillColor(255, 255, 255); // Warna sel tabel header
+            $this->fpdf->Cell(1, 0.9, 'No', 1, 0, 'C', 1);
+            $this->fpdf->Cell(4, 0.9, 'Nama Karyawan', 1, 0, 'C', 1);
+            $this->fpdf->Cell(3, 0.9, 'Jabatan', 1, 0, 'C', 1);
+            $this->fpdf->Cell(1.5, 0.9, '', 1, 0, 'C', 1);
+            $this->fpdf->Cell(1.5, 0.9, '', 1, 0, 'C', 1);
+            $this->fpdf->Cell(3, 0.9, 'Jumlah Uang Lembur', 1, 0, 'C', 1);
+            $this->fpdf->Cell(2, 0.9, '', 1, 0, 'C', 1);
+            $this->fpdf->Cell(2, 0.9, '', 1, 0, 'C', 1);
+            $this->fpdf->Cell(2, 0.9, '', 1, 0, 'C', 1);
+
+            $this->fpdf->Ln(0.1);
+            $this->fpdf->Cell(8.1);
+            $this->fpdf->Cell(1.5, 0.5, 'Jam', 0, 0, 'C');
+
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(8.1);
+            $this->fpdf->Cell(1.5, 0.5, 'Lembur', 0, 0, 'C');
+
+            $this->fpdf->Ln(-0.4);
+            $this->fpdf->Cell(9.6);
+            $this->fpdf->SetFont('Arial', '', '6.5');
+            $this->fpdf->Cell(1.5, 0.5, 'Upah Lembur', 0, 0, 'C');
+
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(9.6);
+            $this->fpdf->Cell(1.5, 0.5, 'Perjam', 0, 0, 'C');
+
+            $this->fpdf->Ln(-0.4);
+            $this->fpdf->Cell(14.3);
+            $this->fpdf->SetFont('Arial', '', '7');
+            $this->fpdf->Cell(1.5, 0.5, 'Uang Makan', 0, 0, 'C');
+
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(14.3);
+            $this->fpdf->Cell(1.5, 0.5, 'Lembur', 0, 0, 'C');
+
+            $this->fpdf->Ln(-0.4);
+            $this->fpdf->Cell(16.3);
+            $this->fpdf->SetFont('Arial', '', '6.5');
+            $this->fpdf->Cell(1.5, 0.5, 'Jumlah Uang', 0, 0, 'C');
+
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(16.3);
+            $this->fpdf->Cell(1.5, 0.5, 'Yang Diterima', 0, 0, 'C');
+
+            $this->fpdf->Ln(-0.4);
+            $this->fpdf->Cell(18.3);
+            $this->fpdf->SetFont('Arial', '', '6.5');
+            $this->fpdf->Cell(1.5, 0.5, 'Hasil Uang', 0, 0, 'C');
+
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(18.3);
+            $this->fpdf->Cell(1.5, 0.5, 'Yang Diterima', 0, 0, 'C');
+
+            $no = 1;
+            $totaljumlahuanglembur = 0;
+            $totaluangmakanlembur = 0;
+            $totaljumlahuangditerima = 0;
+            $totalhasiluangditerima = 0;
+            
+            foreach ($items as $item) {
+
+                $jumlahjam = $item->jumlah_jam_pertama + $item->jumlah_jam_kedua + $item->jumlah_jam_ketiga + $item->jumlah_jam_keempat;
+                $uangmakanlembur = $item->uang_makan_lembur;
+
+                $collections = DB::table('overtimes')
+                            ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
+                            ->join('history_salaries', 'employees.nik_karyawan', '=', 'history_salaries.employees_id')
+                            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                            ->join('areas', 'areas.id', '=', 'employees.areas_id')
+                            ->where('overtimes.employees_id', $item->employees_id)
+                            ->where('overtimes.acc_hrd', '<>', null)
+                            ->where('overtimes.deleted_at', null)
+                            ->whereBetween('tanggal_lembur', [$awal, $akhir])
+                            ->first();
+
+            $namakaryawan = $collections->nama_karyawan;
+            $jabatan = $collections->jabatan;
+            $penempatan = $collections->penempatan;
+            $area = $collections->area;
+            $nomorrekening = $collections->nomor_rekening;
+            $upahlemburperjam = $collections->upah_lembur_perjam;
+            $jumlahuanglembur = $upahlemburperjam * $jumlahjam;
+            $jumlahuangditerima = $jumlahuanglembur + $uangmakanlembur;
+            
+            $jumlahuangditerimapembulatan = ceil($jumlahuangditerima);
+            if (substr($jumlahuangditerimapembulatan, -2) <= 0) {
+                $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2);
+            } else {
+                $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2) + 100;
+            }
+            
+
+            $this->fpdf->SetFont('Arial', '', '7');
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(0.1);
+            $this->fpdf->Cell(1, 0.4, $no, 1, 0, 'C');
+            $this->fpdf->Cell(4, 0.4, $namakaryawan, 1, 0, 'L');
+            $this->fpdf->Cell(3, 0.4, $jabatan, 1, 0, 'L');
+            $this->fpdf->Cell(1.5, 0.4, $jumlahjam, 1, 0, 'C');
+
+            $this->fpdf->Cell(1.5, 0.4, number_format($upahlemburperjam), 1, 0, 'C');
+            $this->fpdf->Cell(3, 0.4, number_format($jumlahuanglembur), 1, 0, 'R');
+            $this->fpdf->Cell(2, 0.4, number_format($uangmakanlembur), 1, 0, 'R');
+            $this->fpdf->Cell(2, 0.4, number_format($jumlahuangditerima), 1, 0, 'R');
+            $this->fpdf->Cell(2, 0.4, number_format($total_jumlahuangditerima), 1, 0, 'R');
+
+            $no++;
+            $totaljumlahuanglembur += $jumlahuanglembur;
+            $totaluangmakanlembur += $uangmakanlembur;
+            $totaljumlahuangditerima += $jumlahuangditerima;
+            $totalhasiluangditerima += $total_jumlahuangditerima;
+        }
+            $this->fpdf->Ln(0.4);
+            $this->fpdf->Cell(11.1);
+            $this->fpdf->Cell(3, 0.4, number_format($totaljumlahuanglembur), 1, 0, 'R');
+            $this->fpdf->Cell(2, 0.4, number_format($totaluangmakanlembur), 1, 0, 'R');
+            $this->fpdf->Cell(2, 0.4, number_format($totaljumlahuangditerima), 1, 0, 'R');
+            $this->fpdf->Cell(2, 0.4, number_format($totalhasiluangditerima), 1, 0, 'R');
+
+            $this->fpdf->Ln(0.7);
+
+            $this->fpdf->Cell(0.1);
+            $this->fpdf->Cell(5, 0.2, 'Mengetahui', 0, 0, 'L');
+
+            $this->fpdf->Cell(6, 0.2, 'Tangerang, ........................................,2020', 0, 0, 'L');
+
+            $this->fpdf->Cell(3);
+            $this->fpdf->Cell(5.4, 0.2, 'Diperiksa', 0, 0, 'L');
+
+
+            $this->fpdf->Ln(1.5);
+            $this->fpdf->Cell(0.1);
+            $this->fpdf->Cell(5, 0.2, 'Veronica', 0, 0, 'L');
+
+
+
+            $this->fpdf->Cell(9);
+            $this->fpdf->Cell(5.4, 0.2, 'Rudiyanto', 0, 0, 'L');
+
+            $this->fpdf->Ln(0.3);
+            $this->fpdf->Cell(0.2);
+            $this->fpdf->Cell(1, 0, '', 1, 0, 'L', 1);
+
+            $this->fpdf->Cell(13);
+            $this->fpdf->Cell(1.1, 0, '', 1, 0, 'L', 1);
+
+            $this->fpdf->Ln(0.1);
+            $this->fpdf->Cell(0.1);
+            $this->fpdf->Cell(5, 0.2, '( Deputy General Manager Accounting )', 0, 0, 'L');
+
+            $this->fpdf->Cell(9);
+            $this->fpdf->Cell(5, 0.2, '( Manager HRD - GA )', 0, 0, 'L');
+
+            $this->fpdf->Output();
+            exit;
+        }
 
         
-    
+
     }
 
     /**
@@ -1190,16 +1503,27 @@ class OvertimesController extends Controller
         $jumlah_jam_kedua       = $jam_kedua * 2;
         $jumlah_jam_ketiga      = $jam_ketiga * 3;
         $jumlah_jam_keempat     = $jam_keempat * 4;
-        
-        // dd($uangmakanlembur);
-
-        // TimeStamp
-        // $waktu_acc_hrd      = Carbon::now()->toDateTimeString();
-        // TimeStamp
 
         foreach ($request->input('employees_id') as $key=>$name) {
+
+
+            // $nikkaryawan    = $request->input('employees_id');
+            
+            // $items  = HistorySalaries::with([
+            //     'employees'
+            //     ])->whereIn('employees_id', $nikkaryawan)->get();
+
+                
+                
+            // foreach ($items as $item ) {
+            //     dd($item->gaji_pokok);
+            // }
+            
+            
+
             $insert =[
                 'employees_id'          => $request->input('employees_id')[$key],
+                // 'upah_lembur_perjam'    => null,
                 'jam_masuk'             => $jam_masuk,
                 'jam_istirahat'         => $jam_istirahat,
                 'jam_pulang'            => $jam_pulang,
@@ -1218,6 +1542,7 @@ class OvertimesController extends Controller
                 'uang_makan_lembur'     => $uang_makan_lembur,
                 'input_oleh'            => $request->input('input_oleh')
             ];
+        
             Overtimes::create($insert);
         }
         
