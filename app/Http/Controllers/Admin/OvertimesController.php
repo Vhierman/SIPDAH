@@ -1325,7 +1325,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->whereIn('divisions_id', [11])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [11])->get();
         }
         elseif ($divisi == 19) {
             $items = Employees::with([
@@ -1333,7 +1333,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->whereIn('divisions_id', [19,20,21,22])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [19,20,21,22])->get();
         } 
         elseif ($divisi == 2) {
             $items = Employees::with([
@@ -1341,7 +1341,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->whereIn('divisions_id', [2])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [2])->get();
         } 
         elseif ($divisi == 7) {
             $items = Employees::with([
@@ -1349,7 +1349,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->whereIn('divisions_id', [7])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [7])->get();
         } 
         elseif ($divisi == 8) {
             $items = Employees::with([
@@ -1357,7 +1357,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->whereIn('divisions_id', [8])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [8])->get();
         } 
         elseif ($divisi == 9) {
             $items = Employees::with([
@@ -1365,7 +1365,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->whereIn('divisions_id', [9])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [9])->get();
         } 
         elseif ($divisi == 10) {
             $items = Employees::with([
@@ -1373,7 +1373,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->whereIn('divisions_id', [12,13,14,15,18])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [12,13,14,15,18])->get();
         } 
         elseif ($divisi == 4) {
             $items = Employees::with([
@@ -1381,7 +1381,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->get();
+                ])->where('status_kerja','<>','Outsourcing')->get();
         } 
         else {
             abort(403);
@@ -1636,6 +1636,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [11])
@@ -1646,6 +1649,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [19,20,21,22])
@@ -1656,6 +1662,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [2])
@@ -1666,6 +1675,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [7])
@@ -1676,6 +1688,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [8])
@@ -1686,6 +1701,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [9])
@@ -1696,6 +1714,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [12,13,14,15,18])
@@ -1706,6 +1727,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->get();
@@ -1921,6 +1945,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [11])
@@ -1931,6 +1958,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [19,20,21,22])
@@ -1941,6 +1971,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [2])
@@ -1951,6 +1984,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [7])
@@ -1961,6 +1997,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [8])
@@ -1971,6 +2010,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [9])
@@ -1981,6 +2023,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereIn('divisions_id', [12,13,14,15,18])
@@ -1991,6 +2036,9 @@ class OvertimesController extends Controller
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                ->groupBy('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
+                ->select('employees.nik_karyawan','employees.nama_karyawan','divisions.penempatan','positions.jabatan')
                 ->where('overtimes.acc_hrd',NULL)
                 ->where('overtimes.deleted_at',NULL)
                 ->get();
