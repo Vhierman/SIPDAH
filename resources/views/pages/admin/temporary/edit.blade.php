@@ -9,7 +9,7 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item">Dashboard</li>
                     <li class="breadcrumb-item">Master</li>
-                    <li class="breadcrumb-item active">Edit Temporary {{ $item->nama_karyawan }}</li>
+                    <li class="breadcrumb-item active">Edit Temporary </li>
                 </ol>
 
                 <div class="card mb-4">
@@ -39,20 +39,27 @@
                                         value="{{ Auth::user()->name }}">
 
                                     <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Nama Karyawan</label>
-                                        <input type="text" class="form-control" readonly name="nama_karyawan"
-                                            placeholder="Masukan Nama Karyawan" value="{{ $item->nama_karyawan }}">
-                                    </div>
-                                    <div class="form-group mb-2">
                                         <label for="title" class="form-label">NIK Karyawan</label>
                                         <input type="text" class="form-control" readonly name="nik_karyawan"
-                                            placeholder="Masukan NIK Karyawan" value="{{ $item->nik_karyawan }}">
+                                            placeholder="Masukan NIK Karyawan" value="{{ $itemkaryawan->nik_karyawan }}">
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Nomor Absen</label>
-                                        <input type="text" class="form-control" onkeyup="angka(this);" maxlength="4"
-                                            name="nomor_absen" placeholder="Masukan Nomor Absen"
-                                            value="{{ $item->nomor_absen }}">
+                                        <label for="title" class="form-label">Nama Karyawan</label>
+                                        <input type="text" class="form-control" readonly name="nama_karyawan"
+                                            placeholder="Masukan Nama Karyawan"
+                                            value="{{ $itemkaryawan->nama_karyawan }}">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="title" class="form-label">Penempatan</label>
+                                        <input type="text" class="form-control" readonly name="penempatan"
+                                            placeholder="Masukan NIK Karyawan"
+                                            value="{{ $itemkaryawan->divisions->penempatan }}">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="title" class="form-label">Upah Lembur Perjam</label>
+                                        <input type="text" class="form-control" onkeyup="angka(this);"
+                                            name="upah_lembur_perjam" placeholder="Masukan Upah Lembur Perjam"
+                                            value="{{ $item->upah_lembur_perjam }}">
                                     </div>
 
                                     <div class="d-grid gap-2 mt-3">

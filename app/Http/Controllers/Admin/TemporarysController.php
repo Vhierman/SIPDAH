@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\TemporarysRequest;
 use App\Models\Admin\Employees;
+use App\Models\Admin\HistorySalaries;
 use App\Models\Admin\Divisions;
 use App\Models\Admin\Positions;
 use Alert;
+use DB;
 
 class TemporarysController extends Controller
 {
@@ -24,13 +26,10 @@ class TemporarysController extends Controller
             abort(403);
         }
 
-        $items = Employees::with([
-            'areas',
-            'divisions',
-            'positions'
+        $items = HistorySalaries::with([
+            'employees'
             ])->get();
 
-        // $items  = Employees::all();
         return view('pages.admin.temporary.index',[
             'items' => $items
         ]);
@@ -89,10 +88,18 @@ class TemporarysController extends Controller
         if (auth()->user()->roles != 'ADMIN') {
             abort(403);
         }
-        $item = Employees::findOrFail($id);
+        
+
+        $item = HistorySalaries::findOrFail($id);
+        $nikkaryawan = $item->employees_id;
+        
+        $itemkaryawan = Employees::with([
+            'divisions'
+        ])->where('nik_karyawan',$nikkaryawan)->first();
 
         return view('pages.admin.temporary.edit',[
-        'item' => $item
+        'item'          => $item,
+        'itemkaryawan'  => $itemkaryawan
         ]);
     }
 
@@ -109,15 +116,15 @@ class TemporarysController extends Controller
         if (auth()->user()->roles != 'ADMIN') {
             abort(403);
         }
-        $item           = Employees::findOrFail($id);
-        $nikkaryawan    = $item->nik_karyawan;
-        $karyawan       = Employees::where('nik_karyawan', $nikkaryawan)->first();
+        $item   = HistorySalaries::findOrFail($id);
+        // $nikkaryawan    = $item->nik_karyawan;
+        // $karyawan       = Employees::where('nik_karyawan', $nikkaryawan)->first();
 
-        $karyawan->update([
-            'nomor_absen'       => $request->input('nomor_absen'),
-            'edit_oleh'         => $request->input('edit_oleh')
+        $item->update([
+            'upah_lembur_perjam'    => $request->input('upah_lembur_perjam'),
+            'edit_oleh'             => $request->input('edit_oleh')
         ]);
-        Alert::info('Success Edit Data Nomor Absen','Oleh '.auth()->user()->name);
+        Alert::info('Success Edit Upah Lembur Perjam','Oleh '.auth()->user()->name);
         return redirect()->route('temporarys.index');
     }
 

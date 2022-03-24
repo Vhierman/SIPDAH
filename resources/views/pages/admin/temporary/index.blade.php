@@ -24,10 +24,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Karyawan</th>
-                                        <th>NIK Karyawan</th>
-                                        <th>Divisi</th>
-                                        <th>Nomor BPJS Kesehatan</th>
-                                        {{-- <th>Action</th> --}}
+                                        <th>Upah Lembur Perjam</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,16 +35,14 @@
                                     @foreach ($items as $item)
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $item->nama_karyawan }}</td>
-                                            <td>{{ $item->nik_karyawan }}</td>
-                                            <td>{{ $item->divisions->penempatan }}</td>
-                                            <td>{{ $item->nomor_jkn }}</td>
-                                            {{-- <td>
+                                            <td>{{ $item->employees->nama_karyawan }}</td>
+                                            <td>{{ $item->upah_lembur_perjam }}</td>
+                                            <td>
                                                 <a href="{{ route('temporarys.edit', $item->id) }}"
                                                     class="btn btn-success">
                                                     <i class="fa fa-pencil-alt"></i>
                                                 </a>
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                     @endforeach
 

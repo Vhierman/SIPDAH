@@ -41,6 +41,6 @@ class HistorySalaries extends Model
     ];
 
     public function employees(){
-        return $this->belongsTo(Employees::class,'employees_id','id');
+        return $this->belongsTo(Employees::class,'employees_id','nik_karyawan');
     }
 }

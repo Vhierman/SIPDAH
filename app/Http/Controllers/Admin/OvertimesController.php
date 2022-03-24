@@ -1512,18 +1512,20 @@ class OvertimesController extends Controller
             // $items  = HistorySalaries::with([
             //     'employees'
             //     ])->whereIn('employees_id', $nikkaryawan)->get();
-
+            
+            
+            // // dd($items[2]);
                 
                 
-            // foreach ($items as $item ) {
-            //     dd($item->gaji_pokok);
+            // foreach ($items as $item=>$name ) {
+            //     dd($name);
             // }
             
             
 
             $insert =[
                 'employees_id'          => $request->input('employees_id')[$key],
-                // 'upah_lembur_perjam'    => null,
+                'upah_lembur_perjam'    => null,
                 'jam_masuk'             => $jam_masuk,
                 'jam_istirahat'         => $jam_istirahat,
                 'jam_pulang'            => $jam_pulang,

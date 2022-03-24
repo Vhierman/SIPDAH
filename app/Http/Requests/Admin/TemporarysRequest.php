@@ -25,7 +25,7 @@ class TemporarysRequest extends FormRequest
     {
         return [
             //
-            'nomor_absen' => 'required'
+            'upah_lembur_perjam' => 'required'
         ];
     }
 }
