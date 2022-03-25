@@ -71,9 +71,9 @@
                                         <select name="uang_makan_lembur" class="form-select">
                                             <option value="">Dapat Uang Makan Lembur ?</option>
                                             <option value="12500"
-                                                @if (old('uang_makan_lembur') == '12500') {{ 'selected' }} @endif>Dapat
+                                                @if ($items->uang_makan_lembur == '12500') {{ 'selected' }} @endif>Dapat
                                             </option>
-                                            <option value="0" @if (old('uang_makan_lembur') == '0') {{ 'selected' }} @endif>
+                                            <option value="0" @if ($items->uang_makan_lembur == '0') {{ 'selected' }} @endif>
                                                 Tidak
                                             </option>
                                         </select>
@@ -86,38 +86,20 @@
                                     </div>
                                     <div class="form-group mt-2">
                                         <label for="title" class="form-label">Jam Masuk</label>
-                                        <input type="number" class="form-control" name="jam_masuk"
-                                            placeholder="Masukan Jam Masuk" maxlength="2"
+                                        <input type="text" class="form-control" name="jam_masuk"
+                                            placeholder="Masukan Jam Masuk" maxlength="4"
                                             value="{{ $items->jam_masuk }}">
                                     </div>
-                                    <div class="form-group  mt-2">
-                                        <label for="jam_istirahat">Jam Istirahat</label>
-                                        <select name="jam_istirahat" class="form-select">
-                                            <option value="">Pilih Jam Istirahat</option>
-                                            <option value="0"
-                                                @if ($items->jam_istirahat == '0') {{ 'selected="selected"' }} @endif>
-                                                0 ( Tidak Ada Istirahat )</option>
-                                            <option value="0.5"
-                                                @if ($items->jam_istirahat == '0.5') {{ 'selected="selected"' }} @endif>
-                                                0.5 ( Setengah
-                                                Jam )</option>
-                                            <option value="1"
-                                                @if ($items->jam_istirahat == '1') {{ 'selected="selected"' }} @endif>
-                                                1 Jam</option>
-                                            <option value="1.5"
-                                                @if ($items->jam_istirahat == '1.5') {{ 'selected="selected"' }} @endif>
-                                                1.5 ( 1
-                                                Setengah
-                                                Jam )</option>
-                                            <option value="2"
-                                                @if ($items->jam_istirahat == '2') {{ 'selected="selected"' }} @endif>
-                                                2 Jam</option>
-                                        </select>
+                                    <div class="form-group mt-2">
+                                        <label for="title" class="form-label">Jam Istirahat</label>
+                                        <input type="text" class="form-control" name="jam_istirahat"
+                                            placeholder="Masukan Jam Istirahat" maxlength="4"
+                                            value="{{ $items->jam_istirahat }}">
                                     </div>
                                     <div class="form-group mt-2">
                                         <label for="title" class="form-label">Jam Pulang</label>
-                                        <input type="number" class="form-control" name="jam_pulang"
-                                            placeholder="Masukan Jam Pulang" maxlength="2"
+                                        <input type="text" class="form-control" name="jam_pulang"
+                                            placeholder="Masukan Jam Pulang" maxlength="4"
                                             value="{{ $items->jam_pulang }}">
                                     </div>
 

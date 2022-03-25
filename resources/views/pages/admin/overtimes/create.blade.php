@@ -8,7 +8,7 @@
             <div class="container-fluid mt-4">
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item">Dashboard</li>
-                    <li class="breadcrumb-item">Inventaris</li>
+                    <li class="breadcrumb-item">Prosess</li>
                     <li class="breadcrumb-item active">Tambah Data Lembur</li>
                 </ol>
 
@@ -87,37 +87,19 @@
                                     </div>
                                     <div class="form-group mt-2">
                                         <label for="title" class="form-label">Jam Masuk</label>
-                                        <input type="number" class="form-control" name="jam_masuk"
-                                            placeholder="Masukan Jam Masuk" maxlength="2" value="{{ old('jam_masuk') }}">
+                                        <input type="text" class="form-control" name="jam_masuk"
+                                            placeholder="Masukan Jam Masuk" maxlength="4" value="{{ old('jam_masuk') }}">
                                     </div>
-                                    <div class="form-group  mt-2">
-                                        <label for="jam_istirahat">Jam Istirahat</label>
-                                        <select name="jam_istirahat" class="form-select">
-                                            <option value="">Pilih Jam Istirahat</option>
-                                            <option value="0" @if (old('jam_istirahat') == '0') {{ 'selected' }} @endif>
-                                                0 ( Tidak Ada Istirahat )
-                                            </option>
-                                            <option value="0.5"
-                                                @if (old('jam_istirahat') == '0.5') {{ 'selected' }} @endif>0.5 ( Setengah
-                                                Jam )
-                                            </option>
-                                            <option value="1" @if (old('jam_istirahat') == '1') {{ 'selected' }} @endif>
-                                                1 Jam
-                                            </option>
-                                            <option value="1.5"
-                                                @if (old('jam_istirahat') == '1.5') {{ 'selected' }} @endif>1.5 ( 1
-                                                Setengah
-                                                Jam )
-                                            </option>
-                                            <option value="2" @if (old('jam_istirahat') == '2') {{ 'selected' }} @endif>
-                                                2 Jam
-                                            </option>
-                                        </select>
+                                    <div class="form-group mt-2">
+                                        <label for="title" class="form-label">Jam Masuk</label>
+                                        <input type="text" class="form-control" name="jam_istirahat"
+                                            placeholder="Masukan Jam Istirahat" maxlength="4"
+                                            value="{{ old('jam_istirahat') }}">
                                     </div>
                                     <div class="form-group mt-2">
                                         <label for="title" class="form-label">Jam Pulang</label>
-                                        <input type="number" class="form-control" name="jam_pulang"
-                                            placeholder="Masukan Jam Pulang" maxlength="2"
+                                        <input type="text" class="form-control" name="jam_pulang"
+                                            placeholder="Masukan Jam Pulang" maxlength="4"
                                             value="{{ old('jam_pulang') }}">
                                     </div>
 
