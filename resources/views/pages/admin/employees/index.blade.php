@@ -19,6 +19,10 @@
                     <a href="{{ route('employees.export_excel') }}" target="_blank" class="btn btn-success shadow-sm mb-3">
                         <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Karyawan
                     </a>
+                @elseif (Auth::user()->roles == 'ACCOUNTING')
+                    <a href="{{ route('employees.export_excel') }}" target="_blank" class="btn btn-success shadow-sm mb-3">
+                        <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Karyawan
+                    </a>
                 @endif
 
                 <div class="card mb-4">

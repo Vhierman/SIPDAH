@@ -65,6 +65,8 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
         $rw                     = "'".$employees->rw;
         $nomor_npwp             = "'".$employees->nomor_npwp;
         $nomor_rekening         = "'".$employees->nomor_rekening;
+        $nomor_handphone        = "'".$employees->nomor_handphone;
+        $nomor_absen            = "'".$employees->nomor_absen;
         
         $tanggal_akhir_kerja = $employees->tanggal_akhir_kerja;
 
@@ -90,8 +92,8 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
                 $nik_karyawan,
                 $employees->nama_karyawan,
                 $employees->email_karyawan,
-                $employees->nomor_handphone,
-                $employees->nomor_absen,
+                $nomor_handphone,
+                $nomor_absen,
                 $nomor_npwp,
                 $employees->tempat_lahir,
                 \Carbon\Carbon::parse($employees->tanggal_lahir)->isoformat('DD-MM-Y'),

@@ -67,6 +67,15 @@
                     <a href="{{ route('employees_outs.create') }}" class="btn btn-primary shadow-sm mb-3">
                         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Karyawan Keluar
                     </a>
+                    <a href="{{ route('employees_outs.export_excel') }}" target="_blank"
+                        class="btn btn-success shadow-sm mb-3">
+                        <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Karyawan Keluar
+                    </a>
+                @elseif (Auth::user()->roles == 'ACCOUNTING')
+                    <a href="{{ route('employees_outs.export_excel') }}" target="_blank"
+                        class="btn btn-success shadow-sm mb-3">
+                        <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Karyawan Keluar
+                    </a>
                 @endif
 
 

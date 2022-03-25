@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Exports\EmployeesOutExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\EmployeesOutsRequest;
 use App\Models\Admin\Employees;
@@ -130,6 +132,14 @@ class EmployeesOutsController extends Controller
         return view('pages.admin.employees-outs.index',[
             'items' => $items
         ]);
+    }
+
+    public function export_excel()
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
+            abort(403);
+        }
+		return Excel::download(new EmployeesOutExport, 'databasekaryawankeluar.xlsx');
     }
 
     /**

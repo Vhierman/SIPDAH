@@ -100,6 +100,7 @@ Route::prefix('admin')
         Route::resource('inventory_motorcycles', 'InventoryMotorcyclesController');
         Route::resource('inventory_cars', 'InventoryCarsController');
         //Karyawan Keluar
+        Route::get('employees_outs/export_excel', 'EmployeesOutsController@export_excel')->name('employees_outs.export_excel');
         Route::resource('employees_outs', 'EmployeesOutsController');
         //Cetak Surat
         Route::get('cetak/aktifkerja/{nik_karyawan}', 'CetaksController@aktifkerja')->name('cetak.aktifkerja');
