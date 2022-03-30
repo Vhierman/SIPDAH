@@ -35,16 +35,17 @@
                         Halaman Karyawan
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <div class="collapse" id="collapseStudents" aria-labelledby="headingOne"
+                    {{-- <div class="collapse" id="collapseStudents" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('comingsoon.index') }}">Absensi</a>
                         </nav>
-                    </div>
+                    </div> --}}
                     <div class="collapse" id="collapseStudents" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{ route('comingsoon.index') }}">Lemburan</a>
+                            <a class="nav-link"
+                                href="{{ route('dashboard.form_slip_lembur_karyawan') }}">Lemburan</a>
                         </nav>
                     </div>
                 @endif

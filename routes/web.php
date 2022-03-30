@@ -58,11 +58,19 @@ Route::prefix('admin')
     ->middleware(['auth','admin'])
     ->group(function()
     {
+        //Dashboard
+        Route::get('dashboard/form_slip_lembur_karyawan', 'DashboardController@form_slip_lembur_karyawan')->name('dashboard.form_slip_lembur_karyawan');
+        Route::post('dashboard/cetak_slip_lembur_karyawan', 'DashboardController@cetak_slip_lembur_karyawan')->name('dashboard.cetak_slip_lembur_karyawan');
+        Route::get('dashboard/form_ganti_foto_karyawan', 'DashboardController@form_ganti_foto_karyawan')->name('dashboard.form_ganti_foto_karyawan');
+        Route::post('dashboard/hasil_ganti_foto_karyawan', 'DashboardController@hasil_ganti_foto_karyawan')->name('dashboard.hasil_ganti_foto_karyawan');
         Route::get('/','DashboardController@index')
         ->name('dashboard');
+
+        //Topbar
         Route::get('privacypolicy','PrivacypolicyController@index')
         ->name('privacypolicy');
 
+        //Master
         Route::resource('users', 'UsersController');
         Route::resource('comingsoon', 'ComingsoonController');
         Route::resource('companies', 'CompaniesController');

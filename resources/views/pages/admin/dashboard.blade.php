@@ -19,10 +19,15 @@
                                     <h3 class="h3">{{ $datakaryawan->nama_karyawan }}</h3>
                                 </div>
                                 <div class="profile-cover__action bg--img" data-overlay="0.3">
-                                    <a class="btn btn-rounded btn-info"
+                                    {{-- <a class="btn btn-rounded btn-info"
                                         href="{{ route('cetak.aktifkerja', $datakaryawan->id) }}" target=" _blank">
                                         <i class="fas fa-address-card"></i>
                                         <span>ID : {{ $datakaryawan->nik_karyawan }}</span>
+                                    </a> --}}
+                                    <a class="btn btn-rounded btn-info"
+                                        href="{{ route('dashboard.form_ganti_foto_karyawan') }}">
+                                        <i class="fas fa-address-card"></i>
+                                        <span>Ganti Foto Profile</span>
                                     </a>
                                 </div>
 
@@ -56,8 +61,14 @@
                                             <div id="collapseFour" class="accordion-collapse collapse"
                                                 aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                                    <img src={{ url('backend/assets/comingsoon/comingsoon2.jpg') }}
-                                                        class="img-fluid" />
+                                                    <div class="alert alert-danger" role="alert">
+                                                        Jika Biodata Diri, Status Pekerjaan, Dan Data Keluarga Ada yang
+                                                        tidak sesuai dengan data sebenarnya, Harap Menghubungi Leader untuk
+                                                        di teruskan ke Bagian HRD-GA....!!
+                                                    </div>
+                                                    {{-- <img src={{ url('backend/assets/comingsoon/comingsoon2.jpg') }}
+                                                        class="img-fluid" /> --}}
+
                                                 </div>
                                             </div>
                                         </div>
@@ -103,8 +114,7 @@
                                                                 Absen</b></label>
                                                         <div class="col-sm-4">
                                                             <input type="text" readonly class="form-control-plaintext"
-                                                                id="staticEmail"
-                                                                value="{{ $datakaryawan->nomor_absen }}">
+                                                                id="staticEmail" value="{{ $datakaryawan->nomor_absen }}">
                                                         </div>
                                                     </div>
                                                     <div class="row">

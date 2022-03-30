@@ -458,6 +458,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.employees_id',$employees_id)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])
+                ->orderBy('tanggal_lembur')
                 ->get();
         
                 // dd($items);
@@ -859,7 +860,7 @@ class OvertimesController extends Controller
             ->where('overtimes.acc_hrd','<>',NULL)
             ->where('overtimes.deleted_at',NULL)
             ->whereBetween('tanggal_lembur', [$awal, $akhir])
-            // ->orderBy('divisions_id')
+            ->orderBy('tanggal_lembur')
             // ->orderBy('nama_karyawan')
             ->get();
 

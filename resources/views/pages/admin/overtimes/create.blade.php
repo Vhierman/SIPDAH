@@ -91,7 +91,7 @@
                                             placeholder="Masukan Jam Masuk" maxlength="4" value="{{ old('jam_masuk') }}">
                                     </div>
                                     <div class="form-group mt-2">
-                                        <label for="title" class="form-label">Jam Masuk</label>
+                                        <label for="title" class="form-label">Jam Istirahat</label>
                                         <input type="text" class="form-control" name="jam_istirahat"
                                             placeholder="Masukan Jam Istirahat" maxlength="4"
                                             value="{{ old('jam_istirahat') }}">
