@@ -26,8 +26,8 @@ class TemporarysController extends Controller
             abort(403);
         }
 
-        $items = HistorySalaries::with([
-            'employees'
+        $items = Employees::with([
+            'divisions'
             ])->get();
 
         return view('pages.admin.temporary.index',[
@@ -93,13 +93,13 @@ class TemporarysController extends Controller
         $item = HistorySalaries::findOrFail($id);
         $nikkaryawan = $item->employees_id;
         
-        $itemkaryawan = Employees::with([
+        $itemkaryawans = Employees::with([
             'divisions'
         ])->where('nik_karyawan',$nikkaryawan)->first();
 
         return view('pages.admin.temporary.edit',[
-        'item'          => $item,
-        'itemkaryawan'  => $itemkaryawan
+        'item'  => $item,
+        'itemkaryawans' => $itemkaryawans
         ]);
     }
 
