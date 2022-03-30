@@ -1,5 +1,4 @@
 .env
 .env.example
 storage/app/public/assets/
-public/storage/assets/
 .htaccess
