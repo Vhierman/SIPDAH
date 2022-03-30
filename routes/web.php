@@ -46,10 +46,10 @@ Route::get('/signs','SignsController@index')
 //     Artisan::call('route:clear');
 //     return 'Route cache cleared!';
 // });
-// Route::get('/storage-link', function() {
-//     Artisan::call('storage:link');
-//     return 'The links have been created.';
-// });
+Route::get('/storage-link', function() {
+    Artisan::call('storage:link');
+    return 'The links have been created.';
+});
 //Artisan Cpanel
 
 
