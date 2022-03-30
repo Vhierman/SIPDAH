@@ -860,7 +860,7 @@ class OvertimesController extends Controller
             ->where('overtimes.acc_hrd','<>',NULL)
             ->where('overtimes.deleted_at',NULL)
             ->whereBetween('tanggal_lembur', [$awal, $akhir])
-            ->orderBy('tanggal_lembur')
+            // ->orderBy('tanggal_lembur')
             // ->orderBy('nama_karyawan')
             ->get();
 
