@@ -434,34 +434,62 @@ class OvertimesController extends Controller
         $awal               = $request->input('awal');
         $akhir              = $request->input('akhir');
 
-        $itemcover = 
-                DB::table('overtimes')
-                ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
-                ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
-                ->join('areas', 'areas.id', '=', 'employees.areas_id')
-                ->join('positions', 'positions.id', '=', 'employees.positions_id')
-                ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
-                ->where('overtimes.acc_hrd','<>',NULL)
-                ->where('overtimes.employees_id',$employees_id)
-                ->where('overtimes.deleted_at',NULL)
-                ->whereBetween('tanggal_lembur', [$awal, $akhir])
-                ->first();
-        
-                // dd($itemcover->nama_karyawan);
+        // $itemcover = 
+                // DB::table('overtimes')
+                // ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
+                // ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                // ->join('areas', 'areas.id', '=', 'employees.areas_id')
+                // ->join('positions', 'positions.id', '=', 'employees.positions_id')
+                // ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
+                
+                // ->where('overtimes.acc_hrd','<>',NULL)
+                // ->where('overtimes.employees_id',$employees_id)
+                // ->where('overtimes.deleted_at',NULL)
+                // ->whereBetween('tanggal_lembur', [$awal, $akhir])
+                // ->first();
 
-        $items = 
-                DB::table('overtimes')
-                ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
-                ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
-                ->join('areas', 'areas.id', '=', 'employees.areas_id')
-                ->where('overtimes.acc_hrd','<>',NULL)
-                ->where('overtimes.employees_id',$employees_id)
-                ->where('overtimes.deleted_at',NULL)
-                ->whereBetween('tanggal_lembur', [$awal, $akhir])
-                ->orderBy('tanggal_lembur')
-                ->get();
+                $itemcover =     Employees::with([
+                                'areas',
+                                'divisions',
+                                'positions',
+                                ])->where('nik_karyawan',$employees_id)->first();
+
+                $itemcoversatu =     HistorySalaries::with([
+                                'employees'
+                                ])->where('employees_id',$employees_id)->first();
+
+                $itemcoverdua =     Overtimes::with([
+                                'employees',
+                                ])
+                                ->where('acc_hrd','<>',NULL)
+                                ->where('employees_id',$employees_id)
+                                ->where('deleted_at',NULL)
+                                ->whereBetween('tanggal_lembur', [$awal, $akhir])
+                                ->first();
+
+                // dd($itemcoversatu);
+
+        // $items = 
+        //         DB::table('overtimes')
+        //         ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
+        //         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+        //         ->join('areas', 'areas.id', '=', 'employees.areas_id')
+        //         ->where('overtimes.acc_hrd','<>',NULL)
+        //         ->where('overtimes.employees_id',$employees_id)
+        //         ->where('overtimes.deleted_at',NULL)
+        //         ->whereBetween('tanggal_lembur', [$awal, $akhir])
+        //         ->orderBy('tanggal_lembur')
+        //         ->get();
         
-                // dd($items);
+        $items =     Overtimes::with([
+                    'employees',
+                    ])
+                    ->where('acc_hrd','<>',NULL)
+                    ->where('employees_id',$employees_id)
+                    ->where('deleted_at',NULL)
+                    ->whereBetween('tanggal_lembur', [$awal, $akhir])
+                    ->orderBy('tanggal_lembur')
+                    ->get();
 
         $this->fpdf = new FPDF('P', 'cm', array(21, 28));
         $this->fpdf->setTopMargin(0.2);
@@ -475,7 +503,7 @@ class OvertimesController extends Controller
         $this->fpdf->Ln(0.4);
         $this->fpdf->SetFont('Arial', '', '9');
         $this->fpdf->Cell(0.1);
-        $this->fpdf->Cell(10, 1, $itemcover->area." - " . $itemcover->penempatan . "", 0, 0, 'L');
+        $this->fpdf->Cell(10, 1, $itemcover->areas->area." - " . $itemcover->divisions->penempatan . "", 0, 0, 'L');
 
         $this->fpdf->SetFont('Arial', 'B', '10');
         $this->fpdf->Ln(0.4);
@@ -492,7 +520,7 @@ class OvertimesController extends Controller
 
         $this->fpdf->Ln(0.4);
         $this->fpdf->Cell(0.1);
-        $this->fpdf->Cell(7, 0.5, "Bagian   : " . $itemcover->jabatan . " / " . $itemcover->penempatan . "", 0, 0, 'L');
+        $this->fpdf->Cell(7, 0.5, "Bagian   : " . $itemcover->positions->jabatan . " / " . $itemcover->divisions->penempatan . "", 0, 0, 'L');
 
         $this->fpdf->Ln(0.5);
     
@@ -590,7 +618,7 @@ class OvertimesController extends Controller
         }
 
         $jumlahjamlembur        = $jumlahjampertama + $jumlahjamkedua + $jumlahjamketiga + $jumlahjamkeempat;
-        $jumlahuanglembur       = $jumlahjamlembur * $itemcover->upah_lembur_perjam;
+        $jumlahuanglembur       = $jumlahjamlembur * $itemcoversatu->upah_lembur_perjam;
         $jumlahuangditerima     = $jumlahuanglembur + $jumlahuangmakanlembur;
 
         $this->fpdf->Ln(0.4);
@@ -616,7 +644,7 @@ class OvertimesController extends Controller
         $this->fpdf->Cell(0.1);
         $this->fpdf->Cell(5, 0.2, 'Upah Lembur Perjam', 0, 0, 'L');
         $this->fpdf->Cell(1.5, 0.2, 'Rp.', 0, 0, 'R');
-        $this->fpdf->Cell(3, 0.2, number_format($itemcover->upah_lembur_perjam), 0, 0, 'R');
+        $this->fpdf->Cell(3, 0.2, number_format($itemcoversatu->upah_lembur_perjam), 0, 0, 'R');
 
         $this->fpdf->SetFont('Arial', 'B', '7');
         $this->fpdf->Cell(1.5);
@@ -1508,25 +1536,24 @@ class OvertimesController extends Controller
         foreach ($request->input('employees_id') as $key=>$name) {
 
 
-            // $nikkaryawan    = $request->input('employees_id');
+        //     $nikkaryawan    = $request->input('employees_id');
             
-            // $items  = HistorySalaries::with([
-            //     'employees'
-            //     ])->whereIn('employees_id', $nikkaryawan)->get();
+        //     $items  = HistorySalaries::with([
+        //         'employees'
+        //         ])->whereIn('employees_id', $nikkaryawan)->get();
             
             
-            // // dd($items[2]);
                 
                 
-            // foreach ($items as $item=>$name ) {
-            //     dd($name);
-            // }
-            
-            
+        //     foreach ($items as $item) {
+             
+             
+        //     dd($item->upah_lembur_perjam);
+        // }
 
             $insert =[
                 'employees_id'          => $request->input('employees_id')[$key],
-                'upah_lembur_perjam'    => null,
+                // 'upah_lembur_perjam'    => $item->upah_lembur_perjam[$key],
                 'jam_masuk'             => $jam_masuk,
                 'jam_istirahat'         => $jam_istirahat,
                 'jam_pulang'            => $jam_pulang,
@@ -1545,6 +1572,7 @@ class OvertimesController extends Controller
                 'uang_makan_lembur'     => $uang_makan_lembur,
                 'input_oleh'            => $request->input('input_oleh')
             ];
+        
         
             Overtimes::create($insert);
         }

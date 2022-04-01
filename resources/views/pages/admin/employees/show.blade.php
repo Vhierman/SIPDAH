@@ -392,6 +392,13 @@
                                                         <p class="card-text">{{ $item->provinsi }}</p>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-lg-5 col-md-6">
+                                                        <h6 class="card-title">Kode POS</h6>
+                                                        <p class="card-text">{{ $item->kode_pos }}
+                                                        </p>
+                                                    </div>
+                                                </div>
 
                                             </div>
 
