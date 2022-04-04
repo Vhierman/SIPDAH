@@ -1535,25 +1535,9 @@ class OvertimesController extends Controller
 
         foreach ($request->input('employees_id') as $key=>$name) {
 
-
-        //     $nikkaryawan    = $request->input('employees_id');
-            
-        //     $items  = HistorySalaries::with([
-        //         'employees'
-        //         ])->whereIn('employees_id', $nikkaryawan)->get();
-            
-            
-                
-                
-        //     foreach ($items as $item) {
-             
-             
-        //     dd($item->upah_lembur_perjam);
-        // }
-
             $insert =[
                 'employees_id'          => $request->input('employees_id')[$key],
-                // 'upah_lembur_perjam'    => $item->upah_lembur_perjam[$key],
+                // 'upah_lembur_perjam'    => $items->upah_lembur_perjam,
                 'jam_masuk'             => $jam_masuk,
                 'jam_istirahat'         => $jam_istirahat,
                 'jam_pulang'            => $jam_pulang,
@@ -1572,8 +1556,7 @@ class OvertimesController extends Controller
                 'uang_makan_lembur'     => $uang_makan_lembur,
                 'input_oleh'            => $request->input('input_oleh')
             ];
-        
-        
+            
             Overtimes::create($insert);
         }
         
