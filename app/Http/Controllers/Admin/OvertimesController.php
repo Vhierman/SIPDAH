@@ -1141,7 +1141,7 @@ class OvertimesController extends Controller
             $this->fpdf->SetAutoPageBreak(true);
 
             $this->fpdf->AddPage();
-            $this->fpdf->Cell(20.5, 27.5, '', 1, 0, 'C');
+            $this->fpdf->Cell(20.5, 27.5, '', 0, 0, 'C');
             $this->fpdf->Ln(0.1);
             
             $this->fpdf->SetFont('Arial', 'B', '8');
