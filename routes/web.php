@@ -174,6 +174,14 @@ Route::prefix('admin')
         Route::get('overtimes/export_excel_rekap_overtime', 'OvertimesController@export_excel_rekap_overtime')->name('overtimes.export_excel_rekap_overtime');
         Route::post('overtimes/export_pdf_rekap_overtime', 'OvertimesController@export_pdf_rekap_overtime')->name('overtimes.export_pdf_rekap_overtime');
         Route::resource('overtimes', 'OvertimesController');
+        //Absensi
+        Route::get('absensi/lihat_absensi', 'AttendancesController@lihat_absensi')->name('absensi.lihat_absensi');
+        Route::post('absensi/tampil_absensi', 'AttendancesController@tampil_absensi')->name('absensi.tampil_absensi');
+        Route::get('absensi/form_edit', 'AttendancesController@form_edit')->name('absensi.form_edit');
+        Route::post('absensi/tampil_edit', 'AttendancesController@tampil_edit')->name('absensi.tampil_edit');
+        Route::get('absensi/form_hapus', 'AttendancesController@form_hapus')->name('absensi.form_hapus');
+        Route::post('absensi/tampil_hapus', 'AttendancesController@tampil_hapus')->name('absensi.tampil_hapus');
+        Route::resource('absensi', 'AttendancesController');
         
         
 });

@@ -102,6 +102,23 @@
                 @endif
                 {{-- End Employee --}}
 
+                {{-- Absensi --}}
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER')
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAbsensi"
+                        aria-expanded="false" aria-controls="collapseAbsensi">
+                        <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                        Absensi
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseAbsensi" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('absensi.index') }}">Data Absensi</a>
+                        </nav>
+                    </div>
+                @endif
+                {{-- End Absensi --}}
+
                 {{-- Siswa Prakerin --}}
                 @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseStudents"

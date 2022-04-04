@@ -108,4 +108,7 @@ class Employees extends Model
     public function overtimes() {
         return $this->hasMany(Overtimes::class,'employees_id','id');
     }
+    public function attendances() {
+        return $this->hasMany(Attendances::class,'employees_id','id');
+    }
 }

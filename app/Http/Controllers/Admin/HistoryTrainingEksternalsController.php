@@ -230,7 +230,7 @@ class HistoryTrainingEksternalsController extends Controller
             'alamat_training_eksternal'                     => $request->input('alamat_training_eksternal'),
             'input_oleh'                                    => $request->input('input_oleh')
         ]);
-        $employees                          = Employees::where('nik_karyawan', $request->input('nik_karyawan'))->first();
+        $employees  = Employees::where('nik_karyawan', $request->input('nik_karyawan'))->first();
         //Insert History Training Eksternal
         Alert::success('Success Input Data Training Eksternal','Oleh '.auth()->user()->name);
         return redirect()->route('employees.show',$employees->id);
