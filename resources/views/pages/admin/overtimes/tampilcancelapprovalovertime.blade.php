@@ -61,9 +61,11 @@
                                         <th>No</th>
                                         <th>Nama Karyawan</th>
                                         <th>Tanggal Lembur</th>
+                                        <th>Jenis Lembur</th>
                                         <th>Jam Masuk</th>
                                         <th>Jam Istirahat</th>
                                         <th>Jam Pulang</th>
+                                        <th>Uang Makan</th>
                                         <th>Keterangan</th>
                                         <th>Status</th>
                                     </tr>
@@ -78,9 +80,11 @@
                                             <td>{{ $item->nama_karyawan }}</td>
                                             <td>{{ \Carbon\Carbon::parse($item->tanggal_lembur)->isoformat('DD-MM-Y') }}
                                             </td>
+                                            <td>{{ $item->jenis_lembur }}</td>
                                             <td>{{ $item->jam_masuk }}</td>
                                             <td>{{ $item->jam_istirahat }}</td>
                                             <td>{{ $item->jam_pulang }}</td>
+                                            <td>{{ $item->uang_makan_lembur }}</td>
                                             <td>{{ $item->keterangan_lembur }}</td>
                                             @if ($item->acc_hrd == null)
                                                 <td><span class="badge bg-danger">Belum Disetujui</span></td>
