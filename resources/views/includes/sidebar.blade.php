@@ -285,6 +285,13 @@
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.absensi_karyawan') }}">Absensi
+                                Karyawan</a>
+                        </nav>
+                    </div>
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('reports.karyawan_masuk') }}">Karyawan
                                 Masuk</a>
                         </nav>

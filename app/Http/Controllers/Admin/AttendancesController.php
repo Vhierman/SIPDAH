@@ -23,7 +23,7 @@ class AttendancesController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING' && auth()->user()->roles != 'LEADER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
             abort(403);
         }
         return view('pages.admin.absensi.index');
@@ -36,6 +36,7 @@ class AttendancesController extends Controller
         }
         return view('pages.admin.absensi.cariabsensi');
     }
+    
     public function tampil_absensi(AttendancesLihatRequest $request)
     {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
@@ -55,6 +56,16 @@ class AttendancesController extends Controller
                 ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
                 ->whereIn('divisions_id', [19,20,21,22])
+                ->where('attendances.deleted_at',NULL)
+                ->whereBetween('tanggal_absen', [$awal, $akhir])
+                ->get();
+        } 
+        elseif ($divisi == 11) {
+            $items = 
+                DB::table('attendances')
+                ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
+                ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+                ->whereIn('divisions_id', [11])
                 ->where('attendances.deleted_at',NULL)
                 ->whereBetween('tanggal_absen', [$awal, $akhir])
                 ->get();
@@ -105,6 +116,14 @@ class AttendancesController extends Controller
                 'divisions',
                 'positions'
                 ])->whereIn('divisions_id', [19,20,21,22])->get();
+        }
+        elseif ($divisi == 11) {
+            $items = Employees::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [11])->get();
         }
         elseif ($divisi == 4) {
             $items = Employees::with([
@@ -158,6 +177,9 @@ class AttendancesController extends Controller
     public function show($id)
     {
         //
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
+            abort(403);
+        }
     }
 
     /**
@@ -185,6 +207,14 @@ class AttendancesController extends Controller
                 'divisions',
                 'positions'
                 ])->whereIn('divisions_id', [19,20,21,22])->get();
+        }
+        elseif ($divisi == 11) {
+            $items = Employees::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [11])->get();
         }
         elseif ($divisi == 4) {
             $items = Employees::with([
@@ -233,6 +263,9 @@ class AttendancesController extends Controller
     public function edit($id)
     {
         //
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
+            abort(403);
+        }
     }
 
     /**
@@ -288,6 +321,14 @@ class AttendancesController extends Controller
                 'divisions',
                 'positions'
                 ])->whereIn('divisions_id', [19,20,21,22])->get();
+        }
+        elseif ($divisi == 11) {
+            $items = Employees::with([
+                'companies',
+                'areas',
+                'divisions',
+                'positions'
+                ])->whereIn('divisions_id', [11])->get();
         }
         elseif ($divisi == 4) {
             $items = Employees::with([

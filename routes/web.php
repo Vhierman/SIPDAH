@@ -121,6 +121,8 @@ Route::prefix('admin')
         Route::post('cetak/tampil_pkwt_harian', 'CetaksController@tampil_pkwt_harian')->name('cetak.tampil_pkwt_harian');
         Route::resource('cetak', 'CetaksController');
         //Reports
+        Route::get('reports/absensi_karyawan', 'ReportsController@absensi_karyawan')->name('reports.absensi_karyawan');
+        Route::post('reports/tampil_absensi_karyawan', 'ReportsController@tampil_absensi_karyawan')->name('reports.tampil_absensi_karyawan');
         Route::get('reports/karyawan_masuk', 'ReportsController@karyawan_masuk')->name('reports.karyawan_masuk');
         Route::post('reports/tampil_karyawan_masuk', 'ReportsController@tampil_karyawan_masuk')->name('reports.tampil_karyawan_masuk');
         Route::get('reports/karyawan_keluar', 'ReportsController@karyawan_keluar')->name('reports.karyawan_keluar');

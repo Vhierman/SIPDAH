@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use App\Models\Admin\Attendances;
 use App\Models\Admin\Employees;
 use App\Models\Admin\Areas;
 use App\Models\Admin\Divisions;
@@ -15,6 +16,7 @@ use App\Models\Admin\InventoryMotorcycles;
 use App\Models\Admin\InventoryCars;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\LaporanKaryawanMasukRequest;
+use App\Http\Requests\Admin\LaporanAbsensiKaryawanRequest;
 use Carbon\Carbon;
 use Storage;
 
@@ -25,6 +27,160 @@ class ReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function absensi_karyawan()
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+            abort(403);
+        }
+
+        $items = Employees::with([
+        'companies',
+        'areas',
+        'divisions',
+        'positions'
+        ])->get();
+
+        return view ('pages.admin.laporan.absensi_karyawan.index',[
+            'items'     => $items
+        ]);
+    }
+
+    public function tampil_absensi_karyawan(LaporanAbsensiKaryawanRequest $request)
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+            abort(403);
+        }
+        $employees_id   = $request->input('employees_id');
+        $awal           = $request->input('tanggal_awal');
+        $akhir          = $request->input('tanggal_akhir');
+
+        $item = Attendances::with([
+            'employees'
+            ])
+            ->where('employees_id',$employees_id)
+            ->first();
+
+        $absens = Attendances::with([
+            'employees'
+            ])
+            ->where('employees_id',$employees_id)
+            ->whereBetween('tanggal_absen', [$awal, $akhir])
+            ->get();
+
+        $cutitahunan = DB::table('attendances')
+                ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
+                ->groupBy('keterangan_absen','lama_absen','employees_id')
+                ->select('keterangan_absen','employees_id','lama_absen', DB::raw('sum(lama_absen) as lama_absen'))
+                ->where('employees_id',$employees_id)
+                ->whereBetween('tanggal_absen', [$awal, $akhir])
+                ->where('attendances.deleted_at',NULL)
+                ->where('keterangan_absen','Cuti Tahunan')
+                ->count();
+        $cutikhusus = DB::table('attendances')
+                ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
+                ->groupBy('keterangan_absen','lama_absen','employees_id')
+                ->select('keterangan_absen','employees_id','lama_absen', DB::raw('sum(lama_absen) as lama_absen'))
+                ->where('employees_id',$employees_id)
+                ->whereBetween('tanggal_absen', [$awal, $akhir])
+                ->where('attendances.deleted_at',NULL)
+                ->where('keterangan_absen','Cuti Khusus')
+                ->count();
+        $sakit = DB::table('attendances')
+                ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
+                ->groupBy('keterangan_absen','lama_absen','employees_id')
+                ->select('keterangan_absen','employees_id','lama_absen', DB::raw('sum(lama_absen) as lama_absen'))
+                ->where('employees_id',$employees_id)
+                ->whereBetween('tanggal_absen', [$awal, $akhir])
+                ->where('attendances.deleted_at',NULL)
+                ->where('keterangan_absen','Sakit')
+                ->count();
+        $ijin = DB::table('attendances')
+                ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
+                ->groupBy('keterangan_absen','lama_absen','employees_id')
+                ->select('keterangan_absen','employees_id','lama_absen', DB::raw('sum(lama_absen) as lama_absen'))
+                ->where('employees_id',$employees_id)
+                ->whereBetween('tanggal_absen', [$awal, $akhir])
+                ->where('attendances.deleted_at',NULL)
+                ->where('keterangan_absen','Ijin')
+                ->count();
+        $alpa = DB::table('attendances')
+                ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
+                ->groupBy('keterangan_absen','lama_absen','employees_id')
+                ->select('keterangan_absen','employees_id','lama_absen', DB::raw('sum(lama_absen) as lama_absen'))
+                ->where('employees_id',$employees_id)
+                ->whereBetween('tanggal_absen', [$awal, $akhir])
+                ->where('attendances.deleted_at',NULL)
+                ->where('keterangan_absen','Alpa')
+                ->count();
+        
+
+        $this->fpdf = new FPDF('P', 'mm', 'A4');
+        $this->fpdf->AddPage();
+
+        $this->fpdf->Ln(10);
+        $this->fpdf->SetFont('Arial', 'B', '18');
+        $this->fpdf->Cell(190, 5, 'DATA ABSEN KARYAWAN', 0, 1, 'C');
+        $this->fpdf->Ln(5);
+
+        $this->fpdf->Cell(190, 5, $item->employees->nama_karyawan, 0, 1, 'C');
+        $this->fpdf->Ln(5);
+
+        $this->fpdf->Cell(190, 5, \Carbon\Carbon::parse($awal)->isoformat(' D MMMM Y') . ' s/d ' . \Carbon\Carbon::parse($akhir)->isoformat(' D MMMM Y') . '', 0, 1, 'C');
+
+        $this->fpdf->Ln(10);
+        $this->fpdf->SetFont('Arial', 'B', '11');
+        $this->fpdf->Cell(25, 10, 'Sakit', 0, 0, 'L');
+        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
+        $this->fpdf->Cell(15, 10, $sakit.' Hari', 0, 0, 'L');
+        $this->fpdf->Ln();
+
+        $this->fpdf->Cell(25, 10, 'Ijin', 0, 0, 'L');
+        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
+        $this->fpdf->Cell(15, 10, $ijin.' Hari', 0, 0, 'L');
+        $this->fpdf->Ln();
+
+        $this->fpdf->Cell(25, 10, 'Alpa', 0, 0, 'L');
+        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
+        $this->fpdf->Cell(15, 10, $alpa.' Hari', 0, 0, 'L');
+        $this->fpdf->Ln();
+
+        $this->fpdf->Cell(25, 10, 'Cuti Tahunan', 0, 0, 'L');
+        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
+        $this->fpdf->Cell(15, 10, $cutitahunan.' Hari', 0, 0, 'L');
+        $this->fpdf->Ln();
+
+        $this->fpdf->Cell(25, 10, 'Cuti Khusus', 0, 0, 'L');
+        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
+        $this->fpdf->Cell(15, 10, $cutikhusus.' Hari', 0, 0, 'L');
+
+
+        $this->fpdf->Ln(10);
+        $this->fpdf->Cell(1);
+        $this->fpdf->SetFont('Arial', 'B', '12');
+        $this->fpdf->SetFillColor(192, 192, 192); // Warna sel tabel header
+        $this->fpdf->Cell(10, 10, 'No', 1, 0, 'C', 1);
+        $this->fpdf->Cell(60, 10, 'Tanggal Absen', 1, 0, 'C', 1);
+        $this->fpdf->Cell(60, 10, 'Jenis', 1, 0, 'C', 1);
+        $this->fpdf->Cell(60, 10, 'Keterangan', 1, 0, 'C', 1);
+
+        $no = 1;
+
+        foreach ($absens as $absen) {
+            $this->fpdf->Ln();
+            $this->fpdf->Cell(1);
+            $this->fpdf->SetFont('Arial', '', '11');
+            $this->fpdf->Cell(10, 8, $no, 1, 0, 'C');
+            $this->fpdf->Cell(60, 8, \Carbon\Carbon::parse($absen->tanggal_absen)->isoformat(' D MMMM Y'), 1, 0, 'C');
+            $this->fpdf->Cell(60, 8, $absen->keterangan_absen, 1, 0, 'C');
+            $this->fpdf->Cell(60, 8, $absen->keterangan_cuti_khusus, 1, 0, 'C');
+            $no++;
+        }
+
+        $this->fpdf->Output();
+        exit;
+
+    }
+
     public function karyawan_masuk()
     {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
