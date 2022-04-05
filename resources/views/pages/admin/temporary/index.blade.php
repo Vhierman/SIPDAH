@@ -24,7 +24,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Karyawan</th>
-                                        <th>Foto Karyawan</th>
+                                        <th>No HP</th>
+                                        <th>Email Karyawan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -36,7 +37,8 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $item->nama_karyawan }}</td>
-                                            <td>{{ $item->foto_karyawan }}</td>
+                                            <td>{{ $item->nomor_handphone }}</td>
+                                            <td>{{ $item->email_karyawan }}</td>
                                             <td>
                                                 <a href="{{ route('temporarys.edit', $item->id) }}"
                                                     class="btn btn-success">

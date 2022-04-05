@@ -90,7 +90,7 @@ class TemporarysController extends Controller
         }
         
 
-        $item = HistorySalaries::findOrFail($id);
+        $item = Employees::findOrFail($id);
         $nikkaryawan = $item->employees_id;
         
         $itemkaryawans = Employees::with([
@@ -116,15 +116,14 @@ class TemporarysController extends Controller
         if (auth()->user()->roles != 'ADMIN') {
             abort(403);
         }
-        $item   = HistorySalaries::findOrFail($id);
-        // $nikkaryawan    = $item->nik_karyawan;
-        // $karyawan       = Employees::where('nik_karyawan', $nikkaryawan)->first();
 
+        $item   = Employees::findOrFail($id);
         $item->update([
-            'upah_lembur_perjam'    => $request->input('upah_lembur_perjam'),
-            'edit_oleh'             => $request->input('edit_oleh')
+            'email_karyawan'    => $request->input('email_karyawan'),
+            'nomor_handphone'   => $request->input('nomor_handphone'),
+            'edit_oleh'         => $request->input('edit_oleh')
         ]);
-        Alert::info('Success Edit Upah Lembur Perjam','Oleh '.auth()->user()->name);
+        Alert::info('Success Edit Email Dan No HP','Oleh '.auth()->user()->name);
         return redirect()->route('temporarys.index');
     }
 

@@ -41,25 +41,24 @@
                                     <div class="form-group mb-2">
                                         <label for="title" class="form-label">NIK Karyawan</label>
                                         <input type="text" class="form-control" readonly name="nik_karyawan"
-                                            placeholder="Masukan NIK Karyawan" value="{{ $itemkaryawan->nik_karyawan }}">
+                                            placeholder="Masukan NIK Karyawan" value="{{ $item->nik_karyawan }}">
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="title" class="form-label">Nama Karyawan</label>
                                         <input type="text" class="form-control" readonly name="nama_karyawan"
-                                            placeholder="Masukan Nama Karyawan"
-                                            value="{{ $itemkaryawan->nama_karyawan }}">
+                                            placeholder="Masukan Nama Karyawan" value="{{ $item->nama_karyawan }}">
                                     </div>
+
                                     <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Penempatan</label>
-                                        <input type="text" class="form-control" readonly name="penempatan"
-                                            placeholder="Masukan NIK Karyawan"
-                                            value="{{ $itemkaryawan->divisions->penempatan }}">
+                                        <label for="title" class="form-label">No Handphone</label>
+                                        <input type="text" class="form-control" name="nomor_handphone"
+                                            placeholder="Masukan No Handphone" value="{{ $item->nomor_handphone }}">
                                     </div>
+
                                     <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Upah Lembur Perjam</label>
-                                        <input type="text" class="form-control" onkeyup="angka(this);"
-                                            name="upah_lembur_perjam" placeholder="Masukan Upah Lembur Perjam"
-                                            value="{{ $item->upah_lembur_perjam }}">
+                                        <label for="title" class="form-label">Email Karyawan</label>
+                                        <input type="text" class="form-control" name="email_karyawan"
+                                            placeholder="Masukan Email Karyawan" value="{{ $item->email_karyawan }}">
                                     </div>
 
                                     <div class="d-grid gap-2 mt-3">
