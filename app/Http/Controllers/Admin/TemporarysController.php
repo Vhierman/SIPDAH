@@ -27,8 +27,8 @@ class TemporarysController extends Controller
         }
 
         $items = Employees::with([
-            'divisions'
-            ])->get();
+            'history_salaries'
+            ])->where('tanggal_akhir_kerja','2022-05-15')->get();
 
         return view('pages.admin.temporary.index',[
             'items' => $items
@@ -91,11 +91,12 @@ class TemporarysController extends Controller
         
 
         $item = Employees::findOrFail($id);
+
         $nikkaryawan = $item->employees_id;
         
         $itemkaryawans = Employees::with([
-            'divisions'
-        ])->where('nik_karyawan',$nikkaryawan)->first();
+            'history_salaries'
+        ])->where('employees_id',$nikkaryawan)->first();
 
         return view('pages.admin.temporary.edit',[
         'item'  => $item,
@@ -118,12 +119,17 @@ class TemporarysController extends Controller
         }
 
         $item   = Employees::findOrFail($id);
-        $item->update([
-            'email_karyawan'    => $request->input('email_karyawan'),
-            'nomor_handphone'   => $request->input('nomor_handphone'),
+        $nikkaryawan = $item->nik_karyawan;
+        
+        $itemhistorysalaries = HistorySalaries::with([
+            'employees'
+        ])->where('employees_id',$nikkaryawan)->first();
+
+        $itemhistorysalaries->update([
+            'upah_lembur_perjam'    => $request->input('upah_lembur_perjam'),
             'edit_oleh'         => $request->input('edit_oleh')
         ]);
-        Alert::info('Success Edit Email Dan No HP','Oleh '.auth()->user()->name);
+        Alert::info('Success Edit Upah Lembur Perjam','Oleh '.auth()->user()->name);
         return redirect()->route('temporarys.index');
     }
 

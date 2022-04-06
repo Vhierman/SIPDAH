@@ -50,15 +50,10 @@
                                     </div>
 
                                     <div class="form-group mb-2">
-                                        <label for="title" class="form-label">No Handphone</label>
-                                        <input type="text" class="form-control" name="nomor_handphone"
-                                            placeholder="Masukan No Handphone" value="{{ $item->nomor_handphone }}">
-                                    </div>
-
-                                    <div class="form-group mb-2">
-                                        <label for="title" class="form-label">Email Karyawan</label>
-                                        <input type="text" class="form-control" name="email_karyawan"
-                                            placeholder="Masukan Email Karyawan" value="{{ $item->email_karyawan }}">
+                                        <label for="title" class="form-label">Upah Lembur Perjam</label>
+                                        <input type="text" class="form-control" name="upah_lembur_perjam"
+                                            placeholder="Masukan Upah Lembur Perjam"
+                                            value="{{ $item->history_salaries->upah_lembur_perjam }}">
                                     </div>
 
                                     <div class="d-grid gap-2 mt-3">
