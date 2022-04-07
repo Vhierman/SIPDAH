@@ -1347,6 +1347,8 @@ class OvertimesController extends Controller
         $nik            = auth()->user()->nik;
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
+        
+        
 
         if ($divisi == 11) {
             $items = Employees::with([
@@ -1417,7 +1419,8 @@ class OvertimesController extends Controller
         }
 
         return view ('pages.admin.overtimes.create',[
-            'items'     => $items
+            'items'     => $items,
+            'divisi'    => $divisi
         ]);
     }
 
@@ -1752,7 +1755,8 @@ class OvertimesController extends Controller
 
         if (!$items->isEmpty()) {
             return view ('pages.admin.overtimes.editovertime',[
-                'items'     => $items
+                'items'     => $items,
+                'divisi'    => $divisi
             ]);
         } else {
             Alert::error('Data Overtimes Karyawan Sudah Di Approve Semua');
@@ -1772,6 +1776,7 @@ class OvertimesController extends Controller
 
         $employees_id       = $request->input('employees_id');
         $tanggal_lembur     = $request->input('tanggal_lembur');
+        $divisi             = $request->input('divisi');
 
         $items = Overtimes::with([
             'employees'
@@ -1785,7 +1790,8 @@ class OvertimesController extends Controller
             return redirect()->route('overtimes.index');
         } else {
         return view('pages.admin.overtimes.tampileditovertime',[
-            'items' => $items
+            'items'     => $items,
+            'divisi'    => $divisi
         ]);
         }
     }

@@ -36,6 +36,9 @@
                                 @csrf
                                 <div class="form-group">
 
+                                    <input type="hidden" readonly class="form-control" name="divisi"
+                                        value="{{ $divisi }}">
+
                                     <label for="title" class="form-label">Nama Karyawan</label>
                                     <select class="selectpicker" name="employees_id" data-width="100%"
                                         data-live-search="true" required>
