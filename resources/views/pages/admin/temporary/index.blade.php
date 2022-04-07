@@ -23,11 +23,11 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>NIK Karyawan</th>
                                         <th>Nama Karyawan</th>
-                                        <th>Penempatan</th>
-                                        <th>No Handphone</th>
                                         <th>Email</th>
-                                        <th>Action</th>
+                                        <th>Password</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,16 +37,16 @@
                                     @foreach ($items as $item)
                                         <tr>
                                             <td>{{ $no++ }}</td>
+                                            <td>{{ $item->nik_karyawan }}</td>
                                             <td>{{ $item->nama_karyawan }}</td>
-                                            <td>{{ $item->divisions->penempatan }}</td>
-                                            <td>{{ $item->nomor_handphone }}</td>
                                             <td>{{ $item->email_karyawan }}</td>
-                                            <td>
+                                            <td>{{ $item->nik_karyawan }}</td>
+                                            {{-- <td>
                                                 <a href="{{ route('temporarys.edit', $item->id) }}"
                                                     class="btn btn-success">
                                                     <i class="fa fa-pencil-alt"></i>
                                                 </a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
 
