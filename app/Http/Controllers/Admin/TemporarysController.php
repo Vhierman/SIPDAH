@@ -28,7 +28,7 @@ class TemporarysController extends Controller
 
         $items = Employees::with([
             'divisions'
-            ])->where('divisions_id',19)->orderBy('nama_karyawan')->get();
+            ])->orderBy('nama_karyawan')->get();
         
             // $salaries       = HistorySalaries::where('employees_id', $nikkaryawan)->first();
 
