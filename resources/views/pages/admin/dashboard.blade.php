@@ -66,6 +66,9 @@
                                                         tidak sesuai dengan data sebenarnya, Harap Menghubungi Leader untuk
                                                         di teruskan ke Bagian HRD-GA....!!
                                                     </div>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        Ganti Foto Profile Dengan Maksimal Size 500KB....!!
+                                                    </div>
                                                     {{-- <img src={{ url('backend/assets/comingsoon/comingsoon2.jpg') }}
                                                         class="img-fluid" /> --}}
 
@@ -270,8 +273,7 @@
                                                                 JHT</b></label>
                                                         <div class="col-sm-4">
                                                             <input type="text" readonly class="form-control-plaintext"
-                                                                id="staticEmail"
-                                                                value="{{ $datakaryawan->nomor_rekening }}">
+                                                                id="staticEmail" value="{{ $datakaryawan->nomor_jht }}">
                                                         </div>
                                                         <label for="staticEmail" class="col-sm-2 col-form-label"><b>Status
                                                                 Kerja</b></label>

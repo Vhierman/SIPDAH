@@ -48,6 +48,13 @@
                                 href="{{ route('dashboard.form_slip_lembur_karyawan') }}">Lemburan</a>
                         </nav>
                     </div>
+                    <div class="collapse" id="collapseStudents" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link"
+                                href="{{ route('dashboard.form_absensi_karyawan') }}">Absensi</a>
+                        </nav>
+                    </div>
                 @endif
                 {{-- Halaman Karyawan --}}
 

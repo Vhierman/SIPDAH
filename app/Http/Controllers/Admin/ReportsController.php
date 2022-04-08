@@ -119,24 +119,32 @@ class ReportsController extends Controller
 
         $this->fpdf->Ln(10);
         $this->fpdf->SetFont('Arial', 'B', '18');
-        $this->fpdf->Cell(190, 5, 'DATA ABSEN KARYAWAN', 0, 1, 'C');
+        $this->fpdf->Cell(190, 5, 'DATA ABSENSI', 0, 1, 'C');
         $this->fpdf->Ln(5);
 
         $this->fpdf->Cell(190, 5, $item->employees->nama_karyawan, 0, 1, 'C');
         $this->fpdf->Ln(5);
 
-        $this->fpdf->Cell(190, 5, \Carbon\Carbon::parse($awal)->isoformat(' D MMMM Y') . ' s/d ' . \Carbon\Carbon::parse($akhir)->isoformat(' D MMMM Y') . '', 0, 1, 'C');
+        $this->fpdf->Cell(190, 5, \Carbon\Carbon::parse($awal)->isoformat('D MMMM Y') . ' s/d ' . \Carbon\Carbon::parse($akhir)->isoformat('D MMMM Y') . '', 0, 1, 'C');
 
         $this->fpdf->Ln(10);
         $this->fpdf->SetFont('Arial', 'B', '11');
         $this->fpdf->Cell(25, 10, 'Sakit', 0, 0, 'L');
         $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(15, 10, $sakit.' Hari', 0, 0, 'L');
+        $this->fpdf->Cell(60, 10, $sakit.' Hari', 0, 0, 'L');
+        
+        $this->fpdf->Cell(25, 10, 'Cuti Tahunan', 0, 0, 'L');
+        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
+        $this->fpdf->Cell(15, 10, $cutitahunan.' Hari', 0, 0, 'L');
         $this->fpdf->Ln();
 
         $this->fpdf->Cell(25, 10, 'Ijin', 0, 0, 'L');
         $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(15, 10, $ijin.' Hari', 0, 0, 'L');
+        $this->fpdf->Cell(60, 10, $ijin.' Hari', 0, 0, 'L');
+
+        $this->fpdf->Cell(25, 10, 'Cuti Khusus', 0, 0, 'L');
+        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
+        $this->fpdf->Cell(15, 10, $cutikhusus.' Hari', 0, 0, 'L');
         $this->fpdf->Ln();
 
         $this->fpdf->Cell(25, 10, 'Alpa', 0, 0, 'L');
@@ -144,17 +152,6 @@ class ReportsController extends Controller
         $this->fpdf->Cell(15, 10, $alpa.' Hari', 0, 0, 'L');
         $this->fpdf->Ln();
 
-        $this->fpdf->Cell(25, 10, 'Cuti Tahunan', 0, 0, 'L');
-        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(15, 10, $cutitahunan.' Hari', 0, 0, 'L');
-        $this->fpdf->Ln();
-
-        $this->fpdf->Cell(25, 10, 'Cuti Khusus', 0, 0, 'L');
-        $this->fpdf->Cell(5, 10, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(15, 10, $cutikhusus.' Hari', 0, 0, 'L');
-
-
-        $this->fpdf->Ln(10);
         $this->fpdf->Cell(1);
         $this->fpdf->SetFont('Arial', 'B', '12');
         $this->fpdf->SetFillColor(192, 192, 192); // Warna sel tabel header
