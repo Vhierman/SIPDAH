@@ -7,10 +7,11 @@
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                 <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ url('frontend/frontend/images/slides/1.jpg') }}" class="d-block w-100" alt="...">
+                    <img src="{{ url('frontend/frontend/images/slides/4.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Some representative placeholder content for the first slide.</p>
@@ -27,6 +28,13 @@
                     <img src="{{ url('frontend/frontend/images/slides/3.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url('frontend/frontend/images/slides/1.jpg') }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Fourth slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
                     </div>
                 </div>
@@ -48,7 +56,7 @@
         <div class="container">
             <div class="col text-center section-company-overview-heading">
                 <h2 data-aos="fade-down">COMPANY OVERVIEW</h2>
-                <div class="section-content-company-overview">
+                <div class="section-content-company-overview row justify-content-center">
                     <div class="col-sm-10 col-md-12 col-lg-10">
                         <blockquote class="blockquote mb-0">
                             <h3 data-aos="fade-up"> "PT PRIMA KOMPONEN INDONESIA IS A TRUSTWORTHY COMPANY WITH A STRONG

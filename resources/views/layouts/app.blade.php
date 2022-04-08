@@ -105,16 +105,16 @@
                             <ul class="list-unstyled mt-4">
                                 <li><i class="fab fa-periscope"></i>&nbsp;&nbsp;Kawasan Industri Taman Tekno
                                 <li>
-                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Blok F2,No.10-11,F1J,Setu</li>
-                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Setu,Tangsel,Banten.</li>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Blok F2,No.10-11,F 1J,F1 A2</li>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Setu,Setu,Tangsel,Banten.</li>
                             </ul>
                             <ul class="list-unstyled">
-                                <li><i class="fas fa-phone-alt"></i>&nbsp;Telp.(021) 75880223 - 25</li>
+                                <li><i class="fas fa-phone-alt"></i>&nbsp; Telp.(021) 75880223 - 25</li>
                                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fax.(021) 75880220 - 21</a></li>
                             </ul>
                             <ul class="list-unstyled">
-                                <li><i class="fas fa-envelope-open-text"></i>&nbsp;marketing@primakomindonesia.com</li>
-                                <li>&nbsp;&nbsp;&nbsp;&nbsp; hrd-ga@primakomindonesia.com</a></li>
+                                <li><i class="fas fa-envelope-open-text"></i>&nbsp; marketing@primakomindonesia.com</li>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hrd-ga@primakomindonesia.com</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-3" data-aos="fade-up" data-aos-duration="3000">
@@ -125,12 +125,12 @@
                                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jakarta Barat,DKI Jakarta</li>
                             </ul>
                             <ul class="list-unstyled">
-                                <li><i class="fas fa-phone-alt"></i>&nbsp;Telp.(021) 56943136 - 38</li>
+                                <li><i class="fas fa-phone-alt"></i>&nbsp; Telp.(021) 56943136 - 38</li>
                                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fax.(021) 56943135</li>
                             </ul>
                             <ul class="list-unstyled">
-                                <li><a><i
-                                            class="fas fa-envelope-open-text"></i></a>&nbsp;accounting@primakomindonesia.com
+                                <li><a><i class="fas fa-envelope-open-text"></i></a>&nbsp;
+                                    accounting@primakomindonesia.com
                                 </li>
                             </ul>
                         </div>
@@ -138,13 +138,13 @@
                             <h5>CERTIFICATION</h5>
                             <ul class="list-unstyled mt-4 row justify-content-center">
                                 <li>
-                                    <img class="certification"
+                                    <img class="certification mt-2"
                                         src="{{ url('frontend/frontend/images/footer/9001.png') }}" alt="">
-                                    <img class="certification"
+                                    <img class="certification mt-2"
                                         src="{{ url('frontend/frontend/images/footer/14001.png') }}" alt="">
-                                    <img class="certification"
+                                    <img class="certification mt-2"
                                         src="{{ url('frontend/frontend/images/footer/integrasi.png') }}" alt="">
-                                    <img class="certification"
+                                    <img class="certification mt-2"
                                         src="{{ url('frontend/frontend/images/footer/sni.png') }}" alt="">
                                 </li>
                             </ul>
