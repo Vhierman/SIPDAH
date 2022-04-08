@@ -48,17 +48,17 @@
         <div class="container">
             <div class="col text-center section-company-overview-heading">
                 <h2 data-aos="fade-down">COMPANY OVERVIEW</h2>
-                <div class="section-content-company-overview row justify-content-center">
+                <div class="section-content-company-overview">
                     <div class="col-sm-10 col-md-12 col-lg-10">
                         <blockquote class="blockquote mb-0">
                             <h3 data-aos="fade-up"> "PT PRIMA KOMPONEN INDONESIA IS A TRUSTWORTHY COMPANY WITH A STRONG
                                 HISTORY AND EXPERIENCE AS AN OEM IN THIS COUNTRY"</h3>
-                            <p class="patas" data-aos="fade-right">PT Prima Komponen Indonesia was established
+                            <p class="patas" data-aos="fade-up">PT Prima Komponen Indonesia was established
                                 in 2003 as one of the most reliable manufactures in Indonesia. With more than 15 years
                                 of experience in the industry, PT Prima Komponen Indonesia has had a deep knowledge of
                                 local market preference and many experience in handling labour resources, these two
                                 important factor has enabled us to create the best solutions for our customers.</p>
-                            <p data-aos="fade-left">We have strong commitment for our core business plastic injection
+                            <p data-aos="fade-up">We have strong commitment for our core business plastic injection
                                 parts, electrical parts, and mechanical parts with sales contribution in Off Line,
                                 Dealer Option and OEM parts. We assembled raw material and parts, and deliver them into
                                 ready-to-use auto components for our many satisfied clients in the following list.</p>
@@ -79,14 +79,14 @@
             <div class="row align-items-center">
                 <div class="col-lg-5 order-lg-2">
                     <div class="p-5">
-                        <img data-aos="fade-down-left" class="img-fluid rounded-circle"
+                        <img data-aos="zoom-in-up" class="img-fluid rounded-circle"
                             src="{{ url('frontend/frontend/images/visi-misi/image-vision.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-7 order-lg-1 heading">
                     <div class="p-5">
-                        <h2 data-aos="flip-left" class="display-4">VISION</h2>
-                        <p data-aos="flip-left">TO BE THE BEST AND THE LARGEST AUTOMOTIVE COMPONENT PARTS MANUFACTURER
+                        <h2 data-aos="zoom-in-down" class="display-4">VISION</h2>
+                        <p data-aos="zoom-in-down">TO BE THE BEST AND THE LARGEST AUTOMOTIVE COMPONENT PARTS MANUFACTURER
                             IN INDONESIA.</p>
                     </div>
                 </div>
@@ -96,14 +96,14 @@
             <div class="row align-items-center">
                 <div class="col-lg-5">
                     <div class="p-5">
-                        <img data-aos="fade-down-right" class="img-fluid rounded-circle"
+                        <img data-aos="zoom-in-up" class="img-fluid rounded-circle"
                             src="{{ url('frontend/frontend/images/visi-misi/image-vission.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-7 heading">
                     <div class="p-5">
-                        <h2 data-aos="flip-right" class="display-4">MISSION</h2>
-                        <p data-aos="flip-right">CUSTOMERS SATISFACTION IS OUR FIRST PRIORITY BY PROVIDING BEST QUALITY
+                        <h2 data-aos="zoom-in-down" class="display-4">MISSION</h2>
+                        <p data-aos="zoom-in-down">CUSTOMERS SATISFACTION IS OUR FIRST PRIORITY BY PROVIDING BEST QUALITY
                             GUARANTEE, COMPETITIVE PRICE, ON-TIME SERVICE, AND CONTINUOUS AFTER-SALES SERVICE AND
                             SUPPORT WITH THE APPLICATION OF QUAALITY SAFETY AND ENVIRONMENTAL MANAGEMENT AS WELL AS OF
                             RISKS AND OPPORTUNITIES IN ALL ASPECTS OF OPERATIONAL AND BUSINESS ACTIVITIES.</p>
