@@ -64,12 +64,7 @@ class DashboardController extends Controller
             'areas',
             'divisions',
             'positions'
-            ])->orderBy('nama_karyawan')->get();
-        // $itemleaders     = Employees::with([
-        //     'areas',
-        //     'divisions',
-        //     'positions'
-        //     ])->where('divisions_id', $divisi)->orderBy('positions_id')->orderBy('nama_karyawan')->get();
+            ])->where('divisions_id', $divisi)->orderBy('positions_id')->orderBy('nama_karyawan')->get();
         //Halaman Leader
 
         //Halaman Admin HRD Accounting
