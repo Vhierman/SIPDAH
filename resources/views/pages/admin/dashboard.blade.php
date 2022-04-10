@@ -1167,9 +1167,10 @@
                 text: 'Detail Penempatan Karyawan'
             },
             xAxis: {
-                categories: ['Accounting', 'IC', 'IT', 'HRD', 'Doc Control', 'Marketing', 'Engineering', 'Quality',
+                categories: ['Blok BL', 'Accounting', 'IC', 'IT', 'HRD', 'Doc Control', 'Marketing', 'Engineering',
+                    'Quality',
                     'Purchasing', 'PPC', 'Produksi', 'Delivery Produksi', 'Gudang RM', 'Gudang FG', 'Delivery',
-                    'Blok BL', 'Blok E', 'Daihatsu Sunter', 'Daihatsu Cibinong',
+                    'Blok E', 'Daihatsu Sunter', 'Daihatsu Cibinong',
                     'Daihatsu Cibitung', 'Daihatsu Karawang Timur'
                 ]
             },
@@ -1193,26 +1194,28 @@
             },
             series: [{
                 name: 'Tetap',
-                data: [accountingpkwtt, icpkwtt, itpkwtt, hrdpkwtt, doccontrolpkwtt, marketingpkwtt,
+                data: [blokblpkwtt, accountingpkwtt, icpkwtt, itpkwtt, hrdpkwtt, doccontrolpkwtt,
+                    marketingpkwtt,
                     engineeringpkwtt, qualitypkwtt, purchasingpkwtt, ppcpkwtt, produksipkwtt,
-                    deliveryproduksipkwtt, gudangrmpkwtt, gudangfgpkwtt, deliverypkwtt, blokblpkwtt,
+                    deliveryproduksipkwtt, gudangrmpkwtt, gudangfgpkwtt, deliverypkwtt,
                     blokepkwtt, pdcdaihatsusunterpkwtt,
                     pdcdaihatsucibinongpkwtt, pdcdaihatsucibitungpkwtt, pdcdaihatsukarawangtimurpkwtt
                 ]
             }, {
                 name: 'Kontrak',
-                data: [accountingpkwt, icpkwt, itpkwt, hrdpkwt, doccontrolpkwt, marketingpkwt,
+                data: [blokblpkwt, accountingpkwt, icpkwt, itpkwt, hrdpkwt, doccontrolpkwt, marketingpkwt,
                     engineeringpkwt, qualitypkwt, purchasingpkwt, ppcpkwt, produksipkwt,
                     deliveryproduksipkwt, gudangrmpkwt, gudangfgpkwt, deliverypkwt,
-                    blokblpkwt, blokepkwt, pdcdaihatsusunterpkwt, pdcdaihatsucibinongpkwt,
+                    blokepkwt, pdcdaihatsusunterpkwt, pdcdaihatsucibinongpkwt,
                     pdcdaihatsucibitungpkwt, pdcdaihatsukarawangtimurpkwt
                 ]
             }, {
                 name: 'Harian',
-                data: [accountingharian, icharian, itharian, hrdharian, doccontrolharian, marketingharian,
+                data: [blokblharian, accountingharian, icharian, itharian, hrdharian, doccontrolharian,
+                    marketingharian,
                     engineeringharian, qualityharian, purchasingharian, ppcharian, produksiharian,
                     deliveryproduksiharian, gudangrmharian, gudangfgharian, deliveryharian,
-                    blokblharian, blokeharian, pdcdaihatsusunterharian,
+                    blokeharian, pdcdaihatsusunterharian,
                     pdcdaihatsucibinongharian, pdcdaihatsucibitungharian, pdcdaihatsukarawangtimurharian
                 ]
             }]

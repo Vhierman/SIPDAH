@@ -77,7 +77,8 @@
                             <a class="nav-link" href="{{ route('working-hours.index') }}">Jam Kerja</a>
                             <a class="nav-link" href="{{ route('schools.index') }}">Sekolah</a>
                             {{-- Temporary Update --}}
-                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Email Dan No HP</a>
+                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Email Dan No
+                                HP</a>
                             {{-- Temporary Update --}}
                         </nav>
                     </div>
@@ -214,18 +215,6 @@
                             <a class="nav-link" href="{{ route('cetak.pkwt_harian') }}">PKWT Harian</a>
                         </nav>
                     </div>
-                    <div class="collapse" id="collapseSurat" aria-labelledby="headingOne"
-                        data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{ route('comingsoon.index') }}">Slip Lemburan</a>
-                        </nav>
-                    </div>
-                    <div class="collapse" id="collapseSurat" aria-labelledby="headingOne"
-                        data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{ route('comingsoon.index') }}">Rekap Lemburan</a>
-                        </nav>
-                    </div>
                 @endif
                 {{-- End Surat --}}
 
@@ -295,6 +284,43 @@
                                 Karyawan</a>
                         </nav>
                     </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingTwo"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                                aria-controls="pagesCollapseAuth">
+                                Absensi Department
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_pdc') }}">PDC
+                                        Daihatsu</a>
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_produksi') }}">Produksi</a>
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_ppc') }}">PPC</a>
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_accicit') }}">ACC,IC,IT</a>
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_hrdgadc') }}">HRD-GA,DC</a>
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_marketing') }}">Marketing</a>
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_purchasing') }}">Purchasing</a>
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_engineering') }}">Engineering</a>
+                                    <a class="nav-link"
+                                        href="{{ route('reports.absensi_department_quality') }}">Quality</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">

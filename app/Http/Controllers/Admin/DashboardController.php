@@ -33,7 +33,6 @@ class DashboardController extends Controller
 
         //Halaman Karyawan
         $nik_karyawan = auth()->user()->nik;
-
         $datakaryawan = Employees::with([
             'companies',
             'areas',

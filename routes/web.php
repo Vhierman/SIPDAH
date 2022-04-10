@@ -124,6 +124,15 @@ Route::prefix('admin')
         Route::resource('cetak', 'CetaksController');
         //Reports
         Route::get('reports/absensi_karyawan', 'ReportsController@absensi_karyawan')->name('reports.absensi_karyawan');
+        Route::get('reports/absensi_department_pdc', 'ReportsController@absensi_department_pdc')->name('reports.absensi_department_pdc');
+        Route::get('reports/absensi_department_produksi', 'ReportsController@absensi_department_produksi')->name('reports.absensi_department_produksi');
+        Route::get('reports/absensi_department_ppc', 'ReportsController@absensi_department_ppc')->name('reports.absensi_department_ppc');
+        Route::get('reports/absensi_department_accicit', 'ReportsController@absensi_department_accicit')->name('reports.absensi_department_accicit');
+        Route::get('reports/absensi_department_hrdgadc', 'ReportsController@absensi_department_hrdgadc')->name('reports.absensi_department_hrdgadc');
+        Route::get('reports/absensi_department_marketing', 'ReportsController@absensi_department_marketing')->name('reports.absensi_department_marketing');
+        Route::get('reports/absensi_department_purchasing', 'ReportsController@absensi_department_purchasing')->name('reports.absensi_department_purchasing');
+        Route::get('reports/absensi_department_engineering', 'ReportsController@absensi_department_engineering')->name('reports.absensi_department_engineering');
+        Route::get('reports/absensi_department_quality', 'ReportsController@absensi_department_quality')->name('reports.absensi_department_quality');
         Route::post('reports/tampil_absensi_karyawan', 'ReportsController@tampil_absensi_karyawan')->name('reports.tampil_absensi_karyawan');
         Route::get('reports/karyawan_masuk', 'ReportsController@karyawan_masuk')->name('reports.karyawan_masuk');
         Route::post('reports/tampil_karyawan_masuk', 'ReportsController@tampil_karyawan_masuk')->name('reports.tampil_karyawan_masuk');
