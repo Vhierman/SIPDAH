@@ -160,7 +160,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanMaret = 
@@ -203,7 +203,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanApril = 
@@ -246,7 +246,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanMei = 
@@ -289,7 +289,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanJuni = 
@@ -332,7 +332,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanJuli = 
@@ -375,7 +375,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanAgustus = 
@@ -418,7 +418,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanSeptember = 
@@ -461,7 +461,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanOktober = 
@@ -504,7 +504,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanNovember = 
@@ -547,7 +547,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','19')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemPDCDaihatsuSunterCutiTahunanDesember = 
@@ -738,7 +738,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemProduksiCutiTahunanMaret =
@@ -781,7 +781,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemProduksiCutiTahunanApril =
@@ -824,7 +824,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemProduksiCutiTahunanMei =
@@ -867,7 +867,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemProduksiCutiTahunanJuni =
@@ -910,7 +910,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemProduksiCutiTahunanJuli =
@@ -953,7 +953,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemProduksiCutiTahunanAgustus =
@@ -996,7 +996,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemProduksiCutiTahunanSeptember =
@@ -1040,7 +1040,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemProduksiCutiTahunanOktober =
@@ -1083,7 +1083,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemProduksiCutiTahunanNovember =
@@ -1127,7 +1127,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','11')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemProduksiCutiTahunanDesember =
@@ -1318,7 +1318,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemPPCCutiTahunanMaret =
@@ -1361,7 +1361,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemPPCCutiTahunanApril =
@@ -1404,7 +1404,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemPPCCutiTahunanMei =
@@ -1447,7 +1447,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemPPCCutiTahunanJuni =
@@ -1490,7 +1490,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemPPCCutiTahunanJuli =
@@ -1533,7 +1533,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemPPCCutiTahunanAgustus =
@@ -1576,7 +1576,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemPPCCutiTahunanSeptember =
@@ -1620,7 +1620,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemPPCCutiTahunanOktober =
@@ -1663,7 +1663,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemPPCCutiTahunanNovember =
@@ -1707,7 +1707,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[10,12,13,14,15,18])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemPPCCutiTahunanDesember =
@@ -1898,7 +1898,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemAccICITCutiTahunanMaret =
@@ -1941,7 +1941,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemAccICITCutiTahunanApril =
@@ -1984,7 +1984,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemAccICITCutiTahunanMei =
@@ -2027,7 +2027,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemAccICITCutiTahunanJuni =
@@ -2070,7 +2070,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemAccICITCutiTahunanJuli =
@@ -2113,7 +2113,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemAccICITCutiTahunanAgustus =
@@ -2156,7 +2156,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemAccICITCutiTahunanSeptember =
@@ -2200,7 +2200,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemAccICITCutiTahunanOktober =
@@ -2243,7 +2243,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemAccICITCutiTahunanNovember =
@@ -2287,7 +2287,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[1,2,3])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemAccICITCutiTahunanDesember =
@@ -2478,7 +2478,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemHRDGADCCutiTahunanMaret =
@@ -2521,7 +2521,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemHRDGADCCutiTahunanApril =
@@ -2564,7 +2564,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemHRDGADCCutiTahunanMei =
@@ -2607,7 +2607,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemHRDGADCCutiTahunanJuni =
@@ -2650,7 +2650,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemHRDGADCCutiTahunanJuli =
@@ -2693,7 +2693,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemHRDGADCCutiTahunanAgustus =
@@ -2736,7 +2736,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemHRDGADCCutiTahunanSeptember =
@@ -2780,7 +2780,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemHRDGADCCutiTahunanOktober =
@@ -2823,7 +2823,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemHRDGADCCutiTahunanNovember =
@@ -2867,7 +2867,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->whereIn('divisions_id',[4,5,16])
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemHRDGADCCutiTahunanDesember =
@@ -3058,7 +3058,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemMarketingCutiTahunanMaret =
@@ -3101,7 +3101,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemMarketingCutiTahunanApril =
@@ -3144,7 +3144,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemMarketingCutiTahunanMei =
@@ -3187,7 +3187,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemMarketingCutiTahunanJuni =
@@ -3230,7 +3230,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemMarketingCutiTahunanJuli =
@@ -3273,7 +3273,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemMarketingCutiTahunanAgustus =
@@ -3316,7 +3316,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemMarketingCutiTahunanSeptember =
@@ -3360,7 +3360,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemMarketingCutiTahunanOktober =
@@ -3403,7 +3403,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemMarketingCutiTahunanNovember =
@@ -3447,7 +3447,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','6')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemMarketingCutiTahunanDesember =
@@ -3638,7 +3638,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemPurchasingCutiTahunanMaret =
@@ -3681,7 +3681,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemPurchasingCutiTahunanApril =
@@ -3724,7 +3724,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemPurchasingCutiTahunanMei =
@@ -3767,7 +3767,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemPurchasingCutiTahunanJuni =
@@ -3810,7 +3810,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemPurchasingCutiTahunanJuli =
@@ -3853,7 +3853,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemPurchasingCutiTahunanAgustus =
@@ -3896,7 +3896,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemPurchasingCutiTahunanSeptember =
@@ -3940,7 +3940,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemPurchasingCutiTahunanOktober =
@@ -3983,7 +3983,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemPurchasingCutiTahunanNovember =
@@ -4027,7 +4027,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','9')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemPurchasingCutiTahunanDesember =
@@ -4218,7 +4218,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemEngineeringCutiTahunanMaret =
@@ -4261,7 +4261,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemEngineeringCutiTahunanApril =
@@ -4304,7 +4304,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemEngineeringCutiTahunanMei =
@@ -4347,7 +4347,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemEngineeringCutiTahunanJuni =
@@ -4390,7 +4390,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemEngineeringCutiTahunanJuli =
@@ -4433,7 +4433,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemEngineeringCutiTahunanAgustus =
@@ -4476,7 +4476,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemEngineeringCutiTahunanSeptember =
@@ -4520,7 +4520,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemEngineeringCutiTahunanOktober =
@@ -4563,7 +4563,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemEngineeringCutiTahunanNovember =
@@ -4607,7 +4607,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','7')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemEngineeringCutiTahunanDesember =
@@ -4798,7 +4798,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-03-01','2022-03-31'])
         ->count();
         $ItemQualityCutiTahunanMaret =
@@ -4841,7 +4841,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-04-01','2022-04-30'])
         ->count();
         $ItemQualityCutiTahunanApril =
@@ -4884,7 +4884,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-05-01','2022-05-31'])
         ->count();
         $ItemQualityCutiTahunanMei =
@@ -4927,7 +4927,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-06-01','2022-06-30'])
         ->count();
         $ItemQualityCutiTahunanJuni =
@@ -4970,7 +4970,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-07-01','2022-07-31'])
         ->count();
         $ItemQualityCutiTahunanJuli =
@@ -5013,7 +5013,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-08-01','2022-08-31'])
         ->count();
         $ItemQualityCutiTahunanAgustus =
@@ -5056,7 +5056,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-09-01','2022-09-30'])
         ->count();
         $ItemQualityCutiTahunanSeptember =
@@ -5100,7 +5100,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-10-01','2022-10-31'])
         ->count();
         $ItemQualityCutiTahunanOktober =
@@ -5143,7 +5143,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-11-01','2022-11-30'])
         ->count();
         $ItemQualityCutiTahunanNovember =
@@ -5187,7 +5187,7 @@ class ReportsController extends Controller
         ->join('employees', 'employees.nik_karyawan', '=', 'attendances.employees_id')
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->where('divisions_id','8')
-        ->where('keterangan_absen','Ijin')
+        ->where('keterangan_absen','Alpa')
         ->whereBetween('tanggal_absen', ['2022-12-01','2022-12-31'])
         ->count();
         $ItemQualityCutiTahunanDesember =
