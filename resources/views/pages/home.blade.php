@@ -87,14 +87,14 @@
             <div class="row align-items-center">
                 <div class="col-lg-5 order-lg-2">
                     <div class="p-5">
-                        <img data-aos="zoom-in-up" class="img-fluid rounded-circle"
+                        <img data-aos="fade-down" class="img-fluid rounded-circle"
                             src="{{ url('frontend/frontend/images/visi-misi/image-vision.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-7 order-lg-1 heading">
                     <div class="p-5">
-                        <h2 data-aos="zoom-in-down" class="display-4">VISION</h2>
-                        <p data-aos="zoom-in-down">TO BE THE BEST AND THE LARGEST AUTOMOTIVE COMPONENT PARTS MANUFACTURER
+                        <h2 data-aos="fade-up" class="display-4">VISION</h2>
+                        <p data-aos="fade-up">TO BE THE BEST AND THE LARGEST AUTOMOTIVE COMPONENT PARTS MANUFACTURER
                             IN INDONESIA.</p>
                     </div>
                 </div>
@@ -104,14 +104,14 @@
             <div class="row align-items-center">
                 <div class="col-lg-5">
                     <div class="p-5">
-                        <img data-aos="zoom-in-up" class="img-fluid rounded-circle"
+                        <img data-aos="fade-down" class="img-fluid rounded-circle"
                             src="{{ url('frontend/frontend/images/visi-misi/image-vission.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-7 heading">
                     <div class="p-5">
-                        <h2 data-aos="zoom-in-down" class="display-4">MISSION</h2>
-                        <p data-aos="zoom-in-down">CUSTOMERS SATISFACTION IS OUR FIRST PRIORITY BY PROVIDING BEST QUALITY
+                        <h2 data-aos="fade-down" class="display-4">MISSION</h2>
+                        <p data-aos="fade-down">CUSTOMERS SATISFACTION IS OUR FIRST PRIORITY BY PROVIDING BEST QUALITY
                             GUARANTEE, COMPETITIVE PRICE, ON-TIME SERVICE, AND CONTINUOUS AFTER-SALES SERVICE AND
                             SUPPORT WITH THE APPLICATION OF QUAALITY SAFETY AND ENVIRONMENTAL MANAGEMENT AS WELL AS OF
                             RISKS AND OPPORTUNITIES IN ALL ASPECTS OF OPERATIONAL AND BUSINESS ACTIVITIES.</p>
