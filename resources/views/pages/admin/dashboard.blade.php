@@ -501,37 +501,20 @@
                         </div>
                     </div>
         </main>
-    @elseif(Auth::user()->roles != 'ADMIN' && Auth::user()->roles != 'HRD' && Auth::user()->roles != 'ACCOUNTING')
-        <div class="container">
-            <div class="timeline-struktur">
-                <div class="container mt-100 mt-60">
-                    <div class="row">
-                        @foreach ($itemleaders as $itemleader)
-                            <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                                <div class="mt-4 pt-2">
-                                    <div class="team position-relative d-block text-center">
-                                        <div class="image position-relative d-block overflow-hidden">
-                                            <img src="{{ Storage::url($itemleader->foto_karyawan) }}"
-                                                class="img-fluid rounded" alt="">
-                                            <div class="overlay rounded bg-dark"></div>
-                                        </div>
-                                        <div
-                                            class="content py-2 member-position bg-white border-bottom overflow-hidden rounded d-inline-block">
-                                            <h4 class="title mb-0">{{ $itemleader->nama_karyawan }}</h4>
-                                            <small class="text-muted">{{ $itemleader->positions->jabatan }}</small>
-                                        </div>
+    @elseif(Auth::user()->roles == 'LEADER')
+        <main>
+            <div class="row mt-3">
+                <div class="col-md-12">
 
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end col-->
+                    @if ($divisi == 19)
+                        <div id="containerpenempatandetailleaderpdc"></div>
+                    @else
+                        <div id="containerpenempatandetailleaderproduksi"></div>
+                    @endif
 
-                            <!--end row-->
-                        @endforeach
-                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     @else
         <main>
             <div class="container-fluid px-4">
@@ -626,6 +609,7 @@
         {{-- End Content --}}
     </div>
     {{-- End Content Dan Footer --}}
+    @endif
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 
@@ -1221,5 +1205,141 @@
             }]
         });
     </script>
-    @endif
+
+    {{-- Leader --}}
+    <script>
+        var produksipkwtt = {{ json_encode($itemproduksipkwtt) }};
+        var produksipkwt = {{ json_encode($itemproduksipkwt) }};
+        var produksiharian = {{ json_encode($itemproduksiharian) }};
+        var produksioutsourcing = {{ json_encode($itemproduksioutsourcing) }};
+        var pdcdaihatsusunterpkwtt = {{ json_encode($itempdcdaihatsusunterpkwtt) }};
+        var pdcdaihatsusunterpkwt = {{ json_encode($itempdcdaihatsusunterpkwt) }};
+        var pdcdaihatsusunterharian = {{ json_encode($itempdcdaihatsusunterharian) }};
+        var pdcdaihatsusunteroutsourcing = {{ json_encode($itempdcdaihatsusunteroutsourcing) }};
+        var pdcdaihatsucibinongpkwtt = {{ json_encode($itempdcdaihatsucibinongpkwtt) }};
+        var pdcdaihatsucibinongpkwt = {{ json_encode($itempdcdaihatsucibinongpkwt) }};
+        var pdcdaihatsucibinongharian = {{ json_encode($itempdcdaihatsucibinongharian) }};
+        var pdcdaihatsucibinongoutsourcing = {{ json_encode($itempdcdaihatsucibinongoutsourcing) }};
+        var pdcdaihatsucibitungpkwtt = {{ json_encode($itempdcdaihatsucibitungpkwtt) }};
+        var pdcdaihatsucibitungpkwt = {{ json_encode($itempdcdaihatsucibitungpkwt) }};
+        var pdcdaihatsucibitungharian = {{ json_encode($itempdcdaihatsucibitungharian) }};
+        var pdcdaihatsucibitungoutsourcing = {{ json_encode($itempdcdaihatsucibitungoutsourcing) }};
+        var pdcdaihatsukarawangtimurpkwtt = {{ json_encode($itempdcdaihatsukarawangtimurpkwtt) }};
+        var pdcdaihatsukarawangtimurpkwt = {{ json_encode($itempdcdaihatsukarawangtimurpkwt) }};
+        var pdcdaihatsukarawangtimurharian = {{ json_encode($itempdcdaihatsukarawangtimurharian) }};
+        var pdcdaihatsukarawangtimuroutsourcing = {{ json_encode($itempdcdaihatsukarawangtimuroutsourcing) }};
+
+        Highcharts.chart('containerpenempatandetailleaderproduksi', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Detail Penempatan Karyawan'
+            },
+            xAxis: {
+                categories: ['Produksi', 'Daihatsu Sunter', 'Daihatsu Cibinong',
+                    'Daihatsu Cibitung', 'Daihatsu Karawang Timur'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total Jumlah Karyawan'
+                }
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Tetap',
+                data: [produksipkwtt, pdcdaihatsusunterpkwtt,
+                    pdcdaihatsucibinongpkwtt, pdcdaihatsucibitungpkwtt, pdcdaihatsukarawangtimurpkwtt
+                ]
+            }, {
+                name: 'Kontrak',
+                data: [produksipkwt, pdcdaihatsusunterpkwt, pdcdaihatsucibinongpkwt,
+                    pdcdaihatsucibitungpkwt, pdcdaihatsukarawangtimurpkwt
+                ]
+            }, {
+                name: 'Harian',
+                data: [produksiharian, pdcdaihatsusunterharian,
+                    pdcdaihatsucibinongharian, pdcdaihatsucibitungharian, pdcdaihatsukarawangtimurharian
+                ]
+            }]
+        });
+    </script>
+
+    <script>
+        var pdcdaihatsusunterpkwtt = {{ json_encode($itempdcdaihatsusunterpkwtt) }};
+        var pdcdaihatsusunterpkwt = {{ json_encode($itempdcdaihatsusunterpkwt) }};
+        var pdcdaihatsusunterharian = {{ json_encode($itempdcdaihatsusunterharian) }};
+        var pdcdaihatsusunteroutsourcing = {{ json_encode($itempdcdaihatsusunteroutsourcing) }};
+        var pdcdaihatsucibinongpkwtt = {{ json_encode($itempdcdaihatsucibinongpkwtt) }};
+        var pdcdaihatsucibinongpkwt = {{ json_encode($itempdcdaihatsucibinongpkwt) }};
+        var pdcdaihatsucibinongharian = {{ json_encode($itempdcdaihatsucibinongharian) }};
+        var pdcdaihatsucibinongoutsourcing = {{ json_encode($itempdcdaihatsucibinongoutsourcing) }};
+        var pdcdaihatsucibitungpkwtt = {{ json_encode($itempdcdaihatsucibitungpkwtt) }};
+        var pdcdaihatsucibitungpkwt = {{ json_encode($itempdcdaihatsucibitungpkwt) }};
+        var pdcdaihatsucibitungharian = {{ json_encode($itempdcdaihatsucibitungharian) }};
+        var pdcdaihatsucibitungoutsourcing = {{ json_encode($itempdcdaihatsucibitungoutsourcing) }};
+
+        Highcharts.chart('containerpenempatandetailleaderpdc', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Detail Penempatan Karyawan'
+            },
+            xAxis: {
+                categories: ['Daihatsu Sunter', 'Daihatsu Cibinong',
+                    'Daihatsu Cibitung'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total Jumlah Karyawan'
+                }
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Tetap',
+                data: [pdcdaihatsusunterpkwtt,
+                    pdcdaihatsucibinongpkwtt, pdcdaihatsucibitungpkwtt
+                ]
+            }, {
+                name: 'Kontrak',
+                data: [pdcdaihatsusunterpkwt, pdcdaihatsucibinongpkwt,
+                    pdcdaihatsucibitungpkwt
+                ]
+            }, {
+                name: 'Harian',
+                data: [pdcdaihatsusunterharian,
+                    pdcdaihatsucibinongharian, pdcdaihatsucibitungharian
+                ]
+            }]
+        });
+    </script>
+    {{-- Leader --}}
+
 @endsection
