@@ -2029,8 +2029,6 @@ class CetaksController extends Controller
             ->whereBetween('tanggal_awal_kontrak', [$awal, $akhir])
             ->orderBy('tanggal_awal_kontrak', 'ASC')->get();
             
-            
-
             $this->fpdf = new FPDF('P', 'mm', 'A4');
             $this->fpdf->setTopMargin(10);
             $this->fpdf->setLeftMargin(4);
@@ -2042,7 +2040,7 @@ class CetaksController extends Controller
                 $items = Employees::with([
                     'divisions',
                     'positions'
-                    ])->where('nik_karyawan', $pkwtharian->employees_id)->get();
+                    ])->where('nik_karyawan', $pkwtharian->employees_id)->where('divisions_id','<>',19)->get();
 
                 foreach ($items as $item) {
                  
