@@ -1064,11 +1064,12 @@ class OvertimesController extends Controller
 
         $items = DB::table('overtimes')
         ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
-        ->groupBy('employees_id','nama_karyawan')
-        ->select('employees_id','nama_karyawan', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
+        ->groupBy('employees_id','nama_karyawan','status_kerja')
+        ->select('employees_id','nama_karyawan','status_kerja', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
         ->whereIn('divisions_id',$divisi)
         ->where('overtimes.acc_hrd','<>',NULL)
         ->where('overtimes.deleted_at',NULL)
+        ->where('status_kerja',$status_kerja)
         ->whereBetween('tanggal_lembur', [$awal, $akhir])
         ->orderBy('nama_karyawan')
         ->get();
@@ -1124,11 +1125,12 @@ class OvertimesController extends Controller
 
         $items = DB::table('overtimes')
         ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
-        ->groupBy('employees_id','nama_karyawan')
-        ->select('employees_id','nama_karyawan', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
+        ->groupBy('employees_id','nama_karyawan','status_kerja')
+        ->select('employees_id','nama_karyawan','status_kerja', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
         ->whereIn('divisions_id',$divisi)
         ->where('overtimes.acc_hrd','<>',NULL)
         ->where('overtimes.deleted_at',NULL)
+        ->where('status_kerja',$status_kerja)
         ->whereBetween('tanggal_lembur', [$awal, $akhir])
         ->orderBy('nama_karyawan')
         ->get();
