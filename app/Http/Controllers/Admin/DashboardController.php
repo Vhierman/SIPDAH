@@ -1002,6 +1002,15 @@ class DashboardController extends Controller
             ])
             ->where('employees_id',$employees_id)
             ->first();
+        
+        if ($item==null) {
+            Alert::error('Data yang anda cari tidak ada');
+            //Redirect
+            return redirect()->route('dashboard.form_absensi_karyawan');
+        } else {
+            
+        
+        
 
         $absens = Attendances::with([
             'employees'
@@ -1117,6 +1126,8 @@ class DashboardController extends Controller
 
         $this->fpdf->Output();
         exit;
+
+    }
     }
 
 }

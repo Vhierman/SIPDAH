@@ -19,6 +19,7 @@ use App\Http\Requests\Admin\LaporanKaryawanMasukRequest;
 use App\Http\Requests\Admin\LaporanAbsensiKaryawanRequest;
 use Carbon\Carbon;
 use Storage;
+use Alert;
 
 class ReportsController extends Controller
 {
@@ -5277,7 +5278,13 @@ class ReportsController extends Controller
             ])
             ->where('employees_id',$employees_id)
             ->first();
-
+        
+        if ($item==null) {
+            Alert::error('Data yang anda cari tidak ada');
+            //Redirect
+            return redirect()->route('reports.absensi_karyawan');
+        } else {
+        
         $absens = Attendances::with([
             'employees'
             ])
@@ -5393,6 +5400,7 @@ class ReportsController extends Controller
 
         $this->fpdf->Output();
         exit;
+    }
 
     }
 
