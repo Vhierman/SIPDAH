@@ -26,9 +26,9 @@ class TemporarysController extends Controller
             abort(403);
         }
 
-        $items = Employees::with([
-            'divisions'
-            ])->orderBy('nama_karyawan')->get();
+        $items = HistorySalaries::with([
+            'employees'
+            ])->get();
         
             // $salaries       = HistorySalaries::where('employees_id', $nikkaryawan)->first();
 
@@ -92,16 +92,16 @@ class TemporarysController extends Controller
         }
         
 
-        $item = Employees::findOrFail($id);
+        $item = HistorySalaries::findOrFail($id);
 
         $nikkaryawan = $item->employees_id;
         
-        $itemkaryawans = Employees::with([
-            'divisions'
-        ])->where('nik_karyawan',$nikkaryawan)->first();
+        $itemkaryawans = HistorySalaries::with([
+            'employees'
+        ])->where('employees_id',$nikkaryawan)->first();
 
         return view('pages.admin.temporary.edit',[
-        'item'  => $item,
+        'item'          => $item,
         'itemkaryawans' => $itemkaryawans
         ]);
     }
@@ -120,19 +120,18 @@ class TemporarysController extends Controller
             abort(403);
         }
 
-        $item   = Employees::findOrFail($id);
-        $nikkaryawan = $item->nik_karyawan;
+        $item           = HistorySalaries::findOrFail($id);
+        $nikkaryawan    = $item->nik_karyawan;
         
-        $items = Employees::with([
-            'divisions'
-        ])->where('nik_karyawan',$nikkaryawan)->first();
+        $items = HistorySalaries::with([
+            'employees'
+        ])->where('employees_id',$nikkaryawan)->first();
 
-        $items->update([
-            'nomor_handphone'   => $request->input('nomor_handphone'),
-            'email_karyawan'    => $request->input('email_karyawan'),
-            'edit_oleh'         => $request->input('edit_oleh')
+        $item->update([
+            'upah_lembur_perjam'    => $request->input('upah_lembur_perjam'),
+            'edit_oleh'             => $request->input('edit_oleh')
         ]);
-        Alert::info('Success Edit Nomor HP Dan Email','Oleh '.auth()->user()->name);
+        Alert::info('Success Edit Upah Lembur Perjam','Oleh '.auth()->user()->name);
         return redirect()->route('temporarys.index');
     }
 

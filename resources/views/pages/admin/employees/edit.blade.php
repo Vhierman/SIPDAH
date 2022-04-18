@@ -425,7 +425,7 @@
                                                     Mandiri</option>
                                             </select>
                                         </div>
-                                        <div class="form-group mt-2">
+                                        {{-- <div class="form-group mt-2">
                                             <label for="text">Gaji Pokok</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">Rp.</span>
@@ -488,7 +488,7 @@
                                                     placeholder="Masukan Tunjangan Jabatan (Tanpa Karakter Khusus Hanya Angka)"
                                                     aria-label="text" aria-describedby="basic-addon1">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="tab-pane fade" id="foto" role="tabpanel" aria-labelledby="foto-tab">
                                         <div class="alert alert-warning alert-dismissible fade show" role="alert">

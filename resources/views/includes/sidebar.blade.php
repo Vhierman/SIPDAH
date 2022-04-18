@@ -77,8 +77,8 @@
                             <a class="nav-link" href="{{ route('working-hours.index') }}">Jam Kerja</a>
                             <a class="nav-link" href="{{ route('schools.index') }}">Sekolah</a>
                             {{-- Temporary Update --}}
-                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Email Dan No
-                                HP</a>
+                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Upah Lembur
+                                Perjam</a>
                             {{-- Temporary Update --}}
                         </nav>
                     </div>
