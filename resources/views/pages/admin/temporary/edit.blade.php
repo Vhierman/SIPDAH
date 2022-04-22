@@ -50,6 +50,12 @@
                                             placeholder="Masukan Nama Karyawan"
                                             value="{{ $item->employees->nama_karyawan }}">
                                     </div>
+                                    <div class="form-group mb-2">
+                                        <label for="title" class="form-label">Nomor Handphone</label>
+                                        <input type="text" class="form-control" name="nomor_handphone"
+                                            placeholder="Masukan Nomor Handphone"
+                                            value="{{ $item->employees->nomor_handphone }}">
+                                    </div>
 
                                     <div class="form-group mb-2">
                                         <label for="title" class="form-label">Upah Lembur Perjam</label>
