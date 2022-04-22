@@ -22,12 +22,12 @@ class TemporarysController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
 
-        $items = HistorySalaries::with([
-            'employees'
+        $items = Employees::with([
+            'divisions'
             ])->get();
         
             // $salaries       = HistorySalaries::where('employees_id', $nikkaryawan)->first();

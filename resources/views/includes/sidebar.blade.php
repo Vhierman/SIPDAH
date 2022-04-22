@@ -59,7 +59,7 @@
                 {{-- Halaman Karyawan --}}
 
                 {{-- Master --}}
-                @if (Auth::user()->roles == 'ADMIN')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseMaster"
                         aria-expanded="false" aria-controls="collapseMaster">
                         <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
@@ -77,8 +77,7 @@
                             <a class="nav-link" href="{{ route('working-hours.index') }}">Jam Kerja</a>
                             <a class="nav-link" href="{{ route('schools.index') }}">Sekolah</a>
                             {{-- Temporary Update --}}
-                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Upah Lembur
-                                Perjam</a>
+                            <a class="nav-link" href="{{ route('temporarys.index') }}">Temporary Nomor HP</a>
                             {{-- Temporary Update --}}
                         </nav>
                     </div>
