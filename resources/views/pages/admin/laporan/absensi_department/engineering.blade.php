@@ -75,7 +75,7 @@
                 type: 'column'
             },
             title: {
-                text: 'LAPORAN ABSENSI ENGINEERING'
+                text: 'LAPORAN ABSENSI ENGINEERING TAHUN 2022'
             },
             subtitle: {
                 text: ''

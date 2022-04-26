@@ -30,7 +30,6 @@ class DashboardController extends Controller
     {
         toast('Hello '.auth()->user()->name,'success');
 
-
         //Halaman Karyawan
         $nik_karyawan = auth()->user()->nik;
         $datakaryawan = Employees::with([
@@ -55,10 +54,8 @@ class DashboardController extends Controller
         //Halaman Karyawan
 
         //Halaman Leader
-
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik_karyawan)->first();
         $divisi         = $caridivisi->divisions_id;
-        
         $itemleaders     = Employees::with([
             'areas',
             'divisions',
@@ -67,6 +64,7 @@ class DashboardController extends Controller
         //Halaman Leader
 
         //Halaman Admin HRD Accounting
+        //Jumlah Karyawan
         $itembsd = Employees::with([
             'areas'
             ])->where('areas_id', 2)->count();
@@ -91,8 +89,9 @@ class DashboardController extends Controller
         
         $itempdc = $itemsunter+$itemcibinong+$itemcibitung+$itemkarawangtimur;
         $itemall = $itembsd+$itemaw+$itembl+$itemsunter+$itemcibinong+$itemcibitung+$itemkarawangtimur;
-        
-        // Penempatan
+        //Jumlah Karyawan
+
+        // Chart Penempatan
         $itemaccounting = Employees::with([
             'divisions'
             ])->where('divisions_id', 1)->count();
@@ -163,9 +162,9 @@ class DashboardController extends Controller
         $itemjumlahhrd          = $itemhrd+$itemsecurity;
         $itemjumlahppc          = $itemppc+$itemdelivery+$itemdeliveryproduksi+$itembloke+$itemgudangrm+$itemgudangfg;
         $itemjumlahproduksi     = $itemproduksi+$itempdcdaihatsusunter+$itempdcdaihatsucibinong+$itempdcdaihatsucibitung+$itempdcdaihatsukarawangtimur;
-        // Penempatan
+        // Chart Penempatan
 
-        //Status Kontrak
+        // Chart Status Kontrak
         $itemkontrak = Employees::all()
             ->where('status_kerja', 'PKWT')
             ->count();
@@ -178,9 +177,9 @@ class DashboardController extends Controller
         $itemoutsourcing = Employees::all()
             ->where('status_kerja', 'Outsourcing')
             ->count();
-        //Status Kontrak
+        // Chart Status Kontrak
         
-        //Status Menikah
+        // Chart Status Menikah
         $itemsingle = Employees::all()
         ->where('status_nikah', 'Single')
         ->count();
@@ -193,18 +192,18 @@ class DashboardController extends Controller
         $itemduda = Employees::all()
         ->where('status_nikah', 'Duda')
         ->count();
-        //Status Menikah
+        // Chart Status Menikah
 
-        //Jenis Kelamin
+        // Chart Jenis Kelamin
         $itempria = Employees::all()
         ->where('jenis_kelamin', 'Pria')
         ->count();
         $itemwanita = Employees::all()
         ->where('jenis_kelamin', 'Wanita')
         ->count();
-        //Jenis Kelamin
+        // Chart Jenis Kelamin
 
-        //Agama
+        // Chart Agama
         $itemislam = Employees::all()
         ->where('agama', 'Islam')
         ->count();
@@ -220,9 +219,9 @@ class DashboardController extends Controller
         $itembudha = Employees::all()
         ->where('agama', 'Budha')
         ->count();
-        //Agama
+        // Chart Agama
 
-        // Penempatan Detail
+        //  Chart Penempatan Detail
         $itemaccountingpkwtt = Employees::with([
             'divisions'
             ])->where('divisions_id', 1)->where('status_kerja', 'PKWTT')->count();
@@ -249,7 +248,6 @@ class DashboardController extends Controller
             'divisions'
             ])->where('divisions_id', 2)->where('status_kerja', 'Outsourcing')->count();
 
-            
         $itemitpkwtt = Employees::with([
             'divisions'
             ])->where('divisions_id', 3)->where('status_kerja', 'PKWTT')->count();
@@ -510,10 +508,10 @@ class DashboardController extends Controller
         $itempdcdaihatsukarawangtimuroutsourcing = Employees::with([
             'divisions'
             ])->where('divisions_id', 22)->where('status_kerja', 'Outsourcing')->count();
-        //
-        // Penempatan Detail
+        // Chart  Penempatan Detail
         
         return view('pages.admin.dashboard',[
+
             //Halaman Karyawan
             'datakaryawan'                  => $datakaryawan,
             'datahistorykontraks'           => $datahistorykontraks,
@@ -527,6 +525,7 @@ class DashboardController extends Controller
             'divisi'                        => $divisi,
             //Halaman Leader
             
+            //Halaman HRD, ADMIN, Accounting
             'itempdc'                       => $itempdc,
             'itemall'                       => $itemall,
             'itemaw'                        => $itemaw,
@@ -703,7 +702,6 @@ class DashboardController extends Controller
             return redirect()->route('dashboard.form_slip_lembur_karyawan');
         } else {
         
-
         $items = 
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
@@ -975,8 +973,6 @@ class DashboardController extends Controller
         $fotokaryawan->update($data);
         Alert::info('Success Update Foto Karyawan','Oleh '.auth()->user()->name);
         return redirect()->route('dashboard');
-
-        // dd($foto_karyawan);
     }
 
     public function form_absensi_karyawan()
@@ -1005,13 +1001,9 @@ class DashboardController extends Controller
         
         if ($item==null) {
             Alert::error('Data yang anda cari tidak ada');
-            //Redirect
             return redirect()->route('dashboard.form_absensi_karyawan');
         } else {
             
-        
-        
-
         $absens = Attendances::with([
             'employees'
             ])

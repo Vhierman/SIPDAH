@@ -31,6 +31,7 @@ class EmployeesOutExport implements FromCollection, WithHeadings, WithMapping
 
         return $employeesouts ;
     }
+
     public function map($employeesouts): array
     {
         
@@ -39,6 +40,7 @@ class EmployeesOutExport implements FromCollection, WithHeadings, WithMapping
             array_push($items);
         }
 
+        //Menambahkan ' di depan huruf agar ketika di export tidak berantakan
         $employees_id                           = "'".$employeesouts->employees_id;
         $nomor_kartu_keluarga_karyawan_keluar   = "'".$employeesouts->nomor_kartu_keluarga_karyawan_keluar;
         $nomor_jkn_karyawan_keluar              = "'".$employeesouts->nomor_jkn_karyawan_keluar;
@@ -49,7 +51,8 @@ class EmployeesOutExport implements FromCollection, WithHeadings, WithMapping
         $nomor_rekening_karyawan_keluar         = "'".$employeesouts->nomor_rekening_karyawan_keluar;
         $nomor_handphone_karyawan_keluar        = "'".$employeesouts->nomor_handphone_karyawan_keluar;
         $nomor_absen_karyawan_keluar            = "'".$employeesouts->nomor_absen_karyawan_keluar;
-        
+        //Menambahkan ' di depan huruf agar ketika di export tidak berantakan
+
         return [
             [
                 $employeesouts->id,
@@ -95,6 +98,7 @@ class EmployeesOutExport implements FromCollection, WithHeadings, WithMapping
 
     }
     
+    //Heading/JUDUL Excell
     public function headings(): array
     {
         return [

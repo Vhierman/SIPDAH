@@ -75,7 +75,7 @@
                 type: 'column'
             },
             title: {
-                text: 'LAPORAN ABSENSI MARKETING'
+                text: 'LAPORAN ABSENSI MARKETING TAHUN 2022'
             },
             subtitle: {
                 text: ''

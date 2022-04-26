@@ -50,6 +50,7 @@ class AttendancesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //PDC Daihatsu
         if ($divisi == 19) {
             $items = 
                 DB::table('attendances')
@@ -60,6 +61,7 @@ class AttendancesController extends Controller
                 ->whereBetween('tanggal_absen', [$awal, $akhir])
                 ->get();
         } 
+        //Produksi
         elseif ($divisi == 11) {
             $items = 
                 DB::table('attendances')
@@ -70,6 +72,7 @@ class AttendancesController extends Controller
                 ->whereBetween('tanggal_absen', [$awal, $akhir])
                 ->get();
         } 
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = 
             DB::table('attendances')
@@ -89,7 +92,6 @@ class AttendancesController extends Controller
             ]);
         } else {
             Alert::error('Data Tidak Ditemukan');
-            //Redirect
             return redirect()->route('absensi.lihat_absensi');
         }
     }
@@ -109,6 +111,7 @@ class AttendancesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //PDC
         if ($divisi == 19) {
             $items = Employees::with([
                 'companies',
@@ -117,6 +120,7 @@ class AttendancesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [19,20,21,22])->get();
         }
+        //Produksi
         elseif ($divisi == 11) {
             $items = Employees::with([
                 'companies',
@@ -125,6 +129,7 @@ class AttendancesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [11])->get();
         }
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = Employees::with([
                 'companies',
@@ -200,6 +205,7 @@ class AttendancesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //PDC
         if ($divisi == 19) {
             $items = Employees::with([
                 'companies',
@@ -208,6 +214,7 @@ class AttendancesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [19,20,21,22])->get();
         }
+        //Produksi
         elseif ($divisi == 11) {
             $items = Employees::with([
                 'companies',
@@ -216,6 +223,7 @@ class AttendancesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [11])->get();
         }
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = Employees::with([
                 'companies',
@@ -233,6 +241,7 @@ class AttendancesController extends Controller
         ]);
         
     }
+
     public function tampil_edit(AttendancesEditRequest $request)
     {
         //
@@ -314,6 +323,7 @@ class AttendancesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //PDC
         if ($divisi == 19) {
             $items = Employees::with([
                 'companies',
@@ -322,6 +332,7 @@ class AttendancesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [19,20,21,22])->get();
         }
+        //Produksi
         elseif ($divisi == 11) {
             $items = Employees::with([
                 'companies',
@@ -330,6 +341,7 @@ class AttendancesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [11])->get();
         }
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = Employees::with([
                 'companies',
@@ -346,6 +358,7 @@ class AttendancesController extends Controller
                 'items'     => $items
         ]);
     }
+
     public function tampil_hapus(AttendancesEditRequest $request)
     {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
@@ -371,6 +384,7 @@ class AttendancesController extends Controller
         ]);
         }
     }
+    
     public function destroy(Request $request, $id)
     {
         //

@@ -75,15 +75,11 @@
                                                     aria-controls="pills-divisi" aria-selected="false">Divisi</button>
                                             </li>
 
-                                            @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="pills-salary-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-salary" type="button"
-                                                        role="tab" aria-controls="pills-salary"
-                                                        aria-selected="false">Salary</button>
-                                                </li>
-                                            @endif
-
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="pills-salary-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#pills-salary" type="button" role="tab"
+                                                    aria-controls="pills-salary" aria-selected="false">Rekening</button>
+                                            </li>
 
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="pills-alamat-tab" data-bs-toggle="pill"
@@ -289,63 +285,65 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
-                                                    <div class="col-lg-5 col-md-6">
-                                                        <h6 class="card-title">Gaji Pokok</h6>
-                                                        <p class="card-text">
-                                                            Rp.{{ number_format($salaries->gaji_pokok) }}
-                                                        </p>
+                                                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-md-6">
+                                                            <h6 class="card-title">Gaji Pokok</h6>
+                                                            <p class="card-text">
+                                                                Rp.{{ number_format($salaries->gaji_pokok) }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6">
+                                                            <h6 class="card-title">Uang Makan</h6>
+                                                            <p class="card-text">
+                                                                Rp.{{ number_format($salaries->uang_makan) }}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-6">
-                                                        <h6 class="card-title">Uang Makan</h6>
-                                                        <p class="card-text">
-                                                            Rp.{{ number_format($salaries->uang_makan) }}
-                                                        </p>
-                                                    </div>
-                                                </div>
 
-                                                <div class="row">
-                                                    <div class="col-lg-5 col-md-6">
-                                                        <h6 class="card-title">Uang Transport</h6>
-                                                        <p class="card-text">
-                                                            Rp.{{ number_format($salaries->uang_transport) }}
-                                                        </p>
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-md-6">
+                                                            <h6 class="card-title">Uang Transport</h6>
+                                                            <p class="card-text">
+                                                                Rp.{{ number_format($salaries->uang_transport) }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6">
+                                                            <h6 class="card-title">Tunjangan Tugas</h6>
+                                                            <p class="card-text">
+                                                                Rp.{{ number_format($salaries->tunjangan_tugas) }}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-6">
-                                                        <h6 class="card-title">Tunjangan Tugas</h6>
-                                                        <p class="card-text">
-                                                            Rp.{{ number_format($salaries->tunjangan_tugas) }}
-                                                        </p>
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-md-6">
+                                                            <h6 class="card-title">Tunjangan Pulsa</h6>
+                                                            <p class="card-text">
+                                                                Rp.{{ number_format($salaries->tunjangan_pulsa) }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6">
+                                                            <h6 class="card-title">Tunjangan Jabatan</h6>
+                                                            <p class="card-text">
+                                                                Rp.{{ number_format($salaries->tunjangan_jabatan) }}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-5 col-md-6">
-                                                        <h6 class="card-title">Tunjangan Pulsa</h6>
-                                                        <p class="card-text">
-                                                            Rp.{{ number_format($salaries->tunjangan_pulsa) }}
-                                                        </p>
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-md-6">
+                                                            <h6 class="card-title">Jumlah Upah</h6>
+                                                            <p class="card-text">
+                                                                Rp.{{ number_format($salaries->jumlah_upah) }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6">
+                                                            <h6 class="card-title">Upah Lembur Perjam</h6>
+                                                            <p class="card-text">
+                                                                Rp.{{ number_format(round($salaries->upah_lembur_perjam, 0)) }}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-6">
-                                                        <h6 class="card-title">Tunjangan Jabatan</h6>
-                                                        <p class="card-text">
-                                                            Rp.{{ number_format($salaries->tunjangan_jabatan) }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-5 col-md-6">
-                                                        <h6 class="card-title">Jumlah Upah</h6>
-                                                        <p class="card-text">
-                                                            Rp.{{ number_format($salaries->jumlah_upah) }}
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6">
-                                                        <h6 class="card-title">Upah Lembur Perjam</h6>
-                                                        <p class="card-text">
-                                                            Rp.{{ number_format(round($salaries->upah_lembur_perjam, 0)) }}
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                                @endif
 
                                             </div>
 

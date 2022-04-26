@@ -48,6 +48,7 @@ class EmployeesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = Employees::with([
                 'areas',
@@ -55,6 +56,7 @@ class EmployeesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [11, 19, 20,21])->get();
         }
+        //PDC
         elseif ($divisi == 19) {
             $items = Employees::with([
                 'areas',
@@ -62,6 +64,7 @@ class EmployeesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [19, 20,21])->get();
         }
+        //IC
         elseif ($divisi == 2) {
             $items = Employees::with([
                 'areas',
@@ -69,6 +72,7 @@ class EmployeesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [2])->get();
         }
+        //Engineering
         elseif ($divisi == 7) {
             $items = Employees::with([
                 'areas',
@@ -76,6 +80,7 @@ class EmployeesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [7])->get();
         }
+        //Quality
         elseif ($divisi == 8) {
             $items = Employees::with([
                 'areas',
@@ -83,6 +88,7 @@ class EmployeesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [8])->get();
         }
+        //Purchasing
         elseif ($divisi == 9) {
             $items = Employees::with([
                 'areas',
@@ -90,6 +96,7 @@ class EmployeesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [9])->get();
         }
+        //PPC
         elseif ($divisi == 10) {
             $items = Employees::with([
                 'areas',
@@ -97,6 +104,7 @@ class EmployeesController extends Controller
                 'positions'
                 ])->whereIn('divisions_id', [12,13,14,15,18])->get();
         }
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = Employees::with([
                 'areas',
@@ -104,6 +112,7 @@ class EmployeesController extends Controller
                 'positions'
                 ])->get();
         }
+        //Accounting
         elseif ($divisi == 1) {
             $items = Employees::with([
                 'areas',
@@ -183,7 +192,6 @@ class EmployeesController extends Controller
         );
         Employees::create($data);
         //Input Employees
-        
 
         //Input History Contracts
         //Hitung Bulan
@@ -334,6 +342,7 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         //
@@ -455,6 +464,7 @@ class EmployeesController extends Controller
         
         $nikkaryawan                        = $item->nik_karyawan;
         
+        //Jika ingin update Salary, Unlink Coment Berikut
         // $salary                             = HistorySalaries::where('employees_id', $nikkaryawan)->first();
 
         // Rumus Gaji

@@ -149,11 +149,6 @@ class ProcessController extends Controller
         $awal_kontrak       = $request->input('awal_kontrak');
         $akhir_kontrak      = $request->input('akhir_kontrak');
 
-        // if ($awal_kontrak == null AND $akhir_kontrak == null) {
-        //     return view('pages.admin.process.pkwt_harian.index');
-        // }
-
-
         $items              = Employees::where('tanggal_akhir_kerja', $akhirkontrak)->where('status_kerja','PKWT')->get();
 
         foreach ($items as $item) {
@@ -208,6 +203,7 @@ class ProcessController extends Controller
         $cetak_surat_magang             = $request->input('cetak_surat_magang');
         $akhir_magang                   = $request->input('akhir_magang');
 
+        //Create Nomor DOkumen
         $nik                            = substr($nik_magang, 12);
         $mytime                         = $cetak_surat_magang;
         $bulan                          = substr($mytime, 5, -3);
@@ -251,6 +247,7 @@ class ProcessController extends Controller
         else {
             $romawi = 'SALAH';
         }
+        //Create Nomor DOkumen
 
         $this->fpdf = new FPDF('P', 'mm', 'A4');
         $this->fpdf->setTopMargin(10);

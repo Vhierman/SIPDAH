@@ -75,7 +75,7 @@
                 type: 'column'
             },
             title: {
-                text: 'LAPORAN ABSENSI ACCOUNTING, IC, IT'
+                text: 'LAPORAN ABSENSI ACCOUNTING, IC, IT TAHUN 2022'
             },
             subtitle: {
                 text: ''

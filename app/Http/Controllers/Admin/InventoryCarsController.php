@@ -127,6 +127,7 @@ class InventoryCarsController extends Controller
             'positions'
             ])->where('nik_karyawan', $nikkaryawan)->first();
         
+        //Create Nomor Dokumen
         $nik            = substr($nikkaryawan, 12);
         $mytime         = $item->tanggal_penyerahan_mobil;
         $bulan          = substr($mytime, 5, -3);
@@ -171,6 +172,7 @@ class InventoryCarsController extends Controller
         else {
             $romawi = 'SALAH';
         }
+        //Create Nomor Dokumen
 
         $this->fpdf = new FPDF('P', 'mm', 'A4');
         $this->fpdf->AddPage();
@@ -428,7 +430,6 @@ class InventoryCarsController extends Controller
         $fotomobil     = $iteminventory->foto_mobil;
         $foto_mobil    = $request->file('foto_mobil');
         
-
         if(Storage::exists('public/'.$fotomobil) && $foto_mobil <> null){
             Storage::delete('public/'.$fotomobil);
             $data['foto_mobil'] = $request->file('foto_mobil')->store(

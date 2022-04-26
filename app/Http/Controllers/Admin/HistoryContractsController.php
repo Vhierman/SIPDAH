@@ -60,8 +60,6 @@ class HistoryContractsController extends Controller
             'item'                  => $item,
             'historycontracts'      => $historycontracts
         ]);
-
-        // dd($historycontracts);
     }
    
 

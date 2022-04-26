@@ -65,6 +65,7 @@ class OvertimesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = 
                 DB::table('overtimes')
@@ -74,6 +75,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         } 
+        //PDC
         elseif ($divisi == 19) {
             $items = 
                 DB::table('overtimes')
@@ -83,6 +85,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //IC
         elseif ($divisi == 2) {
             $items = 
                 DB::table('overtimes')
@@ -92,6 +95,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Engineering
         elseif ($divisi == 7) {
             $items = 
                 DB::table('overtimes')
@@ -101,6 +105,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Quality
         elseif ($divisi == 8) {
             $items = 
                 DB::table('overtimes')
@@ -110,6 +115,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Purchasing
         elseif ($divisi == 9) {
             $items = 
                 DB::table('overtimes')
@@ -119,6 +125,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //PPC
         elseif ($divisi == 10) {
             $items = 
                 DB::table('overtimes')
@@ -128,6 +135,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = 
                 DB::table('overtimes')
@@ -136,6 +144,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Accounting
         elseif ($divisi == 1) {
             $items = 
                 DB::table('overtimes')
@@ -190,6 +199,7 @@ class OvertimesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = 
                 DB::table('overtimes')
@@ -200,6 +210,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         } 
+        //PDC
         elseif ($divisi == 19) {
             $items = 
                 DB::table('overtimes')
@@ -210,6 +221,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //IC
         elseif ($divisi == 2) {
             $items = 
                 DB::table('overtimes')
@@ -220,6 +232,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Engineering
         elseif ($divisi == 7) {
             $items = 
                 DB::table('overtimes')
@@ -230,6 +243,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Quality
         elseif ($divisi == 8) {
             $items = 
                 DB::table('overtimes')
@@ -240,6 +254,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Purchasing
         elseif ($divisi == 9) {
             $items = 
                 DB::table('overtimes')
@@ -250,6 +265,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //PPC
         elseif ($divisi == 10) {
             $items = 
                 DB::table('overtimes')
@@ -260,6 +276,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = 
                 DB::table('overtimes')
@@ -301,6 +318,7 @@ class OvertimesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = 
                 DB::table('overtimes')
@@ -311,6 +329,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         } 
+        //PDC
         elseif ($divisi == 19) {
             $items = 
                 DB::table('overtimes')
@@ -321,6 +340,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //IC
         elseif ($divisi == 2) {
             $items = 
                 DB::table('overtimes')
@@ -331,6 +351,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Engineering
         elseif ($divisi == 7) {
             $items = 
                 DB::table('overtimes')
@@ -341,6 +362,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Quality
         elseif ($divisi == 8) {
             $items = 
                 DB::table('overtimes')
@@ -351,6 +373,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //Purchasing
         elseif ($divisi == 9) {
             $items = 
                 DB::table('overtimes')
@@ -361,6 +384,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //PPC
         elseif ($divisi == 10) {
             $items = 
                 DB::table('overtimes')
@@ -371,6 +395,7 @@ class OvertimesController extends Controller
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])->get();
         }
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = 
                 DB::table('overtimes')
@@ -435,39 +460,37 @@ class OvertimesController extends Controller
         $akhir              = $request->input('akhir');
 
         // $itemcover = 
-                // DB::table('overtimes')
-                // ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
-                // ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
-                // ->join('areas', 'areas.id', '=', 'employees.areas_id')
-                // ->join('positions', 'positions.id', '=', 'employees.positions_id')
-                // ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
-                
-                // ->where('overtimes.acc_hrd','<>',NULL)
-                // ->where('overtimes.employees_id',$employees_id)
-                // ->where('overtimes.deleted_at',NULL)
-                // ->whereBetween('tanggal_lembur', [$awal, $akhir])
-                // ->first();
+        // DB::table('overtimes')
+        // ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
+        // ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+        // ->join('areas', 'areas.id', '=', 'employees.areas_id')
+        // ->join('positions', 'positions.id', '=', 'employees.positions_id')
+        // ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
+        
+        // ->where('overtimes.acc_hrd','<>',NULL)
+        // ->where('overtimes.employees_id',$employees_id)
+        // ->where('overtimes.deleted_at',NULL)
+        // ->whereBetween('tanggal_lembur', [$awal, $akhir])
+        // ->first();
 
-                $itemcover =     Employees::with([
-                                'areas',
-                                'divisions',
-                                'positions',
-                                ])->where('nik_karyawan',$employees_id)->first();
+        $itemcover      =   Employees::with([
+                            'areas',
+                            'divisions',
+                            'positions',
+                            ])->where('nik_karyawan',$employees_id)->first();
 
-                $itemcoversatu =     HistorySalaries::with([
-                                'employees'
-                                ])->where('employees_id',$employees_id)->first();
+        $itemcoversatu  =   HistorySalaries::with([
+                            'employees'
+                            ])->where('employees_id',$employees_id)->first();
 
-                $itemcoverdua =     Overtimes::with([
-                                'employees',
-                                ])
-                                ->where('acc_hrd','<>',NULL)
-                                ->where('employees_id',$employees_id)
-                                ->where('deleted_at',NULL)
-                                ->whereBetween('tanggal_lembur', [$awal, $akhir])
-                                ->first();
-
-                // dd($itemcoversatu);
+        $itemcoverdua   =   Overtimes::with([
+                            'employees',
+                            ])
+                            ->where('acc_hrd','<>',NULL)
+                            ->where('employees_id',$employees_id)
+                            ->where('deleted_at',NULL)
+                            ->whereBetween('tanggal_lembur', [$awal, $akhir])
+                            ->first();
 
         // $items = 
         //         DB::table('overtimes')
@@ -719,7 +742,6 @@ class OvertimesController extends Controller
         }
 
         return view ('pages.admin.overtimes.slipdepartmenovertime');
-        
     }
 
     public function hasil_slipdepartment_overtime(SlipDepartmentOvertimesRequest $request)
@@ -753,8 +775,6 @@ class OvertimesController extends Controller
         else {
             abort(403);
         }
-
-        // dd($divisi);
         
         $itemcovers = 
                     DB::table('overtimes')
@@ -1012,8 +1032,6 @@ class OvertimesController extends Controller
             $this->fpdf->Cell(9);
             $this->fpdf->Cell(5.4, 0.2, '('.$itemcover->nama_karyawan.')', 0, 0, 'L');
 
-
-
             $this->fpdf->Ln(0.4);
         }
 
@@ -1152,7 +1170,6 @@ class OvertimesController extends Controller
             $this->fpdf->Ln(0.4);
             $this->fpdf->SetFont('Arial', '', '9');
             $this->fpdf->Cell(0.1);
-            // $this->fpdf->Cell(10, 1, $area." - " . $penempatan . "", 0, 0, 'L');
 
             $this->fpdf->SetFont('Arial', 'B', '10');
             $this->fpdf->Ln(0.4);
@@ -1297,7 +1314,7 @@ class OvertimesController extends Controller
             $this->fpdf->Cell(0.1);
             $this->fpdf->Cell(5, 0.2, 'Mengetahui', 0, 0, 'L');
 
-            $this->fpdf->Cell(6, 0.2, 'Tangerang, ........................................,2020', 0, 0, 'L');
+            $this->fpdf->Cell(6, 0.2, 'Tangerang, ........................................,2022', 0, 0, 'L');
 
             $this->fpdf->Cell(3);
             $this->fpdf->Cell(5.4, 0.2, 'Diperiksa', 0, 0, 'L');
@@ -1321,7 +1338,7 @@ class OvertimesController extends Controller
 
             $this->fpdf->Ln(0.1);
             $this->fpdf->Cell(0.1);
-            $this->fpdf->Cell(5, 0.2, '( Deputy General Manager Accounting )', 0, 0, 'L');
+            $this->fpdf->Cell(5, 0.2, '( Deputy General Manager Accounting, IC, Finance, IT )', 0, 0, 'L');
 
             $this->fpdf->Cell(9);
             $this->fpdf->Cell(5, 0.2, '( Manager HRD - GA )', 0, 0, 'L');
@@ -1349,9 +1366,8 @@ class OvertimesController extends Controller
         $nik            = auth()->user()->nik;
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
-        
-        
 
+        //Produksi
         if ($divisi == 11) {
             $items = Employees::with([
                 'companies',
@@ -1360,6 +1376,7 @@ class OvertimesController extends Controller
                 'positions'
                 ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [11])->get();
         }
+        //PDC
         elseif ($divisi == 19) {
             $items = Employees::with([
                 'companies',
@@ -1368,6 +1385,7 @@ class OvertimesController extends Controller
                 'positions'
                 ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [19,20,21,22])->get();
         } 
+        //IC
         elseif ($divisi == 2) {
             $items = Employees::with([
                 'companies',
@@ -1376,6 +1394,7 @@ class OvertimesController extends Controller
                 'positions'
                 ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [2])->get();
         } 
+        //Engineering
         elseif ($divisi == 7) {
             $items = Employees::with([
                 'companies',
@@ -1384,6 +1403,7 @@ class OvertimesController extends Controller
                 'positions'
                 ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [7])->get();
         } 
+        //Quality
         elseif ($divisi == 8) {
             $items = Employees::with([
                 'companies',
@@ -1392,6 +1412,7 @@ class OvertimesController extends Controller
                 'positions'
                 ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [8])->get();
         } 
+        //Purchasing
         elseif ($divisi == 9) {
             $items = Employees::with([
                 'companies',
@@ -1400,6 +1421,7 @@ class OvertimesController extends Controller
                 'positions'
                 ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [9])->get();
         } 
+        //PPC
         elseif ($divisi == 10) {
             $items = Employees::with([
                 'companies',
@@ -1408,6 +1430,7 @@ class OvertimesController extends Controller
                 'positions'
                 ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [12,13,14,15,18])->get();
         } 
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = Employees::with([
                 'companies',
@@ -1435,8 +1458,6 @@ class OvertimesController extends Controller
     public function store(OvertimesRequest $request)
     {
         //
-        // $nik_karyawan   = $request->input('employees_id');
-        // $item           = Employees::where('nik_karyawan', $nik_karyawan)->first();
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
             abort(403);
         }
@@ -1451,12 +1472,7 @@ class OvertimesController extends Controller
         $uang_makan_lembur  = $request->input('uang_makan_lembur');
         $jam_lembur         = $jam_pulang-$jam_istirahat-$jam_masuk;
 
-        // if ($jam_lembur >= "3") {
-        //     $uang_makan_lembur  = "12500";
-        // } else {
-        //     $uang_makan_lembur  = "0";
-        // }
-
+        //Rumus Lembur
         if ($jenis_lembur == "Libur") {
 
             $jam_pertama = 0;
@@ -1537,12 +1553,12 @@ class OvertimesController extends Controller
         $jumlah_jam_kedua       = $jam_kedua * 2;
         $jumlah_jam_ketiga      = $jam_ketiga * 3;
         $jumlah_jam_keempat     = $jam_keempat * 4;
+        //Rumus Lembur
 
         foreach ($request->input('employees_id') as $key=>$name) {
 
             $insert =[
                 'employees_id'          => $request->input('employees_id')[$key],
-                // 'upah_lembur_perjam'    => $items->upah_lembur_perjam,
                 'jam_masuk'             => $jam_masuk,
                 'jam_istirahat'         => $jam_istirahat,
                 'jam_pulang'            => $jam_pulang,
@@ -1590,7 +1606,6 @@ class OvertimesController extends Controller
         ]);
 
         Alert::success('Success Approve Data Lembur','Oleh '.auth()->user()->name);
-        //Redirect
         return redirect()->route('overtimes.index');
     }
 
@@ -1648,6 +1663,7 @@ class OvertimesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = 
                 DB::table('overtimes')
@@ -1661,6 +1677,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [11])
                 ->get();
         }
+        //PDC
         elseif ($divisi == 19) {
             $items = 
                 DB::table('overtimes')
@@ -1674,6 +1691,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [19,20,21,22])
                 ->get();
         } 
+        //IC
         elseif ($divisi == 2) {
             $items = 
                 DB::table('overtimes')
@@ -1687,6 +1705,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [2])
                 ->get();
         } 
+        //Engineering
         elseif ($divisi == 7) {
             $items = 
                 DB::table('overtimes')
@@ -1700,6 +1719,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [7])
                 ->get();
         } 
+        //Quality
         elseif ($divisi == 8) {
             $items = 
                 DB::table('overtimes')
@@ -1713,6 +1733,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [8])
                 ->get();
         } 
+        //Purchasing
         elseif ($divisi == 9) {
             $items = 
                 DB::table('overtimes')
@@ -1726,6 +1747,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [9])
                 ->get();
         } 
+        //PPC
         elseif ($divisi == 10) {
             $items = 
                 DB::table('overtimes')
@@ -1739,6 +1761,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [12,13,14,15,18])
                 ->get();
         } 
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = 
                 DB::table('overtimes')
@@ -1762,7 +1785,6 @@ class OvertimesController extends Controller
             ]);
         } else {
             Alert::error('Data Overtimes Karyawan Sudah Di Approve Semua');
-            //Redirect
             return redirect()->route('overtimes.index');
         }
 
@@ -1831,12 +1853,7 @@ class OvertimesController extends Controller
         $uang_makan_lembur  = $request->input('uang_makan_lembur');
         $jam_lembur         = $jam_pulang-$jam_istirahat-$jam_masuk;
 
-        // if ($jam_lembur >= "3") {
-        //     $uang_makan_lembur  = "12500";
-        // } else {
-        //     $uang_makan_lembur  = "0";
-        // }
-
+        //Rumus Lembur
         if ($jenis_lembur == "Libur") {
 
             $jam_pertama = 0;
@@ -1917,6 +1934,7 @@ class OvertimesController extends Controller
         $jumlah_jam_kedua       = $jam_kedua * 2;
         $jumlah_jam_ketiga      = $jam_ketiga * 3;
         $jumlah_jam_keempat     = $jam_keempat * 4;
+        //Rumus Lembur
 
         $overtimes              = Overtimes::where('id', $id)->first();
         $overtimes->update([
@@ -1960,6 +1978,7 @@ class OvertimesController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = 
                 DB::table('overtimes')
@@ -1973,6 +1992,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [11])
                 ->get();
         }
+        //PDC
         elseif ($divisi == 19) {
             $items = 
                 DB::table('overtimes')
@@ -1986,6 +2006,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [19,20,21,22])
                 ->get();
         } 
+        //IC
         elseif ($divisi == 2) {
             $items = 
                 DB::table('overtimes')
@@ -1999,6 +2020,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [2])
                 ->get();
         } 
+        //Engineering
         elseif ($divisi == 7) {
             $items = 
                 DB::table('overtimes')
@@ -2012,6 +2034,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [7])
                 ->get();
         } 
+        //Quality
         elseif ($divisi == 8) {
             $items = 
                 DB::table('overtimes')
@@ -2025,6 +2048,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [8])
                 ->get();
         } 
+        //Purchasing
         elseif ($divisi == 9) {
             $items = 
                 DB::table('overtimes')
@@ -2038,6 +2062,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [9])
                 ->get();
         } 
+        //PPC
         elseif ($divisi == 10) {
             $items = 
                 DB::table('overtimes')
@@ -2051,6 +2076,7 @@ class OvertimesController extends Controller
                 ->whereIn('divisions_id', [12,13,14,15,18])
                 ->get();
         } 
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = 
                 DB::table('overtimes')

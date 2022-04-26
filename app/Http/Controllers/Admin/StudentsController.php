@@ -29,54 +29,63 @@ class StudentsController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = Students::with([
                 'schools',
                 'divisions'
                 ])->whereIn('divisions_id', [11, 19, 20,21])->get();
         }
+        //PDC
         elseif ($divisi == 19) {
             $items = Students::with([
                 'schools',
                 'divisions'
                 ])->whereIn('divisions_id', [19, 20,21])->get();
         } 
+        //IC
         elseif ($divisi == 2) {
             $items = Students::with([
                 'schools',
                 'divisions'
                 ])->whereIn('divisions_id', [2])->get();
         } 
+        //Engineering
         elseif ($divisi == 7) {
             $items = Students::with([
                 'schools',
                 'divisions'
                 ])->whereIn('divisions_id', [7])->get();
         } 
+        //Quality
         elseif ($divisi == 8) {
             $items = Students::with([
                 'schools',
                 'divisions'
                 ])->whereIn('divisions_id', [8])->get();
         } 
+        //Purchasing
         elseif ($divisi == 9) {
             $items = Students::with([
                 'schools',
                 'divisions'
                 ])->whereIn('divisions_id', [9])->get();
         } 
+        //PPC
         elseif ($divisi == 10) {
             $items = Students::with([
                 'schools',
                 'divisions'
                 ])->whereIn('divisions_id', [12,13,14,15,18])->get();
         } 
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = Students::with([
                 'schools',
                 'divisions'
                 ])->get();
         } 
+        //Accounting
         elseif ($divisi == 1) {
             $items = Students::with([
                 'schools',

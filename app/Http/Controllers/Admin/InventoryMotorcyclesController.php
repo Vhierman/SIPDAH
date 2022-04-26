@@ -127,11 +127,11 @@ class InventoryMotorcyclesController extends Controller
             'positions'
             ])->where('nik_karyawan', $nikkaryawan)->first();
         
+        //Create Nomor Dokumen
         $nik            = substr($nikkaryawan, 12);
         $mytime         = $item->tanggal_penyerahan_motor;
         $bulan          = substr($mytime, 5, -3);
         $tahun          = substr($mytime, 0,4);
-
         if ($bulan == 1) {
             $romawi = 'I';
         }
@@ -171,6 +171,7 @@ class InventoryMotorcyclesController extends Controller
         else {
             $romawi = 'SALAH';
         }
+        //Create Nomor Dokumen
 
         $this->fpdf = new FPDF('P', 'mm', 'A4');
         $this->fpdf->AddPage();

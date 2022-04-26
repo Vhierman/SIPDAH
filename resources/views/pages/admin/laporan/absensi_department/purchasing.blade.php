@@ -75,7 +75,7 @@
                 type: 'column'
             },
             title: {
-                text: 'LAPORAN ABSENSI PURCHASING'
+                text: 'LAPORAN ABSENSI PURCHASING TAHUN 2022'
             },
             subtitle: {
                 text: ''

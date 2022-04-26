@@ -53,6 +53,7 @@ class HistoryTrainingEksternalsController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -63,6 +64,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->where('history_training_eksternals.deleted_at',NULL)
             ->get();
         } 
+        //IC
         elseif($divisi == 2){
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -73,6 +75,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->where('history_training_eksternals.deleted_at',NULL)
             ->get();
         }
+        //Engineering
         elseif($divisi == 7){
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -83,6 +86,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->where('history_training_eksternals.deleted_at',NULL)
             ->get();
         }
+        //Quality
         elseif($divisi == 8){
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -93,6 +97,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->where('history_training_eksternals.deleted_at',NULL)
             ->get();
         }
+        //Purchasing
         elseif($divisi == 9){
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -103,6 +108,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->where('history_training_eksternals.deleted_at',NULL)
             ->get();
         }
+        //PPC
         elseif($divisi == 10){
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -113,6 +119,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->where('history_training_eksternals.deleted_at',NULL)
             ->get();
         }
+        //PDC
         elseif($divisi == 19){
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -123,6 +130,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->where('history_training_eksternals.deleted_at',NULL)
             ->get();
         }
+        //HRD-GA
         elseif($divisi == 4){
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -289,6 +297,7 @@ class HistoryTrainingEksternalsController extends Controller
         $caridivisi     = Employees::all()->where('nik_karyawan', $nik)->first();
         $divisi         = $caridivisi->divisions_id;
 
+        //Produksi
         if ($divisi == 11) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -304,6 +313,7 @@ class HistoryTrainingEksternalsController extends Controller
             ])
             ->get();
         }
+        //IC
         elseif ($divisi == 2) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -319,6 +329,7 @@ class HistoryTrainingEksternalsController extends Controller
             ])
             ->get();
         } 
+        //Engineering
         elseif ($divisi == 7) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -334,6 +345,7 @@ class HistoryTrainingEksternalsController extends Controller
             ])
             ->get();
         } 
+        //Quality
         elseif ($divisi == 8) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -349,6 +361,7 @@ class HistoryTrainingEksternalsController extends Controller
             ])
             ->get();
         } 
+        //Purchasing
         elseif ($divisi == 9) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -364,6 +377,7 @@ class HistoryTrainingEksternalsController extends Controller
             ])
             ->get();
         } 
+        //PPC
         elseif ($divisi == 10) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -379,6 +393,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->whereIn('divisions_id', [12,13,14,15,18])
             ->get();
         } 
+        //PDC
         elseif ($divisi == 19) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')
@@ -394,6 +409,7 @@ class HistoryTrainingEksternalsController extends Controller
             ->whereIn('divisions_id', [19,20,21,22])
             ->get();
         } 
+        //HRD-GA
         elseif ($divisi == 4) {
             $items = DB::table('history_training_eksternals')
             ->join('employees', 'employees.nik_karyawan', '=', 'history_training_eksternals.employees_id')

@@ -30,12 +30,12 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
         return $employees ;
     }
     public function map($employees): array
-    {
-        
+    {    
         $items = [];
         foreach($employees as $item){
             array_push($items);
 
+            //Rumus Mengambil status PTKP (tk,k/0,k1,k/2,k3)
             $hitungkeluarga = HistoryFamilies::with([
                 'employees'
                 ])->where('employees_id', $employees->nik_karyawan)->count();
@@ -52,11 +52,12 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
             else{
                 $statuspajak = "k/";
             }
-
             $statusptkp = $statuspajak.$jumlahkeluarga;
+            //Rumus Mengambil status PTKP (tk,k/0,k1,k/2,k3)
 
         }
 
+        //Menambahkan ' di depan huruf agar ketika di export excell tidak berantakan
         $nik_karyawan           = "'".$employees->nik_karyawan;
         $nomor_kartu_keluarga   = "'".$employees->nomor_kartu_keluarga;
         $nomor_jkn              = "'".$employees->nomor_jkn;
@@ -67,16 +68,17 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
         $nomor_rekening         = "'".$employees->nomor_rekening;
         $nomor_handphone        = "'".$employees->nomor_handphone;
         $nomor_absen            = "'".$employees->nomor_absen;
-        
-        $tanggal_akhir_kerja = $employees->tanggal_akhir_kerja;
+        //Menambahkan ' di depan huruf agar ketika di export excell tidak berantakan
 
+        //Status jika Karyawan Tetap Maka Tanggal Akhir Kerja = PKWTT
+        $tanggal_akhir_kerja = $employees->tanggal_akhir_kerja;
         if ($employees->status_kerja == "PKWTT") {
             $tanggalakhirkerja = "PKWTT";
         } else {
             $tanggalakhirkerja = \Carbon\Carbon::parse($tanggal_akhir_kerja)->isoformat('DD-MM-Y');
         }
+        //Status jika Karyawan Tetap Maka Tanggal Akhir Kerja = PKWTT
         
-
         return [
             [
                 $employees->id,
@@ -125,6 +127,8 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
         ];
 
     }
+
+    //Pengaturan Heading/JUDUL Excell
     public function headings(): array
     {
         return [

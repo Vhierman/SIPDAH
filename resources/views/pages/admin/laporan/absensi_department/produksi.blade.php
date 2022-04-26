@@ -75,7 +75,7 @@
                 type: 'column'
             },
             title: {
-                text: 'LAPORAN ABSENSI PRODUKSI'
+                text: 'LAPORAN ABSENSI PRODUKSI TAHUN 2022'
             },
             subtitle: {
                 text: ''

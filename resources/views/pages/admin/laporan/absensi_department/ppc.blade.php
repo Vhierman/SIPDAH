@@ -75,7 +75,7 @@
                 type: 'column'
             },
             title: {
-                text: 'LAPORAN ABSENSI PPC'
+                text: 'LAPORAN ABSENSI PPC TAHUN 2022'
             },
             subtitle: {
                 text: ''

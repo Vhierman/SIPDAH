@@ -75,7 +75,7 @@
                 type: 'column'
             },
             title: {
-                text: 'LAPORAN ABSENSI QUALITY'
+                text: 'LAPORAN ABSENSI QUALITY TAHUN 2022'
             },
             subtitle: {
                 text: ''

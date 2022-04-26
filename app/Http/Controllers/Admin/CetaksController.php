@@ -44,13 +44,12 @@ class CetaksController extends Controller
         $workinghours   = WorkingHours::all();
         $areas          = Areas::all();
 
+        //Create Nomor Dokumen
         $nikkaryawan    = $item->nik_karyawan;
         $nik            = substr($nikkaryawan, 12);
-
         $mytime         = Carbon::now();
         $bulan          = substr($mytime, 5, -12);
         $tahun          = substr($mytime, 0,4);
-
         if ($bulan == 1) {
             $romawi = 'I';
         }
@@ -90,6 +89,7 @@ class CetaksController extends Controller
         else {
             $romawi = 'SALAH';
         }
+        //Create Nomor Dokumen
 
         $this->fpdf = new FPDF('P', 'mm', 'A4');
         $this->fpdf->setTopMargin(2);
@@ -111,7 +111,6 @@ class CetaksController extends Controller
         $this->fpdf->Ln(6);
         $this->fpdf->SetFont('Arial', 'B', '14');
         $this->fpdf->Cell(-5);
-        // $this->fpdf->Cell(200, 10, 'No.' . $nik . '/HRD/PK/' . bulanromawi($bulan) . '/' . $tahun . '.', 0, 0, 'C');
         $this->fpdf->Cell(200, 10, 'No.' . $nik . '/HRD/PK/'. $romawi . '/'.$tahun.'', 0, 0, 'C');
         $this->fpdf->Ln(30);
 
@@ -227,11 +226,11 @@ class CetaksController extends Controller
         $workinghours       = WorkingHours::all();
         $areas              = Areas::all();
         
+        //Create Nomor Dokumen
         $nik                = substr($nikkaryawan, 12);
         $mytime             = Carbon::now();
         $bulan              = substr($mytime, 5, -12);
         $tahun              = substr($mytime, 0,4);
-
         if ($bulan == 1) {
             $romawi = 'I';
         }
@@ -271,7 +270,9 @@ class CetaksController extends Controller
         else {
             $romawi = 'SALAH';
         }
+        //Create Nomor Dokumen
 
+        //Jika Pria Maka Sdr Jika Wanita Maka Sdri
         if ($karyawan->jenis_kelamin == "Pria") {
             $saudara = "Sdr.";
         } elseif ($karyawan->jenis_kelamin == "Wanita") {
@@ -742,6 +743,7 @@ class CetaksController extends Controller
             $this->fpdf->Output();
             exit;
         }
+
         //Jika Karyawan Tetap
         elseif ($statuskontrakkerja == "PKWTT") 
         {
@@ -918,6 +920,7 @@ class CetaksController extends Controller
             $this->fpdf->Output();
             exit;
         } 
+
         //Jika Karyawan Harian
         elseif ($statuskontrakkerja == "Harian") 
         {
@@ -1629,6 +1632,7 @@ class CetaksController extends Controller
             $this->fpdf->Output();
             exit;
         } 
+
         //Jika Karyawan Outsourcing
         else {
             $this->fpdf = new FPDF('P', 'mm', 'A4');
@@ -1667,15 +1671,13 @@ class CetaksController extends Controller
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
+
         $awal               = $request->input('awal_kontrak');
         $akhir              = $request->input('akhir_kontrak');
-        // $penilaiankaryawans = Employees::whereBetween('tanggal_akhir_kerja', [$awal, $akhir])->get();
-        // dd($penilaiankaryawans);
         $penilaiankaryawans = Employees::with([
             'divisions',
             'positions'
             ])->whereBetween('tanggal_akhir_kerja', [$awal, $akhir])->get();
-        
         
         $this->fpdf = new FPDF('P', 'mm', 'A4');
         $this->fpdf->setTopMargin(2);
@@ -1996,7 +1998,6 @@ class CetaksController extends Controller
             $this->fpdf->Output();
             exit;
 
-
     }
 
     public function pkwt_harian()
@@ -2020,6 +2021,7 @@ class CetaksController extends Controller
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
+
         $awal               = $request->input('awal_kontrak');
         $akhir              = $request->input('akhir_kontrak');
         
@@ -2044,14 +2046,11 @@ class CetaksController extends Controller
 
                 foreach ($items as $item) {
                  
-                
-
                 $nik            = substr($pkwtharian->employees_id, 12);
                 $mytime         = $pkwtharian->tanggal_awal_kontrak;
                 $bulan          = substr($mytime, 5, -3);
                 $tahun          = substr($mytime, 0,4);
 
-        
                 if ($bulan == 1) {
                     $romawi = 'I';
                 }
@@ -2305,14 +2304,10 @@ class CetaksController extends Controller
                 $this->fpdf->SetFont('Arial', 'B', '11');
                 $this->fpdf->Cell(36, 6, 'PIHAK KEDUA.', 0, 0, 'L');
         
-        
-        
                 $this->fpdf->Ln(100);
-        
                 $this->fpdf->Ln(50);
                 $this->fpdf->Cell(20);
                 $this->fpdf->Cell(170, 5, '', 0, 0, 'C');
-        
         
                 $this->fpdf->Ln(20);
                 $this->fpdf->SetFont('Arial', 'B', '11');
@@ -2486,13 +2481,10 @@ class CetaksController extends Controller
                 $this->fpdf->Cell(20);
                 $this->fpdf->Cell(170, 5, 'kontrak kerja berakhir.', 0, 0, 'L');
         
-        
                 $this->fpdf->Ln(100);
-        
                 $this->fpdf->Ln(50);
                 $this->fpdf->Cell(20);
                 $this->fpdf->Cell(170, 5, '', 0, 0, 'C');
-        
         
                 $this->fpdf->Ln(20);
                 $this->fpdf->SetFont('Arial', 'B', '11');
@@ -2794,7 +2786,6 @@ class CetaksController extends Controller
             }
             $this->fpdf->Output();
             exit;
-
     }
 
     public function tampil_pkwt_kontrak(CetakRequest $request)
@@ -2811,8 +2802,6 @@ class CetaksController extends Controller
             ->whereBetween('tanggal_akhir_kontrak', [$awal, $akhir])
             ->orderBy('tanggal_akhir_kontrak', 'ASC')->get();
             
-       
-
             $this->fpdf = new FPDF('P', 'mm', 'A4');
             $this->fpdf->AddPage();
             
@@ -2829,14 +2818,11 @@ class CetaksController extends Controller
                 
                 foreach ($salaries as $salary) {
                 foreach ($items as $item) {
-                 
-                
-
+                //Create Nomor Dokumen
                 $nik            = substr($pkwtkontrak->employees_id, 12);
                 $mytime         = $pkwtkontrak->tanggal_awal_kontrak;
                 $bulan          = substr($mytime, 5, -3);
                 $tahun          = substr($mytime, 0,4);
-
         
                 if ($bulan == 1) {
                     $romawi = 'I';
@@ -2877,6 +2863,7 @@ class CetaksController extends Controller
                 else {
                     $romawi = 'SALAH';
                 }
+                //Create Nomor Dokumen
 
                 $this->fpdf->SetFont('Arial', 'BU', '10');
                 $this->fpdf->Cell(190, 10, 'PERJANJIAN KERJA WAKTU TERTENTU', 0, 0, 'C');

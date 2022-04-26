@@ -66,9 +66,7 @@ class InventoryLaptopsController extends Controller
 
         return view ('pages.admin.inventory-laptops.create',[
             'items'     => $items
-        ]);
-        
-        
+        ]);   
     }
 
     /**
@@ -124,11 +122,11 @@ class InventoryLaptopsController extends Controller
             'positions'
             ])->where('nik_karyawan', $nikkaryawan)->first();
         
+        //Create Nomor Dokumen
         $nik            = substr($nikkaryawan, 12);
         $mytime         = $item->tanggal_penyerahan_laptop;
         $bulan          = substr($mytime, 5, -3);
         $tahun          = substr($mytime, 0,4);
-
         if ($bulan == 1) {
             $romawi = 'I';
         }
@@ -168,6 +166,7 @@ class InventoryLaptopsController extends Controller
         else {
             $romawi = 'SALAH';
         }
+        //Create Nomor Dokumen
 
         $this->fpdf = new FPDF('P', 'mm', 'A4');
         $this->fpdf->AddPage();

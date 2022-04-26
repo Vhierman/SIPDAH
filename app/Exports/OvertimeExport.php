@@ -73,7 +73,6 @@ class OvertimeExport implements FromCollection, WithHeadings, WithMapping
         } else {
             $tanggalakhirkerja = \Carbon\Carbon::parse($tanggal_akhir_kerja)->isoformat('DD-MM-Y');
         }
-        
 
         return [
             [
