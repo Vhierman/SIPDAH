@@ -74,6 +74,8 @@ Route::prefix('admin')
 
         //Master
         Route::resource('users', 'UsersController');
+        Route::resource('maksimalbpjsketenagakerjaan', 'MaksimalBpjsKetenagakerjaanController');
+        Route::resource('maksimalbpjskesehatan', 'MaksimalBpjsKesehatanController');
         Route::resource('comingsoon', 'ComingsoonController');
         Route::resource('companies', 'CompaniesController');
         Route::resource('divisions', 'DivisionsController');
@@ -158,6 +160,13 @@ Route::prefix('admin')
         Route::post('process/perpanjang_pkwt_harian', 'ProcessController@perpanjang_pkwt_harian')->name('process.perpanjang_pkwt_harian');
         Route::get('process/process_magang', 'ProcessController@process_magang')->name('process.process_magang');
         Route::post('process/hasil_cetak_pkwt_magang', 'ProcessController@hasil_cetak_pkwt_magang')->name('process.hasil_cetak_pkwt_magang');
+        //Salary
+        Route::get('process/process_rekon_salary', 'ProcessController@process_rekon_salary')->name('process.process_rekon_salary');
+        Route::post('process/tampil_rekon_salary', 'ProcessController@tampil_rekon_salary')->name('process.tampil_rekon_salary');
+        Route::post('process/hasil_rekon_salary', 'ProcessController@hasil_rekon_salary')->name('process.hasil_rekon_salary');
+        Route::get('process/export_excell_rekon_salary', 'ProcessController@export_excell_rekon_salary')->name('process.export_excell_rekon_salary');
+        Route::get('process/edit_salary/{employees_id}', 'ProcessController@edit_salary')->name('process.edit_salary');
+        Route::post('process/hasil_edit_salary/{employees_id}', 'ProcessController@hasil_edit_salary')->name('process.hasil_edit_salary');
         //PKWT Kontrak
         Route::get('process/process_pkwt_kontrak', 'ProcessController@process_pkwt_kontrak')->name('process.process_pkwt_kontrak');
         Route::post('process/tampil_pkwt_kontrak', 'ProcessController@tampil_pkwt_kontrak')->name('process.tampil_pkwt_kontrak');
@@ -195,6 +204,7 @@ Route::prefix('admin')
         Route::get('absensi/form_hapus', 'AttendancesController@form_hapus')->name('absensi.form_hapus');
         Route::post('absensi/tampil_hapus', 'AttendancesController@tampil_hapus')->name('absensi.tampil_hapus');
         Route::resource('absensi', 'AttendancesController');
+        
         
         
 });

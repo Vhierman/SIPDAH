@@ -81,6 +81,9 @@ class Employees extends Model
     public function history_salaries() {
         return $this->hasMany(HistorySalaries::class,'employees_id','id');
     }
+    public function rekap_salaries() {
+        return $this->hasMany(RekapSalaries::class,'employees_id','id');
+    }
     public function history_contracts() {
         return $this->hasMany(HistoryContracts::class,'employees_id','id');
     }

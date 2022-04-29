@@ -26,6 +26,8 @@ use App\Models\Admin\HistoryFamilies;
 use App\Models\Admin\InventoryLaptops;
 use App\Models\Admin\InventoryMotorcycles;
 use App\Models\Admin\InventoryCars;
+use App\Models\Admin\MaksimalBpjskesehatans;
+use App\Models\Admin\MaksimalBpjsketenagakerjaans;
 use File;
 use Storage;
 use Alert;
@@ -239,69 +241,385 @@ class EmployeesController extends Controller
         // Input History Positions
 
         // Rumus Gaji
-        $gaji_pokok                         = $request->input('gaji_pokok');
-        $uang_makan                         = $request->input('uang_makan');
-        $uang_transport                     = $request->input('uang_transport');
-        $tunjangan_tugas                    = $request->input('tunjangan_tugas');
-        $tunjangan_pulsa                    = $request->input('tunjangan_pulsa');
-        $tunjangan_jabatan                  = $request->input('tunjangan_jabatan');
+        $gaji_pokok         = $request->input('gaji_pokok');
+        $uang_makan         = $request->input('uang_makan');
+        $uang_transport     = $request->input('uang_transport');
+        $tunjangan_tugas    = $request->input('tunjangan_tugas');
+        $tunjangan_pulsa    = $request->input('tunjangan_pulsa');
+        $tunjangan_jabatan  = $request->input('tunjangan_jabatan');
+
+        $jht                = $request->input('jht');
+        $jp                 = $request->input('jp');
+        $jkk                = $request->input('jkk');
+        $jkm                = $request->input('jkm');
+        $jkn                = $request->input('jkn');
+
+        //Ikut Semua Kepesertaan BPJS Ketenagakerjaan Dan Kesehatan
+        if ($jht != 0 && $jp != 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {       
+            //End Rumus
+            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+            $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+            if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+
+                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jp_perusahaan         = $jumlah_upah*2/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
+                $potongan_jp_karyawan           = $jumlah_upah*1/100;
+            }
+            elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
+            }
+            elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
+                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+    
+                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
+            }
+            else{
+                dd('Salah');
+            }
+            
+            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
+            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+            $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan,0);
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+            $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan,0);
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            //End Rumus
+        } 
+
+        //Tidak Ikut Semua Kepesertaan BPJS Ketenagakerjaan Dan Kesehatan
+        elseif ($jht == 0 && $jp == 0 && $jkk == 0 && $jkm == 0 && $jkn == 0) {
+            
+            //End Rumus
+            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+            $hasil_potongan_bpjsks_perusahaan   = 0;
+            $hasil_potongan_bpjsks_karyawan     = 0;
+            $hasil_potongan_jht_perusahaan      = 0;
+            $hasil_potongan_jp_perusahaan       = 0;
+            $hasil_potongan_jkm_perusahaan      = 0;
+            $hasil_potongan_jkk_perusahaan      = 0;
+            $hasil_potongan_jht_karyawan        = 0;
+            $hasil_potongan_jp_karyawan         = 0;
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            //End Rumus
+        } 
+
+        //Ikut Kepesertaan BPJS Ketenagakerjaan Dan Tidak Ikut Kepesertaan BPJS Kesehatan
+        elseif ($jht != 0 && $jp != 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {
+            //End Rumus
+            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+            $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+            if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jp_perusahaan         = $jumlah_upah*2/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
+                $potongan_jp_karyawan           = $jumlah_upah*1/100;
+            }
+            elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
+            }
+            else{
+                dd('Salah');
+            }
+            
+            $hasil_potongan_bpjsks_perusahaan   = 0;
+            $hasil_potongan_bpjsks_karyawan     = 0;
+            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+            $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan,0);
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+            $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan,0);
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            //End Rumus
+        } 
+
+        //Ikut Kepesertaan BPJS Kesehatan Dan Tidak Ikut Kepesertaan BPJS Ketenagakerjaan 
+        elseif ($jht == 0 && $jp == 0 && $jkk == 0 && $jkm == 0 && $jkn != 0) {
+            //End Rumus
+            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+            $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+            if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+            }
+            elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
+                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+            }
+            else{
+                dd('Salah');
+            }
+            
+            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
+            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+            $hasil_potongan_jht_perusahaan      = 0;
+            $hasil_potongan_jp_perusahaan       = 0;
+            $hasil_potongan_jkm_perusahaan      = 0;
+            $hasil_potongan_jkk_perusahaan      = 0;
+            $hasil_potongan_jht_karyawan        = 0;
+            $hasil_potongan_jp_karyawan         = 0;
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            //End Rumus
+        } 
+
+        //Tidak Ikut JHT Dan JP, Hanya Ikut JKK Dan JKM Dan Ikut Kepesertaan BPJS Kesehatan
+        elseif ($jht == 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {
+            //End Rumus
+            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+            $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+            if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+            }
+            elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+            }
+            elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
+                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+            }
+            else{
+                dd('Salah');
+            }
+            
+            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
+            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+            $hasil_potongan_jht_perusahaan      = 0;
+            $hasil_potongan_jp_perusahaan       = 0;
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+            $hasil_potongan_jht_karyawan        = 0;
+            $hasil_potongan_jp_karyawan         = 0;
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            //End Rumus
+        } 
+
+        //Tidak Ikut JHT, JP, dan BPJS Kesehatan, Hanya Ikut JKK Dan JKM
+        elseif ($jht == 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {       
+            //End Rumus
+            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+            if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {    
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+            }
+            elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+            }
+            else{
+                dd('Salah');
+            }
+            
+            $hasil_potongan_bpjsks_perusahaan   = 0;
+            $hasil_potongan_bpjsks_karyawan     = 0;
+            $hasil_potongan_jht_perusahaan      = 0;
+            $hasil_potongan_jp_perusahaan       = 0;
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+            $hasil_potongan_jht_karyawan        = 0;
+            $hasil_potongan_jp_karyawan         = 0;
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            //End Rumus
+        }
+
+        //Tidak Ikut JP, Hanya Ikut JHT, JKK Dan JKM Dan Ikut Kepesertaan BPJS Kesehatan
+        elseif ($jht != 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {
+            //End Rumus
+            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+            $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+            if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
+            }
+            elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+            }
+            elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
+                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+    
+                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+            }
+            else{
+                dd('Salah');
+            }
+            
+            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
+            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+            $hasil_potongan_jp_perusahaan       = 0;
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+            $hasil_potongan_jp_karyawan         = 0;
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            //End Rumus
+        } 
+
+        //Tidak Ikut JP, dan BPJS Kesehatan, Hanya Ikut JHT, JKK , Dan JKM
+        elseif ($jht != 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {       
+            //End Rumus
+            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+            if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
+            }
+            elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+            }
+            else{
+                dd('Salah');
+            }
+            
+            $hasil_potongan_bpjsks_perusahaan   = 0;
+            $hasil_potongan_bpjsks_karyawan     = 0;
+            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+            $hasil_potongan_jp_perusahaan       = 0;
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+            $hasil_potongan_jp_karyawan         = 0;
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            //End Rumus
+        } 
         
-        $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-        $upah_lembur_perjam                 = $jumlah_upah/173;
-        $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
-
-        $maksimal_upah_bpjs_kesehatan       = 12000000;
-        $maksimal_upah_bpjs_ketenagakerjaan = 9000000;
-        
-        if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
-
-            $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-            $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-
-            $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-            $potongan_jp_perusahaan         = $jumlah_upah*2/100;
-            $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-            $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-            $potongan_jht_karyawan          = $jumlah_upah*2/100;
-            $potongan_jp_karyawan           = $jumlah_upah*1/100;
+        //Kondisi Salah
+        else {
+            dd('Kondisi Salah');
         }
-        elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-            $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-            $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-
-            $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
-            $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-            $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-            $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-            $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-            $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
-        }
-        elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-            $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
-            $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
-
-            $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
-            $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-            $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-            $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-            $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-            $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
-        }
-        else{
-            dd('Salah');
-        }
-
-        $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
-        $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan,0);
-        $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
-        $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
-        $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
-        $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan,0);
-        
-        $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-        $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-
-        $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$potongan_bpjsks_karyawan;
         // Rumus Gaji
 
         // Input History Salary
@@ -315,13 +633,13 @@ class EmployeesController extends Controller
             'tunjangan_jabatan'             => $tunjangan_jabatan,
             'jumlah_upah'                   => $jumlah_upah,
             'upah_lembur_perjam'            => $hasil_upah_lembur_perjam,
-            'potongan_bpjsks_perusahaan'    => $potongan_bpjsks_perusahaan,
+            'potongan_bpjsks_perusahaan'    => $hasil_potongan_bpjsks_perusahaan,
             'potongan_jht_perusahaan'       => $hasil_potongan_jht_perusahaan,
             'potongan_jp_perusahaan'        => $hasil_potongan_jp_perusahaan,
             'potongan_jkm_perusahaan'       => $hasil_potongan_jkm_perusahaan,
             'potongan_jkk_perusahaan'       => $hasil_potongan_jkk_perusahaan,
             'jumlah_bpjstk_perusahaan'      => $jumlah_bpjstk_perusahaan,
-            'potongan_bpjsks_karyawan'      => $potongan_bpjsks_karyawan,
+            'potongan_bpjsks_karyawan'      => $hasil_potongan_bpjsks_karyawan,
             'potongan_jht_karyawan'         => $hasil_potongan_jht_karyawan,
             'potongan_jp_karyawan'          => $hasil_potongan_jp_karyawan,
             'jumlah_bpjstk_karyawan'        => $jumlah_bpjstk_karyawan,
@@ -467,72 +785,387 @@ class EmployeesController extends Controller
         //Jika ingin update Salary, Unlink Coment Berikut
         // $salary                             = HistorySalaries::where('employees_id', $nikkaryawan)->first();
 
-        // Rumus Gaji
-        //Update Gaji
-        // $gaji_pokok                         = $request->input('gaji_pokok');
-        // $uang_makan                         = $request->input('uang_makan');
-        // $uang_transport                     = $request->input('uang_transport');
-        // $tunjangan_tugas                    = $request->input('tunjangan_tugas');
-        // $tunjangan_pulsa                    = $request->input('tunjangan_pulsa');
-        // $tunjangan_jabatan                  = $request->input('tunjangan_jabatan');
+        // // Rumus Gaji
+        // $gaji_pokok         = $request->input('gaji_pokok');
+        // $uang_makan         = $request->input('uang_makan');
+        // $uang_transport     = $request->input('uang_transport');
+        // $tunjangan_tugas    = $request->input('tunjangan_tugas');
+        // $tunjangan_pulsa    = $request->input('tunjangan_pulsa');
+        // $tunjangan_jabatan  = $request->input('tunjangan_jabatan');
+
+        // $jht                = $request->input('jht');
+        // $jp                 = $request->input('jp');
+        // $jkk                = $request->input('jkk');
+        // $jkm                = $request->input('jkm');
+        // $jkn                = $request->input('jkn');
+
+        // //Ikut Semua Kepesertaan BPJS Ketenagakerjaan Dan Kesehatan
+        // if ($jht != 0 && $jp != 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {       
+        //     //End Rumus
+        //     $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+        //     $upah_lembur_perjam                 = $jumlah_upah/173;
+        //     $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+        //     $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+        //     $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+        //     $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+        //     $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+        //     if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+
+        //         $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+        //         $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+        //         $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+        //         $potongan_jp_perusahaan         = $jumlah_upah*2/100;
+        //         $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+        //         $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+        //         $potongan_jht_karyawan          = $jumlah_upah*2/100;
+        //         $potongan_jp_karyawan           = $jumlah_upah*1/100;
+        //     }
+        //     elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+        //         $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+        //         $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+        //         $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //         $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //         $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
+        //     }
+        //     elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
+        //         $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+    
+        //         $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+        //         $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //         $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //         $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
+        //     }
+        //     else{
+        //         dd('Salah');
+        //     }
+            
+        //     $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
+        //     $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+        //     $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+        //     $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan,0);
+        //     $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+        //     $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+        //     $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+        //     $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan,0);
+
+        //     $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+        //     $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+        //     $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+        //     //End Rumus
+        // } 
+
+        // //Tidak Ikut Semua Kepesertaan BPJS Ketenagakerjaan Dan Kesehatan
+        // elseif ($jht == 0 && $jp == 0 && $jkk == 0 && $jkm == 0 && $jkn == 0) {
+            
+        //     //End Rumus
+        //     $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+        //     $upah_lembur_perjam                 = $jumlah_upah/173;
+        //     $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+        //     $hasil_potongan_bpjsks_perusahaan   = 0;
+        //     $hasil_potongan_bpjsks_karyawan     = 0;
+        //     $hasil_potongan_jht_perusahaan      = 0;
+        //     $hasil_potongan_jp_perusahaan       = 0;
+        //     $hasil_potongan_jkm_perusahaan      = 0;
+        //     $hasil_potongan_jkk_perusahaan      = 0;
+        //     $hasil_potongan_jht_karyawan        = 0;
+        //     $hasil_potongan_jp_karyawan         = 0;
+
+        //     $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+        //     $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+        //     $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+        //     //End Rumus
+        // } 
+
+        // //Ikut Kepesertaan BPJS Ketenagakerjaan Dan Tidak Ikut Kepesertaan BPJS Kesehatan
+        // elseif ($jht != 0 && $jp != 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {
+        //     //End Rumus
+        //     $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+        //     $upah_lembur_perjam                 = $jumlah_upah/173;
+        //     $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+        //     $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+        //     $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+        //     $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+        //     $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+        //     if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+        //         $potongan_jp_perusahaan         = $jumlah_upah*2/100;
+        //         $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+        //         $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+        //         $potongan_jht_karyawan          = $jumlah_upah*2/100;
+        //         $potongan_jp_karyawan           = $jumlah_upah*1/100;
+        //     }
+        //     elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+        //         $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //         $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //         $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
+        //     }
+        //     else{
+        //         dd('Salah');
+        //     }
+            
+        //     $hasil_potongan_bpjsks_perusahaan   = 0;
+        //     $hasil_potongan_bpjsks_karyawan     = 0;
+        //     $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+        //     $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan,0);
+        //     $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+        //     $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+        //     $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+        //     $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan,0);
+
+        //     $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+        //     $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+        //     $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+        //     //End Rumus
+        // } 
+
+        // //Ikut Kepesertaan BPJS Kesehatan Dan Tidak Ikut Kepesertaan BPJS Ketenagakerjaan 
+        // elseif ($jht == 0 && $jp == 0 && $jkk == 0 && $jkm == 0 && $jkn != 0) {
+        //     //End Rumus
+        //     $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+        //     $upah_lembur_perjam                 = $jumlah_upah/173;
+        //     $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+        //     $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+        //     $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+        //     $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+        //     $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+        //     if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan) {
+        //         $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+        //         $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+        //     }
+        //     elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
+        //         $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+        //     }
+        //     else{
+        //         dd('Salah');
+        //     }
+            
+        //     $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
+        //     $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+        //     $hasil_potongan_jht_perusahaan      = 0;
+        //     $hasil_potongan_jp_perusahaan       = 0;
+        //     $hasil_potongan_jkm_perusahaan      = 0;
+        //     $hasil_potongan_jkk_perusahaan      = 0;
+        //     $hasil_potongan_jht_karyawan        = 0;
+        //     $hasil_potongan_jp_karyawan         = 0;
+
+        //     $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+        //     $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+        //     $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+        //     //End Rumus
+        // } 
+
+        // //Tidak Ikut JHT Dan JP, Hanya Ikut JKK Dan JKM Dan Ikut Kepesertaan BPJS Kesehatan
+        // elseif ($jht == 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {
+        //     //End Rumus
+        //     $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+        //     $upah_lembur_perjam                 = $jumlah_upah/173;
+        //     $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+        //     $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+        //     $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+        //     $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+        //     $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+        //     if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+        //         $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+        //         $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+        //         $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+        //     }
+        //     elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+        //         $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //     }
+        //     elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
+        //         $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //     }
+        //     else{
+        //         dd('Salah');
+        //     }
+            
+        //     $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
+        //     $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+        //     $hasil_potongan_jht_perusahaan      = 0;
+        //     $hasil_potongan_jp_perusahaan       = 0;
+        //     $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+        //     $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+        //     $hasil_potongan_jht_karyawan        = 0;
+        //     $hasil_potongan_jp_karyawan         = 0;
+
+        //     $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+        //     $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+        //     $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+        //     //End Rumus
+        // } 
+
+        // //Tidak Ikut JHT, JP, dan BPJS Kesehatan, Hanya Ikut JKK Dan JKM
+        // elseif ($jht == 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {       
+        //     //End Rumus
+        //     $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+        //     $upah_lembur_perjam                 = $jumlah_upah/173;
+        //     $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+        //     $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+        //     $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+        //     if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {    
+        //         $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+        //         $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+        //     }
+        //     elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //     }
+        //     else{
+        //         dd('Salah');
+        //     }
+            
+        //     $hasil_potongan_bpjsks_perusahaan   = 0;
+        //     $hasil_potongan_bpjsks_karyawan     = 0;
+        //     $hasil_potongan_jht_perusahaan      = 0;
+        //     $hasil_potongan_jp_perusahaan       = 0;
+        //     $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+        //     $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+        //     $hasil_potongan_jht_karyawan        = 0;
+        //     $hasil_potongan_jp_karyawan         = 0;
+
+        //     $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+        //     $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+        //     $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+        //     //End Rumus
+        // }
+
+        // //Tidak Ikut JP, Hanya Ikut JHT, JKK Dan JKM Dan Ikut Kepesertaan BPJS Kesehatan
+        // elseif ($jht != 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {
+        //     //End Rumus
+        //     $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+        //     $upah_lembur_perjam                 = $jumlah_upah/173;
+        //     $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+        //     $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
+        //     $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+        //     $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
+        //     $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+        //     if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+        //         $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+        //         $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+        //         $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+        //         $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+        //         $potongan_jht_karyawan          = $jumlah_upah*2/100;
+        //     }
+        //     elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
+        //         $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
+    
+        //         $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //         $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //     }
+        //     elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
+        //         $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+    
+        //         $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //         $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //     }
+        //     else{
+        //         dd('Salah');
+        //     }
+            
+        //     $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
+        //     $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+        //     $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+        //     $hasil_potongan_jp_perusahaan       = 0;
+        //     $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+        //     $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+        //     $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+        //     $hasil_potongan_jp_karyawan         = 0;
+
+        //     $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+        //     $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+        //     $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+        //     //End Rumus
+        // } 
+
+        // //Tidak Ikut JP, dan BPJS Kesehatan, Hanya Ikut JHT, JKK , Dan JKM
+        // elseif ($jht != 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {       
+        //     //End Rumus
+        //     $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
+        //     $upah_lembur_perjam                 = $jumlah_upah/173;
+        //     $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
+
+        //     $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+        //     $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
+
+        //     if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+        //         $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+        //         $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+        //         $potongan_jht_karyawan          = $jumlah_upah*2/100;
+        //     }
+        //     elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+        //         $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+        //         $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
+        //         $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+        //         $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+        //     }
+        //     else{
+        //         dd('Salah');
+        //     }
+            
+        //     $hasil_potongan_bpjsks_perusahaan   = 0;
+        //     $hasil_potongan_bpjsks_karyawan     = 0;
+        //     $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+        //     $hasil_potongan_jp_perusahaan       = 0;
+        //     $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
+        //     $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+        //     $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+        //     $hasil_potongan_jp_karyawan         = 0;
+
+        //     $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
+        //     $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
+        //     $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+        //     //End Rumus
+        // } 
         
-        // $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-        // $upah_lembur_perjam                 = $jumlah_upah/173;
-        // $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
-
-        // $maksimal_upah_bpjs_kesehatan       = 12000000;
-        // $maksimal_upah_bpjs_ketenagakerjaan = 9000000;
-        
-        // if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
-
-        //     $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-        //     $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-
-        //     $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-        //     $potongan_jp_perusahaan         = $jumlah_upah*2/100;
-        //     $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-        //     $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-        //     $potongan_jht_karyawan          = $jumlah_upah*2/100;
-        //     $potongan_jp_karyawan           = $jumlah_upah*1/100;
+        // //Kondisi Salah
+        // else {
+        //     dd('Kondisi Salah');
         // }
-        // elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-        //     $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-        //     $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-
-        //     $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
-        //     $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-        //     $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-        //     $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-        //     $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-        //     $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
-        // }
-        // elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-        //     $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
-        //     $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
-
-        //     $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
-        //     $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-        //     $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-        //     $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-        //     $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-        //     $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
-        // }
-        // else{
-        //     dd('Salah');
-        // }
-
-        // $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
-        // $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan,0);
-        // $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
-        // $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
-        // $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
-        // $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan,0);
-        
-        // $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-        // $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-
-        // $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$potongan_bpjsks_karyawan;
-        // Rumus Gaji
+        // // Rumus Gaji
 
         //Update Gaji
         // $salary->update([
@@ -545,13 +1178,13 @@ class EmployeesController extends Controller
         //     'tunjangan_jabatan'             => $tunjangan_jabatan,
         //     'jumlah_upah'                   => $jumlah_upah,
         //     'upah_lembur_perjam'            => $hasil_upah_lembur_perjam,
-        //     'potongan_bpjsks_perusahaan'    => $potongan_bpjsks_perusahaan,
+        //     'potongan_bpjsks_perusahaan'    => $hasil_potongan_bpjsks_perusahaan,
         //     'potongan_jht_perusahaan'       => $hasil_potongan_jht_perusahaan,
         //     'potongan_jp_perusahaan'        => $hasil_potongan_jp_perusahaan,
         //     'potongan_jkm_perusahaan'       => $hasil_potongan_jkm_perusahaan,
         //     'potongan_jkk_perusahaan'       => $hasil_potongan_jkk_perusahaan,
         //     'jumlah_bpjstk_perusahaan'      => $jumlah_bpjstk_perusahaan,
-        //     'potongan_bpjsks_karyawan'      => $potongan_bpjsks_karyawan,
+        //     'potongan_bpjsks_karyawan'      => $hasil_potongan_bpjsks_karyawan,
         //     'potongan_jht_karyawan'         => $hasil_potongan_jht_karyawan,
         //     'potongan_jp_karyawan'          => $hasil_potongan_jp_karyawan,
         //     'jumlah_bpjstk_karyawan'        => $jumlah_bpjstk_karyawan,

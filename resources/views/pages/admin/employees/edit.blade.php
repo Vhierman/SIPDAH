@@ -489,7 +489,43 @@
                                                     aria-label="text" aria-describedby="basic-addon1">
                                             </div>
                                         </div> --}}
+                                        {{-- <div class="form-group mt-2">
+                                            <label for="title" class="form-label">Kepesertaan BPJS Ketenagakerjaan &
+                                                Kesehatan</label>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input class="form-check-input" name="jht" type="hidden" id="inlineCheckbox1"
+                                                value="0">
+                                            <input class="form-check-input" name="jht" type="checkbox" id="inlineCheckbox1"
+                                                value="1" @if ($salary->potongan_jht_perusahaan != 0) checked @endif>
+                                            <label class="form-check-label" for="inlineCheckbox1">JHT</label>
+
+                                            <input class="form-check-input" name="jp" type="hidden" id="inlineCheckbox1"
+                                                value="0">
+                                            <input class="form-check-input" name="jp" type="checkbox" id="inlineCheckbox2"
+                                                value="1" @if ($salary->potongan_jp_perusahaan != 0) checked @endif>
+                                            <label class="form-check-label" for="inlineCheckbox2">JP</label>
+
+                                            <input class="form-check-input" name="jkk" type="hidden" id="inlineCheckbox1"
+                                                value="0">
+                                            <input class="form-check-input" name="jkk" type="checkbox" id="inlineCheckbox3"
+                                                value="1" @if ($salary->potongan_jkk_perusahaan != 0) checked @endif>
+                                            <label class="form-check-label" for="inlineCheckbox3">JKK</label>
+
+                                            <input class="form-check-input" name="jkm" type="hidden" id="inlineCheckbox1"
+                                                value="0">
+                                            <input class="form-check-input" name="jkm" type="checkbox" id="inlineCheckbox4"
+                                                value="1" @if ($salary->potongan_jkm_perusahaan != 0) checked @endif>
+                                            <label class="form-check-label" for="inlineCheckbox4">JKM</label>
+
+                                            <input class="form-check-input" name="jkn" type="hidden" id="inlineCheckbox1"
+                                                value="0">
+                                            <input class="form-check-input" name="jkn" type="checkbox" id="inlineCheckbox5"
+                                                value="1" @if ($salary->potongan_bpjsks_perusahaan != 0) checked @endif>
+                                            <label class="form-check-label" for="inlineCheckbox5">JKN</label>
+                                        </div> --}}
                                     </div>
+
                                     <div class="tab-pane fade" id="foto" role="tabpanel" aria-labelledby="foto-tab">
                                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

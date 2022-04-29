@@ -70,6 +70,11 @@
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('users.index') }}">User</a>
+                            <a class="nav-link" href="{{ route('maksimalbpjskesehatan.index') }}">Maksimal Upah BPJS
+                                Kesehatan</a>
+                            <a class="nav-link" href="{{ route('maksimalbpjsketenagakerjaan.index') }}">Maksimal
+                                Upah BPJS
+                                Ketenagakerjaan</a>
                             <a class="nav-link" href="{{ route('companies.index') }}">Perusahaan</a>
                             <a class="nav-link" href="{{ route('areas.index') }}">Area</a>
                             <a class="nav-link" href="{{ route('divisions.index') }}">Penempatan</a>
@@ -250,6 +255,12 @@
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('overtimes.index') }}">Overtimes</a>
+                        </nav>
+                    </div>
+                    <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('process.process_rekon_salary') }}">Salary</a>
                         </nav>
                     </div>
                 @elseif (Auth::user()->roles == 'LEADER')
