@@ -1000,6 +1000,7 @@ class ProcessController extends Controller
         ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
         ->join('areas', 'areas.id', '=', 'employees.areas_id')
         ->join('positions', 'positions.id', '=', 'employees.positions_id')
+        ->where('history_salaries.deleted_at', '=', null)
         ->get();
 
         $salary = RekapSalaries::where('periode_awal', $awal)->first();

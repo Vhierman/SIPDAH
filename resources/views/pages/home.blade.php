@@ -11,28 +11,28 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ url('frontend/frontend/images/slides/4.jpg') }}" class="d-block w-100" alt="...">
+                    <img src="{{ url('frontend/frontend/images/slides/Slides1.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Some representative placeholder content for the first slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url('frontend/frontend/images/slides/2.jpg') }}" class="d-block w-100" alt="...">
+                    <img src="{{ url('frontend/frontend/images/slides/Slides2.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Second slide label</h5>
                         <p>Some representative placeholder content for the second slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url('frontend/frontend/images/slides/3.jpg') }}" class="d-block w-100" alt="...">
+                    <img src="{{ url('frontend/frontend/images/slides/Slides3.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url('frontend/frontend/images/slides/1.jpg') }}" class="d-block w-100" alt="...">
+                    <img src="{{ url('frontend/frontend/images/slides/Slides4.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Fourth slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
@@ -61,7 +61,7 @@
                         <blockquote class="blockquote mb-0">
                             <h3 data-aos="fade-up"> "PT PRIMA KOMPONEN INDONESIA IS A TRUSTWORTHY COMPANY WITH A STRONG
                                 HISTORY AND EXPERIENCE AS AN OEM IN THIS COUNTRY"</h3>
-                            <p class="patas" data-aos="fade-up">PT Prima Komponen Indonesia was established
+                            <p class="patas" data-aos="fade-down">PT Prima Komponen Indonesia was established
                                 in 2003 as one of the most reliable manufactures in Indonesia. With more than 15 years
                                 of experience in the industry, PT Prima Komponen Indonesia has had a deep knowledge of
                                 local market preference and many experience in handling labour resources, these two
@@ -87,7 +87,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-5 order-lg-2">
                     <div class="p-5">
-                        <img data-aos="fade-down" class="img-fluid rounded-circle"
+                        <img data-aos="zoom-in-up" class="img-fluid rounded-circle"
                             src="{{ url('frontend/frontend/images/visi-misi/image-vision.jpg') }}" alt="">
                     </div>
                 </div>
@@ -104,14 +104,14 @@
             <div class="row align-items-center">
                 <div class="col-lg-5">
                     <div class="p-5">
-                        <img data-aos="fade-down" class="img-fluid rounded-circle"
+                        <img data-aos="zoom-in-up" class="img-fluid rounded-circle"
                             src="{{ url('frontend/frontend/images/visi-misi/image-vission.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-7 heading">
                     <div class="p-5">
-                        <h2 data-aos="fade-down" class="display-4">MISSION</h2>
-                        <p data-aos="fade-down">CUSTOMERS SATISFACTION IS OUR FIRST PRIORITY BY PROVIDING BEST QUALITY
+                        <h2 data-aos="fade-up" class="display-4">MISSION</h2>
+                        <p data-aos="fade-up">CUSTOMERS SATISFACTION IS OUR FIRST PRIORITY BY PROVIDING BEST QUALITY
                             GUARANTEE, COMPETITIVE PRICE, ON-TIME SERVICE, AND CONTINUOUS AFTER-SALES SERVICE AND
                             SUPPORT WITH THE APPLICATION OF QUAALITY SAFETY AND ENVIRONMENTAL MANAGEMENT AS WELL AS OF
                             RISKS AND OPPORTUNITIES IN ALL ASPECTS OF OPERATIONAL AND BUSINESS ACTIVITIES.</p>
@@ -135,12 +135,12 @@
 
                 <!-- Mobile Button-->
                 <form class="form-inline d-sm-block d-md-none">
-                    <h2 data-aos="flip-up" class="mobile justify-content-center">CORE VALUE</h2>
+                    <h2 data-aos="zoom-in-down" class="mobile justify-content-center">CORE VALUE</h2>
                 </form>
                 <!-- End Mobile Button-->
                 <!-- Desktop Button -->
                 <form class="form-inline d-none d-md-block">
-                    <h2 data-aos="flip-up" class="desktop">CORE VALUE</h2>
+                    <h2 data-aos="zoom-in-down" class="desktop">CORE VALUE</h2>
                 </form>
                 <!-- End Desktop Button -->
 

@@ -18,7 +18,7 @@ class DivisionsController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $items = Divisions::all();
@@ -35,7 +35,7 @@ class DivisionsController extends Controller
     public function create()
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         return view('pages.admin.divisions.create');
@@ -50,7 +50,7 @@ class DivisionsController extends Controller
     public function store(DivisionsRequest $request)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $data = $request->all();
@@ -68,7 +68,7 @@ class DivisionsController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -82,7 +82,7 @@ class DivisionsController extends Controller
     public function edit($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $item = Divisions::findOrFail($id);
@@ -102,7 +102,7 @@ class DivisionsController extends Controller
     public function update(DivisionsRequest $request, $id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $data = $request->all();
@@ -121,7 +121,7 @@ class DivisionsController extends Controller
     public function destroy($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $item = Divisions::findOrFail($id);

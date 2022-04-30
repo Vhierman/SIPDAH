@@ -5,7 +5,7 @@ namespace App\Exports;
 use Carbon\Carbon;
 use App\Models\Admin\Employees;
 use App\Models\Admin\Companies;
-use App\Models\Admin\HistoryFamilies;
+use App\Models\Admin\Overtimes;
 use App\Models\Admin\Areas;
 use App\Models\Admin\Divisions;
 use App\Models\Admin\Positions;
@@ -19,152 +19,78 @@ class OvertimeExport implements FromCollection, WithHeadings, WithMapping
     /**
     * @return \Illuminate\Support\Collection
     */
+
+    protected $awal,$akhir,$divisions_id,$status_kerja;
+
+    function __construct($awal,$akhir,$divisions_id,$status_kerja) {
+        $this->awal         = $awal;
+        $this->akhir        = $akhir;
+        $this->divisions_id = $divisions_id;
+        $this->status_kerja = $status_kerja;
+}
+
     public function collection()
     {
-        $employees = Employees::with([
-            'companies',
-            'areas',
-            'divisions',
-            'positions'
-            ])->orderBy('divisions_id')->get();
-        return $employees ;
+        $divisi = '';
+
+        if ($this->divisions_id == 'Produksi') {
+            $divisi = array('11');
+        }
+        elseif ($this->divisions_id == 'Office') {
+            $divisi = array('1','2','3','4','5','6','7','9','10','17');
+        } 
+        elseif ($this->divisions_id == 'Warehouse') {
+            $divisi = array('12','13','14','15','18');
+        } 
+        elseif ($this->divisions_id == 'Quality') {
+            $divisi = array('8');
+        } 
+        elseif ($this->divisions_id == 'PDC') {
+            $divisi = array('19','20','21','22');
+        } 
+        else {
+            abort(403);
+        }
+
+        $overtimes = DB::table('overtimes')
+        ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
+        ->groupBy('employees_id','nama_karyawan','status_kerja')
+        ->select('employees_id','nama_karyawan','status_kerja', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
+        ->whereIn('divisions_id',$divisi)
+        ->where('overtimes.acc_hrd','<>',NULL)
+        ->where('overtimes.deleted_at',NULL)
+        ->where('status_kerja',$this->status_kerja)
+        ->whereBetween('tanggal_lembur', [$this->awal, $this->akhir])
+        ->orderBy('nama_karyawan')
+        ->get();
+
+        return $overtimes ;
     }
-    public function map($employees): array
+
+    public function map($overtimes): array
     {
         
         $items = [];
-        foreach($employees as $item){
+        foreach($overtimes as $item){
             array_push($items);
-
-            $hitungkeluarga = HistoryFamilies::with([
-                'employees'
-                ])->where('employees_id', $employees->nik_karyawan)->count();
-            if ($hitungkeluarga == null) {
-                $jumlahkeluarga = 0;
-            }
-            else{
-                $jumlahkeluarga = $hitungkeluarga-1;
-            }
-
-            if ($employees->status_nikah == "Single") {
-                $statuspajak = "tk/";
-            }
-            else{
-                $statuspajak = "k/";
-            }
-
-            $statusptkp = $statuspajak.$jumlahkeluarga;
-
         }
 
-        $nik_karyawan           = "'".$employees->nik_karyawan;
-        $nomor_kartu_keluarga   = "'".$employees->nomor_kartu_keluarga;
-        $nomor_jkn              = "'".$employees->nomor_jkn;
-        $nomor_jht              = "'".$employees->nomor_jht;
-        $rt                     = "'".$employees->rt;
-        $rw                     = "'".$employees->rw;
-        $nomor_npwp             = "'".$employees->nomor_npwp;
-        $nomor_rekening         = "'".$employees->nomor_rekening;
+        $employees_id   = "'".$overtimes->employees_id;
+        $nama_karyawan  = "'".$overtimes->nama_karyawan;
         
-        $tanggal_akhir_kerja = $employees->tanggal_akhir_kerja;
-
-        if ($employees->status_kerja == "PKWTT") {
-            $tanggalakhirkerja = "PKWTT";
-        } else {
-            $tanggalakhirkerja = \Carbon\Carbon::parse($tanggal_akhir_kerja)->isoformat('DD-MM-Y');
-        }
-
         return [
             [
-                $employees->id,
-                $statusptkp,
-                $employees->companies->id,
-                $employees->companies->nama_perusahaan,
-                $employees->areas->id,
-                $employees->areas->area,
-                $employees->divisions->id,
-                $employees->divisions->penempatan,
-                $employees->positions->id,
-                $employees->positions->jabatan,
-                $nik_karyawan,
-                $employees->nama_karyawan,
-                $employees->email_karyawan,
-                $employees->nomor_handphone,
-                $employees->nomor_absen,
-                $nomor_npwp,
-                $employees->tempat_lahir,
-                \Carbon\Carbon::parse($employees->tanggal_lahir)->isoformat('DD-MM-Y'),
-                $employees->agama,
-                $employees->jenis_kelamin,
-                $employees->pendidikan_terakhir,
-                $employees->golongan_darah,
-                $employees->status_kerja,
-                \Carbon\Carbon::parse($employees->tanggal_mulai_kerja)->isoformat('DD-MM-Y'),
-                $tanggalakhirkerja,
-                $nomor_rekening,
-                $nomor_kartu_keluarga,
-                $employees->status_nikah,
-                $employees->nama_ayah,
-                $employees->nama_ibu,
-                $nomor_jkn,
-                $nomor_jht,
-                $employees->alamat,
-                $employees->rt,
-                $employees->rw,
-                $employees->kelurahan,
-                $employees->kecamatan,
-                $employees->kota,
-                $employees->provinsi,
-                $employees->kode_pos,
-                $items
+                $employees_id,
+                $nama_karyawan,
             ],
-
         ];
 
     }
     public function headings(): array
     {
         return [
-            'ID',
-            'Status Pajak ACC',
-            'Kode Perusahaan',
-            'Perusahaan',
-            'Kode Area',
-            'Area',
-            'Kode Penempatan',
-            'Penempatan',
-            'Kode Jabatan',
-            'Jabatan',
-            'NIK Karyawan',
-            'Nama Karyawan',
-            'Email',
-            'No Handphone',
-            'No Absen',
-            'No NPWP',
-            'Tempat Lahir',
-            'Tanggal Lahir',
-            'Agama',
-            'Jenis Kelamin',
-            'Pendidikan Terakhir',
-            'Golongan Darah',
-            'Status Kerja',
-            'Tanggal Mulai Kerja',
-            'Tanggal Akhir Kerja',
-            'No Rekening',
-            'Nomor KK',
-            'Status Nikah',
-            'Nama Ayah',
-            'Nama Ibu',
-            'No JKN',
-            'No JHT',
-            'Alamat',
-            'RT',
-            'RW',
-            'Kelurahan',
-            'Kecamatan',
-            'Kabupaten/Kota',
-            'Provinsi',
-            'Kode POS'
+            'NIK',
+            'Jam Masuk'
         ];
     }
 }

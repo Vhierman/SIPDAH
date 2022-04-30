@@ -44,14 +44,16 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item">Dashboard</li>
                     <li class="breadcrumb-item">Process</li>
-                    <li class="breadcrumb-item active">Tampil Rekon Salary</li>
+                    <li class="breadcrumb-item active">Tampil Rekap Salary</li>
                 </ol>
 
                 <div class="card shadow">
                     <div class="card-body">
-                        <form action="{{ route('process.hasil_rekon_salary') }}" method="POST" class="d-inline">
+                        <form action="{{ route('reports.export_excell_rekap_salary') }}" method="POST"
+                            class="d-inline">
                             @csrf
                             <div class="form-group">
+
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="awal" readonly
                                         value="{{ $awal }}">
@@ -60,21 +62,13 @@
                                     <input type="hidden" class="form-control" name="akhir" readonly
                                         value="{{ $akhir }}">
                                 </div>
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" name="input_oleh" placeholder="Name"
-                                        value="{{ Auth::user()->name }}">
-                                </div>
 
                                 <div class="d-grid gap-2 mt-3">
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        Rekonsiliasi Gaji Periode
+                                    <button type="submit" class="btn btn-success btn-block">
+                                        Download Excell Rekap Gaji Periode
                                         {{ \Carbon\Carbon::parse($awal)->isoformat('D MMMM Y') }} s/d
                                         {{ \Carbon\Carbon::parse($akhir)->isoformat('D MMMM Y') }}
                                     </button>
-                                    <a href="{{ route('process.export_excell_rekon_salary') }}"
-                                        class="btn btn-success btn-block">
-                                        Download Excell
-                                    </a>
                                     <a href="{{ route('process.process_pkwt_harian') }}" class="btn btn-danger btn-block">
                                         Cancel
                                     </a>
@@ -84,11 +78,10 @@
                     </div>
                 </div>
 
-
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table mr-1"></i>
-                        Data Rekon
+                        Data Rekap Salary
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -120,36 +113,37 @@
                                             <td>{{ number_format($item->take_home_pay) }}</td>
                                             <td align=center>
                                                 <a type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#ViewSalary" onclick="viewdata(
-                                                                                '{{ $item->nik_karyawan }}',
-                                                                                '{{ $item->nama_karyawan }}',
-                                                                                '{{ $item->jabatan }}',
-                                                                                '{{ $item->penempatan }}',
-                                                                                '{{ number_format($item->gaji_pokok) }}',
-                                                                                '{{ number_format($item->uang_makan) }}',
-                                                                                '{{ number_format($item->uang_transport) }}',
-                                                                                '{{ number_format($item->tunjangan_tugas) }}',
-                                                                                '{{ number_format($item->tunjangan_pulsa) }}',
-                                                                                '{{ number_format($item->tunjangan_jabatan) }}',
-                                                                                '{{ number_format($item->jumlah_upah) }}',
-                                                                                '{{ number_format($item->upah_lembur_perjam) }}',
-                                                                                '{{ number_format($item->potongan_bpjsks_perusahaan) }}',
-                                                                                '{{ number_format($item->potongan_jht_perusahaan) }}',
-                                                                                '{{ number_format($item->potongan_jp_perusahaan) }}',
-                                                                                '{{ number_format($item->potongan_jkm_perusahaan) }}',
-                                                                                '{{ number_format($item->potongan_jkk_perusahaan) }}',
-                                                                                '{{ number_format($item->jumlah_bpjstk_perusahaan) }}',
-                                                                                '{{ number_format($item->potongan_bpjsks_karyawan) }}',
-                                                                                '{{ number_format($item->potongan_jht_karyawan) }}',
-                                                                                '{{ number_format($item->potongan_jp_karyawan) }}',
-                                                                                '{{ number_format($item->jumlah_bpjstk_karyawan) }}',
-                                                                                '{{ number_format($item->take_home_pay) }}'
-                                                                                )">
+                                                    data-bs-target="#ViewSalary"
+                                                    onclick="viewdata(
+                                                                                                                                    '{{ $item->nik_karyawan }}',
+                                                                                                                                    '{{ $item->nama_karyawan }}',
+                                                                                                                                    '{{ $item->jabatan }}',
+                                                                                                                                    '{{ $item->penempatan }}',
+                                                                                                                                    '{{ number_format($item->gaji_pokok) }}',
+                                                                                                                                    '{{ number_format($item->uang_makan) }}',
+                                                                                                                                    '{{ number_format($item->uang_transport) }}',
+                                                                                                                                    '{{ number_format($item->tunjangan_tugas) }}',
+                                                                                                                                    '{{ number_format($item->tunjangan_pulsa) }}',
+                                                                                                                                    '{{ number_format($item->tunjangan_jabatan) }}',
+                                                                                                                                    '{{ number_format($item->jumlah_upah) }}',
+                                                                                                                                    '{{ number_format($item->upah_lembur_perjam) }}',
+                                                                                                                                    '{{ number_format($item->potongan_bpjsks_perusahaan) }}',
+                                                                                                                                    '{{ number_format($item->potongan_jht_perusahaan) }}',
+                                                                                                                                    '{{ number_format($item->potongan_jp_perusahaan) }}',
+                                                                                                                                    '{{ number_format($item->potongan_jkm_perusahaan) }}',
+                                                                                                                                    '{{ number_format($item->potongan_jkk_perusahaan) }}',
+                                                                                                                                    '{{ number_format($item->jumlah_bpjstk_perusahaan) }}',
+                                                                                                                                    '{{ number_format($item->potongan_bpjsks_karyawan) }}',
+                                                                                                                                    '{{ number_format($item->potongan_jht_karyawan) }}',
+                                                                                                                                    '{{ number_format($item->potongan_jp_karyawan) }}',
+                                                                                                                                    '{{ number_format($item->jumlah_bpjstk_karyawan) }}',
+                                                                                                                                    '{{ number_format($item->take_home_pay) }}'
+                                                                                                                                    )">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                                 <a href="{{ route('process.edit_salary', $item->employees_id) }}"
-                                                    class="btn btn-success btn-sm">
-                                                    <i class="fa fa-pencil-alt"></i>
+                                                    class="btn btn-info btn-sm">
+                                                    <i class="fa fa-print"></i>
                                                 </a>
                                             </td>
                                         </tr>

@@ -19,7 +19,7 @@ class AreasController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
 
@@ -37,7 +37,7 @@ class AreasController extends Controller
     public function create()
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         
@@ -53,7 +53,7 @@ class AreasController extends Controller
     public function store(AreasRequest $request)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $data = $request->all();
@@ -71,7 +71,7 @@ class AreasController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -86,7 +86,7 @@ class AreasController extends Controller
     public function edit($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $item = Areas::findOrFail($id);
@@ -106,7 +106,7 @@ class AreasController extends Controller
     public function update(AreasRequest $request, $id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $data = $request->all();
@@ -125,7 +125,7 @@ class AreasController extends Controller
     public function destroy($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $item = Areas::findOrFail($id);

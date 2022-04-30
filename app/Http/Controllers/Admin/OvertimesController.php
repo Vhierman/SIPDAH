@@ -14,6 +14,7 @@ use App\Http\Requests\Admin\RekapOvertimesRequest;
 use App\Models\Admin\Overtimes;
 use App\Models\Admin\Employees;
 use App\Models\Admin\HistorySalaries;
+use App\Models\Admin\RekapSalaries;
 use App\Models\Admin\Companies;
 use App\Models\Admin\Areas;
 use App\Models\Admin\Divisions;
@@ -479,10 +480,6 @@ class OvertimesController extends Controller
                             'positions',
                             ])->where('nik_karyawan',$employees_id)->first();
 
-        $itemcoversatu  =   HistorySalaries::with([
-                            'employees'
-                            ])->where('employees_id',$employees_id)->first();
-
         $itemcoverdua   =   Overtimes::with([
                             'employees',
                             ])
@@ -491,7 +488,14 @@ class OvertimesController extends Controller
                             ->where('deleted_at',NULL)
                             ->whereBetween('tanggal_lembur', [$awal, $akhir])
                             ->first();
-
+        
+        $bulanawal   = Carbon::parse($awal)->isoformat('M');
+        $bulanakhir  = Carbon::parse($akhir)->isoformat('M');
+        
+        $itemcoversatu  =   RekapSalaries::with([
+            'employees'
+            ])->where('employees_id',$employees_id)->whereMonth('periode_awal', $bulanawal)->whereMonth('periode_akhir', $bulanakhir)->first();
+        
         // $items = 
         //         DB::table('overtimes')
         //         ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
@@ -776,13 +780,17 @@ class OvertimesController extends Controller
             abort(403);
         }
         
+        $bulanawal   = Carbon::parse($awal)->isoformat('M');
+        $bulanakhir  = Carbon::parse($akhir)->isoformat('M');
+
         $itemcovers = 
                     DB::table('overtimes')
                     ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                     ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
                     ->join('areas', 'areas.id', '=', 'employees.areas_id')
                     ->join('positions', 'positions.id', '=', 'employees.positions_id')
-                    ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
+                    // ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
+                    ->join('rekap_salaries', 'rekap_salaries.employees_id', '=', 'employees.nik_karyawan')
 
                     ->select('overtimes.employees_id','employees.nama_karyawan','positions.jabatan','divisions.penempatan','areas.area')
                     ->groupByRaw('overtimes.employees_id,employees.nama_karyawan,positions.jabatan,divisions.penempatan,areas.area')
@@ -791,6 +799,8 @@ class OvertimesController extends Controller
                     ->where('overtimes.acc_hrd','<>',NULL)
                     ->where('overtimes.deleted_at',NULL)
                     ->whereBetween('tanggal_lembur', [$awal, $akhir])
+                    ->whereMonth('rekap_salaries.periode_awal', $bulanawal)
+                    ->whereMonth('rekap_salaries.periode_akhir', $bulanakhir)
                     // ->orderBy('divisions_id')
                     ->orderBy('nama_karyawan')
                     ->get();
@@ -892,22 +902,27 @@ class OvertimesController extends Controller
             $jumlahuangmakanlembur = 0;
             $total = 0;
 
+            
+        
             $items = DB::table('overtimes')
             ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
             ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
             ->join('areas', 'areas.id', '=', 'employees.areas_id')
             ->join('positions', 'positions.id', '=', 'employees.positions_id')
-            ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
+            // ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
+            ->join('rekap_salaries', 'rekap_salaries.employees_id', '=', 'employees.nik_karyawan')
 
-            ->select('overtimes.employees_id','employees.nama_karyawan','positions.jabatan','divisions.penempatan','areas.area','overtimes.tanggal_lembur','overtimes.jam_masuk','overtimes.jam_istirahat','overtimes.jam_pulang','overtimes.jam_lembur','overtimes.jam_pertama','overtimes.jam_kedua','overtimes.jam_ketiga','overtimes.jam_keempat','overtimes.uang_makan_lembur','overtimes.jumlah_jam_pertama','overtimes.jumlah_jam_kedua','overtimes.jumlah_jam_ketiga','overtimes.jumlah_jam_keempat','overtimes.jumlah_jam_pertama','overtimes.jumlah_jam_kedua','overtimes.jumlah_jam_ketiga','overtimes.jumlah_jam_keempat','history_salaries.upah_lembur_perjam')
+            ->select('overtimes.employees_id','employees.nama_karyawan','positions.jabatan','divisions.penempatan','areas.area','overtimes.tanggal_lembur','overtimes.jam_masuk','overtimes.jam_istirahat','overtimes.jam_pulang','overtimes.jam_lembur','overtimes.jam_pertama','overtimes.jam_kedua','overtimes.jam_ketiga','overtimes.jam_keempat','overtimes.uang_makan_lembur','overtimes.jumlah_jam_pertama','overtimes.jumlah_jam_kedua','overtimes.jumlah_jam_ketiga','overtimes.jumlah_jam_keempat','overtimes.jumlah_jam_pertama','overtimes.jumlah_jam_kedua','overtimes.jumlah_jam_ketiga','overtimes.jumlah_jam_keempat','rekap_salaries.upah_lembur_perjam')
 
-            ->groupByRaw('overtimes.employees_id,employees.nama_karyawan,positions.jabatan,divisions.penempatan,areas.area,overtimes.tanggal_lembur,overtimes.jam_masuk,overtimes.jam_istirahat,overtimes.jam_pulang,overtimes.jam_lembur,overtimes.jam_pertama,overtimes.jam_kedua,overtimes.jam_ketiga,overtimes.jam_keempat,overtimes.uang_makan_lembur,overtimes.jumlah_jam_pertama,overtimes.jumlah_jam_kedua,overtimes.jumlah_jam_ketiga,overtimes.jumlah_jam_keempat,overtimes.jumlah_jam_pertama,overtimes.jumlah_jam_kedua,overtimes.jumlah_jam_ketiga,overtimes.jumlah_jam_keempat,history_salaries.upah_lembur_perjam')
+            ->groupByRaw('overtimes.employees_id,employees.nama_karyawan,positions.jabatan,divisions.penempatan,areas.area,overtimes.tanggal_lembur,overtimes.jam_masuk,overtimes.jam_istirahat,overtimes.jam_pulang,overtimes.jam_lembur,overtimes.jam_pertama,overtimes.jam_kedua,overtimes.jam_ketiga,overtimes.jam_keempat,overtimes.uang_makan_lembur,overtimes.jumlah_jam_pertama,overtimes.jumlah_jam_kedua,overtimes.jumlah_jam_ketiga,overtimes.jumlah_jam_keempat,overtimes.jumlah_jam_pertama,overtimes.jumlah_jam_kedua,overtimes.jumlah_jam_ketiga,overtimes.jumlah_jam_keempat,rekap_salaries.upah_lembur_perjam')
 
             // ->whereIn('divisions_id',$divisi)
             ->where('overtimes.employees_id',$itemcover->employees_id)
             ->where('overtimes.acc_hrd','<>',NULL)
             ->where('overtimes.deleted_at',NULL)
             ->whereBetween('tanggal_lembur', [$awal, $akhir])
+            ->whereMonth('rekap_salaries.periode_awal', $bulanawal)
+            ->whereMonth('rekap_salaries.periode_akhir', $bulanakhir)
             // ->orderBy('tanggal_lembur')
             // ->orderBy('nama_karyawan')
             ->get();
@@ -1101,12 +1116,18 @@ class OvertimesController extends Controller
         ]);
     }
 
-    public function export_excel_rekap_overtime()
+    public function export_excel_rekap_overtime(Request $request)
     {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
-		return Excel::download(new OvertimeExport, 'rekapovertime.xlsx');
+        
+        $divisions_id   = $request->input('divisions_id');
+        $status_kerja   = $request->input('status_kerja');
+        $awal           = $request->input('awal');
+        $akhir          = $request->input('akhir');
+
+		return Excel::download(new OvertimeExport($awal,$akhir,$divisions_id,$status_kerja), 'rekapovertime.xlsx');
     }
 
     public function export_pdf_rekap_overtime(Request $request)
@@ -1248,20 +1269,26 @@ class OvertimesController extends Controller
             $totaljumlahuangditerima = 0;
             $totalhasiluangditerima = 0;
             
+            $bulanawal   = Carbon::parse($awal)->isoformat('M');
+            $bulanakhir  = Carbon::parse($akhir)->isoformat('M');
+
             foreach ($items as $item) {
 
                 $jumlahjam = $item->jumlah_jam_pertama + $item->jumlah_jam_kedua + $item->jumlah_jam_ketiga + $item->jumlah_jam_keempat;
                 $uangmakanlembur = $item->uang_makan_lembur;
 
+
                 $collections = DB::table('overtimes')
                             ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
-                            ->join('history_salaries', 'employees.nik_karyawan', '=', 'history_salaries.employees_id')
+                            ->join('rekap_salaries', 'employees.nik_karyawan', '=', 'rekap_salaries.employees_id')
                             ->join('positions', 'positions.id', '=', 'employees.positions_id')
                             ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
                             ->join('areas', 'areas.id', '=', 'employees.areas_id')
                             ->where('overtimes.employees_id', $item->employees_id)
                             ->where('overtimes.acc_hrd', '<>', null)
                             ->where('overtimes.deleted_at', null)
+                            ->whereMonth('rekap_salaries.periode_awal', $bulanawal)
+                            ->whereMonth('rekap_salaries.periode_akhir', $bulanakhir)
                             ->whereBetween('tanggal_lembur', [$awal, $akhir])
                             ->first();
 

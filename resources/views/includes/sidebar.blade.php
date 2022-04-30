@@ -70,7 +70,8 @@
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('users.index') }}">User</a>
-                            <a class="nav-link" href="{{ route('maksimalbpjskesehatan.index') }}">Maksimal Upah BPJS
+                            <a class="nav-link" href="{{ route('maksimalbpjskesehatan.index') }}">Maksimal Upah
+                                BPJS
                                 Kesehatan</a>
                             <a class="nav-link" href="{{ route('maksimalbpjsketenagakerjaan.index') }}">Maksimal
                                 Upah BPJS
@@ -287,6 +288,14 @@
                         Laporan
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.rekap_salary') }}">Rekap Gaji</a>
+                        </nav>
+                    </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -338,6 +347,7 @@
                                 Masuk</a>
                         </nav>
                     </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -345,6 +355,7 @@
                                 Keluar</a>
                         </nav>
                     </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -353,6 +364,7 @@
                                 Kontrak</a>
                         </nav>
                     </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -361,6 +373,7 @@
                                 Tetap</a>
                         </nav>
                     </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -369,6 +382,7 @@
                                 Harian</a>
                         </nav>
                     </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -377,6 +391,7 @@
                                 Outsourcing</a>
                         </nav>
                     </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -384,6 +399,7 @@
                                 target="_blank">Inventaris Laptop</a>
                         </nav>
                     </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -391,6 +407,7 @@
                                 target="_blank">Inventaris Motor</a>
                         </nav>
                     </div>
+
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">

@@ -18,7 +18,7 @@ class CompaniesController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $items = Companies::all();
@@ -35,7 +35,7 @@ class CompaniesController extends Controller
     public function create()
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         return view('pages.admin.companies.create');
@@ -50,7 +50,7 @@ class CompaniesController extends Controller
     public function store(CompaniesRequest $request)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $data = $request->all();
@@ -67,7 +67,7 @@ class CompaniesController extends Controller
      */
     public function show($id)
     {
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -81,7 +81,7 @@ class CompaniesController extends Controller
     public function edit($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $item = Companies::findOrFail($id);
@@ -100,7 +100,7 @@ class CompaniesController extends Controller
     public function update(CompaniesRequest $request, $id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $data = $request->all();
@@ -119,7 +119,7 @@ class CompaniesController extends Controller
     public function destroy($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $item = Companies::findOrFail($id);

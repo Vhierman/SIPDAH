@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\RekapSalaryExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Codedge\Fpdf\Fpdf\Fpdf;
@@ -14,9 +16,11 @@ use App\Models\Admin\EmployeesOuts;
 use App\Models\Admin\InventoryLaptops;
 use App\Models\Admin\InventoryMotorcycles;
 use App\Models\Admin\InventoryCars;
+use App\Models\Admin\RekapSalaries;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\LaporanKaryawanMasukRequest;
 use App\Http\Requests\Admin\LaporanAbsensiKaryawanRequest;
+use App\Http\Requests\Admin\RekapSalaryRequest;
 use Carbon\Carbon;
 use Storage;
 use Alert;
@@ -28,6 +32,62 @@ class ReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function rekap_salary()
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+            abort(403);
+        }
+        return view ('pages.admin.laporan.rekap_salary.index');
+    }
+
+    public function tampil_rekap_salary(RekapSalaryRequest $request)
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+            abort(403);
+        }  
+
+        $awal       = $request->input('awal');
+        $akhir      = $request->input('akhir');
+
+        $salary = RekapSalaries::where('periode_awal', $awal)->where('periode_akhir', $akhir)->first();
+
+        $items = 
+        DB::table('rekap_salaries')
+        ->join('employees', 'employees.nik_karyawan', '=', 'rekap_salaries.employees_id')
+        ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+        ->join('areas', 'areas.id', '=', 'employees.areas_id')
+        ->join('positions', 'positions.id', '=', 'employees.positions_id')
+        ->where('periode_awal', '=', $awal)
+        ->where('periode_akhir', '=', $akhir)
+        ->where('rekap_salaries.deleted_at', '=', null)
+        ->get();
+
+        if ($salary == null) {
+            Alert::error('Data Tidak Ditemukan');
+            return redirect()->route('reports.rekap_salary');
+        } else {
+            return view('pages.admin.laporan.rekap_salary.tampil_rekap_salary',[
+                'awal'  => $awal,
+                'akhir' => $akhir,
+                'items' => $items
+            ]);
+        }
+
+    }
+
+    public function export_excell_rekap_salary(RekapSalaryRequest $request)
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+            abort(403);
+        } 
+        
+        $awal       = $request->input('awal');
+        $akhir      = $request->input('akhir');
+
+        return Excel::download(new RekapSalaryExport($awal), 'rekapsalary.xlsx');
+    }
+
     public function absensi_karyawan()
     {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
@@ -5401,9 +5461,7 @@ class ReportsController extends Controller
         $this->fpdf->Output();
         exit;
     }
-
     }
-
     public function karyawan_masuk()
     {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {

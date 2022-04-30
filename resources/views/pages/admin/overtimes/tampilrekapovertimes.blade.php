@@ -18,11 +18,6 @@
                         Data Rekap Overtimes {{ $divisions_id }}
                     </div>
 
-
-                    {{-- <a href="{{ route('overtimes.export_excel_rekap_overtime') }}" target="_blank"
-                        class="btn btn-success shadow-sm">
-                        <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Rekap
-                    </a> --}}
                     <form action="{{ route('overtimes.export_pdf_rekap_overtime') }}" target="_blank" method="post"
                         enctype="multipart/form-data">
                         @csrf
@@ -47,6 +42,32 @@
                             </button>
                         </div>
                     </form>
+
+                    {{-- Export Excell Masih Dalam Tahap Pengembangan --}}
+                    {{-- <form action="{{ route('overtimes.export_excel_rekap_overtime') }}" target="_blank" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group mt-2">
+                            <input type="hidden" class="form-control" name="awal" readonly value="{{ $awal }}">
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="hidden" class="form-control" name="akhir" readonly value="{{ $akhir }}">
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="hidden" class="form-control" name="divisions_id" readonly
+                                value="{{ $divisions_id }}">
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="hidden" class="form-control" name="status_kerja" readonly
+                                value="{{ $status_kerja }}">
+                        </div>
+                        <div class="d-grid gap-2 mt-2">
+                            <button type="submit" class="btn btn-success btn-block">
+                                <i class="fas fa-download fa-sm text-white-50"></i>
+                                Download Excell
+                            </button>
+                        </div>
+                    </form> --}}
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -77,16 +98,21 @@
                                         @endphp
 
                                         @php
+                                            
+                                            $bulanawal = \Carbon\Carbon::parse($awal)->isoformat('M');
+                                            $bulanakhir = \Carbon\Carbon::parse($akhir)->isoformat('M');
+                                            
                                             $collections = DB::table('overtimes')
                                                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                                                 ->join('history_salaries', 'employees.nik_karyawan', '=', 'history_salaries.employees_id')
+                                                ->join('rekap_salaries', 'employees.nik_karyawan', '=', 'rekap_salaries.employees_id')
                                                 ->join('positions', 'positions.id', '=', 'employees.positions_id')
-                                            
                                                 ->where('overtimes.employees_id', $item->employees_id)
                                                 ->where('overtimes.acc_hrd', '<>', null)
                                                 ->where('overtimes.deleted_at', null)
                                                 ->whereBetween('tanggal_lembur', [$awal, $akhir])
-                                            
+                                                ->whereMonth('rekap_salaries.periode_awal', $bulanawal)
+                                                ->whereMonth('rekap_salaries.periode_akhir', $bulanakhir)
                                                 ->first();
                                         @endphp
                                         @php

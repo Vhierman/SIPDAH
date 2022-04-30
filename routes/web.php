@@ -125,6 +125,9 @@ Route::prefix('admin')
         Route::post('cetak/tampil_pkwt_harian', 'CetaksController@tampil_pkwt_harian')->name('cetak.tampil_pkwt_harian');
         Route::resource('cetak', 'CetaksController');
         //Reports
+        Route::get('reports/rekap_salary', 'ReportsController@rekap_salary')->name('reports.rekap_salary');
+        Route::post('reports/tampil_rekap_salary', 'ReportsController@tampil_rekap_salary')->name('reports.tampil_rekap_salary');
+        Route::post('reports/export_excell_rekap_salary', 'ReportsController@export_excell_rekap_salary')->name('reports.export_excell_rekap_salary');
         Route::get('reports/absensi_karyawan', 'ReportsController@absensi_karyawan')->name('reports.absensi_karyawan');
         Route::get('reports/absensi_department_pdc', 'ReportsController@absensi_department_pdc')->name('reports.absensi_department_pdc');
         Route::get('reports/absensi_department_produksi', 'ReportsController@absensi_department_produksi')->name('reports.absensi_department_produksi');
@@ -193,7 +196,7 @@ Route::prefix('admin')
         Route::post('overtimes/hasil_slipdepartment_overtime', 'OvertimesController@hasil_slipdepartment_overtime')->name('overtimes.hasil_slipdepartment_overtime');
         Route::get('overtimes/form_cetak_rekap_overtime', 'OvertimesController@form_cetak_rekap_overtime')->name('overtimes.form_cetak_rekap_overtime');
         Route::post('overtimes/form_lihat_rekap_overtime', 'OvertimesController@form_lihat_rekap_overtime')->name('overtimes.form_lihat_rekap_overtime');
-        Route::get('overtimes/export_excel_rekap_overtime', 'OvertimesController@export_excel_rekap_overtime')->name('overtimes.export_excel_rekap_overtime');
+        Route::post('overtimes/export_excel_rekap_overtime', 'OvertimesController@export_excel_rekap_overtime')->name('overtimes.export_excel_rekap_overtime');
         Route::post('overtimes/export_pdf_rekap_overtime', 'OvertimesController@export_pdf_rekap_overtime')->name('overtimes.export_pdf_rekap_overtime');
         Route::resource('overtimes', 'OvertimesController');
         //Absensi

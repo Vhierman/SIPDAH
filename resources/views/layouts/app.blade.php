@@ -136,7 +136,7 @@
                         </div>
                         <div class="col-12 col-lg-3" data-aos="fade-up" data-aos-duration="3000">
                             <h5>CERTIFICATION</h5>
-                            <ul class="list-unstyled mt-4 row justify-content-center">
+                            <ul class="list-unstyled mt-2 row justify-content-center">
                                 <li>
                                     <img class="certification mt-2"
                                         src="{{ url('frontend/frontend/images/footer/9001.png') }}" alt="">
