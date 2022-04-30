@@ -110,7 +110,7 @@
                                             <td>{{ $item->employees_id }}</td>
                                             <td>{{ $item->nama_karyawan_keluar }}</td>
                                             <td>{{ $item->divisions->penempatan }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($item->tanggal_keluar_karyawan_keluar)->isoformat('D MMMM Y') }}
+                                            <td>{{ \Carbon\Carbon::parse($item->tanggal_keluar_karyawan_keluar)->isoformat('DD-MM-Y') }}
                                             </td>
                                             <td>{{ $item->status_kerja_karyawan_keluar }}</td>
                                             <td>{{ $item->nomor_jkn_karyawan_keluar }}</td>

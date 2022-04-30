@@ -617,7 +617,6 @@
                                         @foreach ($historyjabatans as $historyjabatan)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $historyjabatan->companies->nama_perusahaan }}</td>
                                                 <td>{{ $historyjabatan->areas->area }}</td>
                                                 <td>{{ $historyjabatan->divisions->penempatan }}</td>
                                                 <td>{{ $historyjabatan->positions->jabatan }}</td>

@@ -113,38 +113,48 @@
                                             <td>{{ number_format($item->take_home_pay) }}</td>
                                             <td align=center>
                                                 <a type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#ViewSalary"
-                                                    onclick="viewdata(
-                                                                                                                                    '{{ $item->nik_karyawan }}',
-                                                                                                                                    '{{ $item->nama_karyawan }}',
-                                                                                                                                    '{{ $item->jabatan }}',
-                                                                                                                                    '{{ $item->penempatan }}',
-                                                                                                                                    '{{ number_format($item->gaji_pokok) }}',
-                                                                                                                                    '{{ number_format($item->uang_makan) }}',
-                                                                                                                                    '{{ number_format($item->uang_transport) }}',
-                                                                                                                                    '{{ number_format($item->tunjangan_tugas) }}',
-                                                                                                                                    '{{ number_format($item->tunjangan_pulsa) }}',
-                                                                                                                                    '{{ number_format($item->tunjangan_jabatan) }}',
-                                                                                                                                    '{{ number_format($item->jumlah_upah) }}',
-                                                                                                                                    '{{ number_format($item->upah_lembur_perjam) }}',
-                                                                                                                                    '{{ number_format($item->potongan_bpjsks_perusahaan) }}',
-                                                                                                                                    '{{ number_format($item->potongan_jht_perusahaan) }}',
-                                                                                                                                    '{{ number_format($item->potongan_jp_perusahaan) }}',
-                                                                                                                                    '{{ number_format($item->potongan_jkm_perusahaan) }}',
-                                                                                                                                    '{{ number_format($item->potongan_jkk_perusahaan) }}',
-                                                                                                                                    '{{ number_format($item->jumlah_bpjstk_perusahaan) }}',
-                                                                                                                                    '{{ number_format($item->potongan_bpjsks_karyawan) }}',
-                                                                                                                                    '{{ number_format($item->potongan_jht_karyawan) }}',
-                                                                                                                                    '{{ number_format($item->potongan_jp_karyawan) }}',
-                                                                                                                                    '{{ number_format($item->jumlah_bpjstk_karyawan) }}',
-                                                                                                                                    '{{ number_format($item->take_home_pay) }}'
-                                                                                                                                    )">
+                                                    data-bs-target="#ViewSalary" onclick="viewdata(
+                                                                            '{{ $item->nik_karyawan }}',
+                                                                            '{{ $item->nama_karyawan }}',
+                                                                            '{{ $item->jabatan }}',
+                                                                            '{{ $item->penempatan }}',
+                                                                            '{{ number_format($item->gaji_pokok) }}',
+                                                                            '{{ number_format($item->uang_makan) }}',
+                                                                            '{{ number_format($item->uang_transport) }}',
+                                                                            '{{ number_format($item->tunjangan_tugas) }}',
+                                                                            '{{ number_format($item->tunjangan_pulsa) }}',
+                                                                            '{{ number_format($item->tunjangan_jabatan) }}',
+                                                                            '{{ number_format($item->jumlah_upah) }}',
+                                                                            '{{ number_format($item->upah_lembur_perjam) }}',
+                                                                            '{{ number_format($item->potongan_bpjsks_perusahaan) }}',
+                                                                            '{{ number_format($item->potongan_jht_perusahaan) }}',
+                                                                            '{{ number_format($item->potongan_jp_perusahaan) }}',
+                                                                            '{{ number_format($item->potongan_jkm_perusahaan) }}',
+                                                                            '{{ number_format($item->potongan_jkk_perusahaan) }}',
+                                                                            '{{ number_format($item->jumlah_bpjstk_perusahaan) }}',
+                                                                            '{{ number_format($item->potongan_bpjsks_karyawan) }}',
+                                                                            '{{ number_format($item->potongan_jht_karyawan) }}',
+                                                                            '{{ number_format($item->potongan_jp_karyawan) }}',
+                                                                            '{{ number_format($item->jumlah_bpjstk_karyawan) }}',
+                                                                            '{{ number_format($item->take_home_pay) }}'
+                                                                            )">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('process.edit_salary', $item->employees_id) }}"
-                                                    class="btn btn-info btn-sm">
-                                                    <i class="fa fa-print"></i>
-                                                </a>
+
+                                                <form action="{{ route('reports.cetak_slip_gaji') }}" method="POST"
+                                                    class="d-inline" target="_blank">
+                                                    @csrf
+                                                    <input type="hidden" class="form-control" name="nik_karyawan" readonly
+                                                        value="{{ $item->employees_id }}">
+                                                    <input type="hidden" class="form-control" name="awal" readonly
+                                                        value="{{ $awal }}">
+                                                    <input type="hidden" class="form-control" name="akhir" readonly
+                                                        value="{{ $akhir }}">
+                                                    <button type="submit" class="btn btn-info btn-sm ">
+                                                        <i class="fa fa-print"></i>
+                                                    </button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     @endforeach

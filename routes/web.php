@@ -52,7 +52,6 @@ Route::get('/signs','SignsController@index')
 // });
 //Artisan Cpanel
 
-
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware(['auth','admin'])
@@ -126,6 +125,7 @@ Route::prefix('admin')
         Route::resource('cetak', 'CetaksController');
         //Reports
         Route::get('reports/rekap_salary', 'ReportsController@rekap_salary')->name('reports.rekap_salary');
+        Route::post('reports/cetak_slip_gaji', 'ReportsController@cetak_slip_gaji')->name('reports.cetak_slip_gaji');
         Route::post('reports/tampil_rekap_salary', 'ReportsController@tampil_rekap_salary')->name('reports.tampil_rekap_salary');
         Route::post('reports/export_excell_rekap_salary', 'ReportsController@export_excell_rekap_salary')->name('reports.export_excell_rekap_salary');
         Route::get('reports/absensi_karyawan', 'ReportsController@absensi_karyawan')->name('reports.absensi_karyawan');

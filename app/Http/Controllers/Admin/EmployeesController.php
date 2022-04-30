@@ -688,7 +688,6 @@ class EmployeesController extends Controller
         //History Jabatan
         $historyjabatans = HistoryPositions::with([
             'employees',
-            'companies',
             'divisions',
             'positions',
             'areas'
