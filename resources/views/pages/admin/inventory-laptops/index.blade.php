@@ -27,9 +27,11 @@
                     <li class="breadcrumb-item active">Laptop</li>
                 </ol>
 
-                <a href="{{ route('inventory_laptops.create') }}" class="btn btn-primary shadow-sm mb-3">
-                    <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Inventaris Laptop
-                </a>
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                    <a href="{{ route('inventory_laptops.create') }}" class="btn btn-primary shadow-sm mb-3">
+                        <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Inventaris Laptop
+                    </a>
+                @endif
 
                 <div class="card mb-4">
                     <div class="card-header">
@@ -67,22 +69,24 @@
                                                     onclick="viewdata('{{ $item->employees->nama_karyawan }}','{{ $item->merk_laptop }}','{{ $item->type_laptop }}','{{ $item->foto_laptop }}','{{ $item->processor }}','{{ $item->ram }}','{{ $item->hardisk }}','{{ $item->vga }}','{{ $item->sistem_operasi }}','{{ \Carbon\Carbon::parse($item->tanggal_penyerahan_laptop)->isoformat('D MMMM Y') }}')">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('inventory_laptops.edit', $item->id) }}"
-                                                    class="btn btn-success">
-                                                    <i class="fa fa-pencil-alt"></i>
-                                                </a>
-                                                <form action="{{ route('inventory_laptops.destroy', $item->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger ">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                                <a href="{{ route('inventory_laptops.show', $item->id) }}"
-                                                    class="btn btn-info" target="_blank">
-                                                    <i class="fa fa-download"></i>
-                                                </a>
+                                                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                                                    <a href="{{ route('inventory_laptops.edit', $item->id) }}"
+                                                        class="btn btn-success">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                    </a>
+                                                    <form action="{{ route('inventory_laptops.destroy', $item->id) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger ">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                    <a href="{{ route('inventory_laptops.show', $item->id) }}"
+                                                        class="btn btn-info" target="_blank">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

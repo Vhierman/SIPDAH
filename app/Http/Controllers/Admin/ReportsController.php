@@ -35,7 +35,7 @@ class ReportsController extends Controller
 
     public function rekap_salary()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         return view ('pages.admin.laporan.rekap_salary.index');
@@ -43,7 +43,7 @@ class ReportsController extends Controller
 
     public function tampil_rekap_salary(RekapSalaryRequest $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }  
 
@@ -78,7 +78,7 @@ class ReportsController extends Controller
 
     public function export_excell_rekap_salary(RekapSalaryRequest $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         } 
         
@@ -90,7 +90,7 @@ class ReportsController extends Controller
 
     public function cetak_slip_gaji(Request $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }  
 
@@ -5677,7 +5677,7 @@ class ReportsController extends Controller
     }
     public function karyawan_masuk()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         return view('pages.admin.laporan.karyawan_masuk.index');
@@ -5685,7 +5685,7 @@ class ReportsController extends Controller
 
     public function tampil_karyawan_masuk(LaporanKaryawanMasukRequest $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $awal               = $request->input('tanggal_awal');
@@ -5742,7 +5742,7 @@ class ReportsController extends Controller
 
     public function karyawan_keluar()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         return view('pages.admin.laporan.karyawan_keluar.index');
@@ -5750,7 +5750,7 @@ class ReportsController extends Controller
 
     public function tampil_karyawan_keluar(LaporanKaryawanMasukRequest $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $awal               = $request->input('tanggal_awal');
@@ -5807,7 +5807,7 @@ class ReportsController extends Controller
 
     public function karyawan_kontrak()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $employees = Employees::with([
@@ -5852,7 +5852,7 @@ class ReportsController extends Controller
 
     public function karyawan_tetap()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $employees = Employees::with([
@@ -5898,7 +5898,7 @@ class ReportsController extends Controller
 
     public function karyawan_harian()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $employees = Employees::with([
@@ -5943,7 +5943,7 @@ class ReportsController extends Controller
 
     public function karyawan_outsourcing()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $employees = Employees::with([
@@ -5988,7 +5988,7 @@ class ReportsController extends Controller
 
     public function inventaris_laptop()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $inventorylaptops = InventoryLaptops::with([
@@ -6032,7 +6032,7 @@ class ReportsController extends Controller
 
     public function inventaris_motor()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $inventorymotors = InventoryMotorcycles::with([
@@ -6078,7 +6078,7 @@ class ReportsController extends Controller
 
     public function inventaris_mobil()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $inventorymobils = InventoryCars::with([

@@ -143,7 +143,7 @@
                 {{-- End Siswa Prakerin --}}
 
                 {{-- Inventory --}}
-                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseHistory"
                         aria-expanded="false" aria-controls="collapseHistory">
                         <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
@@ -258,7 +258,7 @@
                             <a class="nav-link" href="{{ route('process.process_rekon_salary') }}">Salary</a>
                         </nav>
                     </div>
-                @elseif (Auth::user()->roles == 'LEADER')
+                @elseif (Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseProses"
                         aria-expanded="false" aria-controls="collapseProses">
                         <div class="sb-nav-link-icon"><i class="fas fa-paperclip"></i></div>
@@ -334,6 +334,95 @@
                         </nav>
                     </div>
 
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.karyawan_masuk') }}">Karyawan
+                                Masuk</a>
+                        </nav>
+                    </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.karyawan_keluar') }}">Karyawan
+                                Keluar</a>
+                        </nav>
+                    </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.karyawan_kontrak') }}"
+                                target="_blank">Karyawan
+                                Kontrak</a>
+                        </nav>
+                    </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.karyawan_tetap') }}"
+                                target="_blank">Karyawan
+                                Tetap</a>
+                        </nav>
+                    </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.karyawan_harian') }}"
+                                target="_blank">Karyawan
+                                Harian</a>
+                        </nav>
+                    </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.karyawan_outsourcing') }}"
+                                target="_blank">Karyawan
+                                Outsourcing</a>
+                        </nav>
+                    </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.inventaris_laptop') }}"
+                                target="_blank">Inventaris Laptop</a>
+                        </nav>
+                    </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.inventaris_motor') }}"
+                                target="_blank">Inventaris Motor</a>
+                        </nav>
+                    </div>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.inventaris_mobil') }}"
+                                target="_blank">Inventaris Mobil</a>
+                        </nav>
+                    </div>
+                @elseif(Auth::user()->roles == 'ACCOUNTING')
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLaporan"
+                        aria-expanded="false" aria-controls="collapseLaporan">
+                        <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
+                        Laporan
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+
+                    <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{ route('reports.rekap_salary') }}">Rekap Gaji</a>
+                        </nav>
+                    </div>
                     <div class="collapse" id="collapseLaporan" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">

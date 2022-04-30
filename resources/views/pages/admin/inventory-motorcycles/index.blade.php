@@ -30,9 +30,11 @@
                     <li class="breadcrumb-item active">Motor</li>
                 </ol>
 
-                <a href="{{ route('inventory_motorcycles.create') }}" class="btn btn-primary shadow-sm mb-3">
-                    <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Inventaris Motor
-                </a>
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                    <a href="{{ route('inventory_motorcycles.create') }}" class="btn btn-primary shadow-sm mb-3">
+                        <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Inventaris Motor
+                    </a>
+                @endif
 
                 <div class="card mb-4">
                     <div class="card-header">
@@ -76,22 +78,25 @@
                                                     onclick="viewdata('{{ $item->employees->nama_karyawan }}','{{ $item->merk_motor }}','{{ $item->type_motor }}','{{ $item->nomor_polisi }}','{{ $item->warna_motor }}','{{ $item->nomor_rangka_motor }}','{{ $item->nomor_mesin_motor }}','{{ \Carbon\Carbon::parse($item->tanggal_akhir_pajak_motor)->isoformat('D MMMM Y') }}','{{ \Carbon\Carbon::parse($item->tanggal_akhir_plat_motor)->isoformat('D MMMM Y') }}','{{ \Carbon\Carbon::parse($item->tanggal_penyerahan_motor)->isoformat('D MMMM Y') }}','{{ $item->foto_stnk_motor }}','{{ $item->foto_motor }}')">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('inventory_motorcycles.edit', $item->id) }}"
-                                                    class="btn btn-success">
-                                                    <i class="fa fa-pencil-alt"></i>
-                                                </a>
-                                                <form action="{{ route('inventory_motorcycles.destroy', $item->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger ">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                                <a href="{{ route('inventory_motorcycles.show', $item->id) }}"
-                                                    class="btn btn-info" target="_blank">
-                                                    <i class="fa fa-download"></i>
-                                                </a>
+                                                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                                                    <a href="{{ route('inventory_motorcycles.edit', $item->id) }}"
+                                                        class="btn btn-success">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                    </a>
+                                                    <form
+                                                        action="{{ route('inventory_motorcycles.destroy', $item->id) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger ">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                    <a href="{{ route('inventory_motorcycles.show', $item->id) }}"
+                                                        class="btn btn-info" target="_blank">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

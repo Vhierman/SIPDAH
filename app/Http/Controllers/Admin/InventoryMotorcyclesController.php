@@ -35,7 +35,7 @@ class InventoryMotorcyclesController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $items = InventoryMotorcycles::with([
@@ -116,7 +116,7 @@ class InventoryMotorcyclesController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $item           = InventoryMotorcycles::findOrFail($id);

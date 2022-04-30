@@ -35,7 +35,7 @@ class InventoryLaptopsController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $items = InventoryLaptops::with([
@@ -110,7 +110,7 @@ class InventoryLaptopsController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
         $item           = InventoryLaptops::findOrFail($id);

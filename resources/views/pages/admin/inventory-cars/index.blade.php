@@ -30,9 +30,11 @@
                     <li class="breadcrumb-item active">Mobil</li>
                 </ol>
 
-                <a href="{{ route('inventory_cars.create') }}" class="btn btn-primary shadow-sm mb-3">
-                    <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Inventaris Mobil
-                </a>
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                    <a href="{{ route('inventory_cars.create') }}" class="btn btn-primary shadow-sm mb-3">
+                        <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Inventaris Mobil
+                    </a>
+                @endif
 
                 <div class="card mb-4">
                     <div class="card-header">
@@ -76,22 +78,24 @@
                                                     onclick="viewdata('{{ $item->employees->nama_karyawan }}','{{ $item->merk_mobil }}','{{ $item->type_mobil }}','{{ $item->nomor_polisi }}','{{ $item->warna_mobil }}','{{ $item->nomor_rangka_mobil }}','{{ $item->nomor_mesin_mobil }}','{{ \Carbon\Carbon::parse($item->tanggal_akhir_pajak_mobil)->isoformat('D MMMM Y') }}','{{ \Carbon\Carbon::parse($item->tanggal_akhir_plat_mobil)->isoformat('D MMMM Y') }}','{{ \Carbon\Carbon::parse($item->tanggal_penyerahan_mobil)->isoformat('D MMMM Y') }}','{{ $item->foto_stnk_mobil }}','{{ $item->foto_mobil }}')">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('inventory_cars.edit', $item->id) }}"
-                                                    class="btn btn-success">
-                                                    <i class="fa fa-pencil-alt"></i>
-                                                </a>
-                                                <form action="{{ route('inventory_cars.destroy', $item->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger ">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                                <a href="{{ route('inventory_cars.show', $item->id) }}"
-                                                    class="btn btn-info" target="_blank">
-                                                    <i class="fa fa-download"></i>
-                                                </a>
+                                                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                                                    <a href="{{ route('inventory_cars.edit', $item->id) }}"
+                                                        class="btn btn-success">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                    </a>
+                                                    <form action="{{ route('inventory_cars.destroy', $item->id) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger ">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                    <a href="{{ route('inventory_cars.show', $item->id) }}"
+                                                        class="btn btn-info" target="_blank">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
