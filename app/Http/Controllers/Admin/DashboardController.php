@@ -684,17 +684,22 @@ class DashboardController extends Controller
         $awal           = $request->input('awal');
         $akhir          = $request->input('akhir');
         
+        $bulanawal   = Carbon::parse($awal)->isoformat('M');
+        $bulanakhir  = Carbon::parse($akhir)->isoformat('M');
+
         $itemcover = 
                 DB::table('overtimes')
                 ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
                 ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
                 ->join('areas', 'areas.id', '=', 'employees.areas_id')
                 ->join('positions', 'positions.id', '=', 'employees.positions_id')
-                ->join('history_salaries', 'history_salaries.employees_id', '=', 'employees.nik_karyawan')
+                ->join('rekap_salaries', 'rekap_salaries.employees_id', '=', 'employees.nik_karyawan')
                 ->where('overtimes.acc_hrd','<>',NULL)
                 ->where('overtimes.employees_id',$nik_karyawan)
                 ->where('overtimes.deleted_at',NULL)
                 ->whereBetween('tanggal_lembur', [$awal, $akhir])
+                ->whereMonth('rekap_salaries.periode_awal', $bulanawal)
+                ->whereMonth('rekap_salaries.periode_akhir', $bulanakhir)
                 ->first();
         
         if ($itemcover == null) {
