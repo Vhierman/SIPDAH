@@ -1141,22 +1141,22 @@ class ProcessController extends Controller
                 $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
                 $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
     
-                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
                 $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
                 $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
             }
             elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
                 $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
                 $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
     
-                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
                 $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
                 $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
             }
             else{
@@ -1222,11 +1222,11 @@ class ProcessController extends Controller
                 $potongan_jp_karyawan           = $jumlah_upah*1/100;
             }
             elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
                 $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
                 $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
             }
             else{
@@ -1310,15 +1310,15 @@ class ProcessController extends Controller
                 $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
                 $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
     
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
             }
             elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
                 $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
                 $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
 
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
             }
             else{
                 dd('Salah');
@@ -1354,8 +1354,8 @@ class ProcessController extends Controller
                 $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
             }
             elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
             }
             else{
                 dd('Salah');
@@ -1401,19 +1401,19 @@ class ProcessController extends Controller
                 $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
                 $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
     
-                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
             }
             elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
                 $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
                 $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
     
-                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
             }
             else{
                 dd('Salah');
@@ -1451,10 +1451,10 @@ class ProcessController extends Controller
                 $potongan_jht_karyawan          = $jumlah_upah*2/100;
             }
             elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_jht_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*3.7/100;
-                $potongan_jkm_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.3/100;
-                $potongan_jkk_perusahaan        = $maksimal_upah_bpjs_ketenagakerjaan*0.24/100;
-                $potongan_jht_karyawan          = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
+                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
+                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
+                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
+                $potongan_jht_karyawan          = $jumlah_upah*2/100;
             }
             else{
                 dd('Salah');
