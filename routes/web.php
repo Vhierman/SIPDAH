@@ -75,6 +75,7 @@ Route::prefix('admin')
         Route::resource('users', 'UsersController');
         Route::resource('maksimalbpjsketenagakerjaan', 'MaksimalBpjsKetenagakerjaanController');
         Route::resource('maksimalbpjskesehatan', 'MaksimalBpjsKesehatanController');
+        Route::resource('minimalupah', 'MinimalSalariesController');
         Route::resource('comingsoon', 'ComingsoonController');
         Route::resource('companies', 'CompaniesController');
         Route::resource('divisions', 'DivisionsController');

@@ -26,6 +26,7 @@ use App\Models\Admin\HistoryFamilies;
 use App\Models\Admin\InventoryLaptops;
 use App\Models\Admin\InventoryMotorcycles;
 use App\Models\Admin\InventoryCars;
+use App\Models\Admin\MinimalSalaries;
 use App\Models\Admin\MaksimalBpjskesehatans;
 use App\Models\Admin\MaksimalBpjsketenagakerjaans;
 use File;
@@ -155,13 +156,15 @@ class EmployeesController extends Controller
         $divisions      = Divisions::all();
         $positions      = Positions::all();
         $areas          = Areas::all();
+        $salary         = MinimalSalaries::where('id', 1)->first();
         
         return view ('pages.admin.employees.create',[
             'companies'     => $companies,
             'workinghours'  => $workinghours,
             'divisions'     => $divisions,
             'positions'     => $positions,
-            'areas'         => $areas
+            'areas'         => $areas,
+            'salary'        => $salary
         ]);
     }
 

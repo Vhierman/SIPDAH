@@ -403,72 +403,44 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="form-group mt-2">
-                                            <label for="text">Gaji Pokok</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                                <input type="text" name="gaji_pokok" class="form-control" maxlength="9"
-                                                    onkeyup="angka(this);" value="{{ old('gaji_pokok') }}"
-                                                    placeholder="Masukan Gaji Pokok (Tanpa Karakter Khusus Hanya Angka)"
-                                                    aria-label="text" aria-describedby="basic-addon1">
-                                            </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="gaji_pokok" class="form-control" maxlength="9"
+                                                onkeyup="angka(this);" value="{{ $salary->minimal_upah }}" readonly
+                                                placeholder="Masukan Gaji Pokok (Tanpa Karakter Khusus Hanya Angka)"
+                                                aria-label="text" aria-describedby="basic-addon1">
                                         </div>
-                                        <div class="form-group mt-2">
-                                            <label for="text">Uang Makan</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                                <input type="text" name="uang_makan" value="{{ old('uang_makan') }}"
-                                                    class="form-control" maxlength="9" onkeyup="angka(this);"
-                                                    placeholder="Masukan Uang Makan (Tanpa Karakter Khusus Hanya Angka)"
-                                                    aria-label="text" aria-describedby="basic-addon1">
-                                            </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="uang_makan" value="0" class="form-control"
+                                                maxlength="9" onkeyup="angka(this);" readonly
+                                                placeholder="Masukan Uang Makan (Tanpa Karakter Khusus Hanya Angka)"
+                                                aria-label="text" aria-describedby="basic-addon1">
                                         </div>
-                                        <div class="form-group mt-2">
-                                            <label for="text">Uang Transport</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                                <input type="text" name="uang_transport" class="form-control"
-                                                    maxlength="9" onkeyup="angka(this);"
-                                                    value="{{ old('uang_transport') }}"
-                                                    placeholder="Masukan Uang Transport (Tanpa Karakter Khusus Hanya Angka)"
-                                                    aria-label="text" aria-describedby="basic-addon1">
-                                            </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="uang_transport" class="form-control" maxlength="9"
+                                                onkeyup="angka(this);" value="0" readonly
+                                                placeholder="Masukan Uang Transport (Tanpa Karakter Khusus Hanya Angka)"
+                                                aria-label="text" aria-describedby="basic-addon1">
                                         </div>
-                                        <div class="form-group mt-2">
-                                            <label for="text">Tunjangan Tugas</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                                <input type="text" name="tunjangan_tugas" class="form-control"
-                                                    maxlength="9" onkeyup="angka(this);"
-                                                    value="{{ old('tunjangan_tugas') }}"
-                                                    placeholder="Masukan Tunjangan Tugas (Tanpa Karakter Khusus Hanya Angka)"
-                                                    aria-label="text" aria-describedby="basic-addon1">
-                                            </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="tunjangan_tugas" class="form-control"
+                                                maxlength="9" onkeyup="angka(this);" value="0" readonly
+                                                placeholder="Masukan Tunjangan Tugas (Tanpa Karakter Khusus Hanya Angka)"
+                                                aria-label="text" aria-describedby="basic-addon1">
                                         </div>
-                                        <div class="form-group mt-2">
-                                            <label for="text">Tunjangan Pulsa</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                                <input type="text" name="tunjangan_pulsa" class="form-control"
-                                                    maxlength="9" onkeyup="angka(this);"
-                                                    value="{{ old('tunjangan_pulsa') }}"
-                                                    placeholder="Masukan Tunjangan Pulsa (Tanpa Karakter Khusus Hanya Angka)"
-                                                    aria-label="text" aria-describedby="basic-addon1">
-                                            </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="tunjangan_pulsa" class="form-control"
+                                                maxlength="9" onkeyup="angka(this);" value="0" readonly
+                                                placeholder="Masukan Tunjangan Pulsa (Tanpa Karakter Khusus Hanya Angka)"
+                                                aria-label="text" aria-describedby="basic-addon1">
                                         </div>
-                                        <div class="form-group mt-2">
-                                            <label for="text">Tunjangan Jabatan</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                                <input type="text" name="tunjangan_jabatan" class="form-control"
-                                                    maxlength="9" onkeyup="angka(this);"
-                                                    value="{{ old('tunjangan_jabatan') }}"
-                                                    placeholder="Masukan Tunjangan Jabatan (Tanpa Karakter Khusus Hanya Angka)"
-                                                    aria-label="text" aria-describedby="basic-addon1">
-                                            </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="tunjangan_jabatan" class="form-control"
+                                                maxlength="9" onkeyup="angka(this);" value="0" readonly
+                                                placeholder="Masukan Tunjangan Jabatan (Tanpa Karakter Khusus Hanya Angka)"
+                                                aria-label="text" aria-describedby="basic-addon1">
                                         </div>
 
-                                        <div class="form-group mt-2">
+                                        <div class="form-group">
                                             <label for="title" class="form-label">Kepesertaan BPJS Ketenagakerjaan &
                                                 Kesehatan</label>
                                         </div>

@@ -64,12 +64,12 @@
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('users.index') }}">User</a>
+                            <a class="nav-link" href="{{ route('minimalupah.index') }}">Minimal
+                                Upah</a>
                             <a class="nav-link" href="{{ route('maksimalbpjskesehatan.index') }}">Maksimal Upah
-                                BPJS
-                                Kesehatan</a>
+                                BPJS Kesehatan</a>
                             <a class="nav-link" href="{{ route('maksimalbpjsketenagakerjaan.index') }}">Maksimal
-                                Upah BPJS
-                                Ketenagakerjaan</a>
+                                Upah BPJS Ketenagakerjaan</a>
                             <a class="nav-link" href="{{ route('companies.index') }}">Perusahaan</a>
                             <a class="nav-link" href="{{ route('areas.index') }}">Area</a>
                             <a class="nav-link" href="{{ route('divisions.index') }}">Penempatan</a>
