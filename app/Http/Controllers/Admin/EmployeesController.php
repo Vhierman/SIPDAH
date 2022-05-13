@@ -134,7 +134,7 @@ class EmployeesController extends Controller
     
     public function export_excel()
 	{
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
 		return Excel::download(new EmployeesExport, 'databasekaryawan.xlsx');

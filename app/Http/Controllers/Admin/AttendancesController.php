@@ -23,7 +23,7 @@ class AttendancesController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
             abort(403);
         }
         return view('pages.admin.absensi.index');
@@ -31,7 +31,7 @@ class AttendancesController extends Controller
 
     public function lihat_absensi()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' &&  auth()->user()->roles != 'LEADER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD' &&  auth()->user()->roles != 'LEADER') {
             abort(403);
         }
         return view('pages.admin.absensi.cariabsensi');
@@ -39,7 +39,7 @@ class AttendancesController extends Controller
     
     public function tampil_absensi(AttendancesLihatRequest $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
             abort(403);
         }
 

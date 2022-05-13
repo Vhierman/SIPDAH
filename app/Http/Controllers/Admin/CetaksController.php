@@ -34,7 +34,7 @@ class CetaksController extends Controller
 
     public function aktifkerja($id)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'KARYAWAN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'KARYAWAN') {
             abort(403);
         }
         $item           = Employees::findOrFail($id);
@@ -206,7 +206,7 @@ class CetaksController extends Controller
 
     public function pkwt($id)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD'&& auth()->user()->roles != 'KARYAWAN') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'KARYAWAN') {
             abort(403);
         }
         $item               = HistoryContracts::findOrFail($id);

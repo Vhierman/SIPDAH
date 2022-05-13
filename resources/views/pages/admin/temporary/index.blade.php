@@ -9,13 +9,13 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item">Dashboard</li>
                     <li class="breadcrumb-item">Master</li>
-                    <li class="breadcrumb-item active">Temporary Update</li>
+                    <li class="breadcrumb-item active">Upah Lembur Perjam</li>
                 </ol>
 
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table mr-1"></i>
-                        Data Temporary Update
+                        Data Upah Lembur Perjam
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -27,7 +27,10 @@
                                         <th>Nama Karyawan</th>
                                         <th>Nomor Handphone</th>
                                         <th>Upah Lembur Perjam</th>
-                                        <th>Action</th>
+                                        @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER')
+                                            <th>Action</th>
+                                        @else
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,12 +44,15 @@
                                             <td>{{ $item->employees->nama_karyawan }}</td>
                                             <td>{{ $item->employees->nomor_handphone }}</td>
                                             <td>{{ $item->upah_lembur_perjam }}</td>
-                                            <td>
-                                                <a href="{{ route('temporarys.edit', $item->id) }}"
-                                                    class="btn btn-success">
-                                                    <i class="fa fa-pencil-alt"></i>
-                                                </a>
-                                            </td>
+                                            @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER')
+                                                <td>
+                                                    <a href="{{ route('temporarys.edit', $item->id) }}"
+                                                        class="btn btn-success">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                    </a>
+                                                </td>
+                                            @else
+                                            @endif
                                         </tr>
                                     @endforeach
 

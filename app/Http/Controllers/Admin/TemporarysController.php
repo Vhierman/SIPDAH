@@ -22,7 +22,7 @@ class TemporarysController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
 
@@ -30,8 +30,6 @@ class TemporarysController extends Controller
             'employees'
             ])->get();
         
-            // $salaries       = HistorySalaries::where('employees_id', $nikkaryawan)->first();
-
         return view('pages.admin.temporary.index',[
             'items' => $items
         ]);
@@ -45,7 +43,7 @@ class TemporarysController extends Controller
     public function create()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -59,7 +57,7 @@ class TemporarysController extends Controller
     public function store(Request $request)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -73,7 +71,7 @@ class TemporarysController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -87,7 +85,7 @@ class TemporarysController extends Controller
     public function edit($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
         
@@ -116,7 +114,7 @@ class TemporarysController extends Controller
     public function update(TemporarysRequest $request, $id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
 
@@ -149,7 +147,7 @@ class TemporarysController extends Controller
     public function destroy($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }

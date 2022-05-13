@@ -145,7 +145,7 @@ class EmployeesOutsController extends Controller
 
     public function export_excel()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'ACCOUNTING') {
             abort(403);
         }
 		return Excel::download(new EmployeesOutExport, 'databasekaryawankeluar.xlsx');
@@ -321,7 +321,7 @@ class EmployeesOutsController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'ACCOUNTING') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
         $item           = EmployeesOuts::findOrFail($id);

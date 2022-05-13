@@ -978,7 +978,7 @@ class ProcessController extends Controller
     public function process_rekon_salary()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
         return view('pages.admin.salary.rekon_salary');
@@ -987,7 +987,7 @@ class ProcessController extends Controller
     public function tampil_rekon_salary(RekonSalaryRequest $request)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
 
@@ -1023,7 +1023,7 @@ class ProcessController extends Controller
 
     public function export_excell_rekon_salary()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
         return Excel::download(new RekonSalaryExport, 'rekonsiliasisalary.xlsx');
@@ -1031,7 +1031,7 @@ class ProcessController extends Controller
 
     public function hasil_rekon_salary(RekonSalaryRequest $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
 
@@ -1077,7 +1077,7 @@ class ProcessController extends Controller
 
     public function edit_salary($employees_id)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
         $item = 
@@ -1096,7 +1096,7 @@ class ProcessController extends Controller
 
     public function hasil_edit_salary(EditSalaryRequest $request, $employees_id)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
             abort(403);
         }
 

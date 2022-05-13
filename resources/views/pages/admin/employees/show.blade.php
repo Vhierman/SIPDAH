@@ -56,7 +56,6 @@
                                         </div>
                                     @endif
 
-
                                 </div>
                                 {{-- Foto --}}
 
@@ -455,7 +454,7 @@
                                                     </div>
                                                 </div>
 
-                                                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
+                                                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'HRD')
                                                     <div class="row">
                                                         <div class="col-lg-5 col-sm-5 mt-1">
                                                             <button type="button" class="btn btn-primary"
@@ -470,12 +469,13 @@
                                                             </a>
                                                         </div>
                                                     </div>
+                                                @elseif (Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'ACCOUNTING')
                                                     <div class="row">
                                                         <div class="col-lg-5 col-sm-5 mt-1">
-                                                            <a href="{{ route('comingsoon.index') }}"
-                                                                class="btn btn-primary">
-                                                                Lemburan
-                                                            </a>
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-bs-toggle="modal" data-bs-target="#HistoryKeluarga">
+                                                                History Keluarga
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -857,7 +857,7 @@
                                                 <td>{{ $historyfamily->nik_history_keluarga }}</td>
                                                 <td>{{ $historyfamily->nomor_bpjs_kesehatan_history_keluarga }}</td>
                                                 <td>{{ $historyfamily->nama_history_keluarga }}</td>
-                                                <td>{{ $historyfamily->tempat_lahir_history_keluarga .'-' .\Carbon\Carbon::parse($historyfamily->tanggal_lahir_history_keluarga)->isoformat('D MMMM Y') }}
+                                                <td>{{ $historyfamily->tempat_lahir_history_keluarga . '-' . \Carbon\Carbon::parse($historyfamily->tanggal_lahir_history_keluarga)->isoformat('D MMMM Y') }}
                                                 </td>
                                                 @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD')
                                                     <td>

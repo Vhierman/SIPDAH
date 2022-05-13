@@ -14,37 +14,47 @@
                     </div>
 
                     <div class="card shadow">
-
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3 d-grid gap-2 mt-2">
-                                    <a href="{{ route('absensi.lihat_absensi') }}" class="btn btn-primary btn-lg">
-                                        <i class="fas fa-search"></i>
-                                        Lihat Data
-                                    </a>
+                        @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER')
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('absensi.lihat_absensi') }}" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-search"></i>
+                                            Lihat Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('absensi.create') }}" class="btn btn-success btn-lg">
+                                            <i class="fas fa-plus"></i>
+                                            Tambah Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('absensi.form_edit') }}" class="btn btn-warning btn-lg">
+                                            <i class="fas fa-sync-alt"></i>
+                                            Edit Data
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('absensi.form_hapus') }}" class="btn btn-danger btn-lg">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Hapus Data
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 d-grid gap-2 mt-2">
-                                    <a href="{{ route('absensi.create') }}" class="btn btn-success btn-lg">
-                                        <i class="fas fa-plus"></i>
-                                        Tambah Data
-                                    </a>
-                                </div>
-                                <div class="col-md-3 d-grid gap-2 mt-2">
-                                    <a href="{{ route('absensi.form_edit') }}" class="btn btn-warning btn-lg">
-                                        <i class="fas fa-sync-alt"></i>
-                                        Edit Data
-                                    </a>
-                                </div>
-                                <div class="col-md-3 d-grid gap-2 mt-2">
-                                    <a href="{{ route('absensi.form_hapus') }}" class="btn btn-danger btn-lg">
-                                        <i class="fas fa-trash-alt"></i>
-                                        Hapus Data
-                                    </a>
-                                </div>
-
                             </div>
-                        </div>
-
+                        @elseif(Auth::user()->roles == 'MANAGER')
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 d-grid gap-2 mt-2">
+                                        <a href="{{ route('absensi.lihat_absensi') }}" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-search"></i>
+                                            Lihat Data
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

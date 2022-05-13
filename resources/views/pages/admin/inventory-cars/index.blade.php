@@ -95,6 +95,11 @@
                                                         class="btn btn-info" target="_blank">
                                                         <i class="fa fa-download"></i>
                                                     </a>
+                                                @elseif (Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'ACCOUNTING')
+                                                    <a href="{{ route('inventory_cars.show', $item->id) }}"
+                                                        class="btn btn-info" target="_blank">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
                                                 @endif
                                             </td>
                                         </tr>

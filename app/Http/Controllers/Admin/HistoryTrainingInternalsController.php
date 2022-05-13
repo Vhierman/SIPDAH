@@ -45,7 +45,7 @@ class HistoryTrainingInternalsController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
             abort(403);
         }
 
@@ -251,7 +251,7 @@ class HistoryTrainingInternalsController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN'  && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'LEADER' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -282,7 +282,7 @@ class HistoryTrainingInternalsController extends Controller
 
     public function tampilmultipletraininginternal(HistoryTrainingInternalsMultipleViewRequest $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD' && auth()->user()->roles != 'LEADER') {
             abort(403);
         }
         

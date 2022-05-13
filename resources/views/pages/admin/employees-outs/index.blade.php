@@ -71,7 +71,7 @@
                         class="btn btn-success shadow-sm mb-3">
                         <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Karyawan Keluar
                     </a>
-                @elseif (Auth::user()->roles == 'ACCOUNTING')
+                @elseif (Auth::user()->roles == 'ACCOUNTING' || Auth::user()->roles == 'MANAGER')
                     <a href="{{ route('employees_outs.export_excel') }}" target="_blank"
                         class="btn btn-success shadow-sm mb-3">
                         <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Karyawan Keluar
@@ -135,6 +135,11 @@
                                                             <i class="fa fa-trash"></i>
                                                         </button>
                                                     </form>
+                                                    <a href="{{ route('employees_outs.show', $item->id) }}"
+                                                        class="btn btn-info btn-sm" target="_blank">
+                                                        <i class="fa fa-print"></i>
+                                                    </a>
+                                                @elseif(Auth::user()->roles == 'MANAGER')
                                                     <a href="{{ route('employees_outs.show', $item->id) }}"
                                                         class="btn btn-info btn-sm" target="_blank">
                                                         <i class="fa fa-print"></i>
