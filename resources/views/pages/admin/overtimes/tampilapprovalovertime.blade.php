@@ -65,6 +65,7 @@
                                         <th>Jam Masuk</th>
                                         <th>Jam Istirahat</th>
                                         <th>Jam Pulang</th>
+                                        <th>Jumlah Jam</th>
                                         <th>Uang Makan</th>
                                         <th>Keterangan</th>
                                         <th>Status</th>
@@ -84,6 +85,7 @@
                                             <td>{{ $item->jam_masuk }}</td>
                                             <td>{{ $item->jam_istirahat }}</td>
                                             <td>{{ $item->jam_pulang }}</td>
+                                            <td>{{ $item->jam_lembur }}</td>
                                             <td>{{ $item->uang_makan_lembur }}</td>
                                             <td>{{ $item->keterangan_lembur }}</td>
                                             @if ($item->acc_hrd == null)
