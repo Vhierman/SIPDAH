@@ -49,7 +49,7 @@
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="gaji-tab" data-bs-toggle="tab"
                                             data-bs-target="#gaji" type="button" role="tab" aria-controls="gaji"
-                                            aria-selected="false">Gaji</button>
+                                            aria-selected="false">Rekening</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="foto-tab" data-bs-toggle="tab"
