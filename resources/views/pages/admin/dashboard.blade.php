@@ -15,7 +15,7 @@
                         <div class="col-lg-12">
                             <div class="panel profile-cover">
                                 <div class="profile-cover__img">
-                                    <img src="{{ Storage::url($datakaryawan->foto_karyawan) }}" alt="" />
+                                    <img src="{{ Storage::url($datakaryawan->foto_karyawan) }}" class="img-fluid" />
                                     <h3 class="h3">{{ $datakaryawan->nama_karyawan }}</h3>
                                 </div>
                                 <div class="profile-cover__action bg--img" data-overlay="0.3">

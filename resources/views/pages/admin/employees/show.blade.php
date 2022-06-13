@@ -36,7 +36,7 @@
                                 <div class="col-lg-3 mt-4 mb-4">
                                     <div class="row">
                                         <img src="{{ Storage::url($item->foto_karyawan) }}"
-                                            class="img-fluid rounded-circle">
+                                            class="img-fluid rounded-circle" style="width: 250px;height: 250px;">
                                     </div>
 
                                     @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'ACCOUNTING')
