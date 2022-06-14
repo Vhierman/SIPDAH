@@ -4325,7 +4325,7 @@ class ReportsController extends Controller
         //Desember
         // Purchasing
     
-        return view('pages.admin.laporan.absensi_department.Purchasing',[
+        return view('pages.admin.laporan.absensi_department.purchasing',[
         'ItemPurchasingSakitJanuari' => $ItemPurchasingSakitJanuari,
         'ItemPurchasingIjinJanuari' => $ItemPurchasingIjinJanuari,
         'ItemPurchasingAlpaJanuari' => $ItemPurchasingAlpaJanuari,
@@ -4905,7 +4905,7 @@ class ReportsController extends Controller
         //Desember
         // Engineering
     
-        return view('pages.admin.laporan.absensi_department.Engineering',[
+        return view('pages.admin.laporan.absensi_department.engineering',[
         'ItemEngineeringSakitJanuari' => $ItemEngineeringSakitJanuari,
         'ItemEngineeringIjinJanuari' => $ItemEngineeringIjinJanuari,
         'ItemEngineeringAlpaJanuari' => $ItemEngineeringAlpaJanuari,
@@ -5485,7 +5485,7 @@ class ReportsController extends Controller
         //Desember
         // Quality
     
-        return view('pages.admin.laporan.absensi_department.Quality',[
+        return view('pages.admin.laporan.absensi_department.quality',[
         'ItemQualitySakitJanuari' => $ItemQualitySakitJanuari,
         'ItemQualityIjinJanuari' => $ItemQualityIjinJanuari,
         'ItemQualityAlpaJanuari' => $ItemQualityAlpaJanuari,
