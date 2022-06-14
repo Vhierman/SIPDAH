@@ -51,6 +51,7 @@ class Employees extends Model
         'tanggal_mulai_kerja',
         'tanggal_akhir_kerja',
         'status_kerja',
+        'golongan',
         'nama_bank',
         'nomor_rekening',
         'input_oleh',

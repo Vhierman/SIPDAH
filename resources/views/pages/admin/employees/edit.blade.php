@@ -408,6 +408,24 @@
 
                                     <div class="tab-pane fade" id="gaji" role="tabpanel" aria-labelledby="gaji-tab">
                                         <div class="form-group mt-4">
+                                            <label for="golongan">Golongan</label>
+                                            <select name="golongan" class="form-select">
+                                                <option value="">Pilih Golongan</option>
+                                                <option value="I"
+                                                    @if ($item->golongan == 'I') {{ 'selected="selected"' }} @endif>
+                                                    I</option>
+                                                <option value="II"
+                                                    @if ($item->golongan == 'II') {{ 'selected="selected"' }} @endif>
+                                                    II</option>
+                                                <option value="III"
+                                                    @if ($item->golongan == 'III') {{ 'selected="selected"' }} @endif>
+                                                    III</option>
+                                                <option value="IV"
+                                                    @if ($item->golongan == 'IV') {{ 'selected="selected"' }} @endif>
+                                                    IV</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2">
                                             <label for="title" class="form-label">Nomor Rekening</label>
                                             <input type="text" maxlength="30" class="form-control" name="nomor_rekening"
                                                 placeholder="Masukan Nomor Rekening (Tanpa Karakter Khusus Hanya Angka)"

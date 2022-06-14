@@ -385,6 +385,24 @@
                                     </div>
 
                                     <div class="tab-pane fade" id="gaji" role="tabpanel" aria-labelledby="gaji-tab">
+                                        <div class="form-group  mt-2">
+                                            <label for="golongan">Golongan</label>
+                                            <select name="golongan" class="form-select">
+                                                <option value="">Pilih Golongan</option>
+                                                <option value="I"
+                                                    @if (old('golongan') == 'I') {{ 'selected' }} @endif>I
+                                                </option>
+                                                <option value="II"
+                                                    @if (old('golongan') == 'II') {{ 'selected' }} @endif>II
+                                                </option>
+                                                <option value="III"
+                                                    @if (old('golongan') == 'III') {{ 'selected' }} @endif>III
+                                                </option>
+                                                <option value="IV"
+                                                    @if (old('golongan') == 'IV') {{ 'selected' }} @endif>
+                                                    IV</option>
+                                            </select>
+                                        </div>
                                         <div class="form-group mt-4">
                                             <label for="title" class="form-label">Nomor Rekening</label>
                                             <input type="text" maxlength="30" class="form-control" name="nomor_rekening"
