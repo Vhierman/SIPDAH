@@ -1338,11 +1338,23 @@ class OvertimesController extends Controller
             $jumlahuangditerima = $jumlahuanglembur + $uangmakanlembur;
             
             $jumlahuangditerimapembulatan = ceil($jumlahuangditerima);
-            if (substr($jumlahuangditerimapembulatan, -2) <= 0) {
-                $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2);
-            } else {
-                $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2) + 100;
+            // if (substr($jumlahuangditerimapembulatan, -2) <= 0) {
+            //     $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2);
+            // } else {
+            //     $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2) + 100;
+            // }
+            if (substr($jumlahuangditerimapembulatan,-2)>50 && substr($jumlahuangditerimapembulatan,-2)<100){
+                $total_jumlahuangditerima=round($jumlahuangditerimapembulatan,-2);
             }
+            elseif (substr($jumlahuangditerimapembulatan,-2)<50 && substr($jumlahuangditerimapembulatan,-2)>0){
+                $total_jumlahuangditerima=round($jumlahuangditerimapembulatan,-2)+100;
+            }
+            elseif (substr($jumlahuangditerimapembulatan,-2)<=0){
+                $total_jumlahuangditerima=round($jumlahuangditerimapembulatan,-2);
+            }
+            else {
+                $total_jumlahuangditerima = 0;
+            } 
             
 
             $this->fpdf->SetFont('Arial', '', '7');
@@ -1590,11 +1602,24 @@ class OvertimesController extends Controller
             $jumlahuangditerima = $jumlahuanglembur + $uangmakanlembur;
             
             $jumlahuangditerimapembulatan = ceil($jumlahuangditerima);
-            if (substr($jumlahuangditerimapembulatan, -2) <= 0) {
-                $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2);
-            } else {
-                $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2) + 100;
+            // if (substr($jumlahuangditerimapembulatan, -2) <= 0) {
+            //     $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2);
+            // } else {
+            //     $total_jumlahuangditerima = round($jumlahuangditerimapembulatan, -2) + 100;
+            // }
+
+            if (substr($jumlahuangditerimapembulatan,-2)>50 && substr($jumlahuangditerimapembulatan,-2)<100){
+                $total_jumlahuangditerima=round($jumlahuangditerimapembulatan,-2);
             }
+            elseif (substr($jumlahuangditerimapembulatan,-2)<50 && substr($jumlahuangditerimapembulatan,-2)>0){
+                $total_jumlahuangditerima=round($jumlahuangditerimapembulatan,-2)+100;
+            }
+            elseif (substr($jumlahuangditerimapembulatan,-2)<=0){
+                $total_jumlahuangditerima=round($jumlahuangditerimapembulatan,-2);
+            }
+            else {
+                $total_jumlahuangditerima = 0;
+            } 
             
 
             $this->fpdf->SetFont('Arial', '', '7');
