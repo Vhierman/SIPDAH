@@ -27,7 +27,7 @@
                         <h5 class="card-title">Perubahan Kebijakan Privasi Kami</h5>
                         <p>Kami dapat mengubah atau merevisi Kebijakan Privasi. Setiap perubahan pada Kebijakan Privasi ini
                             akan menjadi efektif ketika kami mengumumkan versi revisi melalui situs
-                            https://hrd-ga.achmadfirmansyah.web.id/admin/privacypolicy Kami sangat menganjurkan Anda untuk
+                            https://hrd.achmadfirmansyah.web.id/admin/privacypolicy Kami sangat menganjurkan Anda untuk
                             mengakses situs
                             kami secara berkala agar mengetahui perubahan-perubahan terbaru. Dengan terus mengakses aplikasi
                             HRD-GA, Anda dianggap telah menerima dan menyetujui segala perubahan. </p>

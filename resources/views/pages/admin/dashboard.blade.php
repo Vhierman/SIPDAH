@@ -63,8 +63,7 @@
                                                 <div class="accordion-body">
                                                     <div class="alert alert-danger" role="alert">
                                                         Jika Biodata Diri, Status Pekerjaan, Dan Data Keluarga Ada yang
-                                                        tidak sesuai dengan data sebenarnya, Harap Menghubungi Leader untuk
-                                                        di teruskan ke Bagian HRD-GA....!!
+                                                        tidak sesuai dengan data sebenarnya, Harap Menghubungi HRD-GA....!!
                                                     </div>
                                                     <div class="alert alert-danger" role="alert">
                                                         Ganti Foto Profile Dengan Maksimal Size 500KB....!!
@@ -262,7 +261,7 @@
                                                                 value="{{ $datakaryawan->nomor_rekening }}">
                                                         </div>
                                                         <label for="staticEmail" class="col-sm-2 col-form-label"><b>Nomor
-                                                                JKN</b></label>
+                                                                Kesehatan</b></label>
                                                         <div class="col-sm-4">
                                                             <input type="text" readonly class="form-control-plaintext"
                                                                 id="staticEmail" value="{{ $datakaryawan->nomor_jkn }}">
@@ -270,7 +269,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <label for="staticEmail" class="col-sm-2 col-form-label"><b>Nomor
-                                                                JHT</b></label>
+                                                                BPJSTK</b></label>
                                                         <div class="col-sm-4">
                                                             <input type="text" readonly class="form-control-plaintext"
                                                                 id="staticEmail" value="{{ $datakaryawan->nomor_jht }}">
