@@ -442,7 +442,7 @@ class OvertimesController extends Controller
             'areas',
             'divisions',
             'positions'
-            ])->get();
+            ])->whereIn('golongan', ['II','III'])->get();
 
         return view ('pages.admin.overtimes.slipkaryawanovertime',[
             'items'     => $items
@@ -1069,6 +1069,7 @@ class OvertimesController extends Controller
             abort(403);
         }
         
+        $golongan       = $request->input('golongan');
         $divisions_id   = $request->input('divisions_id');
         $status_kerja   = $request->input('status_kerja');
         $awal           = $request->input('awal');
@@ -1103,11 +1104,13 @@ class OvertimesController extends Controller
         ->where('overtimes.acc_hrd','<>',NULL)
         ->where('overtimes.deleted_at',NULL)
         ->where('status_kerja',$status_kerja)
+        ->where('golongan',$golongan)
         ->whereBetween('tanggal_lembur', [$awal, $akhir])
         ->orderBy('nama_karyawan')
         ->get();
 
         return view('pages.admin.overtimes.tampilrekapovertimes',[
+            'golongan'              => $golongan,
             'divisions_id'          => $divisions_id,
             'status_kerja'          => $status_kerja,
             'items'                 => $items,
@@ -1136,6 +1139,7 @@ class OvertimesController extends Controller
             abort(403);
         }
 
+        $golongan       = $request->input('golongan');
         $divisions_id   = $request->input('divisions_id');
         $status_kerja   = $request->input('status_kerja');
         $awal           = $request->input('awal');
@@ -1170,6 +1174,7 @@ class OvertimesController extends Controller
         ->where('overtimes.acc_hrd','<>',NULL)
         ->where('overtimes.deleted_at',NULL)
         ->where('status_kerja',$status_kerja)
+        ->where('golongan',$golongan)
         ->whereBetween('tanggal_lembur', [$awal, $akhir])
         ->orderBy('nama_karyawan')
         ->get();
@@ -1287,6 +1292,7 @@ class OvertimesController extends Controller
                             ->where('overtimes.employees_id', $item->employees_id)
                             ->where('overtimes.acc_hrd', '<>', null)
                             ->where('overtimes.deleted_at', null)
+                            ->where('employees.golongan', $golongan)
                             ->whereMonth('rekap_salaries.periode_awal', $bulanawal)
                             ->whereMonth('rekap_salaries.periode_akhir', $bulanakhir)
                             ->whereBetween('tanggal_lembur', [$awal, $akhir])
@@ -1401,7 +1407,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [11])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('golongan', ['II','III'])->whereIn('divisions_id', [11])->get();
         }
         //PDC
         elseif ($divisi == 19) {
@@ -1410,7 +1416,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [19,20,21,22])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('golongan', ['II','III'])->whereIn('divisions_id', [19,20,21,22])->get();
         } 
         //IC
         elseif ($divisi == 2) {
@@ -1419,7 +1425,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [2])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('golongan', ['II','III'])->whereIn('divisions_id', [2])->get();
         } 
         //Engineering
         elseif ($divisi == 7) {
@@ -1428,7 +1434,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [7])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('golongan', ['II','III'])->whereIn('divisions_id', [7])->get();
         } 
         //Quality
         elseif ($divisi == 8) {
@@ -1437,7 +1443,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [8])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('golongan', ['II','III'])->whereIn('divisions_id', [8])->get();
         } 
         //Purchasing
         elseif ($divisi == 9) {
@@ -1446,7 +1452,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [9])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('golongan', ['II','III'])->whereIn('divisions_id', [9])->get();
         } 
         //PPC
         elseif ($divisi == 10) {
@@ -1455,7 +1461,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->where('status_kerja','<>','Outsourcing')->whereIn('divisions_id', [12,13,14,15,18])->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('golongan', ['II','III'])->whereIn('divisions_id', [12,13,14,15,18])->get();
         } 
         //HRD-GA
         elseif ($divisi == 4) {
@@ -1464,7 +1470,7 @@ class OvertimesController extends Controller
                 'areas',
                 'divisions',
                 'positions'
-                ])->where('status_kerja','<>','Outsourcing')->get();
+                ])->where('status_kerja','<>','Outsourcing')->whereIn('golongan', ['II','III'])->get();
         } 
         else {
             abort(403);

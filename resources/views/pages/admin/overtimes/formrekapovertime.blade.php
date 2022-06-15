@@ -75,6 +75,19 @@
                                     </div>
 
                                     <div class="form-group mt-2">
+                                        <label for="golongan">Data</label>
+                                        <select name="golongan" class="form-select">
+                                            <option value="">Pilih Data</option>
+                                            <option value="II"
+                                                @if (old('golongan') == 'II') {{ 'selected' }} @endif>Susan
+                                            </option>
+                                            <option value="III"
+                                                @if (old('golongan') == 'III') {{ 'selected' }} @endif>Ghufron
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mt-2">
                                         <label for="title" class="form-label">Mulai dari</label>
                                         <input type="date" class="form-control" name="awal" placeholder="DD-MM-YYYY"
                                             value="{{ old('awal') }}">

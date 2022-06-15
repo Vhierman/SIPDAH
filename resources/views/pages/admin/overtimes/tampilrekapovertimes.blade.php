@@ -35,6 +35,10 @@
                             <input type="text" class="form-control" name="status_kerja" readonly
                                 value="{{ $status_kerja }}">
                         </div>
+                        <div class="form-group mt-2">
+                            <input type="hidden" class="form-control" name="golongan" readonly
+                                value="{{ $golongan }}">
+                        </div>
                         <div class="d-grid gap-2 mt-2">
                             <button type="submit" class="btn btn-danger btn-block">
                                 <i class="fas fa-download fa-sm text-white-50"></i>
