@@ -1198,7 +1198,7 @@ class OvertimesController extends Controller
         
         $items = DB::table('overtimes')
         ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
-        ->groupBy('employees_id','nama_karyawan','status_kerja')
+        ->groupBy('employees_id','nama_karyawan','status_kerja','divisions_id')
         ->select('employees_id','nama_karyawan','status_kerja', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
         ->where('overtimes.acc_hrd','<>',NULL)
         ->where('overtimes.deleted_at',NULL)
