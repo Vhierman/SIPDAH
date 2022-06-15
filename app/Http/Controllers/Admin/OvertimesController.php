@@ -1449,7 +1449,7 @@ class OvertimesController extends Controller
 
         $items = DB::table('overtimes')
         ->join('employees', 'employees.nik_karyawan', '=', 'overtimes.employees_id')
-        ->groupBy('employees_id','nama_karyawan','status_kerja')
+        ->groupBy('employees_id','nama_karyawan','status_kerja','divisions_id')
         ->select('employees_id','nama_karyawan','status_kerja', DB::raw('sum(jumlah_jam_pertama) as jumlah_jam_pertama'),DB::raw('sum(jumlah_jam_kedua) as jumlah_jam_kedua'),DB::raw('sum(jumlah_jam_ketiga) as jumlah_jam_ketiga'),DB::raw('sum(jumlah_jam_keempat) as jumlah_jam_keempat'),DB::raw('sum(uang_makan_lembur) as uang_makan_lembur'))
         ->whereIn('divisions_id',$divisi)
         ->where('overtimes.acc_hrd','<>',NULL)
@@ -1457,6 +1457,7 @@ class OvertimesController extends Controller
         ->where('status_kerja',$status_kerja)
         ->where('golongan',$golongan)
         ->whereBetween('tanggal_lembur', [$awal, $akhir])
+        ->orderBy('divisions_id')
         ->orderBy('nama_karyawan')
         ->get();
 
@@ -1497,7 +1498,7 @@ class OvertimesController extends Controller
             $this->fpdf->SetFillColor(255, 255, 255); // Warna sel tabel header
             $this->fpdf->Cell(1, 0.9, 'No', 1, 0, 'C', 1);
             $this->fpdf->Cell(4, 0.9, 'Nama Karyawan', 1, 0, 'C', 1);
-            $this->fpdf->Cell(3, 0.9, 'Jabatan', 1, 0, 'C', 1);
+            $this->fpdf->Cell(3, 0.9, 'Penempatan', 1, 0, 'C', 1);
             $this->fpdf->Cell(1.5, 0.9, '', 1, 0, 'C', 1);
             $this->fpdf->Cell(1.5, 0.9, '', 1, 0, 'C', 1);
             $this->fpdf->Cell(3, 0.9, 'Jumlah Uang Lembur', 1, 0, 'C', 1);
@@ -1601,7 +1602,7 @@ class OvertimesController extends Controller
             $this->fpdf->Cell(0.1);
             $this->fpdf->Cell(1, 0.4, $no, 1, 0, 'C');
             $this->fpdf->Cell(4, 0.4, $namakaryawan, 1, 0, 'L');
-            $this->fpdf->Cell(3, 0.4, $jabatan, 1, 0, 'L');
+            $this->fpdf->Cell(3, 0.4, $penempatan, 1, 0, 'L');
             $this->fpdf->Cell(1.5, 0.4, $jumlahjam, 1, 0, 'C');
 
             $this->fpdf->Cell(1.5, 0.4, number_format($upahlemburperjam), 1, 0, 'C');
