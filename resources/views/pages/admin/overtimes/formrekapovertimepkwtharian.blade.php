@@ -31,41 +31,23 @@
 
                     <div class="card shadow">
                         <div class="card-body">
-                            <form action="{{ route('overtimes.form_lihat_rekap_overtime') }}" method="post"
+                            <form action="{{ route('overtimes.form_lihat_rekap_overtime_pkwt_harian') }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
+
                                     <div class="form-group mt-2">
                                         <label for="status_kerja">Status Kerja</label>
-                                        <input type="text" class="form-control" readonly name="status_kerja"
-                                            value="PKWTT">
-                                    </div>
-
-                                    <div class="form-group mt-2">
-                                        <label for="divisions_id">Divisi</label>
-                                        <select name="divisions_id" class="form-select">
-                                            <option value="">Pilih Divisi</option>
-                                            <option value="PDC"
-                                                @if (old('divisions_id') == 'PDC') {{ 'selected' }} @endif>PDC
+                                        <select name="status_kerja" class="form-select">
+                                            <option value="">Pilih Status Kerja</option>
+                                            <option value="PKWT"
+                                                @if (old('status_kerja') == 'PKWT') {{ 'selected' }} @endif>Kontrak
                                             </option>
-                                            <option value="Office"
-                                                @if (old('divisions_id') == 'Office') {{ 'selected' }} @endif>Office
+                                            <option value="Harian"
+                                                @if (old('status_kerja') == 'Harian') {{ 'selected' }} @endif>Harian
                                             </option>
-                                            <option value="Produksi"
-                                                @if (old('divisions_id') == 'Produksi') {{ 'selected' }} @endif>Produksi
-                                            </option>
-                                            <option value="Quality"
-                                                @if (old('divisions_id') == 'Quality') {{ 'selected' }} @endif>Quality
-                                            </option>
-                                            <option value="PPC"
-                                                @if (old('divisions_id') == 'PPC') {{ 'selected' }} @endif>PPC
-                                            </option>
-
-
                                         </select>
                                     </div>
-
-
 
                                     <div class="form-group mt-2">
                                         <label for="golongan">Data</label>

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RekapOvertimesRequest extends FormRequest
+class RekapOvertimesPkwtHarianRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,8 @@ class RekapOvertimesRequest extends FormRequest
     {
         return [
             //
-            'divisions_id'      => 'required',
-            'golongan'          => 'required',
             'status_kerja'      => 'required',
+            'golongan'          => 'required',
             'awal'              => 'required|date',
             'akhir'             => 'required|date'
         ];

@@ -10,7 +10,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table mr-1"></i>
-                        Data Lemburs
+                        Data Lembur
                     </div>
 
                     <div class="card shadow">
@@ -58,7 +58,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-3 d-grid gap-2 mt-2">
-                                        <a href="{{ route('overtimes.form_cetak_rekap_overtime') }}"
+                                        <a href="{{ route('overtimes.form_rekap_overtime') }}"
                                             class="btn btn-warning btn-lg">
                                             <i class="fas fa-print"></i>
                                             Cetak Rekap
@@ -101,7 +101,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-3 d-grid gap-2 mt-2">
-                                        <a href="{{ route('overtimes.form_cetak_rekap_overtime') }}"
+                                        <a href="{{ route('overtimes.form_rekap_overtime') }}"
                                             class="btn btn-warning btn-lg">
                                             <i class="fas fa-print"></i>
                                             Cetak Rekap
