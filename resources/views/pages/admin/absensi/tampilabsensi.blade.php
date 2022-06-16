@@ -24,7 +24,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Karyawan</th>
+                                        <th>Jenis</th>
                                         <th>Penempatan</th>
+                                        <th>Status</th>
                                         <th>Tanggal Absen</th>
                                         <th>Jenis Absen</th>
                                         <th>Keterangan</th>
@@ -38,7 +40,9 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $item->nama_karyawan }}</td>
+                                            <td>{{ $item->golongan }}</td>
                                             <td>{{ $item->penempatan }}</td>
+                                            <td>{{ $item->status_kerja }}</td>
                                             <td>{{ \Carbon\Carbon::parse($item->tanggal_absen)->isoformat('DD-MM-Y') }}
                                             </td>
                                             <td>{{ $item->keterangan_absen }}</td>
