@@ -189,7 +189,7 @@ class HistoryTrainingInternalsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function storemultipletraininginternal(HistoryTrainingInternalsRequest $request)
+    public function storemultipletraininginternal(HistoryTrainingInternalsMultipleRequest $request)
     {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
@@ -216,7 +216,7 @@ class HistoryTrainingInternalsController extends Controller
         return redirect()->route('history_training_internal.index');
     }
 
-    public function store(HistoryTrainingInternalsMultipleRequest $request)
+    public function store(HistoryTrainingInternalsRequest $request)
     {
         //
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
