@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\HistoryTrainingInternalsRequest;
 use App\Http\Requests\Admin\HistoryTrainingInternalsMultipleViewRequest;
+use App\Http\Requests\Admin\HistoryTrainingInternalsMultipleRequest;
 use App\Models\Admin\Employees;
 use App\Models\Admin\Companies;
 use App\Models\Admin\Areas;
@@ -215,7 +216,7 @@ class HistoryTrainingInternalsController extends Controller
         return redirect()->route('history_training_internal.index');
     }
 
-    public function store(HistoryTrainingInternalsRequest $request)
+    public function store(HistoryTrainingInternalsMultipleRequest $request)
     {
         //
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
