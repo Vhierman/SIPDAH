@@ -38,15 +38,13 @@
                     <div class="collapse" id="collapseStudents" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link"
-                                href="{{ route('dashboard.form_slip_lembur_karyawan') }}">Lemburan</a>
+                            <a class="nav-link" href="{{ route('dashboard.form_slip_lembur_karyawan') }}">Lemburan</a>
                         </nav>
                     </div>
                     <div class="collapse" id="collapseStudents" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link"
-                                href="{{ route('dashboard.form_absensi_karyawan') }}">Absensi</a>
+                            <a class="nav-link" href="{{ route('dashboard.form_absensi_karyawan') }}">Absensi</a>
                         </nav>
                     </div>
                 @endif
@@ -95,8 +93,7 @@
                                 Upah</a>
                             <a class="nav-link" href="{{ route('maksimalbpjskesehatan.index') }}">Maksimal Upah
                                 BPJS Kesehatan</a>
-                            <a class="nav-link"
-                                href="{{ route('maksimalbpjsketenagakerjaan.index') }}">Maksimal
+                            <a class="nav-link" href="{{ route('maksimalbpjsketenagakerjaan.index') }}">Maksimal
                                 Upah BPJS Ketenagakerjaan</a>
                             {{-- Temporary Update --}}
                             <a class="nav-link" href="{{ route('temporarys.index') }}">Upah Lembur Perjam</a>
@@ -198,8 +195,7 @@
                     <div class="collapse" id="collapseTraining" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link"
-                                href="{{ route('history_training_internal.index') }}">Internal</a>
+                            <a class="nav-link" href="{{ route('history_training_internal.index') }}">Internal</a>
                         </nav>
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link"
@@ -261,13 +257,13 @@
                                 Harian</a>
                         </nav>
                     </div>
-                    <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
+                    {{-- <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('process.process_magang') }}">Cetak PKWT
                                 Harian Lepas</a>
                         </nav>
-                    </div>
+                    </div> --}}
                     <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -320,13 +316,13 @@
                                 Harian</a>
                         </nav>
                     </div>
-                    <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
+                    {{-- <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('process.process_magang') }}">Cetak PKWT
                                 Harian Lepas</a>
                         </nav>
-                    </div>
+                    </div> --}}
                     <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -385,8 +381,7 @@
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link"
-                                        href="{{ route('reports.absensi_department_pdc') }}">PDC
+                                    <a class="nav-link" href="{{ route('reports.absensi_department_pdc') }}">PDC
                                         Daihatsu</a>
                                     <a class="nav-link"
                                         href="{{ route('reports.absensi_department_produksi') }}">Produksi</a>
@@ -512,8 +507,7 @@
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link"
-                                        href="{{ route('reports.absensi_department_pdc') }}">PDC
+                                    <a class="nav-link" href="{{ route('reports.absensi_department_pdc') }}">PDC
                                         Daihatsu</a>
                                     <a class="nav-link"
                                         href="{{ route('reports.absensi_department_produksi') }}">Produksi</a>
@@ -646,8 +640,7 @@
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link"
-                                        href="{{ route('reports.absensi_department_pdc') }}">PDC
+                                    <a class="nav-link" href="{{ route('reports.absensi_department_pdc') }}">PDC
                                         Daihatsu</a>
                                     <a class="nav-link"
                                         href="{{ route('reports.absensi_department_produksi') }}">Produksi</a>
