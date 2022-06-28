@@ -129,6 +129,7 @@ Route::prefix('admin')
         Route::post('reports/cetak_slip_gaji', 'ReportsController@cetak_slip_gaji')->name('reports.cetak_slip_gaji');
         Route::post('reports/tampil_rekap_salary', 'ReportsController@tampil_rekap_salary')->name('reports.tampil_rekap_salary');
         Route::post('reports/export_excell_rekap_salary', 'ReportsController@export_excell_rekap_salary')->name('reports.export_excell_rekap_salary');
+        Route::post('reports/cancel_rekap_salary', 'ReportsController@cancel_rekap_salary')->name('reports.cancel_rekap_salary');
         Route::get('reports/absensi_karyawan', 'ReportsController@absensi_karyawan')->name('reports.absensi_karyawan');
         Route::get('reports/absensi_department_pdc', 'ReportsController@absensi_department_pdc')->name('reports.absensi_department_pdc');
         Route::get('reports/absensi_department_produksi', 'ReportsController@absensi_department_produksi')->name('reports.absensi_department_produksi');

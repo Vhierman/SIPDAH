@@ -49,8 +49,7 @@
 
                 <div class="card shadow">
                     <div class="card-body">
-                        <form action="{{ route('reports.export_excell_rekap_salary') }}" method="POST"
-                            class="d-inline">
+                        <form action="{{ route('reports.export_excell_rekap_salary') }}" method="POST" class="d-inline">
                             @csrf
                             <div class="form-group">
 
@@ -69,9 +68,26 @@
                                         {{ \Carbon\Carbon::parse($awal)->isoformat('D MMMM Y') }} s/d
                                         {{ \Carbon\Carbon::parse($akhir)->isoformat('D MMMM Y') }}
                                     </button>
-                                    <a href="{{ route('process.process_pkwt_harian') }}" class="btn btn-danger btn-block">
-                                        Cancel
-                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="{{ route('reports.cancel_rekap_salary') }}" method="POST" class="d-inline">
+                            @csrf
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" name="awal" readonly
+                                    value="{{ $awal }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" name="akhir" readonly
+                                    value="{{ $akhir }}">
+                            </div>
+                            <div class="form-group">
+                                <div class="d-grid gap-2 mt-2">
+                                    <button type="submit" class="btn btn-danger btn-block">
+                                        Cancel Rekap Gaji Periode
+                                        {{ \Carbon\Carbon::parse($awal)->isoformat('D MMMM Y') }} s/d
+                                        {{ \Carbon\Carbon::parse($akhir)->isoformat('D MMMM Y') }}
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -113,7 +129,8 @@
                                             <td>{{ number_format($item->take_home_pay) }}</td>
                                             <td align=center>
                                                 <a type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#ViewSalary" onclick="viewdata(
+                                                    data-bs-target="#ViewSalary"
+                                                    onclick="viewdata(
                                                                             '{{ $item->nik_karyawan }}',
                                                                             '{{ $item->nama_karyawan }}',
                                                                             '{{ $item->jabatan }}',
@@ -247,40 +264,47 @@
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">POT BPJKS Perusahaan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="potongan_bpjsks_perusahaan">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="potongan_bpjsks_perusahaan">
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">POT JHT Perusahaan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="potongan_jht_perusahaan">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="potongan_jht_perusahaan">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">POT JP Perusahaan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="potongan_jp_perusahaan">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="potongan_jp_perusahaan">
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">POT JKM Perusahaan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="potongan_jkm_perusahaan">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="potongan_jkm_perusahaan">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">POT JKK Perusahaan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="potongan_jkk_perusahaan">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="potongan_jkk_perusahaan">
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">Jmlh BPJSTK Perusahaan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="jumlah_bpjstk_perusahaan">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="jumlah_bpjstk_perusahaan">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">POT BPJSKS Karyawan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="potongan_bpjsks_karyawan">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="potongan_bpjsks_karyawan">
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">POT JHT Karyawan</label>
                             <div class="col-sm-3">
@@ -295,7 +319,8 @@
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">Jmlh BPJSTK Karyawan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="jumlah_bpjstk_karyawan">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="jumlah_bpjstk_karyawan">
                             </div>
                         </div>
 

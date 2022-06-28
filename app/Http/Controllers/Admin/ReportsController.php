@@ -88,6 +88,24 @@ class ReportsController extends Controller
         return Excel::download(new RekapSalaryExport($awal), 'rekapsalary.xlsx');
     }
 
+    public function cancel_rekap_salary(RekapSalaryRequest $request)
+    {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'ACCOUNTING') {
+            abort(403);
+        } 
+        
+        $awal       = $request->input('awal');
+        $akhir      = $request->input('akhir');
+
+        $rekapsalaries      = RekapSalaries::where('periode_awal',$awal)
+                            ->delete();
+        
+        Alert::success('Success Cancel Rekap Gaji','Oleh '.auth()->user()->name);
+        //Redirect
+        return redirect()->route('reports.rekap_salary');
+
+    }
+
     public function cetak_slip_gaji(Request $request)
     {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'ACCOUNTING') {
