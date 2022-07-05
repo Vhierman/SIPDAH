@@ -18,12 +18,12 @@ class MinimalSalariesController extends Controller
     public function index()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
 
         $items = MinimalSalaries::all();
-        return view('pages.admin.minimal-upah.index',[
+        return view('pages.admin.minimal-upah.index', [
             'items' => $items
         ]);
     }
@@ -36,7 +36,7 @@ class MinimalSalariesController extends Controller
     public function create()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -50,7 +50,7 @@ class MinimalSalariesController extends Controller
     public function store(Request $request)
     {
         //
-        if (auth()->user()->roles != 'ADMIN'  && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -64,7 +64,7 @@ class MinimalSalariesController extends Controller
     public function show($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN'  && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }
@@ -78,14 +78,14 @@ class MinimalSalariesController extends Controller
     public function edit($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN'  && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
 
         $item = MinimalSalaries::findOrFail($id);
 
-        return view('pages.admin.minimal-upah.edit',[
-        'item' => $item
+        return view('pages.admin.minimal-upah.edit', [
+            'item' => $item
         ]);
     }
 
@@ -99,13 +99,13 @@ class MinimalSalariesController extends Controller
     public function update(MinimalSalariesRequest $request, $id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
         $data = $request->all();
         $item = MinimalSalaries::findOrFail($id);
         $item->update($data);
-        Alert::info('Success Edit Data Minimal Upah','Oleh '.auth()->user()->name);
+        Alert::info('Success Edit Data Minimal Upah', 'Oleh ' . auth()->user()->name);
         return redirect()->route('minimalupah.index');
     }
 
@@ -118,7 +118,7 @@ class MinimalSalariesController extends Controller
     public function destroy($id)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER' && auth()->user()->roles != 'HRD') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
     }

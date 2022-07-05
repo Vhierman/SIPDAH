@@ -39,7 +39,7 @@
                                             class="img-fluid rounded-circle" style="width: 250px;height: 250px;">
                                     </div>
 
-                                    @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'ACCOUNTING')
+                                    @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'MANAGER ACCOUNTING' || Auth::user()->roles == 'ACCOUNTING')
                                         <div class="text-center mt-4">
                                             <a href="{{ Storage::url($item->foto_ktp) }}" target="_blank"
                                                 class="btn btn-primary btn-block">
@@ -454,7 +454,7 @@
                                                     </div>
                                                 </div>
 
-                                                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'HRD')
+                                                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'HRD' )
                                                     <div class="row">
                                                         <div class="col-lg-5 col-sm-5 mt-1">
                                                             <button type="button" class="btn btn-primary"
@@ -469,7 +469,7 @@
                                                             </a>
                                                         </div>
                                                     </div>
-                                                @elseif (Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'ACCOUNTING')
+                                                @elseif (Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'MANAGER ACCOUNTING' || Auth::user()->roles == 'ACCOUNTING')
                                                     <div class="row">
                                                         <div class="col-lg-5 col-sm-5 mt-1">
                                                             <button type="button" class="btn btn-primary"

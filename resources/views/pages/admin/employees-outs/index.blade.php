@@ -71,7 +71,7 @@
                         class="btn btn-success shadow-sm mb-3">
                         <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Karyawan Keluar
                     </a>
-                @elseif (Auth::user()->roles == 'ACCOUNTING' || Auth::user()->roles == 'MANAGER')
+                @elseif (Auth::user()->roles == 'ACCOUNTING' || Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'MANAGER ACCOUNTING')
                     <a href="{{ route('employees_outs.export_excel') }}" target="_blank"
                         class="btn btn-success shadow-sm mb-3">
                         <i class="fas fa-download fa-sm text-white-50"></i> Download Excell Karyawan Keluar
@@ -230,7 +230,8 @@
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">NPWP</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="nomor_npwp_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="nomor_npwp_karyawan_keluar">
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">No Handphone</label>
                             <div class="col-sm-3">
@@ -267,11 +268,13 @@
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">JHT</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="nomor_jht_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="nomor_jht_karyawan_keluar">
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">JKN</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="nomor_jkn_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="nomor_jkn_karyawan_keluar">
                             </div>
                         </div>
 
@@ -295,7 +298,8 @@
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">Alamat</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="alamat_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="alamat_karyawan_keluar">
                             </div>
                         </div>
 
@@ -313,11 +317,13 @@
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Kelurahan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="kelurahan_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="kelurahan_karyawan_keluar">
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">Kecamatan</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="kecamatan_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="kecamatan_karyawan_keluar">
                             </div>
                         </div>
 
@@ -328,7 +334,8 @@
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">Provinsi</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="provinsi_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="provinsi_karyawan_keluar">
                             </div>
                         </div>
 
@@ -361,11 +368,13 @@
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Nama Ayah</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="nama_ayah_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="nama_ayah_karyawan_keluar">
                             </div>
                             <label for="staticEmail" class="col-sm-3 col-form-label">Nama Ibu</label>
                             <div class="col-sm-3">
-                                <input type="text" readonly class="form-control-plaintext" id="nama_ibu_karyawan_keluar">
+                                <input type="text" readonly class="form-control-plaintext"
+                                    id="nama_ibu_karyawan_keluar">
                             </div>
                         </div>
 

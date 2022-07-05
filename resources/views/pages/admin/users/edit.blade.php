@@ -38,8 +38,8 @@
 
                                     <div class="form-group mt-2">
                                         <label for="title" class="form-label">Email</label>
-                                        <input type="text" class="form-control" name="email" placeholder="Masukan Email"
-                                            value="{{ $item->email }}">
+                                        <input type="text" class="form-control" name="email"
+                                            placeholder="Masukan Email" value="{{ $item->email }}">
                                     </div>
 
                                     <div class="form-group mt-2">
@@ -73,9 +73,13 @@
                                             <option value="LEADER"
                                                 @if ($item->roles == 'LEADER') {{ 'selected="selected"' }} @endif>
                                                 LEADER</option>
-                                            <option value="MANAGER"
-                                                @if ($item->roles == 'MANAGER') {{ 'selected="selected"' }} @endif>
-                                                MANAGER
+                                            <option value="MANAGER HRD"
+                                                @if ($item->roles == 'MANAGER HRD') {{ 'selected="selected"' }} @endif>
+                                                MANAGER HRD
+                                            </option>
+                                            <option value="MANAGER ACCOUNTING"
+                                                @if ($item->roles == 'MANAGER ACCOUNTING') {{ 'selected="selected"' }} @endif>
+                                                MANAGER ACCOUNTING
                                             </option>
                                             <option value="KARYAWAN"
                                                 @if ($item->roles == 'KARYAWAN') {{ 'selected="selected"' }} @endif>

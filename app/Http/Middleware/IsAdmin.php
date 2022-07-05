@@ -26,7 +26,10 @@ class IsAdmin
         elseif (Auth::user() && Auth::user()->roles == 'LEADER') {
             return $next($request);
         }
-        elseif (Auth::user() && Auth::user()->roles == 'MANAGER') {
+        elseif (Auth::user() && Auth::user()->roles == 'MANAGER HRD') {
+            return $next($request);
+        }
+        elseif (Auth::user() && Auth::user()->roles == 'MANAGER ACCOUNTING') {
             return $next($request);
         }
         elseif (Auth::user() && Auth::user()->roles == 'KARYAWAN') {

@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @elseif(Auth::user()->roles == 'MANAGER')
+                        @elseif(Auth::user()->roles == 'MANAGER HRD')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-3 d-grid gap-2 mt-2">

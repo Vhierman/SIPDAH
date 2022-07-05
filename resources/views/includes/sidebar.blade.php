@@ -79,32 +79,11 @@
                             {{-- Temporary Update --}}
                         </nav>
                     </div>
-                @elseif(Auth::user()->roles == 'MANAGER')
-                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseMaster"
-                        aria-expanded="false" aria-controls="collapseMaster">
-                        <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
-                        Master
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseMaster" aria-labelledby="headingOne"
-                        data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{ route('minimalupah.index') }}">Minimal
-                                Upah</a>
-                            <a class="nav-link" href="{{ route('maksimalbpjskesehatan.index') }}">Maksimal Upah
-                                BPJS Kesehatan</a>
-                            <a class="nav-link" href="{{ route('maksimalbpjsketenagakerjaan.index') }}">Maksimal
-                                Upah BPJS Ketenagakerjaan</a>
-                            {{-- Temporary Update --}}
-                            <a class="nav-link" href="{{ route('temporarys.index') }}">Upah Lembur Perjam</a>
-                            {{-- Temporary Update --}}
-                        </nav>
-                    </div>
                 @endif
                 {{-- End Master --}}
 
                 {{-- Employee --}}
-                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'ACCOUNTING')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'ACCOUNTING' || Auth::user()->roles == 'MANAGER ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEmployee"
                         aria-expanded="false" aria-controls="collapseEmployee">
                         <div class="sb-nav-link-icon"><i class="fas fa-snowboarding"></i></div>
@@ -128,7 +107,7 @@
                 {{-- End Employee --}}
 
                 {{-- Absensi --}}
-                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAbsensi"
                         aria-expanded="false" aria-controls="collapseAbsensi">
                         <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
@@ -145,7 +124,7 @@
                 {{-- End Absensi --}}
 
                 {{-- Siswa Prakerin --}}
-                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'ACCOUNTING')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER' || Auth::user()->roles == 'ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseStudents"
                         aria-expanded="false" aria-controls="collapseStudents">
                         <div class="sb-nav-link-icon"><i class="fas fa-user-graduate"></i></div>
@@ -162,7 +141,7 @@
                 {{-- End Siswa Prakerin --}}
 
                 {{-- Inventory --}}
-                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'ACCOUNTING')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'MANAGER ACCOUNTING' || Auth::user()->roles == 'ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseHistory"
                         aria-expanded="false" aria-controls="collapseHistory">
                         <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
@@ -185,7 +164,7 @@
                 {{-- End Inventory --}}
 
                 {{-- Training Untuk Halaman --}}
-                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER')
+                @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'HRD' || Auth::user()->roles == 'LEADER')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTraining"
                         aria-expanded="false" aria-controls="collapseTraining">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
@@ -276,19 +255,13 @@
                             <a class="nav-link" href="{{ route('process.process_rekon_salary') }}">Salary</a>
                         </nav>
                     </div>
-                @elseif (Auth::user()->roles == 'MANAGER')
+                @elseif (Auth::user()->roles == 'MANAGER HRD' || Auth::user()->roles == 'MANAGER ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseProses"
                         aria-expanded="false" aria-controls="collapseProses">
                         <div class="sb-nav-link-icon"><i class="fas fa-paperclip"></i></div>
                         Proses
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
-                        data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{ route('overtimes.index') }}">Overtimes</a>
-                        </nav>
-                    </div>
                     <div class="collapse" id="collapseProses" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
@@ -605,7 +578,7 @@
                                 target="_blank">Inventaris Mobil</a>
                         </nav>
                     </div>
-                @elseif(Auth::user()->roles == 'MANAGER')
+                @elseif(Auth::user()->roles == 'MANAGER HRD')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLaporan"
                         aria-expanded="false" aria-controls="collapseLaporan">
                         <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
@@ -738,7 +711,7 @@
                                 target="_blank">Inventaris Mobil</a>
                         </nav>
                     </div>
-                @elseif(Auth::user()->roles == 'ACCOUNTING')
+                @elseif(Auth::user()->roles == 'ACCOUNTING' || Auth::user()->roles == 'MANAGER ACCOUNTING')
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLaporan"
                         aria-expanded="false" aria-controls="collapseLaporan">
                         <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>

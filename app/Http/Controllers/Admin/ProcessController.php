@@ -53,28 +53,26 @@ class ProcessController extends Controller
         $items = Employees::with([
             'divisions',
             'positions'
-            ])->where('status_kerja','Harian')
-            ->where('tanggal_akhir_kerja',$akhir_kontrak)->get();
-        
-        return view('pages.admin.process.pkwt_harian.tampil',[
+        ])->where('status_kerja', 'Harian')
+            ->where('tanggal_akhir_kerja', $akhir_kontrak)->get();
+
+        return view('pages.admin.process.pkwt_harian.tampil', [
             'items' => $items,
             'akhir_kontrak' => $akhir_kontrak
         ]);
-     
     }
 
     public function prosess_pkwt_harian($akhir_kontrak)
-    {   
+    {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
-        $items = Employees::where('tanggal_akhir_kerja', $akhir_kontrak)->where('status_kerja','Harian')->get();
+        $items = Employees::where('tanggal_akhir_kerja', $akhir_kontrak)->where('status_kerja', 'Harian')->get();
 
-        return view('pages.admin.process.pkwt_harian.prosess',[
+        return view('pages.admin.process.pkwt_harian.prosess', [
             'items'         => $items,
             'akhir_kontrak' => $akhir_kontrak
         ]);
-        
     }
 
     public function perpanjang_pkwt_harian(ProcessPerpanjanganPKWTHarianRequest $request)
@@ -87,7 +85,7 @@ class ProcessController extends Controller
         $awal_kontrak       = $request->input('awal_kontrak');
         $akhir_kontrak      = $request->input('akhir_kontrak');
 
-        $items              = Employees::where('tanggal_akhir_kerja', $akhirkontrak)->where('status_kerja','Harian')->get();
+        $items              = Employees::where('tanggal_akhir_kerja', $akhirkontrak)->where('status_kerja', 'Harian')->get();
 
         foreach ($items as $item) {
             HistoryContracts::create([
@@ -99,14 +97,13 @@ class ProcessController extends Controller
                 'jumlah_kontrak'                => 1
             ]);
 
-            $employees  = Employees::where('nik_karyawan', $item->nik_karyawan)->where('status_kerja','Harian')->first();
+            $employees  = Employees::where('nik_karyawan', $item->nik_karyawan)->where('status_kerja', 'Harian')->first();
             $employees->update([
                 'tanggal_akhir_kerja'   => $akhir_kontrak
-            ]); 
+            ]);
         }
-        Alert::success('Success Proses PKWT Harian','Oleh '.auth()->user()->name);
+        Alert::success('Success Proses PKWT Harian', 'Oleh ' . auth()->user()->name);
         return view('pages.admin.process.pkwt_harian.index');
-
     }
 
     public function process_pkwt_kontrak()
@@ -127,23 +124,23 @@ class ProcessController extends Controller
         $items = Employees::with([
             'divisions',
             'positions'
-            ])->where('status_kerja','PKWT')
-            ->where('tanggal_akhir_kerja',$akhir_kontrak)->get();
-        
-        return view('pages.admin.process.pkwt_kontrak.tampil',[
+        ])->where('status_kerja', 'PKWT')
+            ->where('tanggal_akhir_kerja', $akhir_kontrak)->get();
+
+        return view('pages.admin.process.pkwt_kontrak.tampil', [
             'items' => $items,
             'akhir_kontrak' => $akhir_kontrak
         ]);
     }
 
     public function prosess_pkwt_kontrak($akhir_kontrak)
-    {   
+    {
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'HRD') {
             abort(403);
         }
-        $items = Employees::where('tanggal_akhir_kerja', $akhir_kontrak)->where('status_kerja','PKWT')->get();
+        $items = Employees::where('tanggal_akhir_kerja', $akhir_kontrak)->where('status_kerja', 'PKWT')->get();
 
-        return view('pages.admin.process.pkwt_kontrak.prosess',[
+        return view('pages.admin.process.pkwt_kontrak.prosess', [
             'items'         => $items,
             'akhir_kontrak' => $akhir_kontrak
         ]);
@@ -159,7 +156,7 @@ class ProcessController extends Controller
         $awal_kontrak       = $request->input('awal_kontrak');
         $akhir_kontrak      = $request->input('akhir_kontrak');
 
-        $items              = Employees::where('tanggal_akhir_kerja', $akhirkontrak)->where('status_kerja','PKWT')->get();
+        $items              = Employees::where('tanggal_akhir_kerja', $akhirkontrak)->where('status_kerja', 'PKWT')->get();
 
         foreach ($items as $item) {
             HistoryContracts::create([
@@ -171,14 +168,13 @@ class ProcessController extends Controller
                 'jumlah_kontrak'                => 1
             ]);
 
-            $employees  = Employees::where('nik_karyawan', $item->nik_karyawan)->where('status_kerja','PKWT')->first();
+            $employees  = Employees::where('nik_karyawan', $item->nik_karyawan)->where('status_kerja', 'PKWT')->first();
             $employees->update([
                 'tanggal_akhir_kerja'   => $akhir_kontrak
-            ]); 
+            ]);
         }
-        Alert::success('Success Proses PKWT Kontrak','Oleh '.auth()->user()->name);
+        Alert::success('Success Proses PKWT Kontrak', 'Oleh ' . auth()->user()->name);
         return view('pages.admin.process.pkwt_kontrak.index');
-
     }
 
     public function process_magang()
@@ -217,44 +213,32 @@ class ProcessController extends Controller
         $nik                            = substr($nik_magang, 12);
         $mytime                         = $cetak_surat_magang;
         $bulan                          = substr($mytime, 5, -3);
-        $tahun                          = substr($mytime, 0,4);
+        $tahun                          = substr($mytime, 0, 4);
         if ($bulan == 1) {
             $romawi = 'I';
-        }
-        elseif ($bulan == 2) {
+        } elseif ($bulan == 2) {
             $romawi = 'II';
-        } 
-        elseif ($bulan == 3) {
+        } elseif ($bulan == 3) {
             $romawi = 'III';
-        } 
-        elseif ($bulan == 4) {
+        } elseif ($bulan == 4) {
             $romawi = 'IV';
-        } 
-        elseif ($bulan == 5) {
+        } elseif ($bulan == 5) {
             $romawi = 'V';
-        } 
-        elseif ($bulan == 6) {
+        } elseif ($bulan == 6) {
             $romawi = 'VI';
-        } 
-        elseif ($bulan == 7) {
+        } elseif ($bulan == 7) {
             $romawi = 'VII';
-        } 
-        elseif ($bulan == 8) {
+        } elseif ($bulan == 8) {
             $romawi = 'VIII';
-        } 
-        elseif ($bulan == 9) {
+        } elseif ($bulan == 9) {
             $romawi = 'IX';
-        } 
-        elseif ($bulan == 10) {
+        } elseif ($bulan == 10) {
             $romawi = 'X';
-        } 
-        elseif ($bulan == 11) {
+        } elseif ($bulan == 11) {
             $romawi = 'XI';
-        } 
-        elseif ($bulan == 12) {
+        } elseif ($bulan == 12) {
             $romawi = 'XII';
-        } 
-        else {
+        } else {
             $romawi = 'SALAH';
         }
         //Create Nomor DOkumen
@@ -313,53 +297,53 @@ class ProcessController extends Controller
         $this->fpdf->Cell(10, 8, '2. ', 0, 0, 'L');
         $this->fpdf->Cell(50, 8, 'No.KTP/SIM', 0, 0, 'L');
         $this->fpdf->Cell(5, 8, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(115, 8, ' '.$nik_magang, 0, 0, 'L');
+        $this->fpdf->Cell(115, 8, ' ' . $nik_magang, 0, 0, 'L');
 
         $this->fpdf->Ln();
 
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(50, 8, 'Nama', 0, 0, 'L');
         $this->fpdf->Cell(5, 8, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(115, 8, ' '.$nama_magang, 0, 0, 'L');
+        $this->fpdf->Cell(115, 8, ' ' . $nama_magang, 0, 0, 'L');
 
         $this->fpdf->Ln();
 
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(50, 8, 'Tempat,Tanggal Lahir', 0, 0, 'L');
         $this->fpdf->Cell(5, 8, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(115, 8, ' '.$tempat_lahir_magang.', '.\Carbon\Carbon::parse($tanggal_lahir_magang)->isoformat('D MMMM Y'), 0, 0, 'L');
+        $this->fpdf->Cell(115, 8, ' ' . $tempat_lahir_magang . ', ' . \Carbon\Carbon::parse($tanggal_lahir_magang)->isoformat('D MMMM Y'), 0, 0, 'L');
 
         $this->fpdf->Ln();
 
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(50, 8, 'Pendidikan Terakhir', 0, 0, 'L');
         $this->fpdf->Cell(5, 8, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(115, 8, ' '.$pendidikan_terakhir_magang, 0, 0, 'L');
+        $this->fpdf->Cell(115, 8, ' ' . $pendidikan_terakhir_magang, 0, 0, 'L');
 
         $this->fpdf->Ln();
 
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(50, 8, 'Jenis Kelamin', 0, 0, 'L');
         $this->fpdf->Cell(5, 8, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(115, 8, ' '.$jenis_kelamin_magang, 0, 0, 'L');
+        $this->fpdf->Cell(115, 8, ' ' . $jenis_kelamin_magang, 0, 0, 'L');
 
         $this->fpdf->Ln();
 
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(50, 8, 'Agama', 0, 0, 'L');
         $this->fpdf->Cell(5, 8, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(115, 8, ' '.$agama_magang, 0, 0, 'L');
+        $this->fpdf->Cell(115, 8, ' ' . $agama_magang, 0, 0, 'L');
 
         $this->fpdf->Ln();
 
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(50, 8, 'Alamat', 0, 0, 'L');
         $this->fpdf->Cell(5, 8, ' : ', 0, 0, 'C');
-        $this->fpdf->Cell(115, 6, ' '.$alamat_magang.', '.$rt_magang.'/'.$rw_magang.', Kelurahan.'.$kelurahan_magang, 0, 0, 'L');
+        $this->fpdf->Cell(115, 6, ' ' . $alamat_magang . ', ' . $rt_magang . '/' . $rw_magang . ', Kelurahan.' . $kelurahan_magang, 0, 0, 'L');
 
         $this->fpdf->Ln();
         $this->fpdf->Cell(75);
-        $this->fpdf->Cell(115, 6, ' Kecamatan.'.$kecamatan_magang.', Kota.'.$kota_magang.', '.$provinsi_magang, 0, 0, 'L');
+        $this->fpdf->Cell(115, 6, ' Kecamatan.' . $kecamatan_magang . ', Kota.' . $kota_magang . ', ' . $provinsi_magang, 0, 0, 'L');
 
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
@@ -391,10 +375,10 @@ class ProcessController extends Controller
 
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Cell(96, 6, ' telah   menyatakan   persetujuannya  untuk   menerima', 0, 0, 'L');
-        
+
         $this->fpdf->SetFont('Arial', 'B', '11');
         $this->fpdf->Cell(30, 6, ' PIHAK  KEDUA', 0, 0, 'L');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
@@ -431,12 +415,12 @@ class ProcessController extends Controller
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'Ayat 1', 0, 0, 'C');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(57, 6, 'Pekerjaan yang harus dilakukan', 0, 0, 'L');
-        
+
         $this->fpdf->SetFont('Arial', 'B', '11');
         $this->fpdf->Cell(28, 6, 'PIHAK KEDUA ', 0, 0, 'L');
 
@@ -451,7 +435,7 @@ class ProcessController extends Controller
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Cell(16, 6, ' adalah ', 0, 0, 'L');
         $this->fpdf->SetFont('Arial', 'BU', '11');
-        $this->fpdf->Cell(60, 6, ''.$penempatan_magang.' / '.$jabatan_magang, 0, 0, 'L');
+        $this->fpdf->Cell(60, 6, '' . $penempatan_magang . ' / ' . $jabatan_magang, 0, 0, 'L');
 
         $this->fpdf->SetFont('Arial', 'B', '11');
         $this->fpdf->Ln(10);
@@ -499,7 +483,7 @@ class ProcessController extends Controller
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'Ayat 1', 0, 0, 'C');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
@@ -508,13 +492,13 @@ class ProcessController extends Controller
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(135, 6, 'penandatanganan surat perjanjian kerja ini dan akan berakhir pada tanggal : ', 0, 0, 'L');
         $this->fpdf->SetFont('Arial', 'BU', '11');
-        $this->fpdf->Cell(30, 6, ' '.\Carbon\Carbon::parse($akhir_magang)->isoformat('D MMMM Y').'.', 0, 0, 'L');
+        $this->fpdf->Cell(30, 6, ' ' . \Carbon\Carbon::parse($akhir_magang)->isoformat('D MMMM Y') . '.', 0, 0, 'L');
 
         $this->fpdf->SetFont('Arial', 'B', '11');
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'Ayat 2', 0, 0, 'C');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
@@ -546,7 +530,7 @@ class ProcessController extends Controller
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'CARA KERJA', 0, 0, 'C');
-        
+
         $this->fpdf->Ln(5);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(35, 6, 'PIHAK PERTAMA', 0, 0, 'L');
@@ -679,7 +663,7 @@ class ProcessController extends Controller
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'Ayat 1', 0, 0, 'C');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
@@ -695,12 +679,12 @@ class ProcessController extends Controller
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'Ayat 2', 0, 0, 'C');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(77, 6, 'Sebagai imbalan kerja lembur sesuai ayat 1,', 0, 0, 'L');
-        
+
         $this->fpdf->SetFont('Arial', 'B', '11');
         $this->fpdf->Cell(33, 6, 'PIHAK PERTAMA ', 0, 0, 'L');
 
@@ -724,7 +708,7 @@ class ProcessController extends Controller
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'Ayat 3', 0, 0, 'C');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
@@ -833,23 +817,23 @@ class ProcessController extends Controller
 
         $this->fpdf->Ln();
         $this->fpdf->Cell(29);
-        $this->fpdf->Cell(160, 5,'10.  Menghasut para pekerja lain untuk melakukan mogok kerja.', 0, 0, 'L');
+        $this->fpdf->Cell(160, 5, '10.  Menghasut para pekerja lain untuk melakukan mogok kerja.', 0, 0, 'L');
 
         $this->fpdf->Ln();
         $this->fpdf->Cell(29);
-        $this->fpdf->Cell(160, 5,'11.  Merokok ditempat kerja atau membawa rokok dan korek api dalam lingkungan kerja.', 0, 0, 'L');
+        $this->fpdf->Cell(160, 5, '11.  Merokok ditempat kerja atau membawa rokok dan korek api dalam lingkungan kerja.', 0, 0, 'L');
 
         $this->fpdf->Ln();
         $this->fpdf->Cell(29);
-        $this->fpdf->Cell(160, 5,'12.  Masuk jam kerja tidak tepat waktu selama 2 (dua) kali.', 0, 0, 'L');
+        $this->fpdf->Cell(160, 5, '12.  Masuk jam kerja tidak tepat waktu selama 2 (dua) kali.', 0, 0, 'L');
 
         $this->fpdf->Ln();
         $this->fpdf->Cell(29);
-        $this->fpdf->Cell(160, 5,'13.  Tidak menggunakan alat keselamatan kerja yang sudah ditetapkan.', 0, 0, 'L');
+        $this->fpdf->Cell(160, 5, '13.  Tidak menggunakan alat keselamatan kerja yang sudah ditetapkan.', 0, 0, 'L');
 
         $this->fpdf->Ln();
         $this->fpdf->Cell(29);
-        $this->fpdf->Cell(160, 5,'14.  Tidak menggunakan alat keselamatan dalam berkendara baik berangkat maupun pulang', 0, 0, 'L');
+        $this->fpdf->Cell(160, 5, '14.  Tidak menggunakan alat keselamatan dalam berkendara baik berangkat maupun pulang', 0, 0, 'L');
         $this->fpdf->Ln();
         $this->fpdf->Cell(30);
         $this->fpdf->Cell(160, 5, '      kerja.', 0, 0, 'L');
@@ -894,7 +878,7 @@ class ProcessController extends Controller
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'Ayat 1', 0, 0, 'C');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
@@ -907,7 +891,7 @@ class ProcessController extends Controller
         $this->fpdf->Ln(10);
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(170, 5, 'Ayat 2', 0, 0, 'C');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
@@ -937,7 +921,7 @@ class ProcessController extends Controller
         $this->fpdf->Ln();
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(35, 5, 'PIHAK PERTAMA', 0, 0, 'L');
-        
+
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Cell(35, 5, 'dan lainnya untuk', 0, 0, 'L');
         $this->fpdf->SetFont('Arial', 'B', '11');
@@ -946,7 +930,7 @@ class ProcessController extends Controller
         $this->fpdf->Ln(30);
         $this->fpdf->SetFont('Arial', '', '11');
         $this->fpdf->Cell(20);
-        $this->fpdf->Cell(170, 5, 'Tangerang Selatan, '.\Carbon\Carbon::parse($cetak_surat_magang)->isoformat('D MMMM Y'), 0, 0, 'C');
+        $this->fpdf->Cell(170, 5, 'Tangerang Selatan, ' . \Carbon\Carbon::parse($cetak_surat_magang)->isoformat('D MMMM Y'), 0, 0, 'C');
 
         $this->fpdf->Ln(10);
         $this->fpdf->SetFont('Arial', 'B', '11');
@@ -960,11 +944,10 @@ class ProcessController extends Controller
         $this->fpdf->Cell(20);
         $this->fpdf->Cell(50, 5, '( Rudiyanto )', 0, 0, 'C');
         $this->fpdf->Cell(70, 5, '', 0, 0, 'C');
-        $this->fpdf->Cell(50, 5, '( '.$nama_magang.' )', 0, 0, 'C');
+        $this->fpdf->Cell(50, 5, '( ' . $nama_magang . ' )', 0, 0, 'C');
         $this->fpdf->Ln(100);
         $this->fpdf->Output();
         exit;
-
     }
 
     public function index()
@@ -978,7 +961,7 @@ class ProcessController extends Controller
     public function process_rekon_salary()
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER HRD' && auth()->user()->roles != 'MANAGER ACCOUNTING') {
             abort(403);
         }
         return view('pages.admin.salary.rekon_salary');
@@ -987,21 +970,21 @@ class ProcessController extends Controller
     public function tampil_rekon_salary(RekonSalaryRequest $request)
     {
         //
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER HRD' && auth()->user()->roles != 'MANAGER ACCOUNTING') {
             abort(403);
         }
 
         $awal       = $request->input('awal');
         $akhir      = $request->input('akhir');
 
-        $items = 
-        DB::table('history_salaries')
-        ->join('employees', 'employees.nik_karyawan', '=', 'history_salaries.employees_id')
-        ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
-        ->join('areas', 'areas.id', '=', 'employees.areas_id')
-        ->join('positions', 'positions.id', '=', 'employees.positions_id')
-        ->where('history_salaries.deleted_at', '=', null)
-        ->get();
+        $items =
+            DB::table('history_salaries')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_salaries.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('areas', 'areas.id', '=', 'employees.areas_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where('history_salaries.deleted_at', '=', null)
+            ->get();
 
         $salary = RekapSalaries::where('periode_awal', $awal)->first();
 
@@ -1012,18 +995,17 @@ class ProcessController extends Controller
             //Redirect
             return redirect()->route('process.process_rekon_salary');
         } else {
-            return view('pages.admin.salary.tampil_rekon_salary',[
+            return view('pages.admin.salary.tampil_rekon_salary', [
                 'awal'  => $awal,
                 'akhir' => $akhir,
                 'items' => $items
             ]);
         }
-
     }
 
     public function export_excell_rekon_salary()
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER HRD' && auth()->user()->roles != 'MANAGER ACCOUNTING') {
             abort(403);
         }
         return Excel::download(new RekonSalaryExport, 'rekonsiliasisalary.xlsx');
@@ -1031,7 +1013,7 @@ class ProcessController extends Controller
 
     public function hasil_rekon_salary(RekonSalaryRequest $request)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER HRD' && auth()->user()->roles != 'MANAGER ACCOUNTING') {
             abort(403);
         }
 
@@ -1040,9 +1022,9 @@ class ProcessController extends Controller
         $input_oleh = $request->input('input_oleh');
 
         $items = HistorySalaries::all();
-        
+
         foreach ($items as $item) {
-            
+
             RekapSalaries::create([
                 'periode_awal'                      => $awal,
                 'periode_akhir'                     => $akhir,
@@ -1071,32 +1053,32 @@ class ProcessController extends Controller
             ]);
         }
 
-        Alert::success('Success Rekonsiliasi Data Salary','Oleh '.auth()->user()->name);
+        Alert::success('Success Rekonsiliasi Data Salary', 'Oleh ' . auth()->user()->name);
         return redirect()->route('dashboard');
     }
 
     public function edit_salary($employees_id)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER HRD' && auth()->user()->roles != 'MANAGER ACCOUNTING') {
             abort(403);
         }
-        $item = 
-        DB::table('history_salaries')
-        ->join('employees', 'employees.nik_karyawan', '=', 'history_salaries.employees_id')
-        ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
-        ->join('areas', 'areas.id', '=', 'employees.areas_id')
-        ->join('positions', 'positions.id', '=', 'employees.positions_id')
-        ->where('history_salaries.employees_id', '=', $employees_id)
-        ->first();
-    
-        return view('pages.admin.salary.edit_salary',[
+        $item =
+            DB::table('history_salaries')
+            ->join('employees', 'employees.nik_karyawan', '=', 'history_salaries.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('areas', 'areas.id', '=', 'employees.areas_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where('history_salaries.employees_id', '=', $employees_id)
+            ->first();
+
+        return view('pages.admin.salary.edit_salary', [
             'item' => $item
         ]);
     }
 
     public function hasil_edit_salary(EditSalaryRequest $request, $employees_id)
     {
-        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER') {
+        if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER HRD' && auth()->user()->roles != 'MANAGER ACCOUNTING') {
             abort(403);
         }
 
@@ -1114,76 +1096,73 @@ class ProcessController extends Controller
         $jkn                = $request->input('jkn');
 
         //Ikut Semua Kepesertaan BPJS Ketenagakerjaan Dan Kesehatan
-        if ($jht != 0 && $jp != 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {       
+        if ($jht != 0 && $jp != 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {
             //End Rumus
-            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $jumlah_upah                        = $gaji_pokok + $uang_makan + $uang_transport + $tunjangan_tugas + $tunjangan_pulsa + $tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah / 173;
             $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
 
-            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
-            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id', 1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id', 1)->first();
             $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
             $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
 
             if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
 
-                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-    
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jp_perusahaan         = $jumlah_upah*2/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-                $potongan_jp_karyawan           = $jumlah_upah*1/100;
-            }
-            elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-    
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
-            }
-            elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
-                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
-    
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
-            }
-            else{
+                $potongan_bpjsks_perusahaan     = $jumlah_upah * 4 / 100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah * 1 / 100;
+
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jp_perusahaan         = $jumlah_upah * 2 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+                $potongan_jp_karyawan           = $jumlah_upah * 1 / 100;
+            } elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah * 4 / 100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah * 1 / 100;
+
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan * 2 / 100;
+                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan * 1 / 100;
+            } elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan * 4 / 100;
+                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan * 1 / 100;
+
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan * 2 / 100;
+                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan * 1 / 100;
+            } else {
                 dd('Salah');
             }
-            
-            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
-            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
-            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
-            $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan,0);
-            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
-            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
-            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
-            $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan,0);
 
-            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan, 0);
+            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan, 0);
+            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan, 0);
+            $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan, 0);
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan, 0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan, 0);
+            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan, 0);
+            $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan, 0);
+
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan + $hasil_potongan_jp_perusahaan + $hasil_potongan_jkm_perusahaan + $hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan + $hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah - $jumlah_bpjstk_karyawan - $hasil_potongan_bpjsks_karyawan;
             //End Rumus
-        } 
+        }
 
         //Tidak Ikut Semua Kepesertaan BPJS Ketenagakerjaan Dan Kesehatan
         elseif ($jht == 0 && $jp == 0 && $jkk == 0 && $jkm == 0 && $jkn == 0) {
-            
+
             //End Rumus
-            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $jumlah_upah                        = $gaji_pokok + $uang_makan + $uang_transport + $tunjangan_tugas + $tunjangan_pulsa + $tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah / 173;
             $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
 
             $hasil_potongan_bpjsks_perusahaan   = 0;
@@ -1195,85 +1174,81 @@ class ProcessController extends Controller
             $hasil_potongan_jht_karyawan        = 0;
             $hasil_potongan_jp_karyawan         = 0;
 
-            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan + $hasil_potongan_jp_perusahaan + $hasil_potongan_jkm_perusahaan + $hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan + $hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah - $jumlah_bpjstk_karyawan - $hasil_potongan_bpjsks_karyawan;
             //End Rumus
-        } 
+        }
 
         //Ikut Kepesertaan BPJS Ketenagakerjaan Dan Tidak Ikut Kepesertaan BPJS Kesehatan
         elseif ($jht != 0 && $jp != 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {
             //End Rumus
-            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $jumlah_upah                        = $gaji_pokok + $uang_makan + $uang_transport + $tunjangan_tugas + $tunjangan_pulsa + $tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah / 173;
             $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
 
-            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
-            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id', 1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id', 1)->first();
             $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
             $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
 
             if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jp_perusahaan         = $jumlah_upah*2/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-                $potongan_jp_karyawan           = $jumlah_upah*1/100;
-            }
-            elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan*2/100;
-                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan*1/100;
-            }
-            else{
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jp_perusahaan         = $jumlah_upah * 2 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+                $potongan_jp_karyawan           = $jumlah_upah * 1 / 100;
+            } elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+                $potongan_jp_perusahaan         = $maksimal_upah_bpjs_ketenagakerjaan * 2 / 100;
+                $potongan_jp_karyawan           = $maksimal_upah_bpjs_ketenagakerjaan * 1 / 100;
+            } else {
                 dd('Salah');
             }
-            
+
             $hasil_potongan_bpjsks_perusahaan   = 0;
             $hasil_potongan_bpjsks_karyawan     = 0;
-            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
-            $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan,0);
-            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
-            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
-            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
-            $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan,0);
+            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan, 0);
+            $hasil_potongan_jp_perusahaan       = round($potongan_jp_perusahaan, 0);
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan, 0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan, 0);
+            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan, 0);
+            $hasil_potongan_jp_karyawan         = round($potongan_jp_karyawan, 0);
 
-            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan + $hasil_potongan_jp_perusahaan + $hasil_potongan_jkm_perusahaan + $hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan + $hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah - $jumlah_bpjstk_karyawan - $hasil_potongan_bpjsks_karyawan;
             //End Rumus
-        } 
+        }
 
         //Ikut Kepesertaan BPJS Kesehatan Dan Tidak Ikut Kepesertaan BPJS Ketenagakerjaan 
         elseif ($jht == 0 && $jp == 0 && $jkk == 0 && $jkm == 0 && $jkn != 0) {
             //End Rumus
-            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $jumlah_upah                        = $gaji_pokok + $uang_makan + $uang_transport + $tunjangan_tugas + $tunjangan_pulsa + $tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah / 173;
             $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
 
-            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
-            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id', 1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id', 1)->first();
             $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
             $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
 
             if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan) {
-                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-            }
-            elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
-                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
-            }
-            else{
+                $potongan_bpjsks_perusahaan     = $jumlah_upah * 4 / 100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah * 1 / 100;
+            } elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan * 4 / 100;
+                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan * 1 / 100;
+            } else {
                 dd('Salah');
             }
-            
-            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
-            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+
+            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan, 0);
+            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan, 0);
             $hasil_potongan_jht_perusahaan      = 0;
             $hasil_potongan_jp_perusahaan       = 0;
             $hasil_potongan_jkm_perusahaan      = 0;
@@ -1281,205 +1256,195 @@ class ProcessController extends Controller
             $hasil_potongan_jht_karyawan        = 0;
             $hasil_potongan_jp_karyawan         = 0;
 
-            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan + $hasil_potongan_jp_perusahaan + $hasil_potongan_jkm_perusahaan + $hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan + $hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah - $jumlah_bpjstk_karyawan - $hasil_potongan_bpjsks_karyawan;
             //End Rumus
-        } 
+        }
 
         //Tidak Ikut JHT Dan JP, Hanya Ikut JKK Dan JKM Dan Ikut Kepesertaan BPJS Kesehatan
         elseif ($jht == 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {
             //End Rumus
-            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $jumlah_upah                        = $gaji_pokok + $uang_makan + $uang_transport + $tunjangan_tugas + $tunjangan_pulsa + $tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah / 173;
             $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
 
-            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
-            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id', 1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id', 1)->first();
             $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
             $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
 
             if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-    
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-            }
-            elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-    
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-            }
-            elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
-                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
+                $potongan_bpjsks_perusahaan     = $jumlah_upah * 4 / 100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah * 1 / 100;
 
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-            }
-            else{
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+            } elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah * 4 / 100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah * 1 / 100;
+
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+            } elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan * 4 / 100;
+                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan * 1 / 100;
+
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+            } else {
                 dd('Salah');
             }
-            
-            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
-            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
+
+            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan, 0);
+            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan, 0);
             $hasil_potongan_jht_perusahaan      = 0;
             $hasil_potongan_jp_perusahaan       = 0;
-            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
-            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan, 0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan, 0);
             $hasil_potongan_jht_karyawan        = 0;
             $hasil_potongan_jp_karyawan         = 0;
 
-            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan + $hasil_potongan_jp_perusahaan + $hasil_potongan_jkm_perusahaan + $hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan + $hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah - $jumlah_bpjstk_karyawan - $hasil_potongan_bpjsks_karyawan;
             //End Rumus
-        } 
+        }
 
         //Tidak Ikut JHT, JP, dan BPJS Kesehatan, Hanya Ikut JKK Dan JKM
-        elseif ($jht == 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {       
+        elseif ($jht == 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {
             //End Rumus
-            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $jumlah_upah                        = $gaji_pokok + $uang_makan + $uang_transport + $tunjangan_tugas + $tunjangan_pulsa + $tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah / 173;
             $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
 
-            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id', 1)->first();
             $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
 
-            if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {    
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-            }
-            elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-            }
-            else{
+            if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+            } elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+            } else {
                 dd('Salah');
             }
-            
+
             $hasil_potongan_bpjsks_perusahaan   = 0;
             $hasil_potongan_bpjsks_karyawan     = 0;
             $hasil_potongan_jht_perusahaan      = 0;
             $hasil_potongan_jp_perusahaan       = 0;
-            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
-            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan, 0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan, 0);
             $hasil_potongan_jht_karyawan        = 0;
             $hasil_potongan_jp_karyawan         = 0;
 
-            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan + $hasil_potongan_jp_perusahaan + $hasil_potongan_jkm_perusahaan + $hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan + $hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah - $jumlah_bpjstk_karyawan - $hasil_potongan_bpjsks_karyawan;
             //End Rumus
         }
 
         //Tidak Ikut JP, Hanya Ikut JHT, JKK Dan JKM Dan Ikut Kepesertaan BPJS Kesehatan
         elseif ($jht != 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn != 0) {
             //End Rumus
-            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $jumlah_upah                        = $gaji_pokok + $uang_makan + $uang_transport + $tunjangan_tugas + $tunjangan_pulsa + $tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah / 173;
             $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
 
-            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id',1)->first();
-            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $itemBpjskesehatans                 = MaksimalBpjskesehatans::where('id', 1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id', 1)->first();
             $maksimal_upah_bpjs_kesehatan       = $itemBpjskesehatans->maksimalupah_bpjskesehatan;
             $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
 
             if ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-    
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-            }
-            elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $jumlah_upah*4/100;
-                $potongan_bpjsks_karyawan       = $jumlah_upah*1/100;
-    
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-            }
-            elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan*4/100;
-                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan*1/100;
-    
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-            }
-            else{
+                $potongan_bpjsks_perusahaan     = $jumlah_upah * 4 / 100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah * 1 / 100;
+
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+            } elseif ($jumlah_upah <= $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $jumlah_upah * 4 / 100;
+                $potongan_bpjsks_karyawan       = $jumlah_upah * 1 / 100;
+
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+            } elseif ($jumlah_upah > $maksimal_upah_bpjs_kesehatan && $jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_bpjsks_perusahaan     = $maksimal_upah_bpjs_kesehatan * 4 / 100;
+                $potongan_bpjsks_karyawan       = $maksimal_upah_bpjs_kesehatan * 1 / 100;
+
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+            } else {
                 dd('Salah');
             }
-            
-            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan,0);
-            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan,0);
-            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+
+            $hasil_potongan_bpjsks_perusahaan   = round($potongan_bpjsks_perusahaan, 0);
+            $hasil_potongan_bpjsks_karyawan     = round($potongan_bpjsks_karyawan, 0);
+            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan, 0);
             $hasil_potongan_jp_perusahaan       = 0;
-            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
-            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
-            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan, 0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan, 0);
+            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan, 0);
             $hasil_potongan_jp_karyawan         = 0;
 
-            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan + $hasil_potongan_jp_perusahaan + $hasil_potongan_jkm_perusahaan + $hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan + $hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah - $jumlah_bpjstk_karyawan - $hasil_potongan_bpjsks_karyawan;
             //End Rumus
-        } 
+        }
 
         //Tidak Ikut JP, dan BPJS Kesehatan, Hanya Ikut JHT, JKK , Dan JKM
-        elseif ($jht != 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {       
+        elseif ($jht != 0 && $jp == 0 && $jkk != 0 && $jkm != 0 && $jkn == 0) {
             //End Rumus
-            $jumlah_upah                        = $gaji_pokok+$uang_makan+$uang_transport+$tunjangan_tugas+$tunjangan_pulsa+$tunjangan_jabatan;
-            $upah_lembur_perjam                 = $jumlah_upah/173;
+            $jumlah_upah                        = $gaji_pokok + $uang_makan + $uang_transport + $tunjangan_tugas + $tunjangan_pulsa + $tunjangan_jabatan;
+            $upah_lembur_perjam                 = $jumlah_upah / 173;
             $hasil_upah_lembur_perjam           = round($upah_lembur_perjam);
 
-            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id',1)->first();
+            $itemBpjsketenagakerjaans           = MaksimalBpjsketenagakerjaans::where('id', 1)->first();
             $maksimal_upah_bpjs_ketenagakerjaan = $itemBpjsketenagakerjaans->maksimalupah_bpjsketenagakerjaan;
 
             if ($jumlah_upah <= $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-            }
-            elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
-                $potongan_jht_perusahaan        = $jumlah_upah*3.7/100;
-                $potongan_jkm_perusahaan        = $jumlah_upah*0.3/100;
-                $potongan_jkk_perusahaan        = $jumlah_upah*0.24/100;
-                $potongan_jht_karyawan          = $jumlah_upah*2/100;
-            }
-            else{
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+            } elseif ($jumlah_upah > $maksimal_upah_bpjs_ketenagakerjaan) {
+                $potongan_jht_perusahaan        = $jumlah_upah * 3.7 / 100;
+                $potongan_jkm_perusahaan        = $jumlah_upah * 0.3 / 100;
+                $potongan_jkk_perusahaan        = $jumlah_upah * 0.24 / 100;
+                $potongan_jht_karyawan          = $jumlah_upah * 2 / 100;
+            } else {
                 dd('Salah');
             }
-            
+
             $hasil_potongan_bpjsks_perusahaan   = 0;
             $hasil_potongan_bpjsks_karyawan     = 0;
-            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan,0);
+            $hasil_potongan_jht_perusahaan      = round($potongan_jht_perusahaan, 0);
             $hasil_potongan_jp_perusahaan       = 0;
-            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan,0);
-            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan,0);
-            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan,0);
+            $hasil_potongan_jkm_perusahaan      = round($potongan_jkm_perusahaan, 0);
+            $hasil_potongan_jkk_perusahaan      = round($potongan_jkk_perusahaan, 0);
+            $hasil_potongan_jht_karyawan        = round($potongan_jht_karyawan, 0);
             $hasil_potongan_jp_karyawan         = 0;
 
-            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan+$hasil_potongan_jp_perusahaan+$hasil_potongan_jkm_perusahaan+$hasil_potongan_jkk_perusahaan;
-            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan+$hasil_potongan_jp_karyawan;
-            $take_home_pay                      = $jumlah_upah-$jumlah_bpjstk_karyawan-$hasil_potongan_bpjsks_karyawan;
+            $jumlah_bpjstk_perusahaan           = $hasil_potongan_jht_perusahaan + $hasil_potongan_jp_perusahaan + $hasil_potongan_jkm_perusahaan + $hasil_potongan_jkk_perusahaan;
+            $jumlah_bpjstk_karyawan             = $hasil_potongan_jht_karyawan + $hasil_potongan_jp_karyawan;
+            $take_home_pay                      = $jumlah_upah - $jumlah_bpjstk_karyawan - $hasil_potongan_bpjsks_karyawan;
             //End Rumus
-        } 
-        
+        }
+
         //Kondisi Salah
         else {
             dd('Kondisi Salah');
         }
-        
+
         $salary = HistorySalaries::where('employees_id', $employees_id)->first();
         $salary->update([
             'gaji_pokok'                    => $gaji_pokok,
@@ -1503,8 +1468,8 @@ class ProcessController extends Controller
             'take_home_pay'                 => $take_home_pay,
             'edit_oleh'                     => $request->input('edit_oleh')
         ]);
-       
-        Alert::info('Success Edit Data Salary','Oleh '.auth()->user()->name);
+
+        Alert::info('Success Edit Data Salary', 'Oleh ' . auth()->user()->name);
         return redirect()->route('process.process_rekon_salary');
     }
 

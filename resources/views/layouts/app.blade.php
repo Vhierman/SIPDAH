@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Achmad Firmansyah" />
+    <meta name="author" content="Achmad Firmansyah" />
     <link rel="icon" href={{ url('backend/assets/logo/network.png') }}>
     <title>HRD-GA</title>
 
@@ -27,7 +29,8 @@
                 <img src="{{ url('frontend/frontend/images/navbar/logo-bulat.png') }}"
                     alt="Logo Prima Komponen Indonesia">
             </a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navb">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navb">
@@ -141,9 +144,11 @@
                                     <img class="certification mt-2"
                                         src="{{ url('frontend/frontend/images/footer/9001.png') }}" alt="">
                                     <img class="certification mt-2"
-                                        src="{{ url('frontend/frontend/images/footer/14001.png') }}" alt="">
+                                        src="{{ url('frontend/frontend/images/footer/14001.png') }}"
+                                        alt="">
                                     <img class="certification mt-2"
-                                        src="{{ url('frontend/frontend/images/footer/integrasi.png') }}" alt="">
+                                        src="{{ url('frontend/frontend/images/footer/integrasi.png') }}"
+                                        alt="">
                                     <img class="certification mt-2"
                                         src="{{ url('frontend/frontend/images/footer/sni.png') }}" alt="">
                                 </li>

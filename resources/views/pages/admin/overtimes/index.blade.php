@@ -73,17 +73,6 @@
                                     </div>
                                 </div>
                             </div>
-                        @elseif(Auth::user()->roles == 'MANAGER')
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-3 d-grid gap-2 mt-2">
-                                        <a href="{{ route('overtimes.lihat_overtime') }}" class="btn btn-primary btn-lg">
-                                            <i class="fas fa-search"></i>
-                                            Lihat Data
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                         @elseif(Auth::user()->roles == 'ACCOUNTING')
                             <div class="card-body">
                                 <div class="row">
