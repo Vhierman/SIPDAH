@@ -12,9 +12,11 @@ use App\Models\Admin\Positions;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 use DB;
 
-class EmployeesExport implements FromCollection, WithHeadings, WithMapping
+class EmployeesExport implements FromCollection, WithHeadings, WithMapping, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -81,17 +83,12 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
         
         return [
             [
-                $employees->id,
                 $statusptkp,
-                $employees->companies->id,
-                $employees->companies->nama_perusahaan,
-                $employees->areas->id,
-                $employees->areas->area,
-                $employees->divisions->id,
-                $employees->divisions->penempatan,
-                $employees->positions->id,
-                $employees->positions->jabatan,
                 $employees->golongan,
+                $employees->companies->nama_perusahaan,
+                $employees->areas->area,
+                $employees->divisions->penempatan,
+                $employees->positions->jabatan,
                 $nik_karyawan,
                 $employees->nama_karyawan,
                 $employees->email_karyawan,
@@ -133,17 +130,12 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'ID',
-            'Status Pajak ACC',
-            'Kode Perusahaan',
-            'Perusahaan',
-            'Kode Area',
-            'Area',
-            'Kode Penempatan',
-            'Penempatan',
-            'Kode Jabatan',
-            'Jabatan',
+            'Status PTKP',
             'Golongan',
+            'Perusahaan',
+            'Area',
+            'Penempatan',
+            'Jabatan',
             'NIK Karyawan',
             'Nama Karyawan',
             'Email',
@@ -174,6 +166,61 @@ class EmployeesExport implements FromCollection, WithHeadings, WithMapping
             'Kabupaten/Kota',
             'Provinsi',
             'Kode POS'
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $event->sheet->getDelegate()->getStyle('1')->getFont()->setSize(14);
+
+                $event->sheet->getDelegate()->getStyle('A1:AJ1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+                $event->sheet->getDelegate()->getStyle('A1:AJ1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('228B22');
+
+                $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(20);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(30);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(50);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('Q')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('R')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('T')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('U')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('V')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('W')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('X')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('Y')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('Z')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('AA')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('AB')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('AC')->setWidth(45);
+                $event->sheet->getDelegate()->getColumnDimension('AC')->setWidth(45);
+                $event->sheet->getDelegate()->getColumnDimension('AD')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('AE')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('AF')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('AG')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('AH')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('AI')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('AJ')->setWidth(15);
+
+                
+     
+            },
         ];
     }
 }
