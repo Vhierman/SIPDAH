@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class ChangePasswordRequest extends FormRequest
 {
@@ -25,6 +26,17 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             //
+            'password' => ['required', 'min:8','confirmed'],
         ];
+
+        if (Hash::check($request->current_password, auth()->user()->password)) {
+            return back()->with('message','Your Password Has Been Update');
+        }
+        else{
+            throw ValidationException::withMessages([
+                'current_password' => 'Your Current Password Does Not Match With Our Record',
+
+            ]);
+        }
     }
 }

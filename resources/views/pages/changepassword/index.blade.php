@@ -15,7 +15,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table mr-1"></i>
-                        Change Password
+                        Change Your Password
                     </div>
 
                     @if ($errors->any())
@@ -30,25 +30,26 @@
 
                     <div class="card shadow">
                         <div class="card-body">
-                            <form action="{{ route('dashboard.hasil_ubah_password') }}" target="_blank" method="post"
+                            <form action="{{ route('dashboard.hasil_ubah_password') }}" method="post"
                                 enctype="multipart/form-data">
+
                                 @csrf
                                 <div class="form-group">
 
-                                    <div class="form-group mt-2">
-                                        <label for="title" class="form-label">Old Password</label>
-                                        <input type="text" class="form-control" name="old_password"
-                                            placeholder="Old Password" value="{{ old('old_password') }}">
-                                    </div>
-                                    <div class="form-group mt-2">
+                                    {{-- <div class="form-group mt-2">
+                                        <label for="title" class="form-label">Current Password</label>
+                                        <input type="text" class="form-control" name="current_password"
+                                            placeholder="Current Password">
+                                    </div> --}}
+                                    <div class="form-group mt-1">
                                         <label for="title" class="form-label">New Password</label>
-                                        <input type="text" class="form-control" name="new_password"
-                                            placeholder="New Password" value="{{ old('new_password') }}">
+                                        <input type="text" class="form-control" name="password"
+                                            placeholder="New Password" value="{{ old('password') }}">
                                     </div>
-                                    <div class="form-group mt-2">
-                                        <label for="title" class="form-label">Repeat Password</label>
-                                        <input type="text" class="form-control" name="new_password"
-                                            placeholder="Repeat New Password" value="{{ old('new_password') }}">
+                                    <div class="form-group mt-1">
+                                        <label for="title" class="form-label">Confirm New Password</label>
+                                        <input type="text" class="form-control" name="password_confirmation"
+                                            placeholder="New Password" value="{{ old('password_confirmation') }}">
                                     </div>
 
                                     <div class="d-grid gap-2 mt-3">

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Admin\Employees;
 use App\Models\Admin\Companies;
 use App\Models\Admin\Areas;
+use App\Models\User;
 use App\Models\Admin\Divisions;
 use App\Models\Admin\Positions;
 use App\Models\Admin\Overtimes;
@@ -23,10 +25,17 @@ use Storage;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use DB;
 use Alert;
+use Auth;
+
 
 class DashboardController extends Controller
 {
     //
+    public function logout(){
+        Auth::logout();
+        return redirect('/'); // ini untuk redirect setelah logout
+    }
+
     public function index(Request $request)
     {
         toast('Hello ' . auth()->user()->name, 'success');
@@ -1145,7 +1154,16 @@ class DashboardController extends Controller
         // $nik_karyawan   = auth()->user()->nik;
         // $fotokaryawan   = Employees::where('nik_karyawan', $nik_karyawan)->first();
 
-        Alert::info('Success Update Password', 'Oleh ' . auth()->user()->name);
-        return redirect()->route('dashboard');
+        $id                 = auth()->user()->id;
+        $password           = $request->input('password');
+
+        $updatepassword     = User::where('id', $id)->first();
+
+        $updatepassword->update([
+            'password'      => Hash::make($password)
+        ]);
+        Alert::success('Success Update Password');
+        Auth::logout();
+        return redirect('/login');
     }
 }
