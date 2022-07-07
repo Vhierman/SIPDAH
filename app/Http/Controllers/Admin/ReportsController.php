@@ -52,7 +52,48 @@ class ReportsController extends Controller
 
         $salary = RekapSalaries::where('periode_awal', $awal)->where('periode_akhir', $akhir)->first();
 
-        $items =
+        //
+        if (auth()->user()->roles == 'MANAGER HRD') {
+            $items =
+            DB::table('rekap_salaries')
+            ->join('employees', 'employees.nik_karyawan', '=', 'rekap_salaries.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('areas', 'areas.id', '=', 'employees.areas_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where('periode_awal', '=', $awal)
+            ->where('periode_akhir', '=', $akhir)
+            ->where('golongan', '=','II')
+            ->where('rekap_salaries.deleted_at', '=', null)
+            ->get();
+        } 
+        elseif (auth()->user()->roles == 'MANAGER ACCOUNTING') {
+            $items =
+            DB::table('rekap_salaries')
+            ->join('employees', 'employees.nik_karyawan', '=', 'rekap_salaries.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('areas', 'areas.id', '=', 'employees.areas_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where('periode_awal', '=', $awal)
+            ->where('periode_akhir', '=', $akhir)
+            ->where('golongan', '=','I')
+            ->where('rekap_salaries.deleted_at', '=', null)
+            ->get();
+        }        
+        elseif (auth()->user()->roles == 'ACCOUNTING') {
+            $items =
+            DB::table('rekap_salaries')
+            ->join('employees', 'employees.nik_karyawan', '=', 'rekap_salaries.employees_id')
+            ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
+            ->join('areas', 'areas.id', '=', 'employees.areas_id')
+            ->join('positions', 'positions.id', '=', 'employees.positions_id')
+            ->where('periode_awal', '=', $awal)
+            ->where('periode_akhir', '=', $akhir)
+            ->where('golongan', '=','II')
+            ->where('rekap_salaries.deleted_at', '=', null)
+            ->get();
+        }        
+        elseif (auth()->user()->roles == 'ADMIN') {
+            $items =
             DB::table('rekap_salaries')
             ->join('employees', 'employees.nik_karyawan', '=', 'rekap_salaries.employees_id')
             ->join('divisions', 'divisions.id', '=', 'employees.divisions_id')
@@ -62,6 +103,16 @@ class ReportsController extends Controller
             ->where('periode_akhir', '=', $akhir)
             ->where('rekap_salaries.deleted_at', '=', null)
             ->get();
+        }        
+        else {
+            Alert::error('Data Tidak Ditemukan');
+            return redirect()->route('reports.rekap_salary');
+        }
+        
+        
+        //
+
+
 
         if ($salary == null) {
             Alert::error('Data Tidak Ditemukan');
@@ -81,10 +132,13 @@ class ReportsController extends Controller
             abort(403);
         }
 
+        $roles      = auth()->user()->roles;
         $awal       = $request->input('awal');
         $akhir      = $request->input('akhir');
 
-        return Excel::download(new RekapSalaryExport($awal), 'rekapsalary.xlsx');
+        return Excel::download(new RekapSalaryExport($awal,$roles), 'rekapsalary.xlsx');
+
+
     }
 
     public function cancel_rekap_salary(RekapSalaryRequest $request)

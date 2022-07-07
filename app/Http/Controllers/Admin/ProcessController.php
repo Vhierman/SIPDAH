@@ -1008,7 +1008,7 @@ class ProcessController extends Controller
         if (auth()->user()->roles != 'ADMIN' && auth()->user()->roles != 'MANAGER HRD' && auth()->user()->roles != 'MANAGER ACCOUNTING') {
             abort(403);
         }
-        return Excel::download(new RekonSalaryExport, 'rekonsiliasisalary.xlsx');
+        return Excel::download(new RekonSalaryExport, 'rekonsalary.xlsx');
     }
 
     public function hasil_rekon_salary(RekonSalaryRequest $request)
