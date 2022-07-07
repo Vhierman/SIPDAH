@@ -65,19 +65,8 @@
                                         </select>
                                     </div>
 
-
-
                                     <div class="form-group mt-2">
-                                        <label for="golongan">Data</label>
-                                        <select name="golongan" class="form-select">
-                                            <option value="">Pilih Data</option>
-                                            <option value="II" @if (old('golongan') == 'II') {{ 'selected' }} @endif>
-                                                Susan
-                                            </option>
-                                            <option value="III"
-                                                @if (old('golongan') == 'III') {{ 'selected' }} @endif>Ghufron
-                                            </option>
-                                        </select>
+                                        <input type="hidden" class="form-control" readonly name="golongan" value="II">
                                     </div>
 
                                     <div class="form-group mt-2">
